@@ -17,15 +17,15 @@ test_results_not_checked <- testthat::test_dir("./tests/manual/")
 devtools::build_vignettes()
 
 # system("R CMD build --resave-data .") #Then move it up one directory.
-# tarBallPattern <- "^REDCapR_.+\\.tar\\.gz$"
+# tarBallPattern <- "^OuhscMunge_.+\\.tar\\.gz$"
 # file.copy(from=list.files(pattern=tarBallPattern), to="../", overwrite=TRUE)
 # system(paste("R CMD check --as-cran", list.files(pattern=tarBallPattern, path="..//", full.names=TRUE)))
 # unlink(list.files(pattern=tarBallPattern))
 # unlink(list.files(pattern=tarBallPattern, path="..//", full.names=TRUE))
-# unlink("REDCapR.Rcheck", recursive=T)
+# unlink("OuhscMunge.Rcheck", recursive=T)
 # system("R CMD check --as-cran D:/Projects/RDev/NlsyLinksStaging/NlsyLinks_1.300.tar.gz")
 
 # devtools::check(force_suggests = FALSE)
 # devtools::build_win(version="R-devel") #CRAN submission policies encourage the development version
-# devtools::revdep_check(pkg="REDCapR", recursive=TRUE)
+# devtools::revdep_check(pkg="OuhscMunge", recursive=TRUE)
 # devtools::release(check=FALSE) #Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.

@@ -1,5 +1,5 @@
 library(devtools)
-devtools::create(  path=file.path(getwd(), "seed"),check=TRUE, description=list(
+devtools::create(path=file.path(getwd(), "seed") ,check=TRUE, description=list(
   "Title" = "Data manipulation operations",
   "Description" = "Data manipulation operations frequently used in OUHSC BBMC projects.",
   "Date" = "2014-03-08",
