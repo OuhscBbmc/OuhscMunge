@@ -1,0 +1,13 @@
+Package: OuhscMunge
+Title: Data manipulation operations
+Version: 0.0-1
+Authors@R: person("Will", "Beasley", , "wibeasley@hotmail.com", role = c("aut", "cre"))
+Author: Will Beasley [aut, cre]
+Maintainer: Will Beasley <wibeasley@hotmail.com> 
+Description: Data manipulation operations frequently used in OUHSC BBMC projects.
+Depends: R (>= 3.1.2)
+License: GPL-2
+LazyData: TRUE
+Roxygen: list(wrap = TRUE)
+Date: 2014-03-08
+Suggests: testthat

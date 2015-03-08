@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.gitignore$
+^\.travis.yml$
+^cran-comments\.md$
+^ShortcutLucky1404\.lnk$
+
+documentation_peek.pdf
+documentation_for_developers/
+playgrounds/
+utility_scripts/
