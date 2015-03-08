@@ -9,3 +9,4 @@ documentation_peek.pdf
 documentation_for_developers/
 playgrounds/
 utility_scripts/
+^\.travis\.yml$

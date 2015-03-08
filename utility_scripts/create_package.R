@@ -7,11 +7,11 @@ devtools::create(  path=file.path(getwd(), "seed"),check=TRUE, description=list(
   "Maintainer" = "'Will Beasley' <wibeasley@hotmail.com> "
 ))
 
+use_travis(pkg = ".")
 use_testthat(pkg = ".")
 use_rstudio(pkg = ".")
 use_vignette(name, pkg = ".")
 use_rcpp(pkg = ".")
-use_travis(pkg = ".")
 use_appveyor(pkg = ".")
 use_package_doc(pkg = ".")
 use_revdep(pkg = ".")
