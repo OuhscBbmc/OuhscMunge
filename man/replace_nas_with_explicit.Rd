@@ -43,6 +43,16 @@ to convert all the \code{NA} values.
 }
 \examples{
 library(OuhscMunge) #Load the package into the current R session.
+missing_indices <- c(3, 6, 8, 25)
+# With a character variable:
+a <- letters
+a[missing_indices] <- NA_character_
+a <- OuhscMunge::replace_nas_with_explicit(a)
+
+# With a factor variable:
+b <- factor(letters, levels=letters)
+b[missing_indices] <- NA_character_
+b <- OuhscMunge::replace_nas_with_explicit(b, add_unknown_level=TRUE)
 }
 \author{
 Will Beasley
