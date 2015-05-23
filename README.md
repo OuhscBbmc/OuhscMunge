@@ -10,6 +10,20 @@ OuhscMunge
 ==========
 Data manipulation operations commonly used by the [Biomedical and Behavioral Methodology Core](http://www.ouhsc.edu/bbmc/) within the [Department of Pediatrics](https://www.oumedicine.com/pediatrics) of the [University of Oklahoma Health Sciences Center](http://ouhsc.edu/).
 
+### Download and Installation Instructions
+<!--
+The *release* version of IalsaSynthesis can be installed from [CRAN](http://cran.r-project.org/web/packages/OuhscMunge/).
+```r
+install.packages("OuhscMunge")
+```
+-->
+
+The *development* version of `OuhscMunge` can be installed from [GitHub](https://github.com/OuhscBbmc/OuhscMunge) after installing the `devtools` package.  (The *release* version will be available on [CRAN](http://cran.rstudio.com/) later.)
+```r
+install.packages("devtools")
+devtools::install_github(repo="OuhscBbmc/OuhscMunge")
+```
+
 ### Collaborative Development
 We encourage input and collaboration from the overall community.  If you're familar with GitHub and R packages, feel free to submit a [pull request](https://github.com/OuhscBbmc/OuhscMunge/pulls).  If you'd like to report a bug or make a suggestion, please create a GitHub [issue](https://github.com/OuhscBbmc/OuhscMunge/issues); issues are a usually a good place to ask public questions too.  However, feel free to email Will (<wibeasley@hotmail.com>).  Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
