@@ -7,6 +7,7 @@
 package_janitor <- function(
                             path_csv, # = './utility/package_dependency_list.csv',
                             cran_repo = "http://cran.rstudio.com",
+                            update_packages = TRUE,
                             check_libcurl_linux = (R.Version()$os=="linux-gnu")
                           ) {
 
@@ -27,12 +28,13 @@ package_janitor <- function(
     stop(paste("The data.frame of the required packages is missing the following columns:", missing_columns))
   
   ds_install_from_cran <- ds_packages[ds_packages$install & ds_packages$on_cran, ]
-  ds_install_from_github <- ds_packages[ds_packages$install & !is.na(ds_packages$github_username) & nchar(ds_packages$github_username)>0, ]
+  ds_install_from_github <- ds_packages[ds_packages$install & !ds_packages$on_cran & !is.na(ds_packages$github_username) & nchar(ds_packages$github_username)>0, ]
   
   rm(ds_packages)
   #####################################
   ## update_cran_packages
-  utils::update.packages(ask=FALSE, checkBuilt=TRUE, repos=cran_repo)
+  if( update_packages )
+    utils::update.packages(ask=FALSE, checkBuilt=TRUE, repos=cran_repo)
   
   #####################################
   ## install_devtools
@@ -47,7 +49,7 @@ package_janitor <- function(
     if( !available ) {
       utils::install.packages(package_name, dependencies=TRUE, repos=cran_repo)
       #base::requireNamespace( package_name, character.only=TRUE)
-    } else {
+    } else if( update_packages ) {
       #Make sure all their dependencies are installed & up-to-date
       update(devtools::package_deps(package_name, dependencies=TRUE), repos=cran_repo) #devtools:::update.package_deps()
     }
@@ -82,4 +84,4 @@ package_janitor <- function(
   
   base::rm(ds_install_from_github, i)
 }
-# install_packages()
+# OuhscMunge:::package_janitor()
