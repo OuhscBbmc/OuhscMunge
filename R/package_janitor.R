@@ -4,7 +4,7 @@
 #   GitHub packages are installed regardless if they're already installed.
 #If anyone encounters a package that should be on there, please add it to `./utility/package_dependency_list.csv`
 
-install_packages <- function(
+package_janitor <- function(
                             path_csv = './utility/package_dependency_list.csv',
                             cran_repo = "http://cran.rstudio.com",
                             check_libcurl_linux = (R.Version()$os=="linux-gnu")
@@ -29,11 +29,7 @@ install_packages <- function(
   
   #####################################
   ## install_devtools
-  # Installing the devtools package is different than the rest of the packages.  On Windows,
-  #   the dll can't be overwritten while in use.  This function avoids that issue.
-  # This should follow the initial CRAN installation of `devtools`.
-  #   Installing the newest GitHub devtools version isn't always necessary, but it usually helps.
-  
+
   if( !base::requireNamespace("devtools") )
     utils::install.packages("devtools", repos=cran_repo)
 
@@ -79,3 +75,4 @@ install_packages <- function(
   
   base::rm(ds_install_from_github, i)
 }
+# install_packages()
