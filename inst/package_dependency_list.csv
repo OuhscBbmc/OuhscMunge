@@ -1,4 +1,4 @@
 package_name,on_cran,install,github_username,description
-testit,TRUE,TRUE,yihui,Has the useful `assert()` function.
-Wats,FALSE,TRUE,OuhscBbmc,Graphing longitudinal data with a seasonal/cyclical pattern.
+digest,TRUE,TRUE,,Has the useful `assert()` function.
+testit,FALSE,TRUE,yihui,Has the useful `assert()` function.
 yaml,TRUE,TRUE,,parsing yaml sections/files.
