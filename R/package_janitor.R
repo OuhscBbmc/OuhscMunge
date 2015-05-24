@@ -8,7 +8,9 @@ package_janitor <- function(
                             path_csv, # = './utility/package_dependency_list.csv',
                             cran_repo = "http://cran.rstudio.com",
                             update_packages = TRUE,
-                            check_libcurl_linux = (R.Version()$os=="linux-gnu")
+                            check_xml_linux = (R.Version()$os=="linux-gnu"),
+                            check_libcurl_linux = (R.Version()$os=="linux-gnu"),
+                            check_openssl_linux = (R.Version()$os=="linux-gnu")
                           ) {
 
   if( !file.exists(path_csv))
@@ -58,17 +60,47 @@ package_janitor <- function(
   
   rm(ds_install_from_cran, package_name)
   #####################################
-  ## check_for_libcurl
+  ## check_xml_linux
+  #http://stackoverflow.com/questions/7765429/unable-to-install-r-package-in-ubuntu-11-04
   
+  if( check_xml_linux ) {
+    libcurl_results <- base::system("locate r-cran-xml")
+    libcurl_missing <- (libcurl_results==0)
+    
+    if( libcurl_missing )
+      base::warning("This Linux machine is possibly missing the 'libxml2-dev' library.  ",
+                    "Consider running `sudo apt-get install r-cran-xml`.", 
+                    "or the equivalent for your distribution.")
+    
+    base::rm(libcurl_results, libcurl_missing)
+  }
+  
+  #####################################
+  ## check_for_libcurl
   if( check_libcurl_linux ) {
     libcurl_results <- base::system("locate libcurl4")
     libcurl_missing <- (libcurl_results==0)
     
     if( libcurl_missing )
       base::warning("This Linux machine is possibly missing the 'libcurl' library.  ",
-                    "Consider running `sudo apt-get install libcurl4-openssl-dev`.")
+                    "Consider running `sudo apt-get install libcurl4-openssl-dev`.", 
+                    "or the equivalent for your distribution.")
     
     base::rm(libcurl_results, libcurl_missing)
+  }
+  
+  #####################################
+  ## check_openssl_linux  
+  if( check_openssl_linux ) {
+    openssl_results <- base::system("locate libssl-dev")
+    openssl_missing <- (openssl_results==0)
+    
+    if( openssl_missing )
+      base::warning("This Linux machine is possibly missing the 'libssl' library.  ",
+                    "Consider running `sudo apt-get install libssl-dev`.", 
+                    "or the equivalent for your distribution.")
+    
+    base::rm(openssl_results, openssl_missing)
   }
   
   #####################################
