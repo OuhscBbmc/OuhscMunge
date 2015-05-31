@@ -1,4 +1,4 @@
-PackageName,OnCran,Install,GitHubUsername,Description
+package_name,on_cran,install,github_username,description
 colorspace,TRUE,TRUE,,Explicit control over the HCL color scheme
 devtools,TRUE,TRUE,,Used in the C1 survival for sourcing gists
 digest,TRUE,TRUE,,Creates SHA hashes for the recruiting database
@@ -9,7 +9,7 @@ ggthemes,TRUE,TRUE,,"Extra themes, scales and geoms for ggplot"
 googleVis,TRUE,TRUE,,"JavaScript-based visualizations, like scrollable tables"
 ggmap,TRUE,TRUE,,"Maps & graphics, based on ggplot"
 knitr,TRUE,TRUE,,For reporting
-httr,FALSE,TRUE,hadley,Calling REDCap API
+httr,TRUE,TRUE,hadley,Calling REDCap API
 lme4,TRUE,TRUE,,Multilevel models
 lubridate,TRUE,TRUE,,Consistent/convenient function signatures for manipulating dates
 plyr,TRUE,TRUE,,Important for most of our data manipulation

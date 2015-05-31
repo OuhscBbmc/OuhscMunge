@@ -1,13 +1,20 @@
 Package: OuhscMunge
-Title: Data manipulation operations
-Version: 0.0-2
-Date: 2014-03-08
+Title: Data Manipulation Operations
+Description: Data manipulation operations frequently used in OUHSC BBMC projects.
+Version: 0.1.5
+Date: 2014-05-30
 Authors@R: person("Will", "Beasley", , "wibeasley@hotmail.com", role = c("aut", "cre"))
 Author: Will Beasley [aut, cre]
 Maintainer: Will Beasley <wibeasley@hotmail.com> 
-Description: Data manipulation operations frequently used in OUHSC BBMC projects.
+URL: https://github.com/OuhscBbmc/OuhscMunge, http://ouhsc.edu/bbmc/
 Depends: R (>= 3.1.0)
 License: GPL-2
 LazyData: TRUE
 Roxygen: list(wrap = TRUE)
-Suggests: testthat
+Depends:
+    R(>= 3.0.0)
+Imports:
+    devtools (>= 1.8.0)
+Suggests: 
+    RODBC,
+    testthat

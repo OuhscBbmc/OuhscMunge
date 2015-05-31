@@ -1,0 +1,4 @@
+package_name,on_cran,install,github_username,description
+digest,TRUE,TRUE,,Has the useful `assert()` function.
+testit,FALSE,TRUE,yihui,Has the useful `assert()` function.
+yaml,TRUE,TRUE,,parsing yaml sections/files.
