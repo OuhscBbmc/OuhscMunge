@@ -5,24 +5,26 @@
 #If anyone encounters a package that should be on there, please add it to `./utility/package_dependency_list.csv`
 
 package_janitor <- function(
-                            path_csv, # = './utility/package_dependency_list.csv',
+                            path_package_dependencies, # = './utility/package_dependency_list.csv',
                             cran_repo = "http://cran.rstudio.com",
                             update_packages = TRUE,
                             check_xml_linux = (R.Version()$os=="linux-gnu"),
                             check_libcurl_linux = (R.Version()$os=="linux-gnu"),
-                            check_openssl_linux = (R.Version()$os=="linux-gnu")
+                            check_openssl_linux = (R.Version()$os=="linux-gnu"),
+                            verbose = TRUE
                           ) {
 
-  if( !file.exists(path_csv))
-    base::stop("The path `", path_csv, "` was not found.  Make sure the working directory is set to the root of the repository.")
+  if( !file.exists(path_package_dependencies))
+    base::stop("The path `", path_package_dependencies, "` was not found.  Make sure the working directory is set to the root of the repository.")
   
   required_columns <- c("package_name", "on_cran", "install", "github_username", "description")
   
   #####################################
   ## load_data
-  ds_packages <- utils::read.csv(file=path_csv, stringsAsFactors=FALSE)
+  if( verbose ) message("package_janitor is loading the list of package depencies.")
+  ds_packages <- utils::read.csv(file=path_package_dependencies, stringsAsFactors=FALSE)
   
-  rm(path_csv)
+  rm(path_package_dependencies)
   #####################################
   ##  tweak_data
   missing_columns <- base::setdiff(required_columns, colnames(ds_packages))
@@ -35,27 +37,44 @@ package_janitor <- function(
   rm(ds_packages)
   #####################################
   ## update_cran_packages
+  if( verbose ) message("package_janitor is updating the existing packages from CRAN.")
   if( update_packages )
     utils::update.packages(ask=FALSE, checkBuilt=TRUE, repos=cran_repo)
   
   #####################################
   ## install_devtools
-
+  if( verbose ) message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
+  
+  if( !base::requireNamespace("httr") )
+    utils::install.packages("httr", repos=cran_repo)
+  
   if( !base::requireNamespace("devtools") )
     utils::install.packages("devtools", repos=cran_repo)
 
   #####################################
   ## install_cran_packages
+  if( verbose ) message("package_janitor is installing the CRAN packages:")
+  
   for( package_name in ds_install_from_cran$package_name ) {
-    available <- base::requireNamespace(package_name, quietly=TRUE) #Checks if it's available
-    if( !available ) {
-      utils::install.packages(package_name, dependencies=TRUE, repos=cran_repo)
-      #base::requireNamespace( package_name, character.only=TRUE)
-    } else if( update_packages ) {
-      #Make sure all their dependencies are installed & up-to-date
-      update(devtools::package_deps(package_name, dependencies=TRUE), repos=cran_repo) #devtools:::update.package_deps()
-    }
-    base::rm(available)
+    if( package_name =="devtools" ) {
+      if( verbose ) message("The `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      
+    } else if( package_name =="httr" ) {
+      if( verbose ) message("The `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      
+    } else {
+        available <- base::requireNamespace(package_name, quietly=TRUE) #Checks if it's available
+        if( !available ) {
+          if( verbose ) message("Installing `", package_name, "` from CRAN, including its dependencies.")
+          utils::install.packages(package_name, dependencies=TRUE, repos=cran_repo)
+          #base::requireNamespace( package_name, character.only=TRUE)
+        } else if( update_packages ) {
+          if( verbose ) message("`", package_name, "` exists, and verifying it's dependencies are installed too.")
+          #Make sure all their dependencies are installed & up-to-date
+          update(devtools::package_deps(package_name, dependencies=TRUE), repos=cran_repo) #devtools:::update.package_deps()
+        }
+        base::rm(available)
+      }
   }
   
   rm(ds_install_from_cran, package_name)
@@ -105,9 +124,12 @@ package_janitor <- function(
   
   #####################################
   ## install_github_packages
+  if( verbose ) message("package_janitor is installing the GitHub packages:")
   
   for( i in base::seq_len(base::nrow(ds_install_from_github)) ) {
     package_name <- ds_install_from_github[i, "package_name"]
+    if( verbose ) message("Installing `", package_name, "` from GitHub, (not including its dependencies).")
+    
     username <- ds_install_from_github[i, "github_username"]
     repository_name <- paste0(username, "/", package_name)
     devtools::install_github(repo=repository_name)
@@ -115,5 +137,6 @@ package_janitor <- function(
   }
   
   base::rm(ds_install_from_github, i)
+  if( verbose ) message("package_janitor is complete.")
 }
 # OuhscMunge:::package_janitor()
