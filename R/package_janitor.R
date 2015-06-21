@@ -71,7 +71,8 @@ package_janitor <- function(
         } else if( update_packages ) {
           if( verbose ) message("`", package_name, "` exists, and verifying it's dependencies are installed too.")
           #Make sure all their dependencies are installed & up-to-date
-          stats::update(devtools::package_deps(package_name, dependencies=TRUE), repos=cran_repo) #devtools:::update.package_deps()
+          need_to_install <- devtools::package_deps(package_name, dependencies=TRUE)
+          devtools::update_packages(need_to_install, repos=cran_repo)
         }
         base::rm(available)
       }
