@@ -8,14 +8,14 @@ replace_nas_with_explicit(scores, new_na_label = "Unknown",
   create_factor = FALSE, add_unknown_level = FALSE)
 }
 \arguments{
-  \item{scores}{An array of values, ideally either
-  factor or character. Required} \item{new_na_label}{The
-  factor label assigned to the missing value. Defaults
-  to \code{Unknown}.} \item{create_factor}{Converts
-  \code{scores} into a factor, if it isn't one already.
-  Defaults to \code{FALSE}.} \item{add_unknown_level}{Should
-  a new factor level be created? (Specify \code{TRUE} if it
-  already exists.) Defaults to \code{FALSE}.}
+  \item{scores}{An array of values, ideally either factor or
+  character. Required} \item{new_na_label}{The factor label
+  assigned to the missing value. Defaults to \code{Unknown}.}
+  \item{create_factor}{Converts \code{scores} into a factor,
+  if it isn't one already. Defaults to \code{FALSE}.}
+  \item{add_unknown_level}{Should a new factor level be
+  created? (Specify \code{TRUE} if it already exists.)
+  Defaults to \code{FALSE}.}
 }
 \value{
 An array of values, where the \code{NA} values are
