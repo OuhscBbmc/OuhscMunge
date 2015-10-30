@@ -1,6 +1,5 @@
 #' @name replace_nas_with_explicit
 #' @export
-#' 
 #' @title Create explicit factor level for missing values.
 #'  
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
