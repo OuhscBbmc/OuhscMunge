@@ -8,7 +8,7 @@ column_rename_headstart <- function( d ) {
   
   right_side <- paste0("\"", colnames(d), "\"\n")
   
-  cat(paste0(left_side, " = ", right_side)) #Gives a headstart to plyr::rename
+  cat(paste0(left_side, " = ", right_side)) #Gives a headstart to dplyr::rename_() & plyr::rename()
 }
 # column_rename_headstart(ds)
 
