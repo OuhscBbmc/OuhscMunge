@@ -1,0 +1,16 @@
+box: rocker/hadleyverse
+build:
+  steps:
+    - jimhester/r-dependencies:
+      github_packages: hadley/testthat kevinushey/rex
+
+    - jimhester/r-check
+
+    - script:
+      name: shim package
+      code: |
+        Rscript -e "devtools::install()"
+        source shim_package.sh
+
+    - jimhester/r-coverage:
+      options: "use_subprocess = FALSE"
