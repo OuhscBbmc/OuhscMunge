@@ -3,6 +3,8 @@
 ^\.gitignore$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^wercker\.yml$
+^shim_package\.sh$
 ^revdep$
 ^cran-comments\.md$
 ^CONDUCT.md$

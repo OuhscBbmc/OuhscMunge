@@ -4,7 +4,6 @@ library(testthat)
 context("Replace NAs")
 ###########
 
-
 test_that("replace_nas_character_standard", {
   a <- letters
   missing_indices <- c(3, 6, 8, 25)
@@ -17,7 +16,6 @@ test_that("replace_nas_character_standard", {
   expect_equal(a, expected, label="The correct letters should have been replaced.")
   expect_equal(class(a), "character", "The returned array should remain a character.")
 })
-
 
 test_that("replace_nas_factor_standard", {
   a <- factor(letters, levels=letters)
@@ -32,6 +30,7 @@ test_that("replace_nas_factor_standard", {
   expect_equal(a, expected, label="The correct letters should have been replaced.")
   expect_equal(class(a), "factor", "The returned array should be a converted factor.")
 })
+
 test_that("replace_nas_factor_create_not_existing", {
   a <- letters
   missing_indices <- c(3, 6, 8, 25)
@@ -45,6 +44,7 @@ test_that("replace_nas_factor_create_not_existing", {
   expect_equal(a, expected, label="The correct letters should have been replaced.")
   expect_equal(class(a), "factor", "The returned array should be a converted factor.")
 })
+
 test_that("replace_nas_factor_create_already_existing", {
   a <- factor(letters, levels=letters, labels=letters)
   missing_indices <- c(3, 6, 8, 25)
