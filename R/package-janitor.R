@@ -1,11 +1,11 @@
-#This code checks the user's installed packages against the packages listed in `./utility/package_dependency_list.csv`.
+#This code checks the user's installed packages against the packages listed in `./utility/package-dependency-list.csv`.
 #   These are necessary for the repository's R code to be fully operational.
 #   CRAN packages are installed only if they're not already; then they're updated if available.
 #   GitHub packages are installed regardless if they're already installed.
-#If anyone encounters a package that should be on there, please add it to `./utility/package_dependency_list.csv`
+#If anyone encounters a package that should be on there, please add it to `./utility/package-dependency-list.csv`
 
 package_janitor <- function(
-                            path_package_dependencies, # = './utility/package_dependency_list.csv',
+                            path_package_dependencies, # = './utility/package-dependency-list.csv',
                             cran_repo = "http://cran.rstudio.com",
                             update_packages = TRUE,
                             check_xml_linux = (R.Version()$os=="linux-gnu"),

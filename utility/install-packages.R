@@ -1,10 +1,10 @@
-#This code checks the user's installed packages against the packages listed in `./utility/package_dependency_list.csv`.
+#This code checks the user's installed packages against the packages listed in `./utility/package-dependency-list.csv`.
 #   These are necessary for the repository's R code to be fully operational. 
 #   CRAN packages are installed only if they're not already; then they're updated if available.
 #   GitHub packages are installed regardless if they're already installed.
-#If anyone encounters a package that should be on there, please add it to `./utility/package_dependency_list.csv`
+#If anyone encounters a package that should be on there, please add it to `./utility/package-dependency-list.csv`
 
 # utils::install.packages("devtools", repos="http://cran.rstudio.com")
 # devtools::install_github("OuhscBbmc/OuhscMunge")
 
-OuhscMunge:::package_janitor(path_package_depencies = "./utility/package_dependency_list.csv")
+OuhscMunge:::package_janitor(path_package_depencies = "./utility/package-dependency-list.csv")
