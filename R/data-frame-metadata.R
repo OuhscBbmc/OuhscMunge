@@ -7,9 +7,10 @@
 #' @description These functions are used during the execution of a program.  Rather they produce snippets
 #' that can be pasted into code, and help the developer avoid some typing.
 #' 
-#' @usage column_rename_headstart( d )
-#'        column_class_headstart( d )
-#'        column_value_headstart( x )
+#' @usage 
+#' column_rename_headstart( d )
+#' column_class_headstart( d )
+#' column_value_headstart( x )
 #' 
 #' @param d A \code{data.frame} to describe.
 #' 
@@ -21,6 +22,8 @@
 #' 
 #' @examples
 #' column_rename_headstart(datasets::OrchardSprays)
+#' column_class_headstart(datasets::OrchardSprays)
+#' column_value_headstart(datasets::OrchardSprays$treatment)
 
 column_rename_headstart <- function( d ) {
   max_column_name <- max(nchar(colnames(d)))
@@ -51,6 +54,9 @@ column_class_headstart <- function( d ) {
 # column_class_headstart(ds)
 
 column_value_headstart <- function( x ) {
+  if( is.factor(x) )
+    x <- as.character(x)
+  
   values <- sort(unique(x))
   max_value_length <- max(nchar(values))
   extra_character_length <- 5L #a comma, two quotes, and two backslashes.

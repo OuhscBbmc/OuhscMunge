@@ -8,8 +8,8 @@
 \title{Utilities for outputting characteristics of a datatset used it code.}
 \usage{
 column_rename_headstart( d )
-       column_class_headstart( d )
-       column_value_headstart( x )
+column_class_headstart( d )
+column_value_headstart( x )
 }
 \arguments{
 \item{d}{A \code{data.frame} to describe.}
@@ -25,6 +25,8 @@ that can be pasted into code, and help the developer avoid some typing.
 }
 \examples{
 column_rename_headstart(datasets::OrchardSprays)
+column_class_headstart(datasets::OrchardSprays)
+column_value_headstart(datasets::OrchardSprays$treatment)
 }
 \author{
 Will Beasley
