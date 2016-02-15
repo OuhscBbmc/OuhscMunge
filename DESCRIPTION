@@ -15,6 +15,7 @@ Depends:
     R(>= 3.1.0)
 Imports:
     devtools (>= 1.8.0),
+    dplyr,
     lubridate
 Suggests:
     RODBC,
