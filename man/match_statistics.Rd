@@ -20,13 +20,16 @@ A \code{numeric} array of the following elements: \code{parent_in_child}, \code{
 Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
 It also allows the presence of a missing to become a predictor in models.
 }
+\note{
+The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code{dplyr::anti_join}.
+}
 \examples{
 ds_parent <- data.frame(
   parent_id         = 1L:10L,
   letter            = rep(letters[1:5], each=2),
   index             = rep(1:2, times=5),
   dv                = runif(10),
-  stringsAsFactors  = F
+  stringsAsFactors  = FALSE
 )
 ds_child <- data.frame(
   child_id          = 101:140,
@@ -34,7 +37,7 @@ ds_child <- data.frame(
   letter            = rep(letters[3:12], each=4),
   index             = rep(1:2, each=2, length.out=40),
   dv                = runif(40),
-  stringsAsFactors  = F
+  stringsAsFactors  = FALSE
 )
 
 #Match on one column:

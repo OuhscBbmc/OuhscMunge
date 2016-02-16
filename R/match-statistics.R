@@ -12,7 +12,7 @@
 #' @return A \code{numeric} array of the following elements: \code{parent_in_child}, \code{parent_not_in_child}, \code{deadbeat_proportion}, \code{child_in_parent}, \code{child_not_in_parent}, and \code{orphan_proportion}.
 #' 
 #' @note
-#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code:dplyr::anti_join}.
+#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code{dplyr::anti_join}.
 #' 
 #' @author Will Beasley
 #' 
@@ -22,7 +22,7 @@
 #'   letter            = rep(letters[1:5], each=2),
 #'   index             = rep(1:2, times=5),
 #'   dv                = runif(10),
-#'   stringsAsFactors  = F
+#'   stringsAsFactors  = FALSE
 #' )
 #' ds_child <- data.frame(
 #'   child_id          = 101:140,
@@ -30,7 +30,7 @@
 #'   letter            = rep(letters[3:12], each=4),
 #'   index             = rep(1:2, each=2, length.out=40),
 #'   dv                = runif(40),
-#'   stringsAsFactors  = F
+#'   stringsAsFactors  = FALSE
 #' )
 #' 
 #' #Match on one column:
