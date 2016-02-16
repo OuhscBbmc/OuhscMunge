@@ -40,12 +40,20 @@
 #' match_statistics(ds_parent, ds_child, join_columns=c("letter", "index"))
 
 match_statistics <- function( d_parent, d_child, join_columns ) {
+  if( is.null(names(join_columns)) ) {
+    flipped_join_columns <- join_columns
+  } else {
+    flipped_join_columns <- names(join_columns)
+    names(flipped_join_columns) <- join_columns
+    flipped_join_columns <- ifelse(nchar(flipped_join_columns)==0L, names(flipped_join_columns), flipped_join_columns)
+  }
+  
   parent_in_child            <- nrow(dplyr::semi_join(d_parent, d_child, by=join_columns))
   parent_not_in_child        <- nrow(dplyr::anti_join(d_parent, d_child, by=join_columns))
   deadbeat_proportion        <- parent_not_in_child / (parent_in_child + parent_not_in_child)
   
-  child_in_parent            <- nrow(dplyr::semi_join(d_child, d_parent, by=join_columns))
-  child_not_in_parent        <- nrow(dplyr::anti_join(d_child, d_parent, by=join_columns))
+  child_in_parent            <- nrow(dplyr::semi_join(d_child, d_parent, by=flipped_join_columns))
+  child_not_in_parent        <- nrow(dplyr::anti_join(d_child, d_parent, by=flipped_join_columns))
   orphan_proportion          <- child_not_in_parent / (child_in_parent + child_not_in_parent)
   
   deadbeats <- c(parent_in_child = parent_in_child, parent_not_in_child = parent_not_in_child, deadbeat_proportion  = deadbeat_proportion )
