@@ -9,10 +9,22 @@
 #' @param d_child A \code{data.frame} of the child table.
 #' @param join_columns The \code{character} vector of the column names used to join to parent and child tables.
 #' 
-#' @return A \code{numeric} array of the following elements: \code{parent_in_child}, \code{parent_not_in_child}, \code{deadbeat_proportion}, \code{child_in_parent}, \code{child_not_in_parent}, and \code{orphan_proportion}.
+#' @return A \code{numeric} array of the following elements: 
+#' \itemize{
+#'   \item \code{parent_in_child} The count of parent records found in the child table.
+#'   \item \code{parent_not_in_child} The count of parent records \emph{not} found in the child table.
+#'   \item \code{deadbeat_proportion} The proportion of parent records \emph{not} found in the child table.
+#'   \item \code{child_in_parent} The count of child records found in the parent table.
+#'   \item \code{child_not_in_parent} The count of child records \emph{not} found in the parent table.
+#'   \item \code{orphan_proportion} The proportion of child records \emph{not} found in the parent table.
+#' }
 #' 
 #' @details 
 #' If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
+#' 
+#' More information about the `parent' and `child' terminology and concepts can be found in the 
+#' \href{https://en.wikipedia.org/wiki/Hierarchical_database_model}{Hierarchical Database Model}
+#' Wikipedia entry, among many other sources.
 #'
 #' @note
 #' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and \code{dplyr::anti_join}.
