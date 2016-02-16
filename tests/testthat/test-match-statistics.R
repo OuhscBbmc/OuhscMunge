@@ -25,9 +25,6 @@ names_returned <- c(
   "child_in_parent", "child_not_in_parent", "orphan_proportion"
 )
 
-# ds_child
-# ds_parent
-
 test_that("match_statistics -one column", {
   expected <- structure(c(7, 3, 0.3, 22, 18, 0.45), .Names = names_returned)
   observed <- match_statistics(ds_parent, ds_child, join_columns="parent_id") #dput(observed)
@@ -37,5 +34,29 @@ test_that("match_statistics -one column", {
 test_that("match_statistics -two columns", {
   expected <- structure(c(6, 4, 0.4, 12, 28, 0.7), .Names = names_returned)
   observed <- match_statistics(ds_parent, ds_child, join_columns=c("letter", "index")) #dput(observed)
+  expect_equal(observed, expected)
+})
+
+test_that("match_statistics -one column w/ 1 different name", {
+  d_c <- dplyr::rename_(ds_child, "ParentID"="parent_id")
+  
+  expected <- structure(c(7, 3, 0.3, 22, 18, 0.45), .Names = names_returned)
+  observed <- match_statistics(ds_parent, d_c, join_columns=c("parent_id"="ParentID")) #dput(observed)
+  expect_equal(observed, expected)
+})
+
+test_that("match_statistics -two columns w/ 1 different name", {
+  d_c <- dplyr::rename_(ds_child, "Letter"="letter")
+  
+  expected <- structure(c(6, 4, 0.4, 12, 28, 0.7), .Names = names_returned)
+  observed <- match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index")) #dput(observed)
+  expect_equal(observed, expected)
+})
+
+test_that("match_statistics -two columns w/ 2 different names", {
+  d_c <- dplyr::rename_(ds_child, "Letter"="letter", "Index"="index")
+  
+  expected <- structure(c(6, 4, 0.4, 12, 28, 0.7), .Names = names_returned)
+  observed <- match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="Index")) #dput(observed)
   expect_equal(observed, expected)
 })
