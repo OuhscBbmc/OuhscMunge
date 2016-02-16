@@ -9,7 +9,7 @@ ds_parent <- data.frame(
   letter            = rep(letters[1:5], each=2),
   index             = rep(1:2, times=5),
   dv                = runif(10),
-  stringsAsFactors  = F
+  stringsAsFactors  = FALSE
 )
 ds_child <- data.frame(
   child_id          = 101:140,
@@ -17,7 +17,7 @@ ds_child <- data.frame(
   letter            = rep(letters[3:12], each=4),
   index             = rep(1:2, each=2, length.out=40),
   dv                = runif(40),
-  stringsAsFactors  = F
+  stringsAsFactors  = FALSE
 )
 
 names_returned <- c(
@@ -59,4 +59,19 @@ test_that("match_statistics -two columns w/ 2 different names", {
   expected <- structure(c(6, 4, 0.4, 12, 28, 0.7), .Names = names_returned)
   observed <- match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="Index")) #dput(observed)
   expect_equal(observed, expected)
+})
+
+test_that("match_statistics -bad parent name", {
+  expect_error(
+    match_statistics(ds_parent, ds_child, join_columns=c("BAD"="Letter", "index"="Index"))
+    , 'The variable `BAD` is not found in the parent table passed to `OuhscMunge::match_statistics\\(\\)`'
+  )
+})
+
+test_that("match_statistics -bad child name", {
+  d_c <- dplyr::rename_(ds_child, "Letter"="letter", "Index"="index")
+  expect_error(
+    match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="BAD"))
+    , 'The variable `BAD` is not found in the child table passed to `OuhscMunge::match_statistics\\(\\)`'
+  )
 })

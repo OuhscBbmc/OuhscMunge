@@ -11,8 +11,11 @@
 #' 
 #' @return A \code{numeric} array of the following elements: \code{parent_in_child}, \code{parent_not_in_child}, \code{deadbeat_proportion}, \code{child_in_parent}, \code{child_not_in_parent}, and \code{orphan_proportion}.
 #' 
+#' @details 
+#' If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
+#'
 #' @note
-#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code{dplyr::anti_join}.
+#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and \code{dplyr::anti_join}.
 #' 
 #' @author Will Beasley
 #' 
@@ -48,6 +51,13 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
     flipped_join_columns <- ifelse(nchar(flipped_join_columns)==0L, names(flipped_join_columns), flipped_join_columns)
   }
   
+  for( i in seq_along(join_columns) ) {
+    if( !(flipped_join_columns[i] %in% colnames(d_parent)) )
+      base::stop("The variable `", flipped_join_columns[i], "` is not found in the parent table passed to `OuhscMunge::match_statistics()`.")
+    if( !(join_columns[i] %in% colnames(d_child)) )
+      base::stop("The variable `", join_columns[i], "` is not found in the child table passed to `OuhscMunge::match_statistics()`.")
+  }
+  
   parent_in_child            <- nrow(dplyr::semi_join(d_parent, d_child, by=join_columns))
   parent_not_in_child        <- nrow(dplyr::anti_join(d_parent, d_child, by=join_columns))
   deadbeat_proportion        <- parent_not_in_child / (parent_in_child + parent_not_in_child)
@@ -58,5 +68,6 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
   
   deadbeats <- c(parent_in_child = parent_in_child, parent_not_in_child = parent_not_in_child, deadbeat_proportion  = deadbeat_proportion )
   orphans   <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, orphan_proportion    = orphan_proportion   )
+  
   return( c(deadbeats, orphans) )
 }

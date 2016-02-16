@@ -20,8 +20,11 @@ A \code{numeric} array of the following elements: \code{parent_in_child}, \code{
 Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
 It also allows the presence of a missing to become a predictor in models.
 }
+\details{
+If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
+}
 \note{
-The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code{dplyr::anti_join}.
+The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and \code{dplyr::anti_join}.
 }
 \examples{
 ds_parent <- data.frame(
