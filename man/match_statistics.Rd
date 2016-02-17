@@ -18,10 +18,12 @@ A \code{numeric} array of the following elements:
 \itemize{
   \item \code{parent_in_child} The count of parent records found in the child table.
   \item \code{parent_not_in_child} The count of parent records \emph{not} found in the child table.
+  \item \code{parent_na_any} The count of parent records with a \code{NA} in at least one of the join columns.
   \item \code{deadbeat_proportion} The proportion of parent records \emph{not} found in the child table.
   \item \code{child_in_parent} The count of child records found in the parent table.
   \item \code{child_not_in_parent} The count of child records \emph{not} found in the parent table.
-  \item \code{orphan_proportion} The proportion of child records \emph{not} found in the parent table.
+  \item \code{child_na_any} The proportion of child records \emph{not} found in the parent table.
+  \item \code{orphan_proportion} The count of child records with a \code{NA} in at least one of the join columns.
 }
 }
 \description{

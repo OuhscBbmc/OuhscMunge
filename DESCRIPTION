@@ -3,7 +3,7 @@ Title: Data Manipulation Operations
 Description: Data manipulation operations frequently used in OUHSC BBMC
     projects.
 Version: 0.1.6.9000
-Date: 2016-01-08
+Date: 2016-02-16
 Authors@R: person("Will", "Beasley", email="wibeasley@hotmail.com", role=c("aut", "cre"))
 Author: Will Beasley [aut, cre]
 Maintainer: Will Beasley <wibeasley@hotmail.com>

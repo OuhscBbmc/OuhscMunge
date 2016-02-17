@@ -13,10 +13,12 @@
 #' \itemize{
 #'   \item \code{parent_in_child} The count of parent records found in the child table.
 #'   \item \code{parent_not_in_child} The count of parent records \emph{not} found in the child table.
+#'   \item \code{parent_na_any} The count of parent records with a \code{NA} in at least one of the join columns.
 #'   \item \code{deadbeat_proportion} The proportion of parent records \emph{not} found in the child table.
 #'   \item \code{child_in_parent} The count of child records found in the parent table.
 #'   \item \code{child_not_in_parent} The count of child records \emph{not} found in the parent table.
-#'   \item \code{orphan_proportion} The proportion of child records \emph{not} found in the parent table.
+#'   \item \code{child_na_any} The proportion of child records \emph{not} found in the parent table.
+#'   \item \code{orphan_proportion} The count of child records with a \code{NA} in at least one of the join columns.
 #' }
 #' 
 #' @details 
@@ -72,14 +74,19 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
   
   parent_in_child            <- nrow(dplyr::semi_join(d_parent, d_child, by=join_columns))
   parent_not_in_child        <- nrow(dplyr::anti_join(d_parent, d_child, by=join_columns))
-  deadbeat_proportion        <- parent_not_in_child / (parent_in_child + parent_not_in_child)
+  deadbeat_proportion        <- parent_not_in_child / nrow(d_parent)
+  parent_na_any              <- sum(apply(dplyr::select_(d_parent, .dots = flipped_join_columns), MARGIN=1, FUN=function(x) any(is.na(x))))
   
   child_in_parent            <- nrow(dplyr::semi_join(d_child, d_parent, by=flipped_join_columns))
   child_not_in_parent        <- nrow(dplyr::anti_join(d_child, d_parent, by=flipped_join_columns))
-  orphan_proportion          <- child_not_in_parent / (child_in_parent + child_not_in_parent)
+  orphan_proportion          <- child_not_in_parent / nrow(d_child)
+  child_na_any               <- sum(apply(dplyr::select_(d_child, .dots = join_columns), MARGIN=1, FUN=function(x) any(is.na(x))))
   
-  deadbeats <- c(parent_in_child = parent_in_child, parent_not_in_child = parent_not_in_child, deadbeat_proportion  = deadbeat_proportion )
-  orphans   <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, orphan_proportion    = orphan_proportion   )
+  # browser()
+  # apply(dplyr::select_(d_parent, .dots = flipped_join_columns), MARGIN=1, FUN=function(x) length(x))
   
-  return( c(deadbeats, orphans) )
+  parent <- c(parent_in_child = parent_in_child, parent_not_in_child = parent_not_in_child, parent_na_any = parent_na_any, deadbeat_proportion  = deadbeat_proportion )
+  child  <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, child_na_any  = child_na_any , orphan_proportion    = orphan_proportion   )
+  
+  return( c(parent, child) )
 }
