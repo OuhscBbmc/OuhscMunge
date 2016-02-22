@@ -12,7 +12,7 @@
 #' @return A \code{numeric} array of the following elements: \code{in_child}, \code{not_in_child}, \code{deadbeat_proportion}, \code{in_parent}, \code{not_in_parent}, and \code{orphan_proportion}.
 #' 
 #' @note
-#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code:dplyr::anti_join}.
+#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and  \code{dplyr::anti_join}.
 #' 
 #' @author Will Beasley
 #' 
