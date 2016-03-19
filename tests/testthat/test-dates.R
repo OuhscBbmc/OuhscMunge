@@ -43,7 +43,7 @@ test_that("clump date -bad day 32", {
   detailed <- seq.Date(from=as.Date("2011-04-21"), to=as.Date("2011-05-14"), by="day")
   expect_error(
     OuhscMunge::clump_month_date(detailed, day_of_month=32)
-    , regexp = "Error in OuhscMunge::clump_month_date\\(detailed, day_of_month = 32\\) :\\s+The `day_of_month` parameter must be bound by \\[1, 31]\\."
+    , regexp = ".*?The `day_of_month` parameter must be bound by \\[1, 31]\\."
   )
 })
 
@@ -51,6 +51,6 @@ test_that("clump date -bad day 31.5", {
   detailed <- seq.Date(from=as.Date("2011-04-21"), to=as.Date("2011-05-14"), by="day")
   expect_error(
     OuhscMunge::clump_month_date(detailed, day_of_month=31.5)
-    , regexp = "Error in OuhscMunge::clump_month_date\\(detailed, day_of_month = 31.5\\) :\\s+The `day_of_month` parameter must be bound by \\[1, 31]\\."
+    , regexp = ".*The `day_of_month` parameter must be bound by \\[1, 31]\\."
   )
 })
