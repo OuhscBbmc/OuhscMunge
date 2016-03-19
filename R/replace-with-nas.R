@@ -35,6 +35,7 @@
 #' 
 #' replace_with_nas(c("2011-02-03", "", "", "2011-02-24"), return_type="Date")
 #' replace_with_nas(c("T", "", "", "F", "FALSE", "", "TRUE"), return_type="logical")
+#' replace_with_nas(c("1", "", "", "0", "0"    , "", "1")   , return_type="logical")
 
 replace_with_nas <- function( x, return_type=NULL ) {
   
