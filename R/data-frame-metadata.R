@@ -34,11 +34,7 @@ column_rename_headstart <- function( d, try_snake_case=TRUE ) {
   extra_padding <- 10L         # Extra space for convenience.
   
   if( try_snake_case ) {
-    #Second & third lines use http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
-    left_names <- gsub("\\.", "_", colnames(d))                                    # Replace dots with underscores.
-    left_names <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2", left_names)                  # Separate w/ dashes basd on capitalization
-    left_names <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", left_names))
-    left_names <- gsub("__", "_", left_names)                                      # Replace double-underscores with single.
+    left_names <- snake_case(colnames(d)) 
   } else {
     left_names <- colnames(d)
   }
