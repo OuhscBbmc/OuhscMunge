@@ -5,14 +5,14 @@
 #If anyone encounters a package that should be on there, please add it to `./utility/package-dependency-list.csv`
 
 package_janitor <- function(
-                            path_package_dependencies, # = './utility/package-dependency-list.csv',
-                            cran_repo = "https://cran.rstudio.com",
-                            update_packages = TRUE,
-                            check_xml_linux = (R.Version()$os=="linux-gnu"),
-                            check_libcurl_linux = (R.Version()$os=="linux-gnu"),
-                            check_openssl_linux = (R.Version()$os=="linux-gnu"),
-                            verbose = TRUE
-                          ) {
+    path_package_dependencies, # = './utility/package-dependency-list.csv',
+    cran_repo                    = "http://cran.rstudio.com",
+    update_packages              = TRUE,
+    check_xml_linux              = (R.Version()$os=="linux-gnu"),
+    check_libcurl_linux          = (R.Version()$os=="linux-gnu"),
+    check_openssl_linux          = (R.Version()$os=="linux-gnu"),
+    verbose                      = TRUE
+  ) {
 
   if( !file.exists(path_package_dependencies))
     base::stop("The path `", path_package_dependencies, "` was not found.  Make sure the working directory is set to the root of the repository.")
