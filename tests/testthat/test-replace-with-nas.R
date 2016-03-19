@@ -55,11 +55,16 @@ test_that("Replace with characters -date", {
 
 test_that("Replace with NA -Boolean", {
   input_1  <- c("T", "", "", "F", "FALSE", "", "TRUE")
-  expected <- c(T, NA, NA, F, F, NA, T)
+  input_2  <- c("1", "", "", "0", "0"    , "", "1")
+  expected <- c(T  , NA, NA, F  , F      , NA, T)
   
   actual_1 <- replace_with_nas(input_1, return_type="logical")
+  actual_2 <- replace_with_nas(input_2, return_type="logical")
   
   expect_equal(actual_1, expected, label="The blank values should have been replaced.")
   expect_equal(class(actual_1), "logical", "The returned array should be converted to a Boolean/logical.")
+  
+  expect_equal(actual_2, expected, label="The blank values should have been replaced.")
+  expect_equal(class(actual_2), "logical", "The returned array should be converted to a Boolean/logical.")
 })
 

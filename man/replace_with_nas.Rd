@@ -21,7 +21,10 @@ cohersion to an optionally-specified data type.
 \details{
 If \code{return_type} is missing, returned data type will match input.
 Supports cohersion to \code{integer}, \code{numeric}, \code{character}, \code{logical},
-and \code{Date} vectors.
+and \code{Date} vectors.  
+
+If \code{return_type=logical}, a \code{logical} vector will be returned
+if \code{x} contains only blanks and the characters \code{"0"} and \code{"1"}.
 }
 \note{
 Contact the package author if you'd like the function generalized so that additional values

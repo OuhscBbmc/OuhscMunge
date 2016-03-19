@@ -13,7 +13,10 @@
 #' 
 #' @details If \code{return_type} is missing, returned data type will match input.
 #' Supports cohersion to \code{integer}, \code{numeric}, \code{character}, \code{logical},
-#' and \code{Date} vectors.
+#' and \code{Date} vectors.  
+#' 
+#' If \code{return_type=logical}, a \code{logical} vector will be returned
+#' if \code{x} contains only blanks and the characters \code{"0"} and \code{"1"}.
 #' 
 #' @note Contact the package author if you'd like the function generalized so that additional values
 #' (other that \code{""}) are converted to \code{NA}s.
@@ -56,7 +59,11 @@ replace_with_nas <- function( x, return_type=NULL ) {
     as.numeric(ifelse(x=="", NA, x))
     
   } else if( return_type == "logical" ) {
-    as.logical(ifelse(x=="", NA, x))
+    if( all(x %in% c("", "0", "1")) ) {
+      as.logical(as.integer(ifelse(x=="", NA, x)))
+    } else {
+      as.logical(ifelse(x=="", NA, x))
+    }
     
   } else {
     stop(paste0("The `return_type` of ", return_type, " is not currently supported."))
