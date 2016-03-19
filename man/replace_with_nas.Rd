@@ -20,7 +20,8 @@ cohersion to an optionally-specified data type.
 }
 \details{
 If \code{return_type} is missing, returned data type will match input.
-Supports cohersion to \code{integer}, \code{numeric}, \code{character}, and \code{Date} vectors.
+Supports cohersion to \code{integer}, \code{numeric}, \code{character}, \code{logical},
+and \code{Date} vectors.
 }
 \note{
 Contact the package author if you'd like the function generalized so that additional values
@@ -37,6 +38,7 @@ replace_with_nas(c(1, 2, "", "", 5), return_type="integer")
 replace_with_nas(c(1, 2, "", "", 5), return_type="numeric")
 
 replace_with_nas(c("2011-02-03", "", "", "2011-02-24"), return_type="Date")
+replace_with_nas(c("T", "", "", "F", "FALSE", "", "TRUE"), return_type="logical")
 }
 \author{
 Will Beasley

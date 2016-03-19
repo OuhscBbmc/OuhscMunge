@@ -12,7 +12,8 @@
 #' @return An array of values with \code{NA}s.
 #' 
 #' @details If \code{return_type} is missing, returned data type will match input.
-#' Supports cohersion to \code{integer}, \code{numeric}, \code{character}, and \code{Date} vectors.
+#' Supports cohersion to \code{integer}, \code{numeric}, \code{character}, \code{logical},
+#' and \code{Date} vectors.
 #' 
 #' @note Contact the package author if you'd like the function generalized so that additional values
 #' (other that \code{""}) are converted to \code{NA}s.
@@ -30,6 +31,7 @@
 #' replace_with_nas(c(1, 2, "", "", 5), return_type="numeric")
 #' 
 #' replace_with_nas(c("2011-02-03", "", "", "2011-02-24"), return_type="Date")
+#' replace_with_nas(c("T", "", "", "F", "FALSE", "", "TRUE"), return_type="logical")
 
 replace_with_nas <- function( x, return_type=NULL ) {
   
@@ -52,6 +54,9 @@ replace_with_nas <- function( x, return_type=NULL ) {
     
   } else if( return_type == "numeric" ) {
     as.numeric(ifelse(x=="", NA, x))
+    
+  } else if( return_type == "logical" ) {
+    as.logical(ifelse(x=="", NA, x))
     
   } else {
     stop(paste0("The `return_type` of ", return_type, " is not currently supported."))
