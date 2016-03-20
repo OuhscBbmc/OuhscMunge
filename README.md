@@ -18,7 +18,7 @@ install.packages("OuhscMunge")
 ```
 -->
 
-The *development* version of `OuhscMunge` can be installed from [GitHub](https://github.com/OuhscBbmc/OuhscMunge) after installing the `devtools` package.  (The *release* version will be available on [CRAN](https://cran.rstudio.com/) later.)
+The *development* version of `OuhscMunge` can be installed from [GitHub](https://github.com/OuhscBbmc/OuhscMunge) after installing the `devtools` package.  (The *release* version will be available on [CRAN](https://cran.r-project.org/) later.)
 ```r
 install.packages("devtools")
 devtools::install_github(repo="OuhscBbmc/OuhscMunge")
