@@ -8,13 +8,15 @@
 #' that can be pasted into code, and help the developer avoid some typing.
 #' 
 #' @usage 
-#' column_rename_headstart( d )
+#' column_rename_headstart( d, try_snake_case=TRUE )
 #' column_class_headstart( d )
 #' column_value_headstart( x )
 #' 
 #' @param d A \code{data.frame} to describe.
 #' 
 #' @param x A vector to describe.
+#' 
+#' @param try_snake_case If \code{TRUE} column names are attempted to be converted to snake_case.
 #'
 #' @return Prints formatted code to the console.
 #' 
@@ -22,18 +24,26 @@
 #' 
 #' @examples
 #' column_rename_headstart(datasets::OrchardSprays)
+#' column_rename_headstart(datasets::iris)
 #' column_class_headstart(datasets::OrchardSprays)
 #' column_value_headstart(datasets::OrchardSprays$treatment)
 
-column_rename_headstart <- function( d ) {
+column_rename_headstart <- function( d, try_snake_case=TRUE ) {
   max_column_name <- max(nchar(colnames(d)))
-  extra_character_length <- 5L #a comma, two quotes, and two backslashes.
+  extra_character_length <- 5L # A comma, two quotes, and two backslashes.
+  extra_padding <- 10L         # Extra space for convenience.
   
-  left_side <- paste0(", \"", colnames(d), "\"")
-  padded_format <- paste0("%-", max_column_name + extra_character_length, "s")
+  if( try_snake_case ) {
+    left_names <- snake_case(colnames(d)) 
+  } else {
+    left_names <- colnames(d)
+  }
+  
+  left_side <- paste0(", \"", left_names, "\"")
+  padded_format <- paste0("%-", max_column_name + extra_character_length + extra_padding, "s")
   left_side <- sprintf(padded_format, left_side)
   
-  right_side <- paste0("\"", colnames(d), "\"\n")
+  right_side <- paste0("\"`", colnames(d), "`\"\n")
   
   cat(paste0(left_side, " = ", right_side)) #Gives a headstart to dplyr::rename_() & plyr::rename()
 }

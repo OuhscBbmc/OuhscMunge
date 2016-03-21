@@ -7,12 +7,14 @@
 \alias{headstart_utilities}
 \title{Utilities for outputting characteristics of a datatset used it code.}
 \usage{
-column_rename_headstart( d )
+column_rename_headstart( d, try_snake_case=TRUE )
 column_class_headstart( d )
 column_value_headstart( x )
 }
 \arguments{
 \item{d}{A \code{data.frame} to describe.}
+
+\item{try_snake_case}{If \code{TRUE} column names are attempted to be converted to snake_case.}
 
 \item{x}{A vector to describe.}
 }
@@ -25,6 +27,7 @@ that can be pasted into code, and help the developer avoid some typing.
 }
 \examples{
 column_rename_headstart(datasets::OrchardSprays)
+column_rename_headstart(datasets::iris)
 column_class_headstart(datasets::OrchardSprays)
 column_value_headstart(datasets::OrchardSprays$treatment)
 }

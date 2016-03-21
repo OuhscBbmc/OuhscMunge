@@ -5,14 +5,14 @@
 #If anyone encounters a package that should be on there, please add it to `./utility/package-dependency-list.csv`
 
 package_janitor <- function(
-                            path_package_dependencies, # = './utility/package-dependency-list.csv',
-                            cran_repo = "http://cran.rstudio.com",
-                            update_packages = TRUE,
-                            check_xml_linux = (R.Version()$os=="linux-gnu"),
-                            check_libcurl_linux = (R.Version()$os=="linux-gnu"),
-                            check_openssl_linux = (R.Version()$os=="linux-gnu"),
-                            verbose = TRUE
-                          ) {
+    path_package_dependencies, # = './utility/package-dependency-list.csv',
+    cran_repo                    = "http://cran.rstudio.com",
+    update_packages              = TRUE,
+    check_xml_linux              = (R.Version()$os=="linux-gnu"),
+    check_libcurl_linux          = (R.Version()$os=="linux-gnu"),
+    check_openssl_linux          = (R.Version()$os=="linux-gnu"),
+    verbose                      = TRUE
+  ) {
 
   if( !file.exists(path_package_dependencies))
     base::stop("The path `", path_package_dependencies, "` was not found.  Make sure the working directory is set to the root of the repository.")
@@ -70,8 +70,9 @@ package_janitor <- function(
           #base::requireNamespace( package_name, character.only=TRUE)
         } else if( update_packages ) {
           if( verbose ) message("`", package_name, "` exists, and verifying it's dependencies are installed too.")
+          
           #Make sure all their dependencies are installed & up-to-date
-          need_to_install <- devtools::package_deps(package_name, dependencies=TRUE)
+          need_to_install <- devtools::package_deps(package_name, dependencies=TRUE)$package
           devtools::update_packages(need_to_install, repos=cran_repo)
         }
         base::rm(available)
@@ -89,7 +90,7 @@ package_janitor <- function(
     
     if( libcurl_missing )
       base::warning("This Linux machine is possibly missing the 'libxml2-dev' library.  ",
-                    "Consider running `sudo apt-get install r-cran-xml`.", 
+                    "Consider running `sudo apt-get install r-cran-xml` ", 
                     "or the equivalent for your distribution.")
     
     base::rm(libcurl_results, libcurl_missing)
@@ -98,12 +99,12 @@ package_janitor <- function(
   #####################################
   ## check_for_libcurl
   if( check_libcurl_linux ) {
-    libcurl_results <- base::system("locate libcurl4")
+    libcurl_results <- base::system("locate libcurl4*")
     libcurl_missing <- (libcurl_results==0)
     
     if( libcurl_missing )
       base::warning("This Linux machine is possibly missing the 'libcurl' library.  ",
-                    "Consider running `sudo apt-get install libcurl4-openssl-dev`.", 
+                    "Consider running `sudo apt-get install libcurl4-openssl-dev` ", 
                     "or the equivalent for your distribution.")
     
     base::rm(libcurl_results, libcurl_missing)
@@ -117,7 +118,7 @@ package_janitor <- function(
     
     if( openssl_missing )
       base::warning("This Linux machine is possibly missing the 'libssl' library.  ",
-                    "Consider running `sudo apt-get install libssl-dev`.", 
+                    "Consider running `sudo apt-get install libssl-dev` ", 
                     "or the equivalent for your distribution.")
     
     base::rm(openssl_results, openssl_missing)
