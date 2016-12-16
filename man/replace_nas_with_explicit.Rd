@@ -22,6 +22,9 @@ An array of values, where the \code{NA} values are now a factor level, with the 
 \description{
 Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
 It also allows the presence of a missing to become a predictor in models.
+
+The function is retained so existing code doesn't break.  For new code, consider using \link[dplyr]{coalesce} 
+if you don't need to convert the missing code to a factor level.
 }
 \note{
 The \code{create_factor} parameter is respected only if \code{scores} isn't already a factor.  Otherwise, levels without any values would be lost.
