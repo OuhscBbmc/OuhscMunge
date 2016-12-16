@@ -4,6 +4,7 @@ sudo: required
 cache: packages
 warnings_are_errors: true
 apt_packages:
+ - libiodbc2-dev
  - r-cran-rodbc
 r_github_packages:
   - jimhester/covr
