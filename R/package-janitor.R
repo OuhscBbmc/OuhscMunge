@@ -85,15 +85,15 @@ package_janitor <- function(
   #http://stackoverflow.com/questions/7765429/unable-to-install-r-package-in-ubuntu-11-04
   
   if( check_xml_linux ) {
-    libcurl_results <- base::system("locate r-cran-xml")
-    libcurl_missing <- (libcurl_results==0)
+    xml_results <- base::system("locate r-cran-xml")
+    xml_missing <- (xml_results==0)
     
-    if( libcurl_missing )
+    if( xml_missing )
       base::warning("This Linux machine is possibly missing the 'libxml2-dev' library.  ",
                     "Consider running `sudo apt-get install r-cran-xml` ", 
                     "or the equivalent for your distribution.")
     
-    base::rm(libcurl_results, libcurl_missing)
+    base::rm(xml_results, xml_missing)
   }
   
   #####################################
