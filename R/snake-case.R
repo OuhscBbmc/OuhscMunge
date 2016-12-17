@@ -22,6 +22,7 @@ snake_case <- function( x ) {
   s <- gsub("\\.", "_", x)                                    # Replace dots with underscores.
   s <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2", s)                 # Separate w/ dashes basd on capitalization
   s <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", s))
+  s <- gsub(" ", "_", s)                                      # Replace spaces with underscores.
   s <- gsub("__", "_", s)                                     # Replace double-underscores with single.
   
   return( s )
