@@ -26,7 +26,12 @@
 
 
 #' @export
-deterge_to_double <- function( x, bound_lower, bound_upper) {
+deterge_to_double <- function( x, bound_lower=-Inf, bound_upper=Inf ) {
+  
+  if( !(class(bound_lower) %in% c("numeric", "integer") & length(bound_lower)==1L) ) 
+    stop("The parameter `bound_lower` must be a numeric or integer vector with exactly one element.")
+  if( !(class(bound_upper) %in% c("numeric", "integer") & length(bound_upper)==1L) ) 
+    stop("The parameter `bound_upper` must be a numeric or integer vector with exactly one element.")
   
   # Remove commas and convert to a double-precision data type.
   x <- as.numeric(gsub(",", "", x, perl=TRUE))
@@ -41,7 +46,13 @@ deterge_to_double <- function( x, bound_lower, bound_upper) {
 }
 
 #' @export
-deterge_to_integer <- function( x, bound_lower, bound_upper) {
+deterge_to_integer <- function( x, bound_lower=-Inf, bound_upper=Inf ) {
+  
+  if( !(class(bound_lower) %in% c("numeric", "integer") & length(bound_lower)==1L) ) 
+    stop("The parameter `bound_lower` must be a numeric or integer vector with exactly one element.")
+  if( !(class(bound_upper) %in% c("numeric", "integer") & length(bound_upper)==1L) ) 
+    stop("The parameter `bound_upper` must be a numeric or integer vector with exactly one element.")
+  
   # Remove commas and convert to a double-precision data type.
   x <- as.integer(gsub(",", "", x, perl=TRUE))
    
