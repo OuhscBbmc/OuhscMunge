@@ -5,6 +5,9 @@
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
 #' It also allows the presence of a missing to become a predictor in models.
 #' 
+#' The function is retained so existing code doesn't break.  For new code, consider using \link[dplyr]{coalesce} 
+#' if you don't need to convert the missing code to a factor level.
+#' 
 #' @param scores An array of values, ideally either factor or character. Required
 #' @param new_na_label The factor label assigned to the missing value.  Defaults to \code{Unknown}.
 #' @param create_factor Converts \code{scores} into a factor, if it isn't one already.   Defaults to \code{FALSE}.
