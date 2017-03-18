@@ -12,11 +12,9 @@
 #' column_class_headstart( d )
 #' column_value_headstart( x )
 #' 
-#' @param d A \code{data.frame} to describe.
-#' 
+#' @param d A `data.frame` to describe.
 #' @param x A vector to describe.
-#' 
-#' @param try_snake_case If \code{TRUE} column names are attempted to be converted to snake_case.
+#' @param try_snake_case If `TRUE` column names are attempted to be converted to snake_case.
 #'
 #' @return Prints formatted code to the console.
 #' 

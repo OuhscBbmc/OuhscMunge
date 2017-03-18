@@ -32,8 +32,8 @@ library(OuhscMunge)
 detailed <- seq.Date(from=as.Date("2011-04-21"), to=as.Date("2011-07-14"), by="day")
 clumped <- clump_month_date(detailed)
 table(clumped)
-# 2011-04-15 2011-05-15 2011-06-15 2011-07-15  
-#         10         31         30         14  
+# 2011-04-15 2011-05-15 2011-06-15 2011-07-15
+#         10         31         30         14
 }
 \author{
 Will Beasley
