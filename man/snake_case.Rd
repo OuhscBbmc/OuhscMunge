@@ -24,4 +24,3 @@ snake_case(colnames(datasets::iris))
 \author{
 Will Beasley
 }
-

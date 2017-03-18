@@ -49,4 +49,3 @@ replace_with_nas(c("1", "", "", "0", "0"    , "", "1")   , return_type="logical"
 \author{
 Will Beasley
 }
-

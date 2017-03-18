@@ -42,4 +42,3 @@ devtools::install_github('OuhscBbmc/OuhscMunge')
   
 Maintainer: Will Beasley <wibeasley@hotmail.com>
 }
-

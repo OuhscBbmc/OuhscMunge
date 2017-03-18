@@ -47,4 +47,3 @@ b <- OuhscMunge::replace_nas_with_explicit(b, add_unknown_level=TRUE)
 \author{
 Will Beasley
 }
-

@@ -33,4 +33,3 @@ deterge_to_integer(c(NA, 1:10), 4, 8)
 \author{
 Will Beasley
 }
-

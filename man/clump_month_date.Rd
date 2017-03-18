@@ -38,4 +38,3 @@ table(clumped)
 \author{
 Will Beasley
 }
-

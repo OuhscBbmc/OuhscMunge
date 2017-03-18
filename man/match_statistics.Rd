@@ -66,4 +66,3 @@ match_statistics(ds_parent, ds_child, join_columns=c("letter", "index"))
 \author{
 Will Beasley
 }
-
