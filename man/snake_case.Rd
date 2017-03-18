@@ -13,7 +13,7 @@ snake_case(x)
 A vector of converted names.
 }
 \description{
-This function attempts to convert variables to snake_case, even if it's already in snake_case.  
+This function attempts to convert variables to snake_case, even if it's already in snake_case.
 The important regex lines were posted by Stack Overflow user \href{http://stackoverflow.com/users/129879/epost}{epost}
 in \href{http://stackoverflow.com/a/1176023/1082435}{"Elegant Python function to convert CamelCase to snake_case?"}.
 }

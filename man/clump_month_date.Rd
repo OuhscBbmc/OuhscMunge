@@ -18,13 +18,13 @@ An array of \code{Date} values.
 This accepts a date, but changes the day.  Set/degrade/clump all the days within a month to the same day.
 }
 \details{
-We use this frequently to set/degrade/clump all the days to the middle of their respective month (ie, the 15th day).  
-The midpoint of a month is usually the most appropriate summary location.  It makes graphs more intuitive.  
+We use this frequently to set/degrade/clump all the days to the middle of their respective month (ie, the 15th day).
+The midpoint of a month is usually the most appropriate summary location.  It makes graphs more intuitive.
 Using the midpoint of month can also avoid problems with timezones.  A date won't get nudged to a neighboring month accidentally.
 }
 \note{
 A \code{stop} error will be thrown if \code{date_detailed} is not a \code{Date}, or if \code{day_of_month} is not bounded by \code{[1, 31]}.
-Be careful that if you set a November date the 31st day, the result will be December 1st.  
+Be careful that if you set a November date the 31st day, the result will be December 1st.
 Consequently, we recommend not setting the day to a value after the 28.
 }
 \examples{

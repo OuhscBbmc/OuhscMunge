@@ -14,31 +14,30 @@ match_statistics(d_parent, d_child, join_columns)
 \item{join_columns}{The \code{character} vector of the column names used to join to parent and child tables.}
 }
 \value{
-A \code{numeric} array of the following elements: 
+A \code{numeric} array of the following elements:
 \itemize{
-  \item \code{parent_in_child} The count of parent records found in the child table.
-  \item \code{parent_not_in_child} The count of parent records \emph{not} found in the child table.
-  \item \code{parent_na_any} The count of parent records with a \code{NA} in at least one of the join columns.
-  \item \code{deadbeat_proportion} The proportion of parent records \emph{not} found in the child table.
-  \item \code{child_in_parent} The count of child records found in the parent table.
-  \item \code{child_not_in_parent} The count of child records \emph{not} found in the parent table.
-  \item \code{child_na_any} The proportion of child records \emph{not} found in the parent table.
-  \item \code{orphan_proportion} The count of child records with a \code{NA} in at least one of the join columns.
+\item \code{parent_in_child}          The count of parent records found in the child table.
+\item \code{parent_not_in_child}      The count of parent records \emph{not} found in the child table.
+\item \code{parent_na_any}            The count of parent records with a \code{NA} in at least one of the join columns.
+\item \code{deadbeat_proportion}      The proportion of parent records \emph{not} found in the child table.
+\item \code{child_in_parent}          The count of child records found in the parent table.
+\item \code{child_not_in_parent}      The count of child records \emph{not} found in the parent table.
+\item \code{child_na_any}             The proportion of child records \emph{not} found in the parent table.
+\item \code{orphan_proportion}        The count of child records with a \code{NA} in at least one of the join columns.
 }
 }
 \description{
-Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
+Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
 It also allows the presence of a missing to become a predictor in models.
 }
 \details{
 If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
-
-More information about the `parent' and `child' terminology and concepts can be found in the 
+More information about the \code{parent' and}child' terminology and concepts can be found in the
 \href{https://en.wikipedia.org/wiki/Hierarchical_database_model}{Hierarchical Database Model}
 Wikipedia entry, among many other sources.
 }
 \note{
-The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and \code{dplyr::anti_join}.
+The \code{join_columns} parameter is passed directly to \url{dplyr::semi_join()} and \url{dplyr::anti_join()}.
 }
 \examples{
 ds_parent <- data.frame(
