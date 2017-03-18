@@ -32,7 +32,8 @@ It also allows the presence of a missing to become a predictor in models.
 }
 \details{
 If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
-More information about the \code{parent' and}child' terminology and concepts can be found in the
+
+More information about the 'parent' and 'child' terminology and concepts can be found in the
 \href{https://en.wikipedia.org/wiki/Hierarchical_database_model}{Hierarchical Database Model}
 Wikipedia entry, among many other sources.
 }

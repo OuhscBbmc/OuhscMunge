@@ -22,11 +22,11 @@
 #' 
 #' @details If a nonexistent column is passed to `join_columns`, an error will be thrown naming the violating column name.
 #' 
-#' More information about the `parent' and `child' terminology and concepts can be found in the 
+#' More information about the 'parent' and 'child' terminology and concepts can be found in the 
 #' [Hierarchical Database Model](https://en.wikipedia.org/wiki/Hierarchical_database_model)
 #' Wikipedia entry, among many other sources.
 #' 
-#' @note The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
+#' @note  The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
 #' 
 #' @author Will Beasley
 #' 
