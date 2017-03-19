@@ -9,8 +9,8 @@
 #' deterge_to_integer(x, bound_lower, bound_upper)
 #' 
 #' @param x The input vector that needs to be cast.  Required
-#' @param bound_lower Elements below this inclusive threshold will be set to \code{NA}.
-#' @param bound_upper Elements above this inclusive threshold will be set to \code{NA}.
+#' @param bound_lower Elements below this inclusive threshold will be set to `NA`.
+#' @param bound_upper Elements above this inclusive threshold will be set to `NA`.
 #' 
 #' @return An array of values.
 #' 

@@ -5,31 +5,28 @@
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
 #' It also allows the presence of a missing to become a predictor in models.
 #' 
-#' @param d_parent A \code{data.frame} of the parent table.
-#' @param d_child A \code{data.frame} of the child table.
-#' @param join_columns The \code{character} vector of the column names used to join to parent and child tables.
+#' @param d_parent A `data.frame` of the parent table.
+#' @param d_child A `data.frame` of the child table.
+#' @param join_columns The `character` vector of the column names used to join to parent and child tables.
 #' 
-#' @return A \code{numeric} array of the following elements: 
-#' \itemize{
-#'   \item \code{parent_in_child} The count of parent records found in the child table.
-#'   \item \code{parent_not_in_child} The count of parent records \emph{not} found in the child table.
-#'   \item \code{parent_na_any} The count of parent records with a \code{NA} in at least one of the join columns.
-#'   \item \code{deadbeat_proportion} The proportion of parent records \emph{not} found in the child table.
-#'   \item \code{child_in_parent} The count of child records found in the parent table.
-#'   \item \code{child_not_in_parent} The count of child records \emph{not} found in the parent table.
-#'   \item \code{child_na_any} The proportion of child records \emph{not} found in the parent table.
-#'   \item \code{orphan_proportion} The count of child records with a \code{NA} in at least one of the join columns.
-#' }
+#' @return 
+#'   A `numeric` array of the following elements: 
+#'   * `parent_in_child`          The count of parent records found in the child table.
+#'   * `parent_not_in_child`      The count of parent records *not* found in the child table.
+#'   * `parent_na_any`            The count of parent records with a `NA` in at least one of the join columns.
+#'   * `deadbeat_proportion`      The proportion of parent records *not* found in the child table.
+#'   * `child_in_parent`          The count of child records found in the parent table.
+#'   * `child_not_in_parent`      The count of child records *not* found in the parent table.
+#'   * `child_na_any`             The proportion of child records *not* found in the parent table.
+#'   * `orphan_proportion`        The count of child records with a `NA` in at least one of the join columns.
 #' 
-#' @details 
-#' If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
+#' @details If a nonexistent column is passed to `join_columns`, an error will be thrown naming the violating column name.
 #' 
-#' More information about the `parent' and `child' terminology and concepts can be found in the 
-#' \href{https://en.wikipedia.org/wiki/Hierarchical_database_model}{Hierarchical Database Model}
+#' More information about the 'parent' and 'child' terminology and concepts can be found in the 
+#' [Hierarchical Database Model](https://en.wikipedia.org/wiki/Hierarchical_database_model)
 #' Wikipedia entry, among many other sources.
-#'
-#' @note
-#' The \code{join_columns} parameter is passed directly to \code{dplyr::semi_join} and \code{dplyr::anti_join}.
+#' 
+#' @note  The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
 #' 
 #' @author Will Beasley
 #' 

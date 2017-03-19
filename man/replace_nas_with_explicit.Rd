@@ -20,10 +20,10 @@ replace_nas_with_explicit(scores, new_na_label = "Unknown",
 An array of values, where the \code{NA} values are now a factor level, with the label specified by the \code{new_na_label} value.
 }
 \description{
-Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.  
+Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
 It also allows the presence of a missing to become a predictor in models.
 
-The function is retained so existing code doesn't break.  For new code, consider using \link[dplyr]{coalesce} 
+The function is retained so existing code doesn't break.  For new code, consider using \url{dplyr::coalesce()}.
 if you don't need to convert the missing code to a factor level.
 }
 \note{
@@ -47,4 +47,3 @@ b <- OuhscMunge::replace_nas_with_explicit(b, add_unknown_level=TRUE)
 \author{
 Will Beasley
 }
-
