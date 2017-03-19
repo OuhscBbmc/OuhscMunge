@@ -15,7 +15,7 @@
 #' Using the midpoint of month can also avoid problems with timezones.  A date won't get nudged to a neighboring month accidentally.
 #'
 #' @note
-#' A `stop` error will be thrown if `date_detailed` is not a `Date`, or if `day_of_month` is not bounded by \code{[1, 31]}.
+#' A `stop` error will be thrown if `date_detailed` is not a `Date`, or if `day_of_month` is not bounded by `[1, 31]`.
 #' Be careful that if you set a November date the 31st day, the result will be December 1st.
 #' Consequently, we recommend not setting the day to a value after the 28.
 #'

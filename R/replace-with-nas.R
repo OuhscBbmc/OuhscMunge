@@ -17,11 +17,11 @@
 #' Supports cohersion to `integer`, `numeric`, `character`, `logical`,
 #' and `Date` vectors.  
 #' 
-#' If \code{return_type=logical}, a `logical` vector will be returned
-#' if `x` contains only blanks and the characters \code{"0"} and \code{"1"}.
+#' If `return_type=logical`, a `logical` vector will be returned
+#' if `x` contains only blanks and the characters `"0"` and `"1"`.
 #' 
 #' @note Contact the package author if you'd like the function generalized so that additional values
-#' (other that \code{""}) are converted to `NA`s.
+#' (other that `""`) are converted to `NA`s.
 #' 
 #' @author Will Beasley
 #' 

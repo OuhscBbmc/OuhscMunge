@@ -5,7 +5,7 @@
 \alias{column_rename_headstart}
 \alias{column_class_headstart}
 \alias{column_value_headstart}
-\title{Utilities for outputting characteristics of a datatset used it code.}
+\title{Utilities for outputting characteristics of a dataset used it code.}
 \usage{
 column_rename_headstart( d, try_snake_case=TRUE )
 column_class_headstart( d )
