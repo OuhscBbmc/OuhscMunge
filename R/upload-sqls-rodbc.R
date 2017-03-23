@@ -23,9 +23,9 @@ upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, creat
     RODBC::sqlClear(channel, table_name)
 
   if( create_table ) {
-    RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
-  } else {
     RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=FALSE)#, varTypes=var_types)
+  } else {
+    RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
   }
 
   RODBC::odbcClose(channel)
