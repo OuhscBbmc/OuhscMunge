@@ -5,7 +5,7 @@
 \title{Upload to a SQL Server database using RODBC}
 \usage{
 upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
-  create_table = FALSE)
+  create_table = FALSE, transaction = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}
@@ -17,7 +17,32 @@ upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
 \item{clear_table}{If \code{TRUE}, calls \url{RODBC::sqlClear()} before writing to the table.}
 
 \item{create_table}{If the table structure has not yet been defined in the database, it will be created if \code{create_table} is \code{TRUE}.}
+
+\item{transaction}{Should the clear and upload steps be wrapped in a rollback transaction?}
+
+\item{verbose}{Write a message about the status of a successful upload.}
 }
 \description{
 The function performs some extra configuration to improve robustness.
+}
+\details{
+If \code{transaction} is \code{TRUE} and the upload fails, the table is rolled back to the state before function was callled.
+This includes rolling back the (optional) clearing of records, and uploading the new records.
+Decide if it's more robust to rollback to the previous state, or if it's better to leave the table in the incomplete state.
+The latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database
+}
+\examples{
+\dontrun{
+requireNamespace("OuhscMunge") 
+
+OuhscMunge::upload_sqls_rodbc(
+  d               = ds_client,          # Some data.frame that exists in RAM
+  table_name      = "tbl_client",
+  dsn_name        = "miechv_eval",
+  create_table    = FALSE,
+  clear_table     = TRUE,
+  transaction     = TRUE,
+  verbose         = TRUE
+)
+}
 }

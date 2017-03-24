@@ -2,8 +2,8 @@ Package: OuhscMunge
 Title: Data Manipulation Operations
 Description: Data manipulation operations frequently used in OUHSC BBMC
     projects.
-Version: 0.1.7.9001
-Date: 2017-03-17
+Version: 0.1.8.9001
+Date: 2017-03-24
 Authors@R: person("Will", "Beasley", email="wibeasley@hotmail.com", role=c("aut", "cre"))
 Author: Will Beasley [aut, cre]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
