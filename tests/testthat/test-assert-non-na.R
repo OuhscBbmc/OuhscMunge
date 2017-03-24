@@ -1,8 +1,6 @@
 library(testthat)
 
-###########
-context("Assert")
-###########
+context("assert_non_na")
 
 test_that("assert_non_na -all - passes", {
   expect_silent( assert_non_na(1:100                                                              , "integer"   ))
