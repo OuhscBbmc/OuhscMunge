@@ -16,17 +16,20 @@
 #' If `transaction` is `TRUE` and the upload fails, the table is rolled back to the state before function was callled.
 #' This includes rolling back the (optional) clearing of records, and uploading the new records.
 #' Decide if it's more robust to rollback to the previous state, or if it's better to leave the table in the incomplete state.
-#' (When uploading in nonbulk) the latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database
+#' The latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database
 #' 
 #' @examples 
 #' \dontrun{
 #' requireNamespace("OuhscMunge") 
 #' 
-#' OuhscMunge::upload_table(
-#'   d                      = ds_code, 
-#'   table_name             = "tbl_code_table", 
-#'   bulk                   = FALSE, 
-#'   transaction_non_bulk   = TRUE
+#' OuhscMunge::upload_sqls_rodbc(
+#'   d               = ds_client,          # Some data.frame that exists in RAM
+#'   table_name      = "tbl_client",
+#'   dsn_name        = "miechv_eval",
+#'   create_table    = FALSE,
+#'   clear_table     = TRUE,
+#'   transaction     = TRUE,
+#'   verbose         = TRUE
 #' )
 #' }
 
