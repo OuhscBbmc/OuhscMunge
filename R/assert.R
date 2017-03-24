@@ -31,14 +31,14 @@ assert_non_na <- function( x, class_vector, proportion_minimum ) {
     
     missing_count <- sum(is.na(x))
     if( missing_count > 0L ) {
-      stop("The vector should not have any NA values, but `", missing_count, "` elements were NA.")
+      stop("The vector should not have any NA values, but ", missing_count, " element(s) were NA.")
     }
     
   } else {
     
     proportion_actual <- mean(!is.na(x))
     if( proportion_actual <  proportion_minimum) {
-      stop("The vector must have a proportion of at least `", proportion_minimum, "` of nonmissing elements.  However the actual nonmissing proportion is `", proportion_actual, "1.")
+      stop("The vector must have a proportion of at least ", proportion_minimum, " of nonmissing elements.  However the actual nonmissing proportion is ", proportion_actual, ".")
     }
     
   }
@@ -52,6 +52,6 @@ assert_non_na_and_unique <- function( x, class_vector ) {
     
   duplicate_count <- sum(duplicated(x))
   if( duplicate_count > 0L ) {
-    stop("The vector elements should be unique, but `", duplicate_count, "` elements were duplicated.")
+    stop("The vector elements should be unique, but ", duplicate_count, " element(s) were duplicated.")
   }
 }

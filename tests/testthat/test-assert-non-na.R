@@ -17,11 +17,13 @@ test_that("assert_non_na -all - passes", {
 })
 
 test_that("assert_non_na -all - fails", {
-  expect_error( assert_non_na(c(NA, 1:100                                                                       ) , "integer"   ))
-  expect_error( assert_non_na(c(NA, runif(100)                                                                  ) , "numeric"   ))
-  expect_error( assert_non_na(c(NA, letters                                                                     ) , "character" ))
-  expect_error( assert_non_na(c(NA, sample(c(T,F), size=100, replace = TRUE)                                    ) , "logical"   ))
-  expect_error( assert_non_na(c(as.Date(NA), seq.Date(as.Date("2015-01-02"), as.Date("2017-04-30"), by="days")  ) , "Date"      ))
+  
+  error_pattern <- "The vector should not have any NA values, but \\d+ element\\(s\\) were NA\\."
+  expect_error( assert_non_na(c(NA, 1:100                                                                       ) , "integer"   ), error_pattern)
+  expect_error( assert_non_na(c(NA, runif(100)                                                                  ) , "numeric"   ), error_pattern)
+  expect_error( assert_non_na(c(NA, letters                                                                     ) , "character" ), error_pattern)
+  expect_error( assert_non_na(c(NA, sample(c(T,F), size=100, replace = TRUE)                                    ) , "logical"   ), error_pattern)
+  expect_error( assert_non_na(c(as.Date(NA), seq.Date(as.Date("2015-01-02"), as.Date("2017-04-30"), by="days")  ) , "Date"      ), error_pattern)
 })
 
 
@@ -40,6 +42,7 @@ test_that("assert_non_na -proportion - passes", {
 })
 
 test_that("assert_non_na -proportion - fails", {
+  error_pattern <- "The vector must have a proportion of at least 0\\.999 of nonmissing elements\\.  However the actual nonmissing proportion is 0\\.\\d+\\."
   expect_error( assert_non_na(c(NA, 1:100                                                                       ) , "integer"   , 0.999))
   expect_error( assert_non_na(c(NA, runif(100)                                                                  ) , "numeric"   , 0.999))
   expect_error( assert_non_na(c(NA, letters                                                                     ) , "character" , 0.999))
