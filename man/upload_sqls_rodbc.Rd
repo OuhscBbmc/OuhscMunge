@@ -5,7 +5,7 @@
 \title{Upload to a SQL Server database using RODBC}
 \usage{
 upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
-  create_table = FALSE)
+  create_table = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}
@@ -17,6 +17,8 @@ upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
 \item{clear_table}{If \code{TRUE}, calls \url{RODBC::sqlClear()} before writing to the table.}
 
 \item{create_table}{If the table structure has not yet been defined in the database, it will be created if \code{create_table} is \code{TRUE}.}
+
+\item{verbose}{Write a message about the status of a successful upload.}
 }
 \description{
 The function performs some extra configuration to improve robustness.
