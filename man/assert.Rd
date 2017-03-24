@@ -3,9 +3,11 @@
 \name{assert}
 \alias{assert}
 \alias{assert_non_na}
+\alias{assert_non_na_and_unique}
 \title{Assert vector characteristics}
 \usage{
 assert_non_na(x, class_vector, proportion_minimum)
+assert_non_na_and_unique(x, class_vector)
 }
 \arguments{
 \item{x}{Vector to inspect.  Required.}
