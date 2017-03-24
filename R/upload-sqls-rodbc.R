@@ -20,30 +20,35 @@ upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, creat
   requireNamespace("RODBC")
   channel <- RODBC::odbcConnect(dsn = dsn_name)
   
-  if( verbose ) {
-  # RODBC::getSqlTypeInfo("Microsoft SQL Server")
-    RODBC::odbcGetInfo(channel)
-  }
-  
-  if( clear_table ) {
-    RODBC::sqlClear(channel, table_name)
-  }
-
-  if( create_table ) {
-    RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=FALSE)
+  tryCatch( {
+    if( verbose ) {
+      # RODBC::getSqlTypeInfo("Microsoft SQL Server")
+      RODBC::odbcGetInfo(channel)
+    }
     
-  } else {
+    if( clear_table ) {
+      RODBC::sqlClear(channel, table_name)
+    }
+  
+    if( create_table ) {
+      RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=FALSE)
+      
+    } else {
+      
+      column_info           <- RODBC::sqlColumns(channel, table_name)
+      var_types             <- as.character(column_info$TYPE_NAME)
+      names(var_types)      <- as.character(column_info$COLUMN_NAME)  #varTypes
     
-    column_info           <- RODBC::sqlColumns(channel, table_name)
-    var_types             <- as.character(column_info$TYPE_NAME)
-    names(var_types)      <- as.character(column_info$COLUMN_NAME)  #varTypes
+      RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
+    }
   
-    RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
-  }
-
-  RODBC::odbcClose(channel)
-  
-  if( verbose ) {
-    message("The table `", table_name, "` was written over dsn `", dsn_name, "` in ", Sys.time() - start_time, ".")
-  }
+    
+    if( verbose ) {
+      message("The table `", table_name, "` was written over dsn `", dsn_name, "` in ", Sys.time() - start_time, ".")
+    }
+  }, error = function( e ) {
+    stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, ".", e)
+  }, finally = {
+    RODBC::odbcClose(channel)
+  })
 }
