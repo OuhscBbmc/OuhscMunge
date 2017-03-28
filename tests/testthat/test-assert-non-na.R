@@ -3,6 +3,12 @@ library(testthat)
 context("assert_non_na")
 
 test_that("assert_non_na -all - passes", {
+  expect_silent( assert_non_na(1:100                                                              ))
+  expect_silent( assert_non_na(runif(100)                                                         ))
+  expect_silent( assert_non_na(letters                                                            ))
+  expect_silent( assert_non_na(sample(c(T,F), size=100, replace = TRUE)                           ))
+  expect_silent( assert_non_na(seq.Date(as.Date("2015-01-02"), as.Date("2017-04-30"), by="days")  ))
+  
   expect_silent( assert_non_na(1:100                                                              , "integer"   ))
   expect_silent( assert_non_na(runif(100)                                                         , "numeric"   ))
   expect_silent( assert_non_na(letters                                                            , "character" ))
@@ -17,7 +23,6 @@ test_that("assert_non_na -all - passes", {
 })
 
 test_that("assert_non_na -all - fails", {
-  
   error_pattern <- "The vector should not have any NA values, but \\d+ element\\(s\\) were NA\\."
   expect_error( assert_non_na(c(NA, 1:100                                                                       ) , "integer"   ), error_pattern)
   expect_error( assert_non_na(c(NA, runif(100)                                                                  ) , "numeric"   ), error_pattern)

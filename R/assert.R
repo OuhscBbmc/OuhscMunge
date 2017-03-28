@@ -22,7 +22,8 @@
 #' @export
 assert_non_na <- function( x, class_vector, proportion_minimum ) {
   
-  if( !missing(class_vector) & !inherits(x, class_vector) ) {
+  class_missing <- missing(class_vector)
+  if( !class_missing & !inherits(x, class_vector) ) {
     stop("The vector must inherit from the class `", class_vector, "`, but it is a `", class(x), "`.")
   }
   
