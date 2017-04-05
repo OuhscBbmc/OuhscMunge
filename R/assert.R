@@ -23,13 +23,13 @@
 assert_non_na <- function( x, class_vector, proportion_minimum ) {
   
   class_missing <- missing(class_vector)
-  if( !class_missing & !inherits(x, class_vector) ) {
-    stop("The vector must inherit from the class `", class_vector, "`, but it is a `", class(x), "`.")
+  if( !class_missing ) {
+    if ( !inherits(x, class_vector) ) {
+      stop("The vector must inherit from the class `", class_vector, "`, but it is a `", class(x), "`.")
+    }
   }
-  
     
   if( missing(proportion_minimum) ) {
-    
     missing_count <- sum(is.na(x))
     if( missing_count > 0L ) {
       stop("The vector should not have any NA values, but ", missing_count, " element(s) were NA.")
