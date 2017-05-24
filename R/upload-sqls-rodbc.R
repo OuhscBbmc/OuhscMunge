@@ -79,7 +79,7 @@ upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, creat
     if( transaction ) {
       RODBC::odbcEndTran(channel, commit = FALSE)
     }
-    stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, ".", e)
+    stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, "`.\n", e)
     
   }, finally = {
     RODBC::odbcClose(channel)
