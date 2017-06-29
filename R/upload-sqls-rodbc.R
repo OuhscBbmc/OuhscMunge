@@ -72,7 +72,8 @@ upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, creat
     }
     
     if( verbose ) {
-      message("The table `", table_name, "` was written over dsn `", dsn_name, "` in ", Sys.time() - start_time, ".")
+      duration <- round(as.numeric(difftime(Sys.time(), start_time, units="mins")), 3)
+      message("The table `", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
     }
   }, error = function( e ) {
     
