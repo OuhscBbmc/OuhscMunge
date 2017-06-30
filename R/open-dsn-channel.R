@@ -40,6 +40,10 @@ open_dsn_channel_sqls <- function(
   requireNamespace("RODBC")
   
   checkmate::assert_character(dsn_name, min.chars=1, any.missing=F)
+  checkmate::assert_class(driver_version_minimum, "numeric_version")
+  checkmate::assert_class(driver_version_maximum, "numeric_version")
+  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, any.missing=F)
+  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, any.missing=F)
 
   # Uses Trusted/integrated authentication
   channel <- RODBC::odbcConnect(dsn = dsn_name)
