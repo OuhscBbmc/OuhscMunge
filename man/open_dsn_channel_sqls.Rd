@@ -5,12 +5,15 @@
 \title{Open an ODBC channel to a SQL Server database}
 \usage{
 open_dsn_channel_sqls(dsn_name,
-  driver_version_minimum = numeric_version("13.0"))
+  driver_version_minimum = numeric_version("13.0"),
+  driver_version_maximum = numeric_version("99.0"))
 }
 \arguments{
 \item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}
 
-\item{driver_version_minimum}{Represnted as a \code{\link[base:numeric_version]{base::numeric_version()}}}
+\item{driver_version_minimum}{The driver must be at least this version number.  Represented as a \code{\link[base:numeric_version]{base::numeric_version()}}}
+
+\item{driver_version_maximum}{The driver must not exceed this version number.  Represented as a \code{\link[base:numeric_version]{base::numeric_version()}}}
 }
 \description{
 Creates & opens a channel and checks its important characteristics.
@@ -21,6 +24,11 @@ is defined on the local computer, and is not under the control of the repository
 This function wraps the basic \url{RODBC::odbcConnect()} function with some
 checks.  If unsuccessful, it returns some hints how to correct the problem, such as downloading
 the newest version from the \href{https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server}{Microsoft website}.
+}
+\note{
+Assuring a minimum version is important, because driver versions can interpret values differently.
+For example, earlier version (before 11.0)  returned dates as characters, which would
+propogate undetected through our code until it broke something with an unhelpful error message.
 }
 \examples{
 \dontrun{
