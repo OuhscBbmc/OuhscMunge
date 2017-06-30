@@ -39,26 +39,38 @@ open_dsn_channel_sqls <- function(
   
   requireNamespace("RODBC")
   
-  checkmate::assert_character(dsn_name, min.chars=1, any.missing=F)
+  checkmate::assert_character(dsn_name, min.chars=1, min.len=1, max.len=1, any.missing=F)
   checkmate::assert_class(driver_version_minimum, "numeric_version")
   checkmate::assert_class(driver_version_maximum, "numeric_version")
-  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, any.missing=F)
-  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, any.missing=F)
+  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, min.len=1, max.len=1, any.missing=F)
+  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, min.len=1, max.len=1, any.missing=F)
+  # Check if the DSN even exists on the local machine.
 
+  create_link <- "https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/odbc-dsn.md"
+  driver_link <- "https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server"
+  
+  dsn_exists <- (dsn_name %in% RODBC::odbcDataSources())
+  if( !dsn_exists ) {
+    m <- "The DSN `%s` does not exist on your local machine.  Please see the installation instructions at %s."
+    stop(sprintf(m, dsn_name, create_link))    
+  }
+  
   # Uses Trusted/integrated authentication
   channel <- RODBC::odbcConnect(dsn = dsn_name)
-  testit::assert("The ODBC channel should open successfully.", channel != -1L)
+  if( channel == -1L ) {
+    m <- "The ODBC channel should open successfully.  Please see the installation instructions at %s."
+    stop(sprintf(m, dsn_name, create_link))  
+  }
 
   info <- RODBC::odbcGetInfo(channel)
 
-  driver_link <- "https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server"
-    
+  
   if( driver_version_minimum <= numeric_version(info["Driver_Ver"]) ) {
-    m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %."
-    stop(sprintf(m, driver_version_minimum, driver_link))
+    m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %.  Please see the installation instructions at %s."
+    stop(sprintf(m, driver_version_minimum, driver_link, create_link))
   } else if ( numeric_version(info["Driver_Ver"]) <= driver_version_minimum) {
-    m <- "The SQL Server ODBC driver version must be not exceed %s.  Please download an earlier version at %."
-    stop(sprintf(m, driver_version_maximum, driver_link))
+    m <- "The SQL Server ODBC driver version must be not exceed %s.  Please download an earlier version at %.  Please see the installation instructions at %s."
+    stop(sprintf(m, driver_version_maximum, driver_link, create_link))
   }
 
   return( channel )
