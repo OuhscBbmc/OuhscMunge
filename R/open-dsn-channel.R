@@ -58,6 +58,7 @@ open_dsn_channel_sqls <- function(
   # Uses Trusted/integrated authentication
   channel <- RODBC::odbcConnect(dsn = dsn_name)
   if( channel == -1L ) {
+    RODBC::odbcClose(channel)
     m <- "The ODBC channel should open successfully.  Please see the installation instructions at %s."
     stop(sprintf(m, dsn_name, create_link))  
   }
@@ -66,9 +67,11 @@ open_dsn_channel_sqls <- function(
 
   
   if( driver_version_minimum <= numeric_version(info["Driver_Ver"]) ) {
+    RODBC::odbcClose(channel)
     m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %.  Please see the installation instructions at %s."
     stop(sprintf(m, driver_version_minimum, driver_link, create_link))
   } else if ( numeric_version(info["Driver_Ver"]) <= driver_version_minimum) {
+    RODBC::odbcClose(channel)
     m <- "The SQL Server ODBC driver version must be not exceed %s.  Please download an earlier version at %.  Please see the installation instructions at %s."
     stop(sprintf(m, driver_version_maximum, driver_link, create_link))
   }
