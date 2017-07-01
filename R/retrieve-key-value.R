@@ -37,9 +37,16 @@
 #' 	WHERE project=@project AND attribute=@attribute
 #' END
 #' ````
+#' @note 
+#' Currently only the 'static' key-value pairs are retrieved through this function.
+#' Talk to Will if you need to retrieve the 'rolling' or the 'personal' key-value pairs.
 #' 
 #' @author Will Beasley
-
+#' 
+#' @examples 
+#' \dontrun{
+#' value <- retrieve_key_value("file-server", "bbmc", "BbmcSecurity")
+#' }
 
 retrieve_key_value <- function(
   key,
@@ -67,7 +74,7 @@ retrieve_key_value <- function(
 
   if( base::missing(channel) | base::is.null(channel) ) {
     if( base::missing(dsn_name) | base::is.null(dsn_name) )
-      stop("The 'dsn_name' parameter can be missing only if a 'channel' has been passed to 'retrieve_token_mssql'.")
+      stop("The 'dsn_name' parameter can be missing only if a 'channel' has been passed to `retrieve_key_value()`.")
 
     channel <- open_dsn_channel_sqls(dsn_name)
     close_channel_on_exit <- TRUE

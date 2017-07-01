@@ -46,6 +46,15 @@ BEGIN
 END
 }
 }
+\note{
+Currently only the 'static' key-value pairs are retrieved through this function.
+Talk to Will if you need to retrieve the 'rolling' or the 'personal' key-value pairs.
+}
+\examples{
+\dontrun{
+value <- retrieve_key_value("file-server", "bbmc", "BbmcSecurity")
+}
+}
 \author{
 Will Beasley
 }
