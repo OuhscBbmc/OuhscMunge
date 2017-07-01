@@ -4,7 +4,7 @@ library(testthat)
 context("open_dsn_channel")
 ###########
 
-name <- "pretent-dsn"
+name <- "pretend-dsn"
 version_min <- numeric_version("0.1.0")
 version_max <- numeric_version("5.0.0")
 
