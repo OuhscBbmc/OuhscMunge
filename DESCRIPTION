@@ -2,8 +2,8 @@ Package: OuhscMunge
 Title: Data Manipulation Operations
 Description: Data manipulation operations frequently used in OUHSC BBMC
     projects.
-Version: 0.1.8.9001
-Date: 2017-03-24
+Version: 0.1.8.9002
+Date: 2017-07-30
 Authors@R: person("Will", "Beasley", email="wibeasley@hotmail.com", role=c("aut", "cre"))
 Author: Will Beasley [aut, cre]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
@@ -12,14 +12,16 @@ BugReports: https://github.com/OuhscBbmc/OuhscMunge/issues
 License: GPL-2
 LazyData: TRUE
 Depends:
-    R(>= 3.1.0)
+    R(>= 3.4.0)
 Imports:
     checkmate,
     devtools (>= 1.8.0),
     dplyr,
-    lubridate
+    lubridate,
+    testit,
 Suggests:
     RODBC,
+    RODBCext,
     testthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
