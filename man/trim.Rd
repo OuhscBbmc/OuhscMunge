@@ -4,10 +4,16 @@
 \alias{trim}
 \alias{trim_numeric}
 \alias{trim_integer}
+\alias{trim_date}
 \title{Trim extreme values}
 \usage{
 trim_numeric(x, bounds=c(-Inf, Inf), replacement=NA_real_)
 trim_integer(x, bounds=c(-2147483647L, 2147483647L), replacement=NA_integer_)
+trim_date(
+  x, 
+  bounds      = as.Date(c("1940-01-01", "2030-01-01")),  
+  replacement = as.Date(NA_character_) 
+)
 }
 \arguments{
 \item{x}{The input vector to be trimmed.  Required}
@@ -28,11 +34,19 @@ In other words, \code{trim_numeric()} accepts only parameters of type 'numeric' 
 'double-precision floating point').  Likewise, \code{trim_date()} accepts only parameters of type \code{Date}.
 
 The lower bound must be less than or equal the upper bound.
+
+The default bounds for numerics and integers are at the extremes of the data type.
+The default bounds for \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/Dates.html}{dates} are
+arbitrary, because the origin is slippery.
 }
 \examples{
 library(OuhscMunge)
 trim_numeric(runif(10, -1, 10), bounds=c(4, 8))
 trim_integer(c(NA, 1:10), bounds=c(4L, 8L))
+trim_date(
+  x      = as.Date(c("1902-02-02", "1999-09-09", "2020-02-22", "1930-01-01", "1930-01-02")),
+  bounds = as.Date(c("1990-01-01", "2030-01-01"))
+)
 }
 \author{
 Will Beasley
