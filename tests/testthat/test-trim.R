@@ -4,12 +4,12 @@ library(testthat)
 context("Trim Numeric")
 
 test_that("trim_numeric -good", {
-  x           <- c(NA, -4:10) / 10
+  x           <- c(NA, -0.4, -0.3, -0.2, -.16, -.15, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.80001, 0.9, 1)
   bounds      <- c( -.15, .8)
   replacement <- 99
   
-  expected_1  <- c(NA, NA, NA, NA, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, NA, NA)
-  expected_2  <- c(NA, 99, 99, 99, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 99, 99)
+  expected_1  <- c(NA, NA, NA, NA, NA, -.15, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, NA, NA, NA)
+  expected_2  <- c(NA, 99, 99, 99, 99, -.15, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 99, 99, 99)
   
   observed_1  <- OuhscMunge::trim_numeric(x, bounds)
   observed_2  <- OuhscMunge::trim_numeric(x, bounds, replacement)
@@ -100,12 +100,12 @@ test_that("trim_integer -bad values", {
 context("Trim Date")
 
 test_that("trim_date -good", {
-  x           <- as.Date(c("1902-02-02", "1999-09-09", "2020-02-22", "2030-01-01", "2030-01-02"))
+  x           <- as.Date(c("1902-02-02", "1989-12-31", "1990-01-01", "1999-09-09", "2020-02-22", "2030-01-01", "2030-01-02"))
   bounds      <- as.Date(c("1990-01-01", "2030-01-01"))
   replacement <- as.Date("1977-07-27")
   
-  expected_1  <-as.Date(c(NA_character_, "1999-09-09", "2020-02-22", "2030-01-01", NA_character_))
-  expected_2  <-as.Date(c("1977-07-27", "1999-09-09", "2020-02-22", "2030-01-01", "1977-07-27"))
+  expected_1  <-as.Date(c(NA_character_,  NA_character_, "1990-01-01", "1999-09-09", "2020-02-22", "2030-01-01", NA_character_))
+  expected_2  <-as.Date(c("1977-07-27", "1977-07-27", "1990-01-01", "1999-09-09", "2020-02-22", "2030-01-01", "1977-07-27"))
   
   observed_1  <- OuhscMunge::trim_date(x, bounds)
   observed_2  <- OuhscMunge::trim_date(x, bounds, replacement)
