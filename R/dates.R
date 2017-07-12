@@ -27,6 +27,9 @@
 #' Consequently, we recommend not setting the day to a value after the 28.
 #'
 #' @author Will Beasley
+#' 
+#' @seealso These functions are gloves around [lubridate::day()] and [lubridate::wday()].  
+#' Essentially the add just error-checking and default values.
 #'
 #' @examples
 #' library(OuhscMunge)
