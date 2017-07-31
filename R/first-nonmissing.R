@@ -9,6 +9,10 @@
 #' @return A vector of converted names.
 #'
 #' @author Will Beasley
+#' @examples 
+#' first_nonmissing(c(NA, "b", "c"))
+#' first_nonmissing(c(NA_character_, NA_character_))
+#' first_nonmissing(character(0))
 
 #' @export
 first_nonmissing <- function( x ) {
