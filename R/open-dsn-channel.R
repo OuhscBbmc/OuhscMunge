@@ -69,12 +69,12 @@ open_dsn_channel_sqls <- function(
   
   if( !(driver_version_minimum <= numeric_version(info["Driver_Ver"])) ) {
     RODBC::odbcClose(channel)
-    m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %s.  Please see the installation instructions at %s."
-    stop(sprintf(m, as.character(driver_version_minimum), driver_link, create_link))
+    m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %s.  Please see the installation instructions at %s.  The DSN name is `%s`."
+    stop(sprintf(m, as.character(driver_version_minimum), driver_link, create_link, dsn_name))
   } else if (!(numeric_version(info["Driver_Ver"]) <= driver_version_maximum)) {
     RODBC::odbcClose(channel)
-    m <- "The SQL Server ODBC driver version must be not exceed %s.  Please download an earlier version at %s.  Please see the installation instructions at %s."
-    stop(sprintf(m, as.character(driver_version_maximum), driver_link, create_link))
+    m <- "The SQL Server ODBC driver version must be not exceed %s.  Please download an earlier version at %s.  Please see the installation instructions at %s.  The DSN name is `%s`."
+    stop(sprintf(m, as.character(driver_version_maximum), driver_link, create_link, dsn_name))
   }
 
   return( channel )
