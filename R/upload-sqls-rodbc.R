@@ -9,8 +9,9 @@
 #' @param dsn_name Name of the locally-defined DSN passed to [RODBC::odbcConnect()](RODBC::odbcConnect()).
 #' @param clear_table If `TRUE`, calls [RODBC::sqlClear()](RODBC::sqlClear()) before writing to the table.
 #' @param create_table If the table structure has not yet been defined in the database, it will be created if `create_table` is `TRUE`.
+#' @param convert_logical_to_integer Convert all `logical` columns to `integer`.  This helps the database store the values as bits.
 #' @param transaction Should the clear and upload steps be wrapped in a rollback transaction? 
-#' @param verbose Write a message about the status of a successful upload.
+#' @param verbose Write a message about the status of a successful upload. 
 #' 
 #' @details 
 #' If `transaction` is `TRUE` and the upload fails, the table is rolled back to the state before function was callled.
@@ -23,22 +24,45 @@
 #' requireNamespace("OuhscMunge") 
 #' 
 #' OuhscMunge::upload_sqls_rodbc(
-#'   d               = ds_client,          # Some data.frame that exists in RAM
-#'   table_name      = "tbl_client",
-#'   dsn_name        = "miechv_eval",
-#'   create_table    = FALSE,
-#'   clear_table     = TRUE,
-#'   transaction     = TRUE,
-#'   verbose         = TRUE
+#'   d                          = ds_client,          # Some data.frame that exists in RAM
+#'   table_name                 = "tbl_client",
+#'   dsn_name                   = "miechv_eval",
+#'   create_table               = FALSE,
+#'   clear_table                = TRUE,
+#'   transaction                = TRUE,
+#'   verbose                    = TRUE,
+#'   convert_logical_to_integer = TRUE
 #' )
 #' }
 
 
-upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, create_table=FALSE, transaction=FALSE, verbose=TRUE ) {
+upload_sqls_rodbc <- function( 
+  d, 
+  table_name, 
+  dsn_name, 
+  clear_table                   = FALSE, 
+  create_table                  = FALSE, 
+  convert_logical_to_integer    = FALSE, 
+  transaction                   = FALSE, 
+  verbose                       = TRUE 
+) {
+  
+  checkmate::assert_class(    d                             , "data.frame"          , null.ok    =F)
+  checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
+  checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)
+  
+  checkmate::assert_logical(  clear_table                                   , len=1L, any.missing=F)
+  checkmate::assert_logical(  create_table                                  , len=1L, any.missing=F)
+  checkmate::assert_logical(  convert_logical_to_integer                    , len=1L, any.missing=F)
+  checkmate::assert_logical(  transaction                                   , len=1L, any.missing=F)
+  checkmate::assert_logical(  verbose                                       , len=1L, any.missing=F)
   
   start_time <- base::Sys.time()
   print(start_time)
 
+  if( convert_logical_to_integer ) {
+    d <- dplyr::mutate_if(d, is.logical, as.integer)
+  }
   
   requireNamespace("RODBC")
   channel <- RODBC::odbcConnect(dsn = dsn_name)
@@ -53,7 +77,7 @@ upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, creat
       RODBC::odbcGetInfo(channel)
     }
     
-    if( clear_table ) {
+    if( !create_table & clear_table ) {
       RODBC::sqlClear(channel, table_name)
     }
   

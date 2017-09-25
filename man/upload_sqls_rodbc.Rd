@@ -5,7 +5,8 @@
 \title{Upload to a SQL Server database using RODBC}
 \usage{
 upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
-  create_table = FALSE, transaction = FALSE, verbose = TRUE)
+  create_table = FALSE, convert_logical_to_integer = FALSE,
+  transaction = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}
@@ -17,6 +18,8 @@ upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
 \item{clear_table}{If \code{TRUE}, calls \url{RODBC::sqlClear()} before writing to the table.}
 
 \item{create_table}{If the table structure has not yet been defined in the database, it will be created if \code{create_table} is \code{TRUE}.}
+
+\item{convert_logical_to_integer}{Convert all \code{logical} columns to \code{integer}.  This helps the database store the values as bits.}
 
 \item{transaction}{Should the clear and upload steps be wrapped in a rollback transaction?}
 
@@ -36,13 +39,14 @@ The latter is helpful diagnosing which record caused the write to fail; look at 
 requireNamespace("OuhscMunge") 
 
 OuhscMunge::upload_sqls_rodbc(
-  d               = ds_client,          # Some data.frame that exists in RAM
-  table_name      = "tbl_client",
-  dsn_name        = "miechv_eval",
-  create_table    = FALSE,
-  clear_table     = TRUE,
-  transaction     = TRUE,
-  verbose         = TRUE
+  d                          = ds_client,          # Some data.frame that exists in RAM
+  table_name                 = "tbl_client",
+  dsn_name                   = "miechv_eval",
+  create_table               = FALSE,
+  clear_table                = TRUE,
+  transaction                = TRUE,
+  verbose                    = TRUE,
+  convert_logical_to_integer = TRUE
 )
 }
 }
