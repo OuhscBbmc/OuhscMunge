@@ -53,7 +53,7 @@ upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, creat
       RODBC::odbcGetInfo(channel)
     }
     
-    if( clear_table ) {
+    if( !create_table & clear_table ) {
       RODBC::sqlClear(channel, table_name)
     }
   
