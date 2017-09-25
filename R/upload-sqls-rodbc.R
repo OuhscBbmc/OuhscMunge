@@ -47,6 +47,16 @@ upload_sqls_rodbc <- function(
   verbose                       = TRUE 
 ) {
   
+  checkmate::assert_class(    d                             , "data.frame"          , null.ok    =F)
+  checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
+  checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)
+  
+  checkmate::assert_logical(  clear_table                                   , len=1L, any.missing=F)
+  checkmate::assert_logical(  create_table                                  , len=1L, any.missing=F)
+  checkmate::assert_logical(  convert_logical_to_integer                    , len=1L, any.missing=F)
+  checkmate::assert_logical(  transaction                                   , len=1L, any.missing=F)
+  checkmate::assert_logical(  verbose                                       , len=1L, any.missing=F)
+  
   start_time <- base::Sys.time()
   print(start_time)
 
