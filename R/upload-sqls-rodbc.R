@@ -9,8 +9,9 @@
 #' @param dsn_name Name of the locally-defined DSN passed to [RODBC::odbcConnect()](RODBC::odbcConnect()).
 #' @param clear_table If `TRUE`, calls [RODBC::sqlClear()](RODBC::sqlClear()) before writing to the table.
 #' @param create_table If the table structure has not yet been defined in the database, it will be created if `create_table` is `TRUE`.
+#' @param convert_logical_to_integer Convert all `logical` columns to `integer`.  This helps the database store the values as bits.
 #' @param transaction Should the clear and upload steps be wrapped in a rollback transaction? 
-#' @param verbose Write a message about the status of a successful upload.
+#' @param verbose Write a message about the status of a successful upload. 
 #' 
 #' @details 
 #' If `transaction` is `TRUE` and the upload fails, the table is rolled back to the state before function was callled.
@@ -34,11 +35,14 @@
 #' }
 
 
-upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, create_table=FALSE, transaction=FALSE, verbose=TRUE ) {
+upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, create_table=FALSE, convert_logical_to_integer=FALSE, transaction=FALSE, verbose=TRUE ) {
   
   start_time <- base::Sys.time()
   print(start_time)
 
+  if( convert_logical_to_integer ) {
+    d <- dplyr::mutate_if(d, is.logical, as.integer)
+  }
   
   requireNamespace("RODBC")
   channel <- RODBC::odbcConnect(dsn = dsn_name)
