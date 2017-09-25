@@ -24,18 +24,28 @@
 #' requireNamespace("OuhscMunge") 
 #' 
 #' OuhscMunge::upload_sqls_rodbc(
-#'   d               = ds_client,          # Some data.frame that exists in RAM
-#'   table_name      = "tbl_client",
-#'   dsn_name        = "miechv_eval",
-#'   create_table    = FALSE,
-#'   clear_table     = TRUE,
-#'   transaction     = TRUE,
-#'   verbose         = TRUE
+#'   d                          = ds_client,          # Some data.frame that exists in RAM
+#'   table_name                 = "tbl_client",
+#'   dsn_name                   = "miechv_eval",
+#'   create_table               = FALSE,
+#'   clear_table                = TRUE,
+#'   transaction                = TRUE,
+#'   verbose                    = TRUE,
+#'   convert_logical_to_integer = TRUE
 #' )
 #' }
 
 
-upload_sqls_rodbc <- function( d, table_name, dsn_name, clear_table=FALSE, create_table=FALSE, convert_logical_to_integer=FALSE, transaction=FALSE, verbose=TRUE ) {
+upload_sqls_rodbc <- function( 
+  d, 
+  table_name, 
+  dsn_name, 
+  clear_table                   = FALSE, 
+  create_table                  = FALSE, 
+  convert_logical_to_integer    = FALSE, 
+  transaction                   = FALSE, 
+  verbose                       = TRUE 
+) {
   
   start_time <- base::Sys.time()
   print(start_time)

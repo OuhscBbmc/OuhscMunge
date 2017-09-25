@@ -39,13 +39,14 @@ The latter is helpful diagnosing which record caused the write to fail; look at 
 requireNamespace("OuhscMunge") 
 
 OuhscMunge::upload_sqls_rodbc(
-  d               = ds_client,          # Some data.frame that exists in RAM
-  table_name      = "tbl_client",
-  dsn_name        = "miechv_eval",
-  create_table    = FALSE,
-  clear_table     = TRUE,
-  transaction     = TRUE,
-  verbose         = TRUE
+  d                          = ds_client,          # Some data.frame that exists in RAM
+  table_name                 = "tbl_client",
+  dsn_name                   = "miechv_eval",
+  create_table               = FALSE,
+  clear_table                = TRUE,
+  transaction                = TRUE,
+  verbose                    = TRUE,
+  convert_logical_to_integer = TRUE
 )
 }
 }
