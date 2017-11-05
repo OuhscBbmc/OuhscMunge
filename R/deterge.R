@@ -35,9 +35,8 @@ deterge_to_double <- function( x, bound_lower=-Inf, bound_upper=Inf ) {
     stop("The parameter `bound_upper` must be a numeric or integer vector with exactly one element.")
   
   # Remove commas and convert to a double-precision data type.
-  x <- as.numeric(gsub(",", "", x, perl=TRUE))
-  
-  # Set values that are outside the thresholds to NA.
+  # x <- as.numeric(gsub(",", "", x, perl=TRUE))
+  x <- readr::parse_number(x)
   
   # Set values that are outside the thresholds to NA.
   trim_numeric(x, c(bound_lower, bound_upper))
