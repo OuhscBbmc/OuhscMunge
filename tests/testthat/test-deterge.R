@@ -76,7 +76,7 @@ test_that("deterge integers", {
 })
 test_that("deterge integers; w/ boundaries", {
   expected <- c(NA, NA, NA, NA, 4, 5, 6, 7, 8, NA, NA)
-  observed <- OuhscMunge::deterge_to_integer(c(NA, 1:10), 4, 8)
+  observed <- OuhscMunge::deterge_to_integer(c(NA, 1:10), 4L, 8L)
   
   expect_equal(observed, expected)
   expect_equal(class(observed), "integer", "The returned array should remain a double-precision data type.")

@@ -23,12 +23,13 @@ An array of values.
 Cast values to desired data type.
 }
 \details{
---write something here--
+Accepts character representations of a number, and returns a \code{numeric} or \code{integer}
+vector.  Elements outside \code{bound_lower} and \code{bound_upper} are converted to \code{NA_real_}/\code{NA_integer_}.
 }
 \examples{
 library(OuhscMunge)
 deterge_to_double(c(NA, 1:10), 4, 8)
-deterge_to_integer(c(NA, 1:10), 4, 8)
+deterge_to_integer(c(NA, 1:10), 4L, 8L)
 }
 \author{
 Will Beasley
