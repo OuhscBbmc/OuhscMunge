@@ -3,7 +3,6 @@ library(testthat)
 # Verify Data Frame -------------------------------------------------------
 context("Verify Data Frame")
 
-
 test_that("OrchardSprays -regular row count", {
   testthat::expect_silent(
     verify_data_frame(datasets::OrchardSprays)
@@ -24,6 +23,7 @@ test_that("OrchardSprays -fails small row count threshold", {
     verify_data_frame(d)
   )
 })
+
 test_that("OrchardSprays -fails sql error message", {
   pretend_sql_message <- "A database error was thrown.  Check your SQL code."
   
