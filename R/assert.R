@@ -34,14 +34,11 @@ assert_non_na <- function( x, class_vector, proportion_minimum ) {
     if( missing_count > 0L ) {
       stop("The vector should not have any NA values, but ", missing_count, " element(s) were NA.")
     }
-    
   } else {
-    
     proportion_actual <- mean(!is.na(x))
     if( proportion_actual <  proportion_minimum) {
       stop("The vector must have a proportion of at least ", proportion_minimum, " of nonmissing elements.  However the actual nonmissing proportion is ", proportion_actual, ".")
     }
-    
   }
   
 }
