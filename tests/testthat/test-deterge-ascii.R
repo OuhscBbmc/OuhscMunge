@@ -4,6 +4,14 @@ library(testthat)
 # Deterge ASCII -----------------------------------------------------------
 context("Deterge ASCII")
 
+test_that("SEM founders --vanilla", {
+  x         <- c("Ekstrom", "Joreskog", "bisschen Zurcher")
+  expected  <- c("Ekstrom", "Joreskog", "bisschen Zurcher")
+  observed  <- deterge_to_ascii(x)
+
+  expect_equal(observed, expected)
+})
+
 test_that("SEM founders --normal", {
   skip("I need to find a way that works consistently across different OSes.")
 
