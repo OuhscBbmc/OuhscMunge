@@ -31,8 +31,8 @@ package_janitor <- function(
   if( length(missing_columns) > 0 )
     stop(paste("The data.frame of the required packages is missing the following columns:", missing_columns))
 
-  ds_install_from_cran <- ds_packages[ds_packages$install & ds_packages$on_cran, ]
-  ds_install_from_github <- ds_packages[ds_packages$install & !ds_packages$on_cran & !is.na(ds_packages$github_username) & nchar(ds_packages$github_username)>0, ]
+  ds_install_from_cran    <- ds_packages[ds_packages$install &  ds_packages$on_cran, ]
+  ds_install_from_github  <- ds_packages[ds_packages$install & !ds_packages$on_cran & !is.na(ds_packages$github_username) & nchar(ds_packages$github_username)>0, ]
 
   rm(ds_packages)
   #####################################
@@ -89,9 +89,11 @@ package_janitor <- function(
     xml_missing <- (xml_results==0)
 
     if( xml_missing )
-      base::warning("This Linux machine is possibly missing the 'libxml2-dev' library.  ",
-                    "Consider running `sudo apt-get install r-cran-xml` ",
-                    "or the equivalent for your distribution.")
+      base::warning(
+        "This Linux machine is possibly missing the 'libxml2-dev' library.  ",
+        "Consider running `sudo apt-get install r-cran-xml` ",
+        "or the equivalent for your distribution."
+      )
 
     base::rm(xml_results, xml_missing)
   }
@@ -103,9 +105,11 @@ package_janitor <- function(
     libcurl_missing <- (libcurl_results==0)
 
     if( libcurl_missing )
-      base::warning("This Linux machine is possibly missing the 'libcurl' library.  ",
-                    "Consider running `sudo apt-get install libcurl4-openssl-dev` ",
-                    "or the equivalent for your distribution.")
+      base::warning(
+        "This Linux machine is possibly missing the 'libcurl' library.  ",
+        "Consider running `sudo apt-get install libcurl4-openssl-dev` ",
+        "or the equivalent for your distribution."
+      )
 
     base::rm(libcurl_results, libcurl_missing)
   }
@@ -117,9 +121,11 @@ package_janitor <- function(
     openssl_missing <- (openssl_results==0)
 
     if( openssl_missing )
-      base::warning("This Linux machine is possibly missing the 'libssl' library.  ",
-                    "Consider running `sudo apt-get install libssl-dev` ",
-                    "or the equivalent for your distribution.")
+      base::warning(
+        "This Linux machine is possibly missing the 'libssl' library.  ",
+        "Consider running `sudo apt-get install libssl-dev` ",
+        "or the equivalent for your distribution."
+      )
 
     base::rm(openssl_results, openssl_missing)
   }
@@ -129,10 +135,10 @@ package_janitor <- function(
   if( verbose ) message("package_janitor is installing the GitHub packages:")
 
   for( i in base::seq_len(base::nrow(ds_install_from_github)) ) {
-    package_name <- ds_install_from_github[i, "package_name"]
+    package_name <- ds_install_from_github$package_name[i]
     if( verbose ) message("Installing `", package_name, "` from GitHub, (not including its dependencies).")
 
-    username <- ds_install_from_github[i, "github_username"]
+    username <- ds_install_from_github$github_username[i]
     repository_name <- paste0(username, "/", package_name)
     devtools::install_github(repo=repository_name)
     base::rm(package_name, username, repository_name)

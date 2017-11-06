@@ -10,7 +10,7 @@ test_that("column rename -OrchardSprays", {
  , "rowpos"               = "`rowpos`"
  , "colpos"               = "`colpos`"
  , "treatment"            = "`treatment`"'
-  
+
   testthat::expect_output(
     column_rename_headstart(datasets::OrchardSprays)
     , expected
@@ -24,7 +24,7 @@ test_that("column rename -Iris", {
  , "petal_length"            = "`Petal.Length`"
  , "petal_width"             = "`Petal.Width`"
  , "species"                 = "`Species`"'
-  
+
   testthat::expect_output(
     column_rename_headstart(datasets::iris)
     , expected
@@ -39,7 +39,7 @@ test_that("column rename w/o snake-Iris", {
  , "Petal.Length"            = "`Petal.Length`"
  , "Petal.Width"             = "`Petal.Width`"
  , "Species"                 = "`Species`"'
-  
+
   testthat::expect_output(
     column_rename_headstart(datasets::iris, try_snake_case=FALSE)
     , expected
@@ -51,7 +51,7 @@ test_that("column class -OrchardSprays", {
  , "rowpos"     = "numeric"
  , "colpos"     = "numeric"
  , "treatment"  = "factor"'
-  
+
   testthat::expect_output(
     column_class_headstart(datasets::OrchardSprays)
     , expected
@@ -64,7 +64,7 @@ test_that("column class -Iris", {
  , "Petal.Length"  = "numeric"
  , "Petal.Width"   = "numeric"
  , "Species"       = "factor"'
-  
+
   testthat::expect_output(
     column_class_headstart(datasets::iris)
     , expected
@@ -80,7 +80,7 @@ test_that("column value -OrchardSprays", {
  , "F"  = "F"
  , "G"  = "G"
  , "H"  = "H"'
-  
+
   testthat::expect_output(
     column_value_headstart(datasets::OrchardSprays$treatment)
     , expected

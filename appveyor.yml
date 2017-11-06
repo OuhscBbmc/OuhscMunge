@@ -20,7 +20,7 @@ environment:
     R_ARCH: x64
 
   - R_VERSION: stable
-  
+
 build_script:
   - travis-tool.sh install_deps
 

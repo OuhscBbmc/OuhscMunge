@@ -4,17 +4,22 @@
 \alias{deterge}
 \alias{deterge_to_double}
 \alias{deterge_to_integer}
+\alias{deterge_to_ascii}
 \title{Convert (and possibly clean) a vector}
 \usage{
 deterge_to_double(x, bound_lower, bound_upper)
 deterge_to_integer(x, bound_lower, bound_upper)
+deterge_to_ascii(x, substitution_character)
 }
 \arguments{
-\item{x}{The input vector that needs to be cast.  Required}
+\item{x}{The input vector that needs to be cast/converted.  Required.}
 
 \item{bound_lower}{Elements below this inclusive threshold will be set to \code{NA}.}
 
 \item{bound_upper}{Elements above this inclusive threshold will be set to \code{NA}.}
+
+\item{substitution_character}{If the character does not have an equivalent in ASCII,
+replace it with this character.  Defaults to a question mark (\emph{i.e.}, '?').}
 }
 \value{
 An array of values.
@@ -23,12 +28,23 @@ An array of values.
 Cast values to desired data type.
 }
 \details{
---write something here--
+The functions \code{deterge_to_double()} and \code{deterge_to_integer()} accept character representations of a number, and return a \code{numeric} or \code{integer}
+vector.  Elements outside \code{bound_lower} and \code{bound_upper} are converted to \code{NA_real_}/\code{NA_integer_}.
+
+The function \code{deterge_to_ascii()} accepts a character vector and returns a character vector.
+The encoding is changed to ASCII.  Individual elements are allowed to be \code{NA_character_}.
 }
 \examples{
 library(OuhscMunge)
 deterge_to_double(c(NA, 1:10), 4, 8)
-deterge_to_integer(c(NA, 1:10), 4, 8)
+deterge_to_integer(c(NA, 1:10), 4L, 8L)
+
+x <- c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher")
+deterge_to_ascii(x)
+}
+\seealso{
+The real work in \code{deterge_to_ascii()} is performed by \code{\link[base:iconv]{base::iconv()}}.
+\code{base::iconv(x=x, from="latin1", to="ASCII//TRANSLIT", sub=substitution_character)}
 }
 \author{
 Will Beasley

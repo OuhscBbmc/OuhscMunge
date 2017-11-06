@@ -20,7 +20,7 @@ assert_non_na_and_unique(x, class_vector)
 Assert a vector meets important data-quality requirements.
 }
 \examples{
-requireNamespace("OuhscMunge") 
+requireNamespace("OuhscMunge")
 OuhscMunge::assert_non_na(1:30, "integer")
 \dontrun{
 OuhscMunge::assert_non_na(c(1:30, NA_integer_), "integer")
