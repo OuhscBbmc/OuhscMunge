@@ -12,7 +12,7 @@
 #'
 #' @details
 #' The database table and stored procedure must defined as:
-#' 
+#'
 #' ```
 #' CREATE TABLE [security_private].[tbl_key_value_static](
 #'   [id] [smallint] IDENTITY(1,1) NOT NULL,
@@ -21,7 +21,7 @@
 #'   [value] [varchar](200) NOT NULL,
 #'   [file_last_updated_date] [date] NOT NULL,
 #'   [retired] [bit] NOT NULL,
-#'   CONSTRAINT [PK_tblUrl] PRIMARY KEY CLUSTERED 
+#'   CONSTRAINT [PK_tblUrl] PRIMARY KEY CLUSTERED
 #'   (
 #'     [id] ASC
 #'   )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -37,13 +37,13 @@
 #' 	WHERE project=@project AND attribute=@attribute
 #' END
 #' ````
-#' @note 
+#' @note
 #' Currently only the 'static' key-value pairs are retrieved through this function.
 #' Talk to Will if you need to retrieve the 'rolling' or the 'personal' key-value pairs.
-#' 
+#'
 #' @author Will Beasley
-#' 
-#' @examples 
+#'
+#' @examples
 #' \dontrun{
 #' value <- retrieve_key_value("file-server", "bbmc", "BbmcSecurity")
 #' }
@@ -51,7 +51,7 @@
 retrieve_key_value <- function(
   key,
   project_name,
-  dsn_name, 
+  dsn_name,
   channel       = NULL
 ) {
   pattern <- "^[-a-zA-Z0-9_]+$"
@@ -63,9 +63,9 @@ retrieve_key_value <- function(
     stop("The function `retrieve_key_value()` cannot run if the `RODBC` package is not installed.  Please install it and try again.")
   if( !requireNamespace("RODBCext", quietly=TRUE) )
     stop("The function `retrieve_key_value()` cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
-  
+
   sql <- "EXEC security.prc_key_value_static @project=?, @attribute = ?"
-  
+
   d_input <- data.frame(
     project_name       = project_name,
     key                = key,

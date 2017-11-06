@@ -1,9 +1,7 @@
 library(testthat)
 
-
 # ---- first-nonmissing --------------------------------------------------------
 context("first-nonmissing")
-
 
 test_that("first_nonmissing -normal", {
   testthat::expect_equal(first_nonmissing(letters), "a")

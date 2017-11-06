@@ -6,11 +6,11 @@ context("dates-month")
 test_that("clump_month_date -typical", {
   detailed <- seq.Date(from=as.Date("2011-04-21"), to=as.Date("2011-05-14"), by="day")
   expected <- structure(c(
-    15079, 15079, 15079, 15079, 15079, 15079, 15079, 15079, 15079, 15079, 
+    15079, 15079, 15079, 15079, 15079, 15079, 15079, 15079, 15079, 15079,
     15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109, 15109
   ), class = "Date")
   observed <- clump_month_date(detailed)#; dput(observed)
-  
+
   expect_equal(observed, expected, label="The dates should be clumped corrected.")
   expect_equal(class(observed), "Date", "The returned array should remain a date data type.")
 })
@@ -62,13 +62,13 @@ context("dates-week")
 test_that("clump_week_date -typical", {
   detailed <- seq.Date(from=as.Date("2011-04-21"), to=as.Date("2011-05-14"), by="day")
   expected <- structure(c(
-    15082, 15082, 15082, 
-    15089, 15089, 15089, 15089, 15089, 15089, 15089, 
-    15096, 15096, 15096, 15096, 15096, 15096, 15096, 
+    15082, 15082, 15082,
+    15089, 15089, 15089, 15089, 15089, 15089, 15089,
+    15096, 15096, 15096, 15096, 15096, 15096, 15096,
     15103, 15103, 15103, 15103, 15103, 15103, 15103
   ), class = "Date")
   observed <- clump_week_date(detailed)#; dput(observed)
-  
+
   expect_equal(observed, expected, label="The dates should be clumped corrected.")
   expect_equal(class(observed), "Date", "The returned array should remain a date data type.")
 })

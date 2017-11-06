@@ -32,7 +32,7 @@ propogate undetected through our code until it broke something with an unhelpful
 }
 \examples{
 \dontrun{
-requireNamespace("OuhscMunge") 
+requireNamespace("OuhscMunge")
 
 OuhscMunge::open_dsn_channel_sqls(
   dsn_name        = "miechv_eval"

@@ -8,7 +8,7 @@
 #' @description
 #'
 #' Thanks to Funders, including [HRSA/ACF D89MC23154](https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012)
-#' 
+#'
 #' \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting
 #' ([MIECHV](http://mchb.hrsa.gov/programs/homevisiting/)) Project.}, which
 #' evaluates MIECHV expansion and enhancement of Evidence-based Home Visitation programs in four Oklahoma counties.
