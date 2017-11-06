@@ -73,7 +73,7 @@ deterge_to_integer <- function( x, bound_lower=-2147483647L, bound_upper=2147483
 deterge_to_ascii <- function( x, substitution_character="?" ) {
 
   # Verify the vector is a `character`.
-  checkmate::assert_character(x, null.ok=FALSE,  any.missing=FALSE)
+  checkmate::assert_character(x, null.ok=FALSE,  any.missing=TRUE)
 
   # Verify the substitution value is a single, nonmissing character.
   checkmate::assert_character(substitution_character, len=1L, any.missing=FALSE)
