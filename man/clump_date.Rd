@@ -44,10 +44,10 @@ table(clumped_month)
 
 clumped_week <- clump_week_date(detailed)
 table(clumped_week)
-# 2011-04-18 2011-04-25 2011-05-02 2011-05-09 2011-05-16 2011-05-23 2011-05-30 
-#          3          7          7          7          7          7          7 
-# 2011-06-06 2011-06-13 2011-06-20 2011-06-27 2011-07-04 2011-07-11 
-#          7          7          7          7          7          5 
+# 2011-04-18 2011-04-25 2011-05-02 2011-05-09 2011-05-16 2011-05-23 2011-05-30
+#          3          7          7          7          7          7          7
+# 2011-06-06 2011-06-13 2011-06-20 2011-06-27 2011-07-04 2011-07-11
+#          7          7          7          7          7          5
 }
 \seealso{
 These functions are gloves around \code{\link[lubridate:day]{lubridate::day()}} and \code{\link[lubridate:wday]{lubridate::wday()}}.

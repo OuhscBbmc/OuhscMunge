@@ -36,7 +36,7 @@ The latter is helpful diagnosing which record caused the write to fail; look at 
 }
 \examples{
 \dontrun{
-requireNamespace("OuhscMunge") 
+requireNamespace("OuhscMunge")
 
 OuhscMunge::upload_sqls_rodbc(
   d                          = ds_client,          # Some data.frame that exists in RAM
