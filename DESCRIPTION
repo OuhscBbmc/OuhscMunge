@@ -2,8 +2,8 @@ Package: OuhscMunge
 Title: Data Manipulation Operations
 Description: Data manipulation operations frequently used in OUHSC BBMC
     projects.
-Version: 0.1.8.9004
-Date: 2017-07-30
+Version: 0.1.8.9005
+Date: 2017-11-24
 Authors@R: person("Will", "Beasley", email="wibeasley@hotmail.com", role=c("aut", "cre"))
 Author: Will Beasley [aut, cre]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
@@ -15,9 +15,11 @@ Depends:
     R(>= 3.4.0)
 Imports:
     checkmate,
+    DBI,
     devtools (>= 1.8.0),
     dplyr,
     lubridate,
+    odbc,
     readr,
     testit,
 Suggests:
