@@ -1,8 +1,7 @@
 library(testthat)
 
-###########
+# ---- retrieve_key_value ------------------------------------------------------
 context("retrieve_key_value")
-###########
 
 key       <- "k"
 project   <- "project"

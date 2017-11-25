@@ -1,8 +1,7 @@
 library(testthat)
 
-###########
-context("Snake Case")
-###########
+# ---- snake_case --------------------------------------------------------------
+context("snake_case")
 
 test_that("snake -OrchardSprays", {
   expected <- c("decrease", "rowpos", "colpos", "treatment")

@@ -1,8 +1,8 @@
 library(testthat)
 
-###########
+
+# ---- open_dsn_channel_sqls ---------------------------------------------------
 context("open_dsn_channel")
-###########
 
 name <- "pretend-dsn"
 version_min <- numeric_version("0.1.0")

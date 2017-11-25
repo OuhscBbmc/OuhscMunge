@@ -1,8 +1,7 @@
 library(testthat)
 
-###########
+# replace_with_nas --------------------------------------------------------
 context("Replace Blanks with NAs")
-###########
 
 test_that("Replace with NAs -character", {
   input    <- c("a", "b", "", "d", "")

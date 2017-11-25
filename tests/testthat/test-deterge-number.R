@@ -1,10 +1,7 @@
 library(testthat)
 
-###########
-context("Deterge")
-###########
-
-# ---- deterge_to_double() -------------------------------------------------------
+# ---- deterge_to_double -------------------------------------------------------
+context("deterge_to_double")
 
 test_that("deterge double with round numbers", {
   expected <- c(NA, 1:10)

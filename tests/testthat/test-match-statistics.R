@@ -1,8 +1,7 @@
 library(testthat)
 
-###########
+# ---- match_statistics --------------------------------------------------------
 context("match_statistics")
-###########
 
 ds_parent <- data.frame(
   parent_id         = 11L:20L,

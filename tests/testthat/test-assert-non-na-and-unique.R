@@ -1,5 +1,7 @@
 library(testthat)
 
+
+# ---- assert_non_na_and_unique ------------------------------------------------
 context("assert_non_na_and_unique")
 
 test_that("assert_non_na_and_unique -all - passes", {

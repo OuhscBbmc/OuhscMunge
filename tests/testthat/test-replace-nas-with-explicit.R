@@ -1,8 +1,7 @@
 library(testthat)
 
-###########
-context("Replace NAs")
-###########
+# ---- replace_nas_with_explicit ------------------------------------------
+context("replace_nas_with_explicit")
 
 test_that("replace_nas_character_standard", {
   a <- letters

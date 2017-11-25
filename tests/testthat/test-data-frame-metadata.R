@@ -1,8 +1,8 @@
 library(testthat)
 
-###########
+
+# ---- metadata ----------------------------------------------------------------
 context("metadata")
-###########
 
 test_that("column rename -OrchardSprays", {
   expected <-

@@ -1,7 +1,7 @@
 library(testthat)
 
-###########
-context("Execute SQL File")
+# ---- execute_sql_file --------------------------------------------------------
+context("execute_sql_file")
 
 path  <- base::file.path(devtools::inst(name="OuhscMunge"), "hdid-select.sql")
 dsn   <- "cdw_cache_staging"
