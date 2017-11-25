@@ -1,8 +1,7 @@
 library(testthat)
 
-
-# Deterge ASCII -----------------------------------------------------------
-context("Deterge ASCII")
+# ---- deterge_to_ascii --------------------------------------------------------
+context("deterge_to_ascii")
 
 test_that("SEM founders --vanilla", {
   x         <- c("Ekstrom", "Joreskog", "bisschen Zurcher")

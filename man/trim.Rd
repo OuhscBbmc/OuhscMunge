@@ -10,9 +10,9 @@
 trim_numeric(x, bounds=c(-Inf, Inf), replacement=NA_real_)
 trim_integer(x, bounds=c(-2147483647L, 2147483647L), replacement=NA_integer_)
 trim_date(
-  x, 
-  bounds      = as.Date(c("1940-01-01", "2030-01-01")),  
-  replacement = as.Date(NA_character_) 
+  x,
+  bounds      = as.Date(c("1940-01-01", "2030-01-01")),
+  replacement = as.Date(NA_character_)
 )
 }
 \arguments{

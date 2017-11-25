@@ -29,7 +29,7 @@ The database table and stored procedure must defined as:\preformatted{CREATE TAB
   [value] [varchar](200) NOT NULL,
   [file_last_updated_date] [date] NOT NULL,
   [retired] [bit] NOT NULL,
-  CONSTRAINT [PK_tblUrl] PRIMARY KEY CLUSTERED 
+  CONSTRAINT [PK_tblUrl] PRIMARY KEY CLUSTERED
   (
     [id] ASC
   )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

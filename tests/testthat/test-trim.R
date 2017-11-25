@@ -1,6 +1,6 @@
 library(testthat)
 
-# ---- trim_numeric() -------------------------------------------------------
+# ---- trim_numeric -------------------------------------------------------
 context("Trim Numeric")
 
 test_that("trim_numeric -good", {

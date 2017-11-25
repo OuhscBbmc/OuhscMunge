@@ -1,6 +1,6 @@
 library(testthat)
 
-# Verify Data Frame -------------------------------------------------------
+# ---- Verify Data Frame -------------------------------------------------------
 context("Verify Data Frame")
 
 test_that("OrchardSprays -regular row count", {
