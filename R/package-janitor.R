@@ -117,7 +117,7 @@ package_janitor <- function(
   #####################################
   ## check_openssl_linux
   if( check_openssl_linux ) {
-    openssl_results <- base::system("locate libssl-dev")
+    openssl_results <- as.integer(base::system("locate libssl-dev | wc -l", intern=TRUE))
     openssl_missing <- (openssl_results==0)
 
     if( openssl_missing )
