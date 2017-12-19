@@ -1,0 +1,4 @@
+Name: Download and install dependencies
+Description: Download and install dependencies of the package.
+Binding: update_packages_addin
+Interactive: true
