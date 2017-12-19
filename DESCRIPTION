@@ -21,6 +21,7 @@ Imports:
     lubridate,
     odbc,
     readr,
+    remotes,
     testit,
 Suggests:
     RODBC,
