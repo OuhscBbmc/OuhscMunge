@@ -12,6 +12,7 @@
 #'
 #' @seealso [checkmate]
 #' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #'
 #' @examples
 #' verify_value_headstart(datasets::OrchardSprays)
@@ -31,7 +32,7 @@ verify_value_headstart <- function( d ) {
 
   d_structure <- dplyr::mutate(
     d_structure,
-    code  = sprintf("checkmate::assert_%s(ds$%s)", class, name_variable)
+    code  = sprintf("checkmate::assert_%s(ds$%s)", class, .data$name_variable)
   )
   # paste(d_structure$code, collapse="\n")
   cat(d_structure$code, sep="\n")
