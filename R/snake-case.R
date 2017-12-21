@@ -11,11 +11,18 @@
 #'
 #' @return A vector of converted names.
 #'
+#' @note This series of regexes has an advantages over the current
+#' implementations of [lettercase::str_snake_case()] and [snakecase::to_snake_case()].
+#' The former converts "PatientDOB" to "patientdob" and the latter converts
+#' "patient.dob" to "patient_._dob".  I'll keep an eye on these packages.  I'd prefer
+#' to use them, instead of maintaining the functions.
+#'
 #' @author Will Beasley
 #'
 #' @examples
 #' snake_case(colnames(datasets::OrchardSprays))
 #' snake_case(colnames(datasets::iris))
+#' snake_case(c("PatientID", "PatientDOB", "DOB", "name.last", "name.first"))
 
 snake_case <- function( x ) {
   #Second & third lines use http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
