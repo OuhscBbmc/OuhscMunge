@@ -26,6 +26,7 @@ Imports:
     remotes,
     rlang,
     testit,
+    tibble,
 Suggests:
     RODBC,
     RODBCext,

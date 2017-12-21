@@ -24,15 +24,17 @@ verify_value_headstart <- function( d ) {
     stop("The object is not a valid data frame.")
   }
 
-  d_structure <- data.frame(
+  d_structure <- tibble::tibble(
     name_variable     = colnames(d),
     class             = tolower(purrr::map_chr(d, class)),
+    any_duplicated    = purrr::map_lgl(d, ~any(duplicated(.))),
     stringsAsFactors  = F
   )
 
   d_structure <- dplyr::mutate(
     d_structure,
-    code  = sprintf("checkmate::assert_%s(ds$%s)", class, .data$name_variable)
+    unique_string   = dplyr::if_else(!.data$any_duplicated, ", unique=T", ""),
+    code            = sprintf("checkmate::assert_%s(ds$%s %s)", class, .data$name_variable, .data$unique_string)
   )
   # paste(d_structure$code, collapse="\n")
   cat(d_structure$code, sep="\n")
