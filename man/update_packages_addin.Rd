@@ -9,7 +9,11 @@ update_packages_addin()
 \description{
 When called in the repo of an R package, its package dependencies are inspected
 and the obsolete ones are updated.  This function is a thin wrapper around
-\code{stats::update(remotes::dev_package_deps())}.  Unlike the 'Update' button in RStudio's 'Packages' panel,
+\code{remotes::update_packages(remotes::dev_package_deps()$package, dependencies=T)}.  Unlike the 'Update' button in RStudio's 'Packages' panel,
 this function will (a) update from CRAN and remote sources like GitHub and
 (b) not attempt to install local packages that are unrelated to the current package.
+}
+\note{
+This function only works if run inside a valid package.  It reads the dependencies enumerated in the package's
+\href{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file}{DESCRIPTION} file.
 }

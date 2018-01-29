@@ -16,3 +16,11 @@ test_that("snake -Iris", {
 
   testthat::expect_equal(actual, expected)
 })
+
+test_that("snake -CamelCase", {
+  input     <- c("PatientID", "PatientDOB", "DOB")
+  expected  <- c("patient_id", "patient_dob", "dob")
+  actual    <- snake_case(input)
+
+  testthat::expect_equal(actual, expected)
+})

@@ -17,6 +17,7 @@ check the properties of a dataset, such as the names and types of each column.
 \examples{
 verify_value_headstart(datasets::OrchardSprays)
 verify_value_headstart(datasets::iris)
+verify_value_headstart(datasets::BOD)
 }
 \seealso{
 \link{checkmate}

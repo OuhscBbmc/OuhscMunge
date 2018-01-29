@@ -17,9 +17,19 @@ This function attempts to convert variables to snake_case, even if it's already 
 The important regex lines were posted by Stack Overflow user \href{http://stackoverflow.com/users/129879/epost}{epost}
 in \href{http://stackoverflow.com/a/1176023/1082435}{"Elegant Python function to convert CamelCase to snake_case?"}.
 }
+\note{
+This series of regexes has an advantages over the current
+implementations of \code{\link[lettercase:str_snake_case]{lettercase::str_snake_case()}} and \code{\link[snakecase:to_snake_case]{snakecase::to_snake_case()}}.
+The former converts "PatientDOB" to "patientdob" and the latter converts
+"patient.dob" to "patient_._dob".  I'll keep an eye on these packages
+(\emph{i.e.}, \href{https://github.com/decisionpatterns/lettercase/issues/1}{lettercase #1} for 'camelCase'
+and \href{https://github.com/Tazinho/snakecase/issues/101}{snakecase #101}).  I'd prefer
+to use one of them, instead of maintaining the functions.
+}
 \examples{
 snake_case(colnames(datasets::OrchardSprays))
 snake_case(colnames(datasets::iris))
+snake_case(c("PatientID", "PatientDOB", "DOB", "name.last", "name.first"))
 }
 \author{
 Will Beasley
