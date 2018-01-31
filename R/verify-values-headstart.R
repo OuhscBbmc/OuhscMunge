@@ -15,38 +15,103 @@
 #' @importFrom rlang .data
 #'
 #' @examples
+#' library(magrittr)
 #' verify_value_headstart(datasets::OrchardSprays)
 #' verify_value_headstart(datasets::iris)
 #' verify_value_headstart(datasets::BOD)
+#' verify_value_headstart(dplyr::band_members)
+#' storms_2 <- dplyr::storms %>%
+#'   dplyr::mutate(
+#'     storm_date = as.Date(ISOdate(year, month, day))
+#'   )
+#' verify_value_headstart(storms_2)
+#'
 
+
+# d <- datasets::OrchardSprays
 verify_value_headstart <- function( d ) {
   # Verify that a legit data.frame.
   if( !inherits(d, "data.frame") ) {
     stop("The object is not a valid data frame.")
   }
 
+  # b <- purrr::map_chr(d, boundaries)
   d_structure <- tibble::tibble(
     name_variable     = colnames(d),
-    class             = tolower(purrr::map_chr(d, class)),
+    class             = tolower(purrr::map_chr(d, ~class(.)[1])),
     any_missing       = purrr::map_lgl(d, ~any(is.na(.))),
-    any_duplicated    = purrr::map_lgl(d, ~any(duplicated(.)))
+    any_duplicated    = purrr::map_lgl(d, ~any(duplicated(.))),
+    boundaries_string = purrr::map_chr(d, boundaries)
   )
 
   d_structure <- d_structure %>%
     dplyr::mutate(
     # d_structure,
+      class_start     = paste0(.data$class, "("),
       missing_string  = dplyr::if_else(.data$any_missing, ", any.missing=T", ", any.missing=F"),
       unique_string   = dplyr::if_else(!.data$any_duplicated, ", unique=T", "")
     ) %>%
     dplyr::mutate(
       code  = sprintf(
-        "checkmate::assert_%s(ds$%s %s %s)",
-        class,
+        "checkmate::assert_%-*sds$%-*s %s %-*s %s)",
+        max(nchar("character"), nchar(.data$class_start)),
+        .data$class_start,
+        max(nchar(.data$name_variable)),
         .data$name_variable,
         .data$missing_string,
+        max(nchar(.data$boundaries_string)),
+        .data$boundaries_string,
         .data$unique_string
       )
     )
   # paste(d_structure$code, collapse="\n")
   cat(d_structure$code, sep="\n")
 }
+
+# Private/non-exposed functions
+boundaries <- function( x ) {
+  data_types <- class(x) # Remember this will have more than one value for columns that inherit multiple datatypes, eg 'factor' and 'ordered'
+
+  # dplyr::recode(
+  #   data_type,
+  #   "numeric" = boundaries_integer(x),
+  #   "integer" = boundaries_integer(x),
+  #
+  # )
+  # data_type=="factor"  ~ "",
+  if(      "numeric"   %in% data_types) boundaries_number(x)
+  else if( "integer"   %in% data_types) boundaries_number(x)
+  else if( "character" %in% data_types) boundaries_character(x)
+  else if( "date"      %in% data_types) boundaries_date(x)
+  else ""
+
+}
+# purrr::map_chr(datasets::OrchardSprays, boundaries)
+#
+# purrr::map_chr(dplyr::storms, boundaries)
+
+boundaries_number <- function( x ) {
+  sprintf(
+    ", lower=%i, upper=%i",
+    floor(min(x, na.rm=T)),
+    ceiling(max(x, na.rm=T))
+  )
+}
+# boundaries_integer(rnorm(10))
+boundaries_character <- function( x ) {
+  sprintf(
+    ', pattern="^.{%i, %i}$"',
+    min(nchar(x)),
+    max(nchar(x))
+  )
+}
+# boundaries_character(dplyr::band_members$band)
+
+boundaries_date <- function( x ) {
+  sprintf(
+    ", lower=%i, upper=%i",
+    min(x, na.rm=T),
+    max(x, na.rm=T)
+  )
+}
+# boundaries_character(dplyr::band_members$band)
