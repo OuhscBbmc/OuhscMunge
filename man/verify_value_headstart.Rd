@@ -15,9 +15,17 @@ prints code to the console that a developer can use to start to
 check the properties of a dataset, such as the names and types of each column.
 }
 \examples{
+library(magrittr)
 verify_value_headstart(datasets::OrchardSprays)
 verify_value_headstart(datasets::iris)
 verify_value_headstart(datasets::BOD)
+verify_value_headstart(dplyr::band_members)
+storms_2 <- dplyr::storms \%>\%
+  dplyr::mutate(
+    storm_date = as.Date(ISOdate(year, month, day))
+  )
+verify_value_headstart(storms_2)
+
 }
 \seealso{
 \link{checkmate}
