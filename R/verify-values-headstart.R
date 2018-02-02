@@ -25,17 +25,14 @@
 #'     storm_date = as.Date(ISOdate(year, month, day))
 #'   )
 #' verify_value_headstart(storms_2)
-#'
 
 
-# d <- datasets::OrchardSprays
 verify_value_headstart <- function( d ) {
   # Verify that a legit data.frame.
   if( !inherits(d, "data.frame") ) {
     stop("The object is not a valid data frame.")
   }
 
-  # b <- purrr::map_chr(d, boundaries)
   d_structure <- tibble::tibble(
     name_variable     = colnames(d),
     class             = tolower(purrr::map_chr(d, ~class(.)[1])),
@@ -46,7 +43,6 @@ verify_value_headstart <- function( d ) {
 
   d_structure <- d_structure %>%
     dplyr::mutate(
-    # d_structure,
       class_start     = paste0(.data$class, "("),
       missing_string  = dplyr::if_else(.data$any_missing, ", any.missing=T", ", any.missing=F"),
       unique_string   = dplyr::if_else(!.data$any_duplicated, ", unique=T", "")
@@ -72,23 +68,12 @@ verify_value_headstart <- function( d ) {
 boundaries <- function( x ) {
   data_types <- class(x) # Remember this will have more than one value for columns that inherit multiple datatypes, eg 'factor' and 'ordered'
 
-  # dplyr::recode(
-  #   data_type,
-  #   "numeric" = boundaries_integer(x),
-  #   "integer" = boundaries_integer(x),
-  #
-  # )
-  # data_type=="factor"  ~ "",
   if(      "numeric"   %in% data_types) boundaries_number(x)
   else if( "integer"   %in% data_types) boundaries_number(x)
   else if( "character" %in% data_types) boundaries_character(x)
   else if( "date"      %in% data_types) boundaries_date(x)
   else ""
-
-}
-# purrr::map_chr(datasets::OrchardSprays, boundaries)
-#
-# purrr::map_chr(dplyr::storms, boundaries)
+} # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
 boundaries_number <- function( x ) {
   sprintf(
@@ -96,16 +81,15 @@ boundaries_number <- function( x ) {
     floor(min(x, na.rm=T)),
     ceiling(max(x, na.rm=T))
   )
-}
-# boundaries_integer(rnorm(10))
+} # boundaries_integer(rnorm(10))
+
 boundaries_character <- function( x ) {
   sprintf(
     ', pattern="^.{%i, %i}$"',
     min(nchar(x)),
     max(nchar(x))
   )
-}
-# boundaries_character(dplyr::band_members$band)
+} # boundaries_character(dplyr::band_members$band)
 
 boundaries_date <- function( x ) {
   sprintf(
@@ -113,5 +97,4 @@ boundaries_date <- function( x ) {
     min(x, na.rm=T),
     max(x, na.rm=T)
   )
-}
-# boundaries_character(dplyr::band_members$band)
+} # boundaries_character(dplyr::band_members$band)
