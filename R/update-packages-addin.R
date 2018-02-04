@@ -14,6 +14,5 @@
 update_packages_addin <- function() {
   # remotes::update_packages(remotes::dev_package_deps(), dependencies = TRUE)
   dependency_list <- remotes::dev_package_deps()
-  # update(dependency_list$package, dependencies=TRUE)
-  remotes::update_packages(dependency_list$package, dependencies=T)
+  remotes::update_packages(dependency_list$package, dependencies=TRUE)
 }
