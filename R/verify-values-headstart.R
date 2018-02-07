@@ -68,7 +68,7 @@ boundaries <- function( x ) {
   if(      "numeric"   %in% data_types) boundaries_number(x)
   else if( "integer"   %in% data_types) boundaries_number(x)
   else if( "character" %in% data_types) boundaries_character(x)
-  else if( "date"      %in% data_types) boundaries_date(x)
+  else if( "Date"      %in% data_types) boundaries_date(x)
   else ""
 } # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
