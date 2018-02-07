@@ -28,10 +28,7 @@
 
 
 verify_value_headstart <- function( d ) {
-  # Verify that a legit data.frame.
-  if( !inherits(d, "data.frame") ) {
-    stop("The object is not a valid data frame.")
-  }
+  checkmate::assert_class(d, "data.frame")
 
   d_structure <- tibble::tibble(
     name_variable     = colnames(d),
