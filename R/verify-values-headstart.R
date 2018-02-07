@@ -28,10 +28,7 @@
 
 
 verify_value_headstart <- function( d ) {
-  # Verify that a legit data.frame.
-  if( !inherits(d, "data.frame") ) {
-    stop("The object is not a valid data frame.")
-  }
+  checkmate::assert_class(d, "data.frame")
 
   d_structure <- tibble::tibble(
     name_variable     = colnames(d),
@@ -71,23 +68,23 @@ boundaries <- function( x ) {
   if(      "numeric"   %in% data_types) boundaries_number(x)
   else if( "integer"   %in% data_types) boundaries_number(x)
   else if( "character" %in% data_types) boundaries_character(x)
-  else if( "date"      %in% data_types) boundaries_date(x)
+  else if( "Date"      %in% data_types) boundaries_date(x)
   else ""
 } # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
 boundaries_number <- function( x ) {
   sprintf(
     ", lower=%i, upper=%i",
-    floor(min(x, na.rm=T)),
+    floor(  min(x, na.rm=T)),
     ceiling(max(x, na.rm=T))
   )
 } # boundaries_integer(rnorm(10))
 
 boundaries_character <- function( x ) {
   sprintf(
-    ', pattern="^.{%i, %i}$"',
-    min(nchar(x)),
-    max(nchar(x))
+    ', pattern="^.{%i,%i}$"',
+    min(nchar(x), na.rm=T),
+    max(nchar(x), na.rm=T)
   )
 } # boundaries_character(dplyr::band_members$band)
 

@@ -19,7 +19,7 @@
 #'
 #' @author Will Beasley
 #'
-#' @seealso [checkmate::assert_class()]
+#' @seealso [`checkmate::assert_class()`]
 #'
 #' @examples
 #' verify_data_frame(datasets::OrchardSprays, 20)

@@ -25,7 +25,6 @@ storms_2 <- dplyr::storms \%>\%
     storm_date = as.Date(ISOdate(year, month, day))
   )
 verify_value_headstart(storms_2)
-
 }
 \seealso{
 \link{checkmate}
