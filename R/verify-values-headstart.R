@@ -78,16 +78,16 @@ boundaries <- function( x ) {
 boundaries_number <- function( x ) {
   sprintf(
     ", lower=%i, upper=%i",
-    floor(min(x, na.rm=T)),
+    floor(  min(x, na.rm=T)),
     ceiling(max(x, na.rm=T))
   )
 } # boundaries_integer(rnorm(10))
 
 boundaries_character <- function( x ) {
   sprintf(
-    ', pattern="^.{%i, %i}$"',
-    min(nchar(x)),
-    max(nchar(x))
+    ', pattern="^.{%i,%i}$"',
+    min(nchar(x), na.rm=T),
+    max(nchar(x), na.rm=T)
   )
 } # boundaries_character(dplyr::band_members$band)
 
