@@ -74,7 +74,7 @@ boundaries <- function( x ) {
 
 boundaries_number <- function( x ) {
   sprintf(
-    ", lower=%i, upper=%i",
+    ", lower=%s, upper=%s", # Allow for values like 'Inf'
     floor(  min(x, na.rm=T)),
     ceiling(max(x, na.rm=T))
   )
@@ -90,7 +90,7 @@ boundaries_character <- function( x ) {
 
 boundaries_date <- function( x ) {
   sprintf(
-    ", lower=%i, upper=%i",
+    ', lower=as.Date("%s"), upper=as.Date("%s")',
     min(x, na.rm=T),
     max(x, na.rm=T)
   )
