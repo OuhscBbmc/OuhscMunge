@@ -81,12 +81,16 @@ boundaries_number <- function( x ) {
 } # boundaries_integer(rnorm(10))
 
 boundaries_character <- function( x ) {
-  sprintf(
-    ', pattern="^.{%i,%i}$"',
-    min(nchar(x), na.rm=T),
-    max(nchar(x), na.rm=T)
-  )
+  # browser()
+  min_char_count <- suppressWarnings(as.numeric(min(nchar(x), na.rm=T)))
+  max_char_count <- suppressWarnings(as.numeric(max(nchar(x), na.rm=T)))
+
+  min_char_count <- dplyr::if_else(is.infinite(min_char_count),   0, min_char_count)
+  max_char_count <- dplyr::if_else(is.infinite(max_char_count), 255, max_char_count)
+
+  sprintf(', pattern="^.{%.0f,%.0f}$"', min_char_count, max_char_count)
 } # boundaries_character(dplyr::band_members$band)
+# boundaries_character(NA_character_)
 
 boundaries_date <- function( x ) {
   sprintf(
