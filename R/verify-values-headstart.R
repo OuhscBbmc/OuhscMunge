@@ -73,25 +73,46 @@ boundaries <- function( x ) {
 } # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
 boundaries_number <- function( x ) {
+  min_number <- suppressWarnings(min(x, na.rm=T))
+  max_number <- suppressWarnings(max(x, na.rm=T))
+
+  if( is.infinite(min_number) | is.infinite(max_number))
+   cat('stop("The number vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
+
   sprintf(
     ", lower=%s, upper=%s", # Allow for values like 'Inf'
-    floor(  min(x, na.rm=T)),
-    ceiling(max(x, na.rm=T))
+    floor(  min_number),
+    ceiling(max_number)
   )
-} # boundaries_integer(rnorm(10))
+} # boundaries_number(rnorm(10))
+# boundaries_number(NA_integer_)
+# checkmate::assert_integer(NA_integer_ , lower=Inf, upper=-Inf)
 
 boundaries_character <- function( x ) {
-  sprintf(
-    ', pattern="^.{%i,%i}$"',
-    min(nchar(x), na.rm=T),
-    max(nchar(x), na.rm=T)
-  )
+  # browser()
+  min_char_count <- suppressWarnings(as.numeric(min(nchar(x), na.rm=T)))
+  max_char_count <- suppressWarnings(as.numeric(max(nchar(x), na.rm=T)))
+
+  if( is.infinite(min_char_count) | is.infinite(max_char_count))
+    cat('stop("The character vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
+
+  min_char_count <- dplyr::if_else(is.infinite(min_char_count), "NA", as.character(min_char_count))
+  max_char_count <- dplyr::if_else(is.infinite(max_char_count), "NA", as.character(max_char_count))
+
+  sprintf(', pattern="^.{%s,%s}$"', min_char_count, max_char_count)
 } # boundaries_character(dplyr::band_members$band)
+# boundaries_character(NA_character_)
 
 boundaries_date <- function( x ) {
-  sprintf(
-    ', lower=as.Date("%s"), upper=as.Date("%s")',
-    min(x, na.rm=T),
-    max(x, na.rm=T)
-  )
-} # boundaries_character(dplyr::band_members$band)
+  min_date <- suppressWarnings(min(x, na.rm=T))
+  max_date <- suppressWarnings(max(x, na.rm=T))
+
+  if( is.infinite(min_date) | is.infinite(max_date))
+    cat('stop("The date vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
+
+  min_date <- dplyr::if_else(is.infinite(min_date), "NA", as.character(min_date))
+  max_date <- dplyr::if_else(is.infinite(max_date), "NA", as.character(max_date))
+
+  sprintf(', lower=as.Date("%s"), upper=as.Date("%s")', min_date, max_date)
+}
+# boundaries_date(as.Date(NA_character_))
