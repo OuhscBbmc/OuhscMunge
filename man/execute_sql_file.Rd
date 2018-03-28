@@ -4,12 +4,18 @@
 \alias{execute_sql_file}
 \title{Execute a SQL file}
 \usage{
-execute_sql_file(path_sql, dsn)
+execute_sql_file(path_sql, dsn, execute = TRUE, minimum_row_count = 0L)
 }
 \arguments{
 \item{path_sql}{A vector to of names to convert.  Required character.}
 
 \item{dsn}{The name of a \href{https://en.wikipedia.org/wiki/Data_source_name}{DSN} defined on your local machine  Required character.}
+
+\item{execute}{Indicates if \code{DBI::dbExecute()} should be used
+(which typically returns a scalar).  Otherwise, \code{DBI::dbGetQuery()} is used,
+(which will return a \code{tibble::tibble}).  Required \code{logical}.}
+
+\item{minimum_row_count}{If \code{execute} is false, the returned dataset should have at least this many rows, or an error will be thrown.  Default of 0.  Required integer.}
 }
 \value{
 A vector of converted names.
