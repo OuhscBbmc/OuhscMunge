@@ -1,4 +1,4 @@
-Blibrary(testthat)
+library(testthat)
 
 # ---- range-date -------------------------------------------------------------------
 context("range-date")
