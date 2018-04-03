@@ -1,5 +1,5 @@
 #' @name date_range
-#' @aliases date_min_with_nas date_max_with_nas
+#' @aliases date_min_with_nas date_max_with_nas date_range_with_nas
 #' @title Find date ranges in the  prescence of missing subsets
 #'
 #' @description Return `NA` for the min and max of a date vector if no nonmissing values are presence
@@ -7,6 +7,7 @@
 #' @usage
 #' date_min_with_nas(x)
 #' date_max_with_nas(x)
+#' date_range_with_nas(x)
 #'
 #' @param x The input date vector.  Required
 
@@ -47,4 +48,12 @@ date_max_with_nas <- function( x ) {
     as.Date(NA_character_)
   else
     max(x, na.rm = TRUE)
+}
+
+#' @export
+date_range_with_nas <- function( x ) {
+  if( all(is.na(x)) )
+    as.Date(c(NA_character_, NA_character_))
+  else
+    range(x, na.rm = TRUE)
 }

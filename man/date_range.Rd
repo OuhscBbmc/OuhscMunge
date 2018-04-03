@@ -4,10 +4,12 @@
 \alias{date_range}
 \alias{date_min_with_nas}
 \alias{date_max_with_nas}
+\alias{date_range_with_nas}
 \title{Find date ranges in the  prescence of missing subsets}
 \usage{
 date_min_with_nas(x)
 date_max_with_nas(x)
+date_range_with_nas(x)
 }
 \arguments{
 \item{x}{The input date vector.  Required}
