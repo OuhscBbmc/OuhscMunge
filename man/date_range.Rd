@@ -34,6 +34,7 @@ by Edward Visel (SO username \href{https://stackoverflow.com/users/4497050/alist
 library(OuhscMunge)
 date_min_with_nas(c(NA, NA, NA))
 date_min_with_nas(as.Date(NA_character_))
+date_min_with_nas(as.Date(character(0)))
 date_min_with_nas(as.Date(c("2009-04-21", "2017-12-27", NA_character_)))
 }
 \author{

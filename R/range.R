@@ -30,6 +30,7 @@
 #' library(OuhscMunge)
 #' date_min_with_nas(c(NA, NA, NA))
 #' date_min_with_nas(as.Date(NA_character_))
+#' date_min_with_nas(as.Date(character(0)))
 #' date_min_with_nas(as.Date(c("2009-04-21", "2017-12-27", NA_character_)))
 
 #' @export
@@ -39,6 +40,8 @@ date_min_with_nas <- function( x ) {
   else
     min(x, na.rm = TRUE)
 }
+
+#' @export
 date_max_with_nas <- function( x ) {
   if( all(is.na(x)) )
     as.Date(NA_character_)
