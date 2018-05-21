@@ -6,6 +6,9 @@
 #' @description Check that the object inherits from [`data.frame`](base::data.frame()).
 #' If not, throw an error.
 #'
+#' This function will be deprecated in the future.  If you're developing new code,
+#' consider the superior [checkmate]() functions, [`checkmate::assert_data_frame()`] and [`checkmate::assert_tibble()`]
+#'
 #' This helps check database-reading functions (*e.g.*, [`RODBC::sqlQuery()`]) that return a `data.frame`
 #' if successful, and a `character` vector is unsucessful.
 #'
