@@ -67,3 +67,11 @@ test_that("Replace with NAs -logical", {
   expect_equal(class(actual_2), "logical", "The returned array should be converted to a Boolean/logical.")
 })
 
+test_that("Replace with NAs -actual date", {
+  input_1  <- as.Date(c("2018-05-21", "2001-01-04", "1940-03-02", NA_character_))
+  expected <- input_1
+
+  actual_1 <- replace_with_nas(input_1, return_type="Date")
+
+  expect_equal(actual_1, expected, label="The blank values should have been replaced.")
+})

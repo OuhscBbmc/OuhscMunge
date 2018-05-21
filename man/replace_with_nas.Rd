@@ -7,7 +7,7 @@
 replace_with_nas(x, return_type = NULL)
 }
 \arguments{
-\item{x}{An array of values. Required}
+\item{x}{An array of values. It is temporarily coerced to a string. Required}
 
 \item{return_type}{Data type of returned vector.  Optional}
 }
@@ -18,7 +18,9 @@ An array of values with \code{NA}s.
 Elements of zero-length are converted to \code{NA}s.  Can force
 cohersion to an optionally-specified data type.
 
-The function is retained so existing code doesn't break.  For new code, consider using \url{dplyr::na_if()}.
+The function has two parts.
+First, it uses consider using \href{dplyr::na_if()}{dplyr::na_if(x, "")}.
+Second, it (optionally) coerces to the desired data type.
 }
 \details{
 If \code{return_type} is missing, returned data type will match input.
