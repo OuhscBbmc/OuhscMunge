@@ -24,12 +24,12 @@ test_that("open_dsn_channel -blank dsn", {
 test_that("open_dsn_channel -string min", {
   expect_error(
     open_dsn_channel_sqls(name, "0.1.0", version_max), # This isn't a `numeric_version`.
-    "Assertion on 'driver_version_minimum' failed: Must have class 'numeric_version', but has class 'character'."
+    "Assertion on 'driver_version_minimum' failed: Must inherit from class 'numeric_version', but has class 'character'."
   )
 })
 test_that("open_dsn_channel -string max", {
   expect_error(
     open_dsn_channel_sqls(name, version_min, "0.1.0"), # This isn't a `numeric_version`.
-    "Assertion on 'driver_version_maximum' failed: Must have class 'numeric_version', but has class 'character'."
+    "Assertion on 'driver_version_maximum' failed: Must inherit from class 'numeric_version', but has class 'character'."
   )
 })
