@@ -2,8 +2,8 @@ Package: OuhscMunge
 Title: Data Manipulation Operations
 Description: Data manipulation operations frequently used in OUHSC BBMC
     projects.
-Version: 0.1.8.9006
-Date: 2018-01-30
+Version: 0.1.9.9007
+Date: 2018-05-21
 Authors@R: person("Will", "Beasley", email="wibeasley@hotmail.com", role=c("aut", "cre"))
 Author: Will Beasley [aut, cre]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
@@ -33,4 +33,4 @@ Suggests:
     RODBCext,
     testthat
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000

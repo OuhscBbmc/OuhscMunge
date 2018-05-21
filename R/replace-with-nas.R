@@ -6,9 +6,11 @@
 #' @description Elements of zero-length are converted to `NA`s.  Can force
 #' cohersion to an optionally-specified data type.
 #'
-#' The function is retained so existing code doesn't break.  For new code, consider using [dplyr::na_if()](dplyr::na_if()).
+#' The function has two parts.
+#' First, it uses consider using [dplyr::na_if(x, "")](dplyr::na_if()).
+#' Second, it (optionally) coerces to the desired data type.
 #'
-#' @param x An array of values. Required
+#' @param x An array of values. It is temporarily coerced to a string. Required
 #' @param return_type Data type of returned vector.  Optional
 
 #' @return An array of values with `NA`s.
@@ -40,34 +42,33 @@
 #' replace_with_nas(c("1", "", "", "0", "0"    , "", "1")   , return_type="logical")
 
 replace_with_nas <- function( x, return_type=NULL ) {
+  x <- as.character(x)
 
   if( is.null(return_type) ) {
     #This function accepts character values with blanks (ie, "").
     #   It converts the blanks to NAs.
-    ifelse(x=="", NA, x)
+    dplyr::na_if(x, "")
 
   } else if( return_type == "Date" ) {
     #This function accepts character values with blanks (ie, "").
     #   It first converts the blanks to NAs.
     #   It then converts them to dates.
-    x <- as.character(x)
-    as.Date(dplyr::if_else(x=="", NA_character_, x))
-    # as.Date(ifelse(nchar(x)==0L, NA, x))
+    as.Date(dplyr::na_if(x, ""))
 
   } else if( return_type == "character" ) {
-    as.character(ifelse(x=="", NA, x))
+    as.character(dplyr::na_if(x, ""))
 
   } else if( return_type == "integer" ) {
-    as.integer(ifelse(x=="", NA, x))
+    as.integer(dplyr::na_if(x, ""))
 
   } else if( return_type == "numeric" ) {
-    as.numeric(ifelse(x=="", NA, x))
+    as.numeric(dplyr::na_if(x, ""))
 
   } else if( return_type == "logical" ) {
     if( all(x %in% c("", "0", "1")) ) {
-      as.logical(as.integer(ifelse(x=="", NA, x)))
+      as.logical(as.integer(dplyr::na_if(x, "")))
     } else {
-      as.logical(ifelse(x=="", NA, x))
+      as.logical(dplyr::na_if(x, ""))
     }
 
   } else {
