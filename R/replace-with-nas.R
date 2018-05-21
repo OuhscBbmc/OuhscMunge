@@ -50,7 +50,9 @@ replace_with_nas <- function( x, return_type=NULL ) {
     #This function accepts character values with blanks (ie, "").
     #   It first converts the blanks to NAs.
     #   It then converts them to dates.
-    as.Date(ifelse(x=="", NA, x))
+    x <- as.character(x)
+    as.Date(dplyr::if_else(x=="", NA_character_, x))
+    # as.Date(ifelse(nchar(x)==0L, NA, x))
 
   } else if( return_type == "character" ) {
     as.character(ifelse(x=="", NA, x))
