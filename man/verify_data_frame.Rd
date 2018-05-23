@@ -16,6 +16,9 @@ The datatype does not have to be an \code{integer}, but should be safely convert
 Check that the object inherits from \href{base::data.frame()}{data.frame}.
 If not, throw an error.
 
+This function will be deprecated in the future.  If you're developing new code,
+consider the superior \url{checkmate} functions, \code{\link[checkmate:assert_data_frame]{checkmate::assert_data_frame()}} and \code{\link[checkmate:assert_tibble]{checkmate::assert_tibble()}}
+
 This helps check database-reading functions (\emph{e.g.}, \code{\link[RODBC:sqlQuery]{RODBC::sqlQuery()}}) that return a \code{data.frame}
 if successful, and a \code{character} vector is unsucessful.
 
