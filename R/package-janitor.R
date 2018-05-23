@@ -14,7 +14,7 @@ package_janitor <- function(
     verbose                      = TRUE
   ) {
 
-  if( !file.exists(path_package_dependencies))
+  if( !file.exists(path_package_dependencies) )
     base::stop("The path `", path_package_dependencies, "` was not found.  Make sure the working directory is set to the root of the repository.")
 
   required_columns <- c("package_name", "on_cran", "install", "github_username", "description")
