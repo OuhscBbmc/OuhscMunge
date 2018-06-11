@@ -4,16 +4,18 @@
 \alias{upload_sqls_rodbc}
 \title{Upload to a SQL Server database using RODBC}
 \usage{
-upload_sqls_rodbc(d, table_name, dsn_name, clear_table = FALSE,
-  create_table = FALSE, convert_logical_to_integer = FALSE,
-  transaction = FALSE, verbose = TRUE)
+upload_sqls_rodbc(d, table_name, dsn_name, schema_name = NA_character_,
+  clear_table = FALSE, create_table = FALSE,
+  convert_logical_to_integer = FALSE, transaction = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}
 
-\item{table_name}{Name of the database destination table.}
+\item{table_name}{Name of the database destination table.  Can include the schema.}
 
 \item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}
+
+\item{schema_name}{Name of the database destination table.  If it's not \code{NA}, the \code{table_name} will be qualified with it.}
 
 \item{clear_table}{If \code{TRUE}, calls \url{RODBC::sqlClear()} before writing to the table.}
 
