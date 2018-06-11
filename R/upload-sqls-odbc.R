@@ -50,7 +50,7 @@ upload_sqls_odbc <- function(
   verbose                       = TRUE
 ) {
 
-  checkmate::assert_class(    d                             , "data.frame"          , null.ok    =F)
+  checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=F)
   checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)
@@ -71,13 +71,13 @@ upload_sqls_odbc <- function(
   requireNamespace("DBI")
   requireNamespace("odbc")
 
-  channel <- DBI::dbConnect(
-    drv   = odbc::odbc(),
-    dsn   = dsn_name
-  )
   table_id <- DBI::Id(
     schema  = schema_name,
     name    = table_name
+  )
+  channel <- DBI::dbConnect(
+    drv   = odbc::odbc(),
+    dsn   = dsn_name
   )
 
   tryCatch( {
@@ -88,8 +88,6 @@ upload_sqls_odbc <- function(
     if( verbose ) {
       DBI::dbGetInfo(channel)
     }
-
-    # message("overwrite: ", !create_table & clear_table)
 
     result <- DBI::dbWriteTable(
       conn        = channel,
@@ -105,7 +103,7 @@ upload_sqls_odbc <- function(
 
     if( verbose ) {
       duration <- round(as.numeric(difftime(Sys.time(), start_time, units="mins")), 3)
-      message("The table `", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
+      message("The table `", schema_name, ".", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
     }
   }, error = function( e ) {
 

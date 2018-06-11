@@ -21,7 +21,7 @@ Imports:
     glue,
     lubridate,
     magrittr,
-    odbc,
+    odbc (>= 1.1.6),
     purrr,
     readr,
     remotes,
