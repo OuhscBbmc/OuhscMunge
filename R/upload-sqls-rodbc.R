@@ -49,7 +49,7 @@ upload_sqls_rodbc <- function(
   verbose                       = TRUE
 ) {
 
-  checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=F)
+  checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=T)
   checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=T)
   checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)

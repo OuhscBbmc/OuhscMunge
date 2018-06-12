@@ -50,7 +50,7 @@ upload_sqls_odbc <- function(
   verbose                       = TRUE
 ) {
 
-  checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=F)
+  checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=T)
   checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)
@@ -75,10 +75,27 @@ upload_sqls_odbc <- function(
     schema  = schema_name,
     name    = table_name
   )
+
+
+  if( !grepl("^\\w+$", table_id@name[["schema"]]) )
+    stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
+
+  if( !grepl("^\\w+$", table_id@name[["name"]]) )
+    stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
+
+
   channel <- DBI::dbConnect(
     drv   = odbc::odbc(),
     dsn   = dsn_name
   )
+
+  if( create_table) {
+    overwrite <- TRUE
+    append    <- FALSE
+  } else {
+    overwrite <- FALSE
+    append    <- TRUE
+  }
 
   tryCatch( {
     if( transaction ) {
@@ -89,12 +106,25 @@ upload_sqls_odbc <- function(
       DBI::dbGetInfo(channel)
     }
 
+    # Check the *qualified* table exists.
+    sql_count     <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+    result_count      <- DBI::dbGetQuery(channel, sql_count)
+    # DBI::dbClearResult(result_count)
+
+    # Truncate the table's rows/records
+    if( clear_table ) {
+      sql_truncate  <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+      result_truncate   <- DBI::dbSendQuery(channel, sql_truncate)
+      DBI::dbClearResult(result_truncate)
+    }
+
+    # Write the data to the table
     result <- DBI::dbWriteTable(
       conn        = channel,
       name        = table_id,
       value       = d,
-      overwrite   = !create_table & clear_table,
-      append      = FALSE
+      overwrite   = overwrite,
+      append      = append
     )
 
     if( transaction ) {
@@ -114,5 +144,7 @@ upload_sqls_odbc <- function(
 
   }, finally = {
     DBI::dbDisconnect(channel)
+    # suppressWarnings(DBI::dbClearResult(result_count))    # A warning message is produced if it was already cleared above.
+    suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
   })
 }
