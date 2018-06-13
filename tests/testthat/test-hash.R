@@ -92,3 +92,17 @@ test_that("hash integers", {
   testthat::expect_equal(actual_1, expected)
   testthat::expect_equal(actual_2, expected)
 })
+
+test_that("hash blanks", {
+  input <- c("a", "", "c")
+
+  expected  <- c(
+    "fb1a678ef965ad4a66c712d2161f20319091cb4e7611e1925df671018c833f72",
+    NA_character_,
+    "2eea4ca3e3a6518aaffdcd5bada74dc92c3e0170ab17f7826aa1d1222f8a1ef5"
+  )
+
+  actual   <- hash_and_salt_sha_256(input)
+
+  testthat::expect_equal(actual, expected)
+})

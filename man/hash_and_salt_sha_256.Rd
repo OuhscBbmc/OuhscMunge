@@ -5,19 +5,21 @@
 \title{Salt and hash a value}
 \usage{
 hash_and_salt_sha_256(x, salt = "", min_characters = 1L,
-  max_characters = 2048L)
+  max_characters = 2048L, na_if = c(""))
 }
 \arguments{
 \item{x}{A vector of values to convert.  it should be a \code{character} vector, or something that can be cast to a \code{character} vector.}
 
 \item{salt}{A single-element character vector.}
 
-\item{min_characters}{The minimum count of characters that \code{x} is allowed to be.  Must be an integer.}
+\item{min_characters}{The minimum count of characters that \code{x} is allowed to be.  Must be an \code{integer} or \code{numeric} data type.}
 
-\item{max_characters}{The maximum count of characters that \code{x} is allowed to be.  Must be an integer.}
+\item{max_characters}{The maximum count of characters that \code{x} is allowed to be.  Must be an \code{integer} or \code{numeric} data type.}
+
+\item{na_if}{A vector of characters that should produce a has of \code{NA_character_}.  Default of \code{c("")}.}
 }
 \value{
-A `character vector.
+A character vector.
 }
 \description{
 Uses \code{\link[digest:digest]{digest::digest()}} to hash as (salted) value, using 'SHA-256'.
@@ -29,8 +31,11 @@ x    <- letters[1:5]
 salt <- "abc123"
 hash_and_salt_sha_256(x, salt)
 
-# If an unsalted hash is desired, leave it blank
+# If an unsalted hash is desired, leave the `salt` parameter blank
 hash_and_salt_sha_256(x)
+
+# By default, a zero-length character produces hash of NA.
+hash_and_salt_sha_256(c("a", "", "c"))
 }
 \author{
 Will Beasley
