@@ -16,12 +16,15 @@
 #' @author Will Beasley
 #'
 #' @examples
+#' x    <- letters[1:5]
+#'
 #' salt <- "abc123"
-#' salt <- ""
-#' x1   <- letters
-#' hash_and_salt_sha_256(x1, salt)
+#' hash_and_salt_sha_256(x, salt)
+#'
+#' # If an unsalted hash is desired, leave it blank
+#' hash_and_salt_sha_256(x)
 
-hash_and_salt_sha_256 <- function( x, salt, min_characters=1L, max_characters=2048L ) {
+hash_and_salt_sha_256 <- function( x, salt="", min_characters=1L, max_characters=2048L ) {
   checkmate::assert_character(salt          , any.missing=F)
   checkmate::assert_integer(  min_characters, any.missing=F, len=1, lower=0)
   checkmate::assert_integer(  max_characters, any.missing=F, len=1, lower=min_characters)
@@ -36,6 +39,8 @@ hash_and_salt_sha_256 <- function( x, salt, min_characters=1L, max_characters=20
 
   # x <- ifelse(x==0, NA_integer_, x)
   salted <- paste0(x, salt)
-  hash <- digest::digest(object=salted, algo="sha256")
+
+  hash <- purrr::map_chr(salted, digest::digest, algo="sha256")
+
   return( dplyr::if_else(is.na(x), NA_character_, hash) )
 }

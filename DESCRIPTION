@@ -17,6 +17,7 @@ Imports:
     checkmate,
     DBI,
     devtools (>= 1.8.0),
+    digest,
     dplyr,
     glue,
     lubridate,

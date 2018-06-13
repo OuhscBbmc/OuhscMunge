@@ -4,7 +4,8 @@
 \alias{hash_and_salt_sha_256}
 \title{Salt and hash a value}
 \usage{
-hash_and_salt_sha_256(x, salt, min_characters = 1L, max_characters = 2048L)
+hash_and_salt_sha_256(x, salt = "", min_characters = 1L,
+  max_characters = 2048L)
 }
 \arguments{
 \item{x}{A vector of values to convert.  it should be a \code{character} vector, or something that can be cast to a \code{character} vector.}
@@ -23,9 +24,13 @@ Uses \code{\link[digest:digest]{digest::digest()}} to hash as (salted) value, us
 If the \code{x} isn't already a \code{character} vector, it's converted to one (even if \code{x} inherits from character).
 }
 \examples{
+x    <- letters[1:5]
+
 salt <- "abc123"
-x1   <- letters
-hash_and_salt_sha_256(x1, salt)
+hash_and_salt_sha_256(x, salt)
+
+# If an unsalted hash is desired, leave it blank
+hash_and_salt_sha_256(x)
 }
 \author{
 Will Beasley
