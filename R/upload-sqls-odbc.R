@@ -1,14 +1,14 @@
-#' @name upload_sqls_rodbc
+#' @name upload_sqls_odbc
 #' @export
-#' @title Upload to a SQL Server database using RODBC
+#' @title Upload to a SQL Server database using odbc
 #'
 #' @description The function performs some extra configuration to improve robustness.
 #'
 #' @param d Dataset to be uploaded to the dataset.  The object must inherit from `data.frame`.
-#' @param table_name Name of the database destination table.  Can include the schema.
-#' @param dsn_name Name of the locally-defined DSN passed to [RODBC::odbcConnect()](RODBC::odbcConnect()).
-#' @param schema_name Name of the database destination table.  If it's not `NA`, the `table_name` will be qualified with it.
-#' @param clear_table If `TRUE`, calls [RODBC::sqlClear()](RODBC::sqlClear()) before writing to the table.
+#' @param schema_name Name of the database destination table.
+#' @param table_name Name of the database destination table.
+#' @param dsn_name Name of the locally-defined DSN passed to [DBI::dbConnect()].
+#' @param clear_table If `TRUE`, calls deletes or truncates all records before writing to the table.
 #' @param create_table If the table structure has not yet been defined in the database, it will be created if `create_table` is `TRUE`.
 #' @param convert_logical_to_integer Convert all `logical` columns to `integer`.  This helps the database store the values as bits.
 #' @param transaction Should the clear and upload steps be wrapped in a rollback transaction?
@@ -24,8 +24,9 @@
 #' \dontrun{
 #' requireNamespace("OuhscMunge")
 #'
-#' OuhscMunge::upload_sqls_rodbc(
+#' OuhscMunge::upload_sqls_odbc(
 #'   d                          = ds_client,          # Some data.frame that exists in RAM
+#'   schema_name                = "dbo",
 #'   table_name                 = "tbl_client",
 #'   dsn_name                   = "miechv_eval",
 #'   create_table               = FALSE,
@@ -37,11 +38,11 @@
 #' }
 
 
-upload_sqls_rodbc <- function(
+upload_sqls_odbc <- function(
   d,
+  schema_name,
   table_name,
   dsn_name,
-  schema_name                   = NA_character_,
   clear_table                   = FALSE,
   create_table                  = FALSE,
   convert_logical_to_integer    = FALSE,
@@ -50,7 +51,7 @@ upload_sqls_rodbc <- function(
 ) {
 
   checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=T)
-  checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=T)
+  checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
   checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)
 
@@ -67,52 +68,83 @@ upload_sqls_rodbc <- function(
     d <- dplyr::mutate_if(d, is.logical, as.integer)
   }
 
-  if( !is.na(schema_name) )
-    table_name <- paste0(schema_name, ".", table_name)
+  requireNamespace("DBI")
+  requireNamespace("odbc")
 
-  requireNamespace("RODBC")
-  channel <- RODBC::odbcConnect(dsn = dsn_name)
+  table_id <- DBI::Id(
+    schema  = schema_name,
+    name    = table_name
+  )
+
+
+  if( !grepl("^\\w+$", table_id@name[["schema"]]) )
+    stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
+
+  if( !grepl("^\\w+$", table_id@name[["name"]]) )
+    stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
+
+
+  channel <- DBI::dbConnect(
+    drv   = odbc::odbc(),
+    dsn   = dsn_name
+  )
+
+  if( create_table) {
+    overwrite <- TRUE
+    append    <- FALSE
+  } else {
+    overwrite <- FALSE
+    append    <- TRUE
+  }
 
   tryCatch( {
     if( transaction ) {
-      RODBC::odbcSetAutoCommit(channel, autoCommit = FALSE)
+      DBI::dbBegin(channel)
     }
 
     if( verbose ) {
-      # RODBC::getSqlTypeInfo("Microsoft SQL Server")
-      RODBC::odbcGetInfo(channel)
+      DBI::dbGetInfo(channel)
     }
 
-    if( !create_table & clear_table ) {
-      RODBC::sqlClear(channel, table_name)
+    # Check the *qualified* table exists.
+    sql_count     <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+    result_count      <- DBI::dbGetQuery(channel, sql_count)
+    # DBI::dbClearResult(result_count)
+
+    # Truncate the table's rows/records
+    if( clear_table ) {
+      sql_truncate  <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+      result_truncate   <- DBI::dbSendQuery(channel, sql_truncate)
+      DBI::dbClearResult(result_truncate)
     }
 
-    if( create_table ) {
-      RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=FALSE)
-    } else {
-      column_info           <- RODBC::sqlColumns(channel, table_name)
-      var_types             <- as.character(column_info$TYPE_NAME)
-      names(var_types)      <- as.character(column_info$COLUMN_NAME)  #varTypes
-
-      RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
-    }
+    # Write the data to the table
+    result <- DBI::dbWriteTable(
+      conn        = channel,
+      name        = table_id,
+      value       = d,
+      overwrite   = overwrite,
+      append      = append
+    )
 
     if( transaction ) {
-      RODBC::odbcEndTran(channel, commit = TRUE)
+      DBI::dbCommit(channel)
     }
 
     if( verbose ) {
       duration <- round(as.numeric(difftime(Sys.time(), start_time, units="mins")), 3)
-      message("The table `", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
+      message("The table `", schema_name, ".", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
     }
   }, error = function( e ) {
 
     if( transaction ) {
-      RODBC::odbcEndTran(channel, commit = FALSE)
+      DBI::dbRollback(channel)
     }
     stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, "`.\n", e)
 
   }, finally = {
-    RODBC::odbcClose(channel)
+    DBI::dbDisconnect(channel)
+    # suppressWarnings(DBI::dbClearResult(result_count))    # A warning message is produced if it was already cleared above.
+    suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
   })
 }
