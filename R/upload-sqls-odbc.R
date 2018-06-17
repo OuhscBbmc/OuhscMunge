@@ -107,8 +107,11 @@ upload_sqls_odbc <- function(
     }
 
     # Check the *qualified* table exists.
-    sql_count     <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
-    result_count      <- DBI::dbGetQuery(channel, sql_count)
+    if( !DBI::dbExistsTable(channel, table_id) )
+      stop(glue::glue("The following table does not exist, or is not accessible on this DSN: {schema}.{tbl}", schema=schema_name, tbl=table_name))
+
+    # sql_count         <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
+    # result_count      <- DBI::dbGetQuery(channel, sql_count)
     # DBI::dbClearResult(result_count)
 
     # Truncate the table's rows/records
