@@ -73,14 +73,14 @@ upload_sqls_odbc <- function(
 
   table_id <- DBI::Id(
     schema  = schema_name,
-    name    = table_name
+    table   = table_name
   )
 
 
   if( !grepl("^\\w+$", table_id@name[["schema"]]) )
     stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
-  if( !grepl("^\\w+$", table_id@name[["name"]]) )
+  if( !grepl("^\\w+$", table_id@name[["table"]]) )
     stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
 
@@ -107,13 +107,13 @@ upload_sqls_odbc <- function(
     }
 
     # Check the *qualified* table exists.
-    sql_count     <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+    sql_count     <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
     result_count      <- DBI::dbGetQuery(channel, sql_count)
     # DBI::dbClearResult(result_count)
 
     # Truncate the table's rows/records
     if( clear_table ) {
-      sql_truncate  <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+      sql_truncate  <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
       result_truncate   <- DBI::dbSendQuery(channel, sql_truncate)
       DBI::dbClearResult(result_truncate)
     }
