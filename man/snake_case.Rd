@@ -7,7 +7,7 @@
 snake_case(x)
 }
 \arguments{
-\item{x}{A vector to of names to convert.}
+\item{x}{A vector of names to convert.}
 }
 \value{
 A vector of converted names.
