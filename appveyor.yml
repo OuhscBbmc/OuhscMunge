@@ -23,6 +23,8 @@ environment:
 
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github Tazinho/snakecase
+  - travis-tool.sh install_github decisionpatterns/lettercase
 
 test_script:
   - travis-tool.sh run_tests

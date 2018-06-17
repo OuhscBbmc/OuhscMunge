@@ -4,12 +4,13 @@ sudo: required
 cache: packages
 warnings_are_errors: true
 apt_packages:
- - iodbc 
+ - iodbc
  - libiodbc2
  - libiodbc2-dev
  - r-cran-rodbc
 r_github_packages:
   - jimhester/covr
+  - Tazinho/snakecase
+  - decisionpatterns/lettercase
 after_success:
   - Rscript -e 'library(covr);coveralls()'
-  
