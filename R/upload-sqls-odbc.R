@@ -135,9 +135,14 @@ upload_sqls_odbc <- function(
     }
 
     if( verbose ) {
-      duration <- round(as.numeric(difftime(Sys.time(), start_time, units="mins")), 3)
-      message("The table `", schema_name, ".", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
+      message(
+        sprintf(
+          "The table `%s.%s` was written over dsn `%s` in %0.3f minutes.",
+          schema_name, table_name, dsn_name, difftime(Sys.time(), start_time, units="mins")
+        )
+      )
     }
+
   }, error = function( e ) {
 
     if( transaction ) {
