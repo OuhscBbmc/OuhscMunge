@@ -29,6 +29,9 @@
 #' cut_with_nas(w, breaks=breaks                                    , right=FALSE)
 
 cut_with_nas   <- function( x, .missing="Unknown", ... ) {
+  checkmate::assert_numeric(x, any.missing = T)
+  checkmate::assert_character(.missing, len=1)
+
   y <- cut(x, ...)
   y <- addNA(y)
   levels(y)[is.na(levels(y))] <- .missing
