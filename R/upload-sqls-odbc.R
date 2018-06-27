@@ -151,8 +151,12 @@ upload_sqls_odbc <- function(
     stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, "`.\n", e)
 
   }, finally = {
-    DBI::dbDisconnect(channel)
+    if( exists("channel") )
+      DBI::dbDisconnect(channel)
+
     # suppressWarnings(DBI::dbClearResult(result_count))    # A warning message is produced if it was already cleared above.
-    suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
+
+    if( exists("result_truncate") )
+      suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
   })
 }
