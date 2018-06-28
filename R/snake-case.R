@@ -7,7 +7,7 @@
 #' The important regex lines were posted by Stack Overflow user [epost](http://stackoverflow.com/users/129879/epost)
 #' in ["Elegant Python function to convert CamelCase to snake_case?"](http://stackoverflow.com/a/1176023/1082435).
 #'
-#' @param x A vector to of names to convert.
+#' @param x A vector of names to convert.
 #'
 #' @return A vector of converted names.
 #'

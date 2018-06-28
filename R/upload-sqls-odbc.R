@@ -73,14 +73,14 @@ upload_sqls_odbc <- function(
 
   table_id <- DBI::Id(
     schema  = schema_name,
-    name    = table_name
+    table   = table_name
   )
 
 
   if( !grepl("^\\w+$", table_id@name[["schema"]]) )
     stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
-  if( !grepl("^\\w+$", table_id@name[["name"]]) )
+  if( !grepl("^\\w+$", table_id@name[["table"]]) )
     stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
 
@@ -107,13 +107,16 @@ upload_sqls_odbc <- function(
     }
 
     # Check the *qualified* table exists.
-    sql_count     <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
-    result_count      <- DBI::dbGetQuery(channel, sql_count)
+    if( !DBI::dbExistsTable(channel, table_id) )
+      stop(glue::glue("The following table does not exist, or is not accessible on this DSN: {schema}.{tbl}", schema=schema_name, tbl=table_name))
+
+    # sql_count         <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
+    # result_count      <- DBI::dbGetQuery(channel, sql_count)
     # DBI::dbClearResult(result_count)
 
     # Truncate the table's rows/records
     if( clear_table ) {
-      sql_truncate  <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["name"]])
+      sql_truncate  <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
       result_truncate   <- DBI::dbSendQuery(channel, sql_truncate)
       DBI::dbClearResult(result_truncate)
     }
@@ -132,9 +135,14 @@ upload_sqls_odbc <- function(
     }
 
     if( verbose ) {
-      duration <- round(as.numeric(difftime(Sys.time(), start_time, units="mins")), 3)
-      message("The table `", schema_name, ".", table_name, "` was written over dsn `", dsn_name, "` in ", duration, " minutes.")
+      message(
+        sprintf(
+          "The table `%s.%s` was written over dsn `%s` in %0.3f minutes.",
+          schema_name, table_name, dsn_name, difftime(Sys.time(), start_time, units="mins")
+        )
+      )
     }
+
   }, error = function( e ) {
 
     if( transaction ) {
@@ -143,8 +151,12 @@ upload_sqls_odbc <- function(
     stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, "`.\n", e)
 
   }, finally = {
-    DBI::dbDisconnect(channel)
+    if( exists("channel") )
+      DBI::dbDisconnect(channel)
+
     # suppressWarnings(DBI::dbClearResult(result_count))    # A warning message is produced if it was already cleared above.
-    suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
+
+    if( exists("result_truncate") )
+      suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
   })
 }
