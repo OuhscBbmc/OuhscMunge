@@ -40,7 +40,14 @@
 #' @param verbose print messages to the console (or wherever messages are being directed).
 #'
 #' @author Will Beasley
-#'#'
+#'
+#' @examples
+#' \dontrun{
+#' # This path works if the working directory is the root of the repo:
+#' # https://github.com/OuhscBbmc/RedcapExamplesAndPatterns
+#'
+#' package_janitor_remote("./utility/package-dependency-list.csv")
+#' }
 
 
 package_janitor_remote <- function(
@@ -56,16 +63,21 @@ package_janitor_remote <- function(
   # if( !file.exists(url_package_dependencies) )
   #   base::stop("The path `", url_package_dependencies, "` was not found.  Make sure the working directory is set to the root of the repository.")
 
+  # ---- load-sources ------------------------------------------------------------
+
+  # ---- load-packages -----------------------------------------------------------
+
+  # ---- declare-globals ---------------------------------------------------------
   required_columns <- c("package_name", "on_cran", "install", "github_username", "description")
 
-  #####################################
-  ## load_data
+  # ---- load-data ---------------------------------------------------------------
   if( verbose ) message("package_janitor is loading the list of package dependencies.")
   ds_packages <- utils::read.csv(file=url_package_dependencies, stringsAsFactors=FALSE)
 
   rm(url_package_dependencies)
-  #####################################
-  ##  tweak_data
+
+
+  # ---- tweak-data --------------------------------------------------------------
   missing_columns <- base::setdiff(required_columns, colnames(ds_packages))
   if( length(missing_columns) > 0 )
     stop(paste("The data.frame of the required packages is missing the following columns:", missing_columns))
@@ -74,14 +86,15 @@ package_janitor_remote <- function(
   ds_install_from_github  <- ds_packages[ds_packages$install & !ds_packages$on_cran & !is.na(ds_packages$github_username) & nchar(ds_packages$github_username)>0, ]
 
   rm(ds_packages)
-  #####################################
-  ## update_cran_packages
+
+
+  # ---- cran-packages -----------------------------------------------------------
   if( verbose ) message("package_janitor is updating the existing packages from CRAN.")
   if( update_packages )
     utils::update.packages(ask=FALSE, checkBuilt=TRUE, repos=cran_repo)
 
-  #####################################
-  ## install_devtools
+
+  # ---- install-devtools --------------------------------------------------------
   if( verbose ) message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
 
   if( !base::requireNamespace("httr") )
@@ -90,8 +103,8 @@ package_janitor_remote <- function(
   if( !base::requireNamespace("devtools") )
     utils::install.packages("devtools", repos=cran_repo)
 
-  #####################################
-  ## install_cran_packages
+
+  # ---- install-cran-packages ---------------------------------------------------
   if( verbose ) message("package_janitor is installing the CRAN packages:")
 
   for( package_name in ds_install_from_cran$package_name ) {
@@ -102,15 +115,15 @@ package_janitor_remote <- function(
       if( verbose ) message("The `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
 
     } else {
-      available <- base::requireNamespace(package_name, quietly=TRUE) #Checks if it's available
+      available <- base::requireNamespace(package_name, quietly=TRUE) # Checks if it's available
       if( !available ) {
         if( verbose ) message("Installing `", package_name, "` from CRAN, including its dependencies.")
         utils::install.packages(package_name, dependencies=TRUE, repos=cran_repo)
-        #base::requireNamespace( package_name, character.only=TRUE)
+
       } else if( update_packages ) {
         if( verbose ) message("`", package_name, "` exists, and verifying it's dependencies are installed too.")
 
-        #Make sure all their dependencies are installed & up-to-date
+        # Make sure all their dependencies are installed & up-to-date
         need_to_install <- devtools::package_deps(package_name, dependencies=TRUE)$package
         devtools::update_packages(need_to_install, repos=cran_repo)
       }
@@ -119,8 +132,9 @@ package_janitor_remote <- function(
   }
 
   rm(ds_install_from_cran, package_name)
-  #####################################
-  ## check_xml_linux
+
+
+  # ----check-linux-xml ---------------------------------------------------------
   #http://stackoverflow.com/questions/7765429/unable-to-install-r-package-in-ubuntu-11-04
 
   if( check_xml_linux ) {
@@ -137,8 +151,8 @@ package_janitor_remote <- function(
     base::rm(xml_results, xml_missing)
   }
 
-  #####################################
-  ## check_for_libcurl
+
+  # ---- check-linux-libcurl -----------------------------------------------------
   if( check_libcurl_linux ) {
     libcurl_results <- base::system("locate libcurl4*")
     libcurl_missing <- (libcurl_results==0)
@@ -153,8 +167,8 @@ package_janitor_remote <- function(
     base::rm(libcurl_results, libcurl_missing)
   }
 
-  #####################################
-  ## check_openssl_linux
+
+  # ---- check-linux-openssl -----------------------------------------------------
   if( check_openssl_linux ) {
     openssl_results <- as.integer(base::system("locate libssl-dev | wc -l", intern=TRUE))
     openssl_missing <- (openssl_results==0)
@@ -169,15 +183,15 @@ package_janitor_remote <- function(
     base::rm(openssl_results, openssl_missing)
   }
 
-  #####################################
-  ## install_github_packages
+
+  #---- install-github-packages -------------------------------------------------
   if( verbose ) message("package_janitor is installing the GitHub packages:")
 
   for( i in base::seq_len(base::nrow(ds_install_from_github)) ) {
     package_name <- ds_install_from_github$package_name[i]
     if( verbose ) message("Installing `", package_name, "` from GitHub, (not including its dependencies).")
 
-    username <- ds_install_from_github$github_username[i]
+    username        <- ds_install_from_github$github_username[i]
     repository_name <- paste0(username, "/", package_name)
     devtools::install_github(repo=repository_name)
     base::rm(package_name, username, repository_name)
