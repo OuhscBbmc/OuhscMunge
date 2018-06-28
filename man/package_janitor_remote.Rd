@@ -56,7 +56,17 @@ package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExampl
 }
 \examples{
 \dontrun{
+# This path works if the working directory is the root of the repo:
+# https://github.com/OuhscBbmc/RedcapExamplesAndPatterns
 package_janitor_remote("./utility/package-dependency-list.csv")
+
+# Internet URLs are also accepted.
+# Caution, this one takes at least 5 minutes.
+url <- paste0(
+  "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/",
+  "master/utility/package-dependency-list.csv"
+)
+package_janitor_remote(url)
 }
 }
 \author{

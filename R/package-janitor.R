@@ -45,8 +45,15 @@
 #' \dontrun{
 #' # This path works if the working directory is the root of the repo:
 #' # https://github.com/OuhscBbmc/RedcapExamplesAndPatterns
-#'
 #' package_janitor_remote("./utility/package-dependency-list.csv")
+#'
+#' # Internet URLs are also accepted.
+#' # Caution, this one takes at least 5 minutes.
+#' url <- paste0(
+#'   "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/",
+#'   "master/utility/package-dependency-list.csv"
+#' )
+#' package_janitor_remote(url)
 #' }
 
 
@@ -109,22 +116,25 @@ package_janitor_remote <- function(
 
   for( package_name in ds_install_from_cran$package_name ) {
     if( package_name =="devtools" ) {
-      if( verbose ) message("The `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      if( verbose ) message("\nThe `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")
 
     } else if( package_name =="httr" ) {
-      if( verbose ) message("The `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      if( verbose ) message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
 
     } else {
       available <- base::requireNamespace(package_name, quietly=TRUE) # Checks if it's available
       if( !available ) {
-        if( verbose ) message("Installing `", package_name, "` from CRAN, including its dependencies.")
+        if( verbose ) message("\nInstalling `", package_name, "` from CRAN, including its dependencies.")
         utils::install.packages(package_name, dependencies=TRUE, repos=cran_repo)
 
       } else if( update_packages ) {
-        if( verbose ) message("`", package_name, "` exists, and verifying it's dependencies are installed too.")
+        if( verbose ) message("\n`", package_name, "` exists, and verifying it's dependencies are installed too.")
 
         # Make sure all their dependencies are installed & up-to-date
         need_to_install <- devtools::package_deps(package_name, dependencies=TRUE)$package
+        if( verbose )
+          message("Package `", package_name, "` has ", length(need_to_install), " dependencies: ", paste(need_to_install, collapse =", "), ".")
+
         devtools::update_packages(need_to_install, repos=cran_repo)
       }
       base::rm(available)
@@ -132,7 +142,7 @@ package_janitor_remote <- function(
   }
 
   rm(ds_install_from_cran, package_name)
-
+  if( verbose ) message("\n")
 
   # ----check-linux-xml ---------------------------------------------------------
   #http://stackoverflow.com/questions/7765429/unable-to-install-r-package-in-ubuntu-11-04
@@ -185,7 +195,7 @@ package_janitor_remote <- function(
 
 
   #---- install-github-packages -------------------------------------------------
-  if( verbose ) message("package_janitor is installing the GitHub packages:")
+  if( verbose ) message("\npackage_janitor is installing the GitHub packages:")
 
   for( i in base::seq_len(base::nrow(ds_install_from_github)) ) {
     package_name <- ds_install_from_github$package_name[i]
