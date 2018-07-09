@@ -71,13 +71,20 @@ upload_sqls_odbc <- function(
   requireNamespace("DBI")
   requireNamespace("odbc")
 
-  table_id <- DBI::Id(
-    schema  = schema_name,
-    table   = table_name
-  )
+  if( schema_name == "dbo" ) {
+    table_id <- DBI::Id(
+      table   = table_name
+    )
+  } else {
+    table_id <- DBI::Id(
+      schema  = schema_name,
+      table   = table_name
+    )
+  }
 
 
-  if( !grepl("^\\w+$", table_id@name[["schema"]]) )
+
+  if( !grepl("^\\w+$", schema_name) )
     stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
   if( !grepl("^\\w+$", table_id@name[["table"]]) )
@@ -113,14 +120,14 @@ upload_sqls_odbc <- function(
       stop(glue::glue("The following table does not exist, or is not accessible on this DSN: {schema}.{tbl}", schema=schema_name, tbl=table_name))
 
     # if( !create_table ) {
-    #   sql_count         <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
+    #   sql_count         <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=schema_name, tbl=table_id@name[["table"]])
     #   result_count      <- DBI::dbGetQuery(channel, sql_count)
     #   DBI::dbClearResult(result_count)
     # }
 
     # Truncate the table's rows/records
     if( !create_table & clear_table ) {
-      sql_truncate      <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=table_id@name[["schema"]], tbl=table_id@name[["table"]])
+      sql_truncate      <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=schema_name, tbl=table_id@name[["table"]])
       result_truncate   <- DBI::dbSendQuery(channel, sql_truncate)
       DBI::dbClearResult(result_truncate)
     }
