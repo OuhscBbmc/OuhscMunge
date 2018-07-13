@@ -114,25 +114,37 @@ match_statistics_display <- function( d_parent, d_child, join_columns ) {
   l$deadbeat_proportion         <- sprintf("%0.4f%%", l$deadbeat_proportion* 100)
   l$orphan_proportion           <- sprintf("%0.4f%%", l$orphan_proportion  * 100)
 
-  d <- tibble::tibble(
-    key   = gsub("_", " ", names(l)),
-    value = as.character(l)
+  d <- l %>%
+    tibble::tibble(
+      key   = gsub("_", " ", names(.)),
+      value = as.character(.)
+    )  %>%
+    dplyr::mutate(
+      key_width_max   = max(nchar(key)),
+      value_width_max = max(nchar(value))
+    )
+
+  s <- paste0(
+    "\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n",
+    paste(
+      sprintf("| %-*s | %*s |", d$key_width_max, d$key, d$value_width_max, d$value),
+      collapse="\n"
+    )
   )
+  return( s )
+  # cat(s)
 
-  # as.character(substitute(join_columns))
-  #
-  # paste(deparse(substitute(join_columns)), collapse=", ")
-  # browser()
-  cat("\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n", sep="")
-  d %>%
-    knitr::kable(
-      align = c("l", "r")
-    ) %>%
-    print()
 
-  # names(m)
-  # str(m)
-  # m %>%
-  #   t()
-  # browser()
+# browser()
+
+
+
+  # cat("\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n", sep="")
+  # d %>%
+  #   knitr::kable(
+  #     align = c("l", "r")
+  #   ) %>%
+  #   print()
+
+
 }
