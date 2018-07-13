@@ -19,7 +19,6 @@ Imports:
     digest,
     dplyr,
     glue,
-    knitr,
     lubridate,
     magrittr,
     odbc (>= 1.1.6),

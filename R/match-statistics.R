@@ -99,20 +99,18 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
 #' @export
 match_statistics_display <- function( d_parent, d_child, join_columns ) {
   m <- match_statistics( d_parent, d_child, join_columns )
+  l <- list()
 
+  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
+  l$parent_not_in_child         <- format(m["parent_not_in_child"]   , big.mark=",")
+  l$parent_na_any               <- format(m["parent_na_any"]         , big.mark=",")
+  l$child_in_parent             <- format(m["child_in_parent"]       , big.mark=",")
+  l$child_not_in_parent         <- format(m["child_not_in_parent"]   , big.mark=",")
+  l$child_na_any                <- format(m["child_na_any"]          , big.mark=",")
+  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
 
-  l <- as.list(m)
-
-  # l$parent_in_child             <- scales::comma(    l$parent_in_child)
-  # l$parent_not_in_child         <- scales::comma(    l$parent_not_in_child)
-  # l$parent_na_any               <- scales::comma(    l$parent_na_any)
-  # l$child_in_parent             <- scales::comma(    l$child_in_parent)
-  # l$child_not_in_parent         <- scales::comma(    l$child_not_in_parent)
-  # l$child_na_any                <- scales::comma(    l$child_na_any)
-  # l$parent_in_child             <- scales::comma(    l$parent_in_child)
-
-  l$deadbeat_proportion         <- sprintf("%0.4f%%", l$deadbeat_proportion* 100)
-  l$orphan_proportion           <- sprintf("%0.4f%%", l$orphan_proportion  * 100)
+  l$deadbeat_proportion         <- sprintf("%0.4f%%", m["deadbeat_proportion"]* 100)
+  l$orphan_proportion           <- sprintf("%0.4f%%", m["orphan_proportion"]  * 100)
 
   d <- l %>%
     tibble::tibble(
@@ -129,22 +127,8 @@ match_statistics_display <- function( d_parent, d_child, join_columns ) {
     paste(
       sprintf("| %-*s | %*s |", d$key_width_max, d$key, d$value_width_max, d$value),
       collapse="\n"
-    )
+    ),
+    "\n"
   )
   return( s )
-  # cat(s)
-
-
-# browser()
-
-
-
-  # cat("\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n", sep="")
-  # d %>%
-  #   knitr::kable(
-  #     align = c("l", "r")
-  #   ) %>%
-  #   print()
-
-
 }
