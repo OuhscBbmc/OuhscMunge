@@ -1,5 +1,5 @@
 #' @name match_statistics
-#' @export
+#' @aliases match_statistics match_statistics_display
 #' @title Create explicit factor level for missing values.
 #'
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
@@ -28,6 +28,8 @@
 #'
 #' @note  The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
 #'
+#' @importFrom magrittr %>%
+#'
 #' @author Will Beasley
 #'
 #' @examples
@@ -52,7 +54,12 @@
 #'
 #' #Match on two columns:
 #' match_statistics(ds_parent, ds_child, join_columns=c("letter", "index"))
+#'
+#'## Produce better format for humans to read
+#' match_statistics_display(ds_parent, ds_child, join_columns="parent_id")
+#' match_statistics_display(ds_parent, ds_child, join_columns=c("letter", "index"))
 
+#' @export
 match_statistics <- function( d_parent, d_child, join_columns ) {
   if( is.null(names(join_columns)) ) {
     flipped_join_columns <- join_columns
@@ -86,4 +93,46 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
   child  <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, child_na_any  = child_na_any , orphan_proportion    = orphan_proportion   )
 
   return( c(parent, child) )
+}
+
+#' @usage match_statistics_display( d_parent, d_child, join_columns )
+#' @export
+match_statistics_display <- function( d_parent, d_child, join_columns ) {
+  m <- match_statistics( d_parent, d_child, join_columns )
+
+
+  l <- as.list(m)
+
+  # l$parent_in_child             <- scales::comma(    l$parent_in_child)
+  # l$parent_not_in_child         <- scales::comma(    l$parent_not_in_child)
+  # l$parent_na_any               <- scales::comma(    l$parent_na_any)
+  # l$child_in_parent             <- scales::comma(    l$child_in_parent)
+  # l$child_not_in_parent         <- scales::comma(    l$child_not_in_parent)
+  # l$child_na_any                <- scales::comma(    l$child_na_any)
+  # l$parent_in_child             <- scales::comma(    l$parent_in_child)
+
+  l$deadbeat_proportion         <- sprintf("%0.4f%%", l$deadbeat_proportion* 100)
+  l$orphan_proportion           <- sprintf("%0.4f%%", l$orphan_proportion  * 100)
+
+  d <- tibble::tibble(
+    key   = gsub("_", " ", names(l)),
+    value = as.character(l)
+  )
+
+  # as.character(substitute(join_columns))
+  #
+  # paste(deparse(substitute(join_columns)), collapse=", ")
+  # browser()
+  cat("\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n", sep="")
+  d %>%
+    knitr::kable(
+      align = c("l", "r")
+    ) %>%
+    print()
+
+  # names(m)
+  # str(m)
+  # m %>%
+  #   t()
+  # browser()
 }
