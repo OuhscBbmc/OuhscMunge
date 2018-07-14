@@ -1,5 +1,6 @@
 #' @name match_statistics
 #' @aliases match_statistics match_statistics_display
+#' @export match_statistics match_statistics_display
 #' @title Create explicit factor level for missing values.
 #'
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
@@ -29,6 +30,7 @@
 #' @note  The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
 #'
 #' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #'
 #' @author Will Beasley
 #'
@@ -59,7 +61,6 @@
 #' match_statistics_display(ds_parent, ds_child, join_columns="parent_id")
 #' match_statistics_display(ds_parent, ds_child, join_columns=c("letter", "index"))
 
-#' @export
 match_statistics <- function( d_parent, d_child, join_columns ) {
   checkmate::assert_data_frame(d_parent, null.ok = FALSE)
   checkmate::assert_data_frame(d_child , null.ok = FALSE)
@@ -99,8 +100,6 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
   return( c(parent, child) )
 }
 
-#' @usage match_statistics_display( d_parent, d_child, join_columns )
-#' @export
 match_statistics_display <- function( d_parent, d_child, join_columns ) {
   # No need to check parameters, because `match_statistics()` does it.
 
@@ -118,14 +117,13 @@ match_statistics_display <- function( d_parent, d_child, join_columns ) {
   l$deadbeat_proportion         <- sprintf("%0.4f%%", m["deadbeat_proportion"]* 100)
   l$orphan_proportion           <- sprintf("%0.4f%%", m["orphan_proportion"]  * 100)
 
-  d <- l %>%
-    tibble::tibble(
-      key   = gsub("_", " ", names(.)),
-      value = as.character(.)
+  d <- tibble::tibble(
+      key   = gsub("_", " ", names(l)),
+      value = as.character(l)
     )  %>%
     dplyr::mutate(
-      key_width_max   = max(nchar(key)),
-      value_width_max = max(nchar(value))
+      key_width_max   = max(nchar(.data$key)),
+      value_width_max = max(nchar(.data$value))
     )
 
   s <- paste0(
