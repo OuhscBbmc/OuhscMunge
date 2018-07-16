@@ -2,6 +2,7 @@
 % Please edit documentation in R/match-statistics.R
 \name{match_statistics}
 \alias{match_statistics}
+\alias{match_statistics_display}
 \title{Create explicit factor level for missing values.}
 \usage{
 match_statistics(d_parent, d_child, join_columns)
@@ -62,6 +63,10 @@ match_statistics(ds_parent, ds_child, join_columns="parent_id")
 
 #Match on two columns:
 match_statistics(ds_parent, ds_child, join_columns=c("letter", "index"))
+
+## Produce better format for humans to read
+match_statistics_display(ds_parent, ds_child, join_columns="parent_id")
+match_statistics_display(ds_parent, ds_child, join_columns=c("letter", "index"))
 }
 \author{
 Will Beasley

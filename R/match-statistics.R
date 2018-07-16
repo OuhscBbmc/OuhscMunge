@@ -1,5 +1,6 @@
 #' @name match_statistics
-#' @export
+#' @aliases match_statistics match_statistics_display
+#' @export match_statistics match_statistics_display
 #' @title Create explicit factor level for missing values.
 #'
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
@@ -28,6 +29,9 @@
 #'
 #' @note  The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
 #'
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
+#'
 #' @author Will Beasley
 #'
 #' @examples
@@ -52,8 +56,16 @@
 #'
 #' #Match on two columns:
 #' match_statistics(ds_parent, ds_child, join_columns=c("letter", "index"))
+#'
+#'## Produce better format for humans to read
+#' match_statistics_display(ds_parent, ds_child, join_columns="parent_id")
+#' match_statistics_display(ds_parent, ds_child, join_columns=c("letter", "index"))
 
 match_statistics <- function( d_parent, d_child, join_columns ) {
+  checkmate::assert_data_frame(d_parent, null.ok = FALSE)
+  checkmate::assert_data_frame(d_child , null.ok = FALSE)
+  checkmate::assert_character(join_columns, min.len=1, any.missing=F)
+
   if( is.null(names(join_columns)) ) {
     flipped_join_columns <- join_columns
   } else {
@@ -86,4 +98,41 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
   child  <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, child_na_any  = child_na_any , orphan_proportion    = orphan_proportion   )
 
   return( c(parent, child) )
+}
+
+match_statistics_display <- function( d_parent, d_child, join_columns ) {
+  # No need to check parameters, because `match_statistics()` does it.
+
+  m <- match_statistics( d_parent, d_child, join_columns )
+  l <- list()
+
+  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
+  l$parent_not_in_child         <- format(m["parent_not_in_child"]   , big.mark=",")
+  l$parent_na_any               <- format(m["parent_na_any"]         , big.mark=",")
+  l$child_in_parent             <- format(m["child_in_parent"]       , big.mark=",")
+  l$child_not_in_parent         <- format(m["child_not_in_parent"]   , big.mark=",")
+  l$child_na_any                <- format(m["child_na_any"]          , big.mark=",")
+  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
+
+  l$deadbeat_proportion         <- sprintf("%0.4f%%", m["deadbeat_proportion"]* 100)
+  l$orphan_proportion           <- sprintf("%0.4f%%", m["orphan_proportion"]  * 100)
+
+  d <- tibble::tibble(
+      key   = gsub("_", " ", names(l)),
+      value = as.character(l)
+    )  %>%
+    dplyr::mutate(
+      key_width_max   = max(nchar(.data$key)),
+      value_width_max = max(nchar(.data$value))
+    )
+
+  s <- paste0(
+    "\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n",
+    paste(
+      sprintf("| %-*s | %*s |", d$key_width_max, d$key, d$value_width_max, d$value),
+      collapse="\n"
+    ),
+    "\n"
+  )
+  return( s )
 }
