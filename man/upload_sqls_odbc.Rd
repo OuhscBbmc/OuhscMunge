@@ -4,9 +4,10 @@
 \alias{upload_sqls_odbc}
 \title{Upload to a SQL Server database using odbc}
 \usage{
-upload_sqls_odbc(d, schema_name, table_name, dsn_name, clear_table = FALSE,
-  create_table = FALSE, convert_logical_to_integer = FALSE,
-  transaction = FALSE, verbose = TRUE)
+upload_sqls_odbc(d, schema_name, table_name, dsn_name,
+  clear_table = FALSE, create_table = FALSE,
+  convert_logical_to_integer = FALSE, transaction = FALSE,
+  verbose = TRUE)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}

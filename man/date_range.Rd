@@ -5,11 +5,23 @@
 \alias{date_min_with_nas}
 \alias{date_max_with_nas}
 \alias{date_range_with_nas}
+\alias{min_with_nas_numeric}
+\alias{max_with_nas_numeric}
+\alias{range_with_nas_numeric}
+\alias{min_with_nas_integer}
+\alias{max_with_nas_integer}
+\alias{range_with_nas_integer}
 \title{Find date ranges in the  prescence of missing subsets}
 \usage{
 date_min_with_nas(x)
 date_max_with_nas(x)
 date_range_with_nas(x)
+min_with_nas_numeric(x)
+max_with_nas_numeric(x)
+range_with_nas_numeric(x)
+min_with_nas_integer(x)
+max_with_nas_integer(x)
+range_with_nas_integer(x)
 }
 \arguments{
 \item{x}{The input date vector.  Required}

@@ -6,7 +6,8 @@
 \usage{
 upload_sqls_rodbc(d, table_name, dsn_name, schema_name = NA_character_,
   clear_table = FALSE, create_table = FALSE,
-  convert_logical_to_integer = FALSE, transaction = FALSE, verbose = TRUE)
+  convert_logical_to_integer = FALSE, transaction = FALSE,
+  verbose = TRUE)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}
