@@ -26,6 +26,11 @@
 #' Be careful that if you set a November date the 31st day, the result will be December 1st.
 #' Consequently, we recommend not setting the day to a value after the 28.
 #'
+#' The [sql equivalent](https://docs.microsoft.com/en-us/sql/t-sql/functions/datepart-transact-sql) to `clump_month_date()`
+#' is `CAST(convert(char(7), GETDATE(), 126) + '-15' AS date)`.
+#' The [sql equivalent](https://blog.sqlauthority.com/2007/08/20/sql-server-find-monday-of-the-current-week/) to `clump_week_date()`
+#' is `SELECT DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0)`
+#'
 #' @author Will Beasley
 #'
 #' @seealso These functions are gloves around [lubridate::day()] and [lubridate::wday()].
