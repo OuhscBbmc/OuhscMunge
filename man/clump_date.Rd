@@ -32,6 +32,11 @@ A \code{stop} error will be thrown if \code{date_detailed} is not a \code{Date}.
 \code{day_of_week} must be bounded by \code{[1, 7]}.
 Be careful that if you set a November date the 31st day, the result will be December 1st.
 Consequently, we recommend not setting the day to a value after the 28.
+
+The \href{https://docs.microsoft.com/en-us/sql/t-sql/functions/datepart-transact-sql}{sql equivalent} to \code{clump_month_date()}
+is \code{CAST(convert(char(7), GETDATE(), 126) + '-15' AS date)}.
+The \href{https://blog.sqlauthority.com/2007/08/20/sql-server-find-monday-of-the-current-week/}{sql equivalent} to \code{clump_week_date()}
+is \code{SELECT DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0)}
 }
 \examples{
 library(OuhscMunge)
