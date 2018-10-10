@@ -2,6 +2,7 @@
 % Please edit documentation in R/open-dsn-channel.R
 \name{open_dsn_channel_sqls}
 \alias{open_dsn_channel_sqls}
+\alias{open_dsn_channel_sqls_odbc}
 \title{Open an ODBC channel to a SQL Server database}
 \usage{
 open_dsn_channel_sqls(dsn_name,
