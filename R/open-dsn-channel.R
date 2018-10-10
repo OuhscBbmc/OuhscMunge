@@ -110,8 +110,8 @@ open_dsn_channel_sqls_odbc <- function(
 
   # Uses Trusted/integrated authentication
   tryCatch({
-    channel <- DBI::dbConnect(odbc::odbc(), dsn = "MiechvEvaluation")
-    # channel <- DBI::dbConnect(odbc::odbc(), dsn = dsn_name)
+    # channel <- DBI::dbConnect(odbc::odbc(), dsn = "MiechvEvaluation")
+    channel <- DBI::dbConnect(odbc::odbc(), dsn = dsn_name)
   } , error = function(e) {
     m <- "The ODBC channel should open successfully.  Please see the installation instructions at %s."
     stop(sprintf(m, dsn_name, create_link))
