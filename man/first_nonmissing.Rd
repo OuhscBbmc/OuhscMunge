@@ -4,16 +4,27 @@
 \alias{first_nonmissing}
 \title{First nonmissing element in a vector}
 \usage{
-first_nonmissing(x)
+first_nonmissing(x, value_if_all_na = NULL, na_codes = NULL)
 }
 \arguments{
-\item{x}{A vector to of names to convert.}
+\item{x}{A vector of values to collapse.}
+
+\item{value_if_all_na}{A scalar value to return if all elements are missing
+(\emph{i.e.}, they are all either \code{NA}, or one of the \code{na_codes}).}
+
+\item{na_codes}{A vector of codes that represent missing values.}
 }
 \value{
-A vector of converted names.
+A scalar of converted names.
 }
 \description{
 Take the first value that isn't missing.  Adapted from http://stackoverflow.com/a/40515261/1082435.
+}
+\details{
+\code{value_if_all_na} and \code{na_codes}must have the same data type as \code{x}.
+
+If \code{value_if_all_na} is null, then an \code{NA} will be returned.
+If \code{na_codes} is null, then all non-NA values are considered.
 }
 \examples{
 first_nonmissing(c(NA, "b", "c"))
