@@ -28,7 +28,11 @@
 #' cut_with_nas(w, breaks=breaks               , include.lowest=TRUE, right=FALSE)
 #' cut_with_nas(w, breaks=breaks                                    , right=FALSE)
 
-cut_with_nas   <- function( x, .missing="Unknown", ... ) {
+cut_with_nas   <- function(
+  x,
+  .missing="Unknown",
+  ...
+) {
   checkmate::assert_numeric(x, any.missing = T)
   checkmate::assert_character(.missing, len=1)
 

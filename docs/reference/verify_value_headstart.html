@@ -129,8 +129,10 @@ check the properties of a dataset, such as the names and types of each column.</
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>magrittr</span>)
-<span class='fu'>verify_value_headstart</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/OrchardSprays'>OrchardSprays</a></span>)</div><div class='output co'>#&gt; checkmate::assert_numeric( ds$decrease  , any.missing=F , lower=2, upper=130 )
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>magrittr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘magrittr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:testthat’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    equals, is_less_than, not</span></div><div class='input'><span class='fu'>verify_value_headstart</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/OrchardSprays'>OrchardSprays</a></span>)</div><div class='output co'>#&gt; checkmate::assert_numeric( ds$decrease  , any.missing=F , lower=2, upper=130 )
 #&gt; checkmate::assert_numeric( ds$rowpos    , any.missing=F , lower=1, upper=8   )
 #&gt; checkmate::assert_numeric( ds$colpos    , any.missing=F , lower=1, upper=8   )
 #&gt; checkmate::assert_factor(  ds$treatment , any.missing=F                      )</div><div class='input'><span class='fu'>verify_value_headstart</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span>)</div><div class='output co'>#&gt; checkmate::assert_numeric( ds$Sepal.Length , any.missing=F , lower=4, upper=8 )
