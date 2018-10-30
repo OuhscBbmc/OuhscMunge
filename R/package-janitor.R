@@ -131,11 +131,11 @@ package_janitor_remote <- function(
         if( verbose ) message("\n`", package_name, "` exists, and verifying it's dependencies are installed too.")
 
         # Make sure all their dependencies are installed & up-to-date
-        need_to_install <- devtools::package_deps(package_name, dependencies=TRUE)$package
+        need_to_install <- remotes::package_deps(package_name, dependencies=TRUE)$package
         if( verbose )
           message("Package `", package_name, "` has ", length(need_to_install), " dependencies: ", paste(need_to_install, collapse =", "), ".")
 
-        devtools::update_packages(need_to_install, repos=cran_repo)
+        remotes::update_packages(need_to_install, repos=cran_repo)
       }
       base::rm(available)
     }

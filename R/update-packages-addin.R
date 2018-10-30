@@ -2,7 +2,7 @@
 #'
 #' When called in the repo of an R package, its package dependencies are inspected
 #' and the obsolete ones are updated.  This function is a thin wrapper around
-#' \code{devtools::update_packages(devtools::dev_package_deps()$package, dependencies=T)}.  Unlike the 'Update' button in RStudio's 'Packages' panel,
+#' \code{remotes::update_packages(remotes::dev_package_deps()$package, dependencies=T)}.  Unlike the 'Update' button in RStudio's 'Packages' panel,
 #' this function will (a) update from CRAN and remote sources like GitHub and
 #' (b) not attempt to install local packages that are unrelated to the current package.
 #'
@@ -12,7 +12,6 @@
 #'
 #' @export
 update_packages_addin <- function() {
-  # devtools::update_packages(devtools::dev_package_deps(), dependencies = TRUE)
-  dependency_list <- devtools::dev_package_deps()
-  devtools::update_packages(dependency_list$package, dependencies=TRUE)
+  dependency_list <- remotes::dev_package_deps()
+  remotes::update_packages(dependency_list$package, dependencies=TRUE)
 }
