@@ -37,13 +37,15 @@ column_rename_headstart <- function( d, try_snake_case=TRUE ) {
     left_names <- colnames(d)
   }
 
-  left_side <- paste0(", \"", left_names, "\"")
+  left_side <- paste0("\"", left_names, "\"")
   padded_format <- paste0("%-", max_column_name + extra_character_length + extra_padding, "s")
   left_side <- sprintf(padded_format, left_side)
 
-  right_side <- paste0("\"`", colnames(d), "`\"\n")
+  right_side <- paste0("\"", colnames(d), "\",\n")
 
-  cat(paste0(left_side, " = ", right_side)) #Gives a headstart to dplyr::rename_() & plyr::rename()
+  cat("dplyr::select(!!c(    # `dplyr::select()` drops columns not mentioned.\n")
+  cat(paste0("  ", left_side, " = ", right_side), sep="") # Gives a headstart to dplyr::rename_() & plyr::rename()
+  cat("))\n")
 }
 # column_rename_headstart(ds)
 
