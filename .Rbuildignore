@@ -11,6 +11,7 @@
 ^cran-comments\.md$
 ^CONDUCT.md$
 ^README.html$
+^LICENSE\.md$
 
 ^documentation-peek.pdf
 ^documentation-for-developers/

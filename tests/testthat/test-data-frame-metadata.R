@@ -6,10 +6,12 @@ context("metadata")
 
 test_that("column rename -OrchardSprays", {
   expected <-
-', "decrease"             = "`decrease`"
- , "rowpos"               = "`rowpos`"
- , "colpos"               = "`colpos`"
- , "treatment"            = "`treatment`"'
+'dplyr::select\\(!!c\\(    # `dplyr::select\\(\\)` drops columns not mentioned\\.
+  "decrease"               = "decrease",
+  "rowpos"                 = "rowpos",
+  "colpos"                 = "colpos",
+  "treatment"              = "treatment",
+\\)\\)'
 
   testthat::expect_output(
     column_rename_headstart(datasets::OrchardSprays)
@@ -19,11 +21,13 @@ test_that("column rename -OrchardSprays", {
 
 test_that("column rename -Iris", {
   expected <-
-', "sepal_length"            = "`Sepal.Length`"
- , "sepal_width"             = "`Sepal.Width`"
- , "petal_length"            = "`Petal.Length`"
- , "petal_width"             = "`Petal.Width`"
- , "species"                 = "`Species`"'
+'dplyr::select\\(!!c\\(    # `dplyr::select\\(\\)` drops columns not mentioned\\.
+  "sepal_length"              = "Sepal.Length",
+  "sepal_width"               = "Sepal.Width",
+  "petal_length"              = "Petal.Length",
+  "petal_width"               = "Petal.Width",
+  "species"                   = "Species",
+\\)\\)'
 
   testthat::expect_output(
     column_rename_headstart(datasets::iris)
@@ -34,11 +38,13 @@ test_that("column rename -Iris", {
 
 test_that("column rename w/o snake-Iris", {
   expected <-
-', "Sepal.Length"            = "`Sepal.Length`"
- , "Sepal.Width"             = "`Sepal.Width`"
- , "Petal.Length"            = "`Petal.Length`"
- , "Petal.Width"             = "`Petal.Width`"
- , "Species"                 = "`Species`"'
+'dplyr::select\\(!!c\\(    # `dplyr::select\\(\\)` drops columns not mentioned\\.
+  "Sepal.Length"              = "Sepal.Length",
+  "Sepal.Width"               = "Sepal.Width",
+  "Petal.Length"              = "Petal.Length",
+  "Petal.Width"               = "Petal.Width",
+  "Species"                   = "Species",
+\\)\\)'
 
   testthat::expect_output(
     column_rename_headstart(datasets::iris, try_snake_case=FALSE)
