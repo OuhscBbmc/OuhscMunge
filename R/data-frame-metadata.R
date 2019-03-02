@@ -1,6 +1,5 @@
 #' @name headstart_utilities
 #' @aliases column_rename_headstart column_class_headstart column_value_headstart
-#' @export column_rename_headstart column_class_headstart column_value_headstart
 #'
 #' @title Utilities for outputting characteristics of a dataset used it code.
 #'
@@ -26,6 +25,7 @@
 #' column_class_headstart(datasets::OrchardSprays)
 #' column_value_headstart(datasets::OrchardSprays$treatment)
 
+#' @export
 column_rename_headstart <- function( d, try_snake_case=TRUE ) {
   max_column_name <- max(nchar(colnames(d)))
   extra_character_length <- 5L # A comma, two quotes, and two backslashes.
@@ -49,6 +49,7 @@ column_rename_headstart <- function( d, try_snake_case=TRUE ) {
 }
 # column_rename_headstart(ds)
 
+#' @export
 column_class_headstart <- function( d ) {
   max_column_name <- max(nchar(colnames(d)))
   extra_character_length <- 5L #a comma, two quotes, and two backslashes.
@@ -63,6 +64,7 @@ column_class_headstart <- function( d ) {
 }
 # column_class_headstart(ds)
 
+#' @export
 column_value_headstart <- function( x ) {
   if( is.factor(x) )
     x <- as.character(x)
