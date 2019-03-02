@@ -1,19 +1,44 @@
+# Directories used in many R-centric repos.
+^\.github$
 ^docs$
-^_pkgdown\.yml$
+^revdep$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+
+# Files used in many R-centric repos.
+^_pkgdown\.yml$
 ^\.gitignore$
 ^\.travis\.yml$
 ^appveyor\.yml$
-^wercker\.yml$
-^shim_package\.sh$
-^revdep$
-^cran-comments\.md$
 ^CONDUCT.md$
+^CONDUCT_OF_CONDUCT.md$
+^config.yml$
+^cran-comments\.md$
 ^README.html$
 ^LICENSE\.md$
+^README.html$
+^shim_package\.sh$
+^wercker\.yml$
 
-^documentation-peek.pdf
-^documentation-for-developers/
-^playgrounds/
-^utility/
+
+# Directories occasionally used in R-centric repos written by the BBMC.
+^analysis$
+^data-private$
+^data-public$
+^data-unshared$
+^demonstration$
+^documentation$
+^documentation-for-developers$
+^figure$
+^libs$
+^manipulation$
+^sandbox$
+^scripts$
+^stitched-output$
+^playgrounds$
+^utility$
+
+
+# Files occasionally used in R-centric repos written by the BBMC.
+^documentation-peek.pdf$
