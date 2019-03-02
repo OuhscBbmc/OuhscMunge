@@ -1,3 +1,8 @@
+# List files that should be included in the repo,
+#   but ignored by R when building the packages.
+#   Specify with a PCRE regular expression.
+#   See http://r-pkgs.had.co.nz/package.html#package
+
 # Directories used in many R-centric repos.
 ^\.github$
 ^docs$
