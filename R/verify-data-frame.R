@@ -17,7 +17,7 @@
 #' but with with a more specific error message.
 #'
 #' @param d The object to verify.  Required.
-#' @param minimum_row_count The `data.frame` should have at least this may rows.  Defaults to 10.
+#' @param minimum_row_count The `data.frame` should have at least this many rows.  Defaults to 10.
 #' The datatype does not have to be an `integer`, but should be safely convertible to an integer.
 #'
 #' @author Will Beasley
@@ -41,7 +41,8 @@ verify_data_frame <- function( d, minimum_row_count=10L ) {
   # Check that the parameter is single, nonmissing positive integer.
   checkmate::assert_integerish(minimum_row_count, len=1L, lower=0, any.missing=F)
 
-  # Verify at least 10 rows were returned (or whatever the argument value was).
-  if( nrow(d) < minimum_row_count )
-    stop("The dataset passed to `verify_data_frame()` must have at least ", minimum_row_count, " rows.")
+  checkmate::assert_data_frame(
+    d,
+    min.rows = minimum_row_count
+  )
 }
