@@ -60,7 +60,7 @@ column_class_headstart <- function( d ) {
 
   right_side <- paste0("\"", sapply(d, class), "\"\n")
 
-  cat(paste0(left_side, " = ", right_side))
+  cat(paste0(left_side, " = ", right_side), sep="")
 }
 # column_class_headstart(ds)
 
@@ -77,6 +77,6 @@ column_value_headstart <- function( x ) {
   padded_format <- paste0("%-", max_value_length + extra_character_length, "s")
   left_side <- sprintf(padded_format, left_side)
 
-  cat(paste0(left_side, " = \"", values, "\"\n"))
+  cat(paste0(left_side, " = \"", values, "\"\n"), sep="")
 }
 # column_value_headstart(ds$Activity)
