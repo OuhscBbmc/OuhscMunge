@@ -9,7 +9,7 @@ verify_data_frame(d, minimum_row_count = 10L)
 \arguments{
 \item{d}{The object to verify.  Required.}
 
-\item{minimum_row_count}{The \code{data.frame} should have at least this may rows.  Defaults to 10.
+\item{minimum_row_count}{The \code{data.frame} should have at least this many rows.  Defaults to 10.
 The datatype does not have to be an \code{integer}, but should be safely convertible to an integer.}
 }
 \description{

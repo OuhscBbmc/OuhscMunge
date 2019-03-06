@@ -1,19 +1,53 @@
+# List files that should be included in the repo,
+#   but ignored by R when building the packages.
+#   Specify with a PCRE regular expression.
+#   See http://r-pkgs.had.co.nz/package.html#package
+
+# Directories used in many R-centric repos.
+^\.github$
 ^docs$
-^_pkgdown\.yml$
+^revdep$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+
+# Files used in many R-centric repos.
+^_pkgdown\.yml$
 ^\.gitignore$
 ^\.travis\.yml$
 ^appveyor\.yml$
-^wercker\.yml$
-^shim_package\.sh$
-^revdep$
-^cran-comments\.md$
 ^CONDUCT.md$
+^CODE_OF_CONDUCT.md$
+^CODE-OF-CONDUCT.md$
+^code_of_conduct.md$
+^code-of-conduct.md$
+^config.yml$
+^cran-comments\.md$
 ^README.html$
+^license\.md$
 ^LICENSE\.md$
+^README.html$
+^shim_package\.sh$
+^wercker\.yml$
 
-^documentation-peek.pdf
-^documentation-for-developers/
-^playgrounds/
-^utility/
+
+# Directories occasionally used in R-centric repos written by the BBMC.
+^analysis$
+^data-private$
+^data-public$
+^data-unshared$
+^demonstration$
+^documentation$
+^documentation-for-developers$
+^figure$
+^libs$
+^manipulation$
+^sandbox$
+^scripts$
+^stitched-output$
+^playgrounds$
+^utility$
+
+
+# Files occasionally used in R-centric repos written by the BBMC.
+^documentation-peek.pdf$
