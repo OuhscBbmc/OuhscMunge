@@ -39,7 +39,7 @@ execute_sql_file <- function( path_sql, dsn, execute=TRUE, minimum_row_count=0L 
       returned_value <- DBI::dbGetQuery(channel, sql) %>%
         tibble::as_tibble()
 
-      OuhscMunge::verify_data_frame(returned_value, minimum_row_count=minimum_row_count)
+      checkmate::assert_tibble(returned_value, min.rows=minimum_row_count)
     }
   }, finally={
     odbc::dbDisconnect(channel)
