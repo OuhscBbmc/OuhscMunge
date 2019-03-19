@@ -104,8 +104,12 @@ upload_sqls_rodbc <- function(
     if( verbose ) {
       message(
         sprintf(
-          "The table `%s.%s` was written over dsn `%s` in %0.3f minutes.",
-          schema_name, table_name, dsn_name, difftime(Sys.time(), start_time, units="mins")
+          "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes.",
+          schema_name,
+          table_name,
+          format(nrow(d), big.mark=",", scientific = F),
+          dsn_name,
+          difftime(Sys.time(), start_time, units="mins")
         )
       )
     }
