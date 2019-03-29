@@ -21,7 +21,6 @@ Imports:
     glue,
     lubridate,
     magrittr,
-    odbc (>= 1.1.6),
     purrr,
     readr,
     remotes,
@@ -29,6 +28,7 @@ Imports:
     testit,
     tibble,
 Suggests:
+    odbc (>= 1.1.6),
     RODBC,
     RODBCext,
     testthat
