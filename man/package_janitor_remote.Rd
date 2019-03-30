@@ -6,8 +6,8 @@
 \usage{
 package_janitor_remote(url_package_dependencies,
   cran_repo = "https://cran.rstudio.com", update_packages = TRUE,
-  check_xml_linux = (R.Version()$os == "linux-gnu"),
-  check_libcurl_linux = (R.Version()$os == "linux-gnu"),
+  dependencies = TRUE, check_xml_linux = (R.Version()$os ==
+  "linux-gnu"), check_libcurl_linux = (R.Version()$os == "linux-gnu"),
   check_openssl_linux = (R.Version()$os == "linux-gnu"),
   verbose = TRUE)
 }
@@ -17,6 +17,8 @@ package_janitor_remote(url_package_dependencies,
 \item{cran_repo}{path to a CRAN mirror.}
 
 \item{update_packages}{should package be updated first.}
+
+\item{dependencies}{Passed to the \code{dependencies} parameter of \code{\link[utils:install.packages]{utils::install.packages()}}).  Set to \code{NA} to avoid 'Suggests'.}
 
 \item{check_xml_linux}{display a message about the xml Linux package.}
 
