@@ -82,12 +82,15 @@ upload_sqls_odbc <- function(
     )
   }
 
+  # Accepts a vanilla name, or a name enclosed in square brackets.
+  # pattern <- "^(?:\\[\\w+\\]|\\w+)$"
+  pattern <- "^\\w+$"
 
-
-  if( !grepl("^\\w+$", schema_name) )
+  # The real way would be to use a conditional, but it's not supported: ^(\[)?\w+(?(1)\])$
+  if( !grepl(pattern, schema_name) )
     stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
-  if( !grepl("^\\w+$", table_id@name[["table"]]) )
+  if( !grepl(pattern, table_id@name[["table"]]) )
     stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
 
