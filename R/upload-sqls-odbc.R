@@ -82,12 +82,15 @@ upload_sqls_odbc <- function(
     )
   }
 
+  # Accepts a vanilla name, or a name enclosed in square brackets.
+  # pattern <- "^(?:\\[\\w+\\]|\\w+)$"
+  pattern <- "^\\w+$"
 
-
-  if( !grepl("^\\w+$", schema_name) )
+  # The real way would be to use a conditional, but it's not supported: ^(\[)?\w+(?(1)\])$
+  if( !grepl(pattern, schema_name) )
     stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
-  if( !grepl("^\\w+$", table_id@name[["table"]]) )
+  if( !grepl(pattern, table_id@name[["table"]]) )
     stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
 
@@ -148,8 +151,12 @@ upload_sqls_odbc <- function(
     if( verbose ) {
       message(
         sprintf(
-          "The table `%s.%s` was written over dsn `%s` in %0.3f minutes.",
-          schema_name, table_name, dsn_name, difftime(Sys.time(), start_time, units="mins")
+          "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes.",
+          schema_name,
+          table_name,
+          format(nrow(d), big.mark=",", scientific = F),
+          dsn_name,
+          difftime(Sys.time(), start_time, units="mins")
         )
       )
     }

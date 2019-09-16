@@ -157,7 +157,7 @@ The encoding is changed to ASCII.  Individual elements are allowed to be <code>N
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>OuhscMunge</span>)
 <span class='fu'>deterge_to_double</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>1</span>:<span class='fl'>10</span>), <span class='fl'>4</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt;  [1] NA NA NA NA  4  5  6  7  8 NA NA</div><div class='input'><span class='fu'>deterge_to_integer</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>1</span>:<span class='fl'>10</span>), <span class='fl'>4L</span>, <span class='fl'>8L</span>)</div><div class='output co'>#&gt;  [1] NA NA NA NA  4  5  6  7  8 NA NA</div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Ekstr\xf8m"</span>, <span class='st'>"J\xf6reskog"</span>, <span class='st'>"bi\xdfchen Z\xfcrcher"</span>)
-<span class='fu'>deterge_to_ascii</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "Ekstrom"          "Joreskog"         "bisschen Zurcher"</div></pre>
+<span class='fu'>deterge_to_ascii</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] "Ekstrom"         "Joreskog"        "bi?chen Zurcher"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
