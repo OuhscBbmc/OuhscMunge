@@ -12,7 +12,7 @@ test_that("column rename -OrchardSprays", {
 \\)\\)'
 
   testthat::expect_output(
-    column_rename_headstart(datasets::OrchardSprays)
+    column_rename_headstart(datasets::OrchardSprays, use_nse = FALSE)
     , expected
   )
 })
@@ -28,7 +28,7 @@ test_that("column rename -Iris", {
 \\)\\)'
 
   testthat::expect_output(
-    column_rename_headstart(datasets::iris)
+    column_rename_headstart(datasets::iris, use_nse = FALSE)
     , expected
   )
   # column_rename_headstart(datasets::iris, use_nse = F); cat(expected)
@@ -46,7 +46,7 @@ test_that("column rename w/o snake-Iris", {
 \\)\\)'
 
   testthat::expect_output(
-    column_rename_headstart(datasets::iris, try_snake_case=FALSE)
+    column_rename_headstart(datasets::iris, try_snake_case=FALSE, use_nse = FALSE)
     , expected
   )
 })

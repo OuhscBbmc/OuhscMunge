@@ -7,7 +7,7 @@
 #' that can be pasted into code, and help the developer avoid some typing.
 #'
 #' @usage
-#' column_rename_headstart( d, try_snake_case=TRUE, use_nse=FALSE )
+#' column_rename_headstart( d, try_snake_case=TRUE, use_nse=TRUE )
 #' column_class_headstart( d )
 #' column_value_headstart( x )
 #'
@@ -27,7 +27,7 @@
 #' column_value_headstart(datasets::OrchardSprays$treatment)
 
 #' @export
-column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=FALSE ) {
+column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=TRUE ) {
   max_column_name <- max(nchar(colnames(d)))
   extra_character_length <- 5L # A comma, two quotes, and two backslashes.
   extra_padding <- 10L         # Extra space for convenience.
