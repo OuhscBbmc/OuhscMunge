@@ -11,38 +11,40 @@
 #'
 #' @author Will Beasley
 #'
+#' @importFrom utils capture.output
+#' @importFrom rlang .data
+#'
 #' @examples
 #' readr_spec_aligned(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
 #' readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
 
-
 #' @export
 readr_spec_aligned <- function(...) {
   readr::spec_csv(...) %>%
-    capture.output() %>%
+    utils::capture.output() %>%
     tibble::as_tibble() %>%
     dplyr::slice(-1, -nrow(.)) %>%
     dplyr::mutate(
 
       # Qualify each col_qqq call with 'readr::'
-      value   = sub(" = ", " = readr::", value),
+      value   = sub(" = ", " = readr::", .data$value),
 
       # Enclose variable name in back ticks (if it's not already).
-      value   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", value),
+      value   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", .data$value),
 
       # Isolate the left-& right-hand sides
-      left    = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\1", value),
-      right   = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\2", value),
+      left    = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\1", .data$value),
+      right   = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\2", .data$value),
 
       # Pad an odd number of spaces -just beyond the longest variable name.
-      padding = nchar(sub("^(.+) = .+", "\\1", value)),
-      padding = max(padding) %/%2 * 2 + 1,
+      padding = nchar(sub("^(.+) = .+", "\\1", .data$value)),
+      padding = max(.data$padding) %/%2 * 2 + 1,
 
       # Pad the left side before appending the right side.
-      aligned = sprintf("  %-*s = %s", padding, left, right)
+      aligned = sprintf("  %-*s = %s", .data$padding, .data$left, .data$right)
     ) %>%
     # dplyr::select(-left, -right, -padding) %>%
-    dplyr::pull(aligned) %>%
+    dplyr::pull(.data$aligned) %>%
     paste(collapse="\n") %>%
     paste0(
       "col_types <- readr::cols_only(\n",

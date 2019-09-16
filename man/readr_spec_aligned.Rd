@@ -2,7 +2,7 @@
 % Please edit documentation in R/readr-spec-aligned.R
 \name{readr_spec_aligned}
 \alias{readr_spec_aligned}
-\title{Align & qualify the de}
+\title{Align & qualify the \code{col_types} specification passed to \code{\link[readr:spec_csv]{readr::spec_csv()}}.}
 \usage{
 readr_spec_aligned(...)
 }
