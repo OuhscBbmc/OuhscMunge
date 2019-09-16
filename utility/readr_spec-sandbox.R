@@ -11,14 +11,20 @@ readr::spec_csv("inst/test-data/subject-1.csv") %>%
     # qualified   = sub("\\s+(.+?) = ", "`\\1`", value),
     value   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", value),
     left    = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\1", value),
-    right   = sub("\\s+(.+)\\s+=\\s+(.+)$", "\, left, right)
+    right   = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\2", value),
 
+    # Pad an odd number of spaces -just beyond the longest variable name.
+    padding = nchar(sub("^(.+) = .+", "\\1", value)),
+    padding = max(padding) %/%2 * 2 + 1,
+    aligned = sprintf("  %-*s = %s", padding, left, right)
   ) %>%
-\2", value),
-    l1           = nchar(sub("^(.+) = .+", "\\1", value)),
-
-    v = sprintf("  %-*s = %s", max(l1), left, right)
-
+  dplyr::select(-left, -right, -padding) %>%
+  dplyr::pull(aligned) %>%
+  paste(collapse="\n") %>%
+  paste0(
+    "col_types <- readr::cols_only(\n",
+    .,
+    "\n)\n"
   ) %>%
-  dplyr::select(-left, -right)
+  cat()
 
