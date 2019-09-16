@@ -9,10 +9,16 @@ readr::spec_csv("inst/test-data/subject-1.csv") %>%
     value       = sub(" = ", " = readr::", value),
     # has_ticks   = grepl("\\s+`", value),
     # qualified   = sub("\\s+(.+?) = ", "`\\1`", value),
-    qualified   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", value),
-    l1           = sub("^(.+) = .+", "\\1", qualified),
-    l2          = nchar(l1)
+    value   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", value),
+    left    = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\1", value),
+    right   = sub("\\s+(.+)\\s+=\\s+(.+)$", "\, left, right)
 
   ) %>%
-  dplyr::select(-value)
+\2", value),
+    l1           = nchar(sub("^(.+) = .+", "\\1", value)),
+
+    v = sprintf("  %-*s = %s", max(l1), left, right)
+
+  ) %>%
+  dplyr::select(-left, -right)
 
