@@ -7,13 +7,14 @@
 #' that can be pasted into code, and help the developer avoid some typing.
 #'
 #' @usage
-#' column_rename_headstart( d, try_snake_case=TRUE )
+#' column_rename_headstart( d, try_snake_case=TRUE, use_nse=FALSE )
 #' column_class_headstart( d )
 #' column_value_headstart( x )
 #'
 #' @param d A `data.frame` to describe.
 #' @param x A vector to describe.
 #' @param try_snake_case If `TRUE` column names are attempted to be converted to snake_case.
+#' @param use_nse Specify columns with NSE (non-standard evaluation; *a.k.a.*, without quotes).
 #'
 #' @return Prints formatted code to the console.
 #'
@@ -38,8 +39,14 @@ column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=FALSE ) {
   }
 
   if( use_nse ) {
-    stop("The `use_nse` parameter is not supported yet.")
+    padded_format <- paste0("%-", max_column_name + extra_character_length + extra_padding, "s")
+    left_side <- sprintf(padded_format, left_names)
 
+    # cat("dplyr::select(    # `dplyr::select()` drops columns not included\\.\n")
+    cat("dplyr::select(    # `dplyr::select()` drops columns not included.\n")
+    cat(paste0("  ", left_side, " = ", colnames(d), ",\n"), sep="") # Gives a headstart to dplyr::rename_() & plyr::rename()
+    # cat("  ", left_side, " = ", colnames(d), ",\n\n", sep="") # Gives a headstart to dplyr::rename_() & plyr::rename()
+    cat(")\n")
   } else {
     left_side <- paste0("\"", left_names, "\"")
     padded_format <- paste0("%-", max_column_name + extra_character_length + extra_padding, "s")
@@ -52,7 +59,7 @@ column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=FALSE ) {
     cat("))\n")
   }
 }
-# column_rename_headstart(datasets::OrchardSprays)
+# column_rename_headstart(datasets::OrchardSprays, use_nse=T)
 
 #' @export
 column_class_headstart <- function( d ) {

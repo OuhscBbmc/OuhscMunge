@@ -7,7 +7,7 @@
 \alias{column_value_headstart}
 \title{Utilities for outputting characteristics of a dataset used it code.}
 \usage{
-column_rename_headstart( d, try_snake_case=TRUE )
+column_rename_headstart( d, try_snake_case=TRUE, use_nse=FALSE )
 column_class_headstart( d )
 column_value_headstart( x )
 }
@@ -15,6 +15,8 @@ column_value_headstart( x )
 \item{d}{A \code{data.frame} to describe.}
 
 \item{try_snake_case}{If \code{TRUE} column names are attempted to be converted to snake_case.}
+
+\item{use_nse}{Specify columns with NSE (non-standard evaluation; \emph{a.k.a.}, without quotes).}
 
 \item{x}{A vector to describe.}
 }
