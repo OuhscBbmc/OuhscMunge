@@ -13,6 +13,7 @@
 #'
 #' @importFrom utils capture.output
 #' @importFrom rlang .data
+#' @importFrom magrittr %>%
 #'
 #' @examples
 #' readr_spec_aligned(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
@@ -23,7 +24,7 @@ readr_spec_aligned <- function(...) {
   readr::spec_csv(...) %>%
     utils::capture.output() %>%
     tibble::as_tibble() %>%
-    dplyr::slice(-1, -nrow(.)) %>%
+    dplyr::slice(-1, -dplyr::n()) %>%
     dplyr::mutate(
 
       # Qualify each col_qqq call with 'readr::'
