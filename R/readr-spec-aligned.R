@@ -20,10 +20,10 @@
 #' readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
 
 #' @export
-readr_spec_aligned <- function(...) {
+readr_spec_aligned <- function( ... ) {
   readr::spec_csv(...) %>%
     utils::capture.output() %>%
-    tibble::as_tibble() %>%
+    tibble::enframe(name=NULL) %>%
     dplyr::slice(-1, -dplyr::n()) %>%
     dplyr::mutate(
 
@@ -44,13 +44,22 @@ readr_spec_aligned <- function(...) {
       # Pad the left side before appending the right side.
       aligned = sprintf("  %-*s = %s", .data$padding, .data$left, .data$right)
     ) %>%
-    # dplyr::select(-left, -right, -padding) %>%
+    dplyr::select(.data$aligned) %>%
+    tibble::add_row(
+      # value   = NA_character_,
+      aligned = "col_types <- readr::cols_only(",
+      .before = 1
+    ) %>%
+    tibble::add_row(
+      # value   = NA_character_,
+      aligned = ")"
+    ) %>%
     dplyr::pull(.data$aligned) %>%
     paste(collapse="\n") %>%
-    paste0(
-      "col_types <- readr::cols_only(\n",
-      .,
-      "\n)\n"
-    ) %>%
+    # paste0( # I'd prefer this approach, but the `.` is causing problems with R CMD check.
+    #   "col_types <- readr::cols_only(\n",
+    #   .,
+    #   "\n)\n"
+    # ) %>%
     cat()
 }

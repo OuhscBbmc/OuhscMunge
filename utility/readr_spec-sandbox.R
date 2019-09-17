@@ -3,7 +3,7 @@ library(magrittr)
 #   readr::write_csv()
 readr::spec_csv("inst/test-data/subject-1.csv") %>%
   capture.output() %>%
-  tibble::as_tibble() %>%
+  tibble::enframe(name=NULL) %>%
   dplyr::slice(-1, -nrow(.)) %>%
   dplyr::mutate(
     value       = sub(" = ", " = readr::", value),
