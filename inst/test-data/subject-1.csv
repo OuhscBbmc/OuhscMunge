@@ -1,21 +1,21 @@
-subject id,county_id,gender_id,race,ethnicity
-1001,51,255,More than One Race,Hispanic or Latino
-1002,72,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino
-1003,51,1,American Indian/Alaska Native,Hispanic or Latino
-1004,72,1,White,Hispanic or Latino
-1005,72,1,Unknown or Not Reported,Hispanic or Latino
-1006,55,2,Unknown or Not Reported,Unknown/Not Reported Ethnicity
-1007,55,2,White,Hispanic or Latino
-1008,51,1,Asian,Unknown/Not Reported Ethnicity
-1009,72,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino
-1010,72,1,More than One Race,Unknown/Not Reported Ethnicity
-1011,55,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino
-1012,51,2,American Indian/Alaska Native,Unknown/Not Reported Ethnicity
-1013,72,2,More than One Race,Not Hispanic or Latino
-1014,51,1,Unknown or Not Reported,Not Hispanic or Latino
-1015,51,2,American Indian/Alaska Native,Unknown/Not Reported Ethnicity
-1016,51,1,More than One Race,Not Hispanic or Latino
-1017,72,1,Unknown or Not Reported,Unknown/Not Reported Ethnicity
-1018,51,1,More than One Race,Not Hispanic or Latino
-1019,55,2,More than One Race,Not Hispanic or Latino
-1020,72,1,American Indian/Alaska Native,Not Hispanic or Latino
+subject id,county_id,gender_id,race,ethnicity,dob,dod
+1001,51,255,More than One Race,Hispanic or Latino,2001-01-01,01/01/99
+1002,72,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino,2001-01-02,01/02/99
+1003,51,1,American Indian/Alaska Native,Hispanic or Latino,2001-01-03,01/03/99
+1004,72,1,White,Hispanic or Latino,2001-01-04,01/04/99
+1005,72,1,Unknown or Not Reported,Hispanic or Latino,2001-01-05,01/05/99
+1006,55,2,Unknown or Not Reported,Unknown/Not Reported Ethnicity,2001-01-06,01/06/99
+1007,55,2,White,Hispanic or Latino,2001-01-07,01/07/99
+1008,51,1,Asian,Unknown/Not Reported Ethnicity,2001-01-08,01/08/99
+1009,72,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino,2001-01-09,01/09/99
+1010,72,1,More than One Race,Unknown/Not Reported Ethnicity,2001-01-10,01/10/99
+1011,55,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino,2001-01-11,01/11/99
+1012,51,2,American Indian/Alaska Native,Unknown/Not Reported Ethnicity,2001-01-12,01/12/99
+1013,72,2,More than One Race,Not Hispanic or Latino,2001-01-13,01/13/99
+1014,51,1,Unknown or Not Reported,Not Hispanic or Latino,2001-01-14,01/14/99
+1015,51,2,American Indian/Alaska Native,Unknown/Not Reported Ethnicity,2001-01-15,01/15/99
+1016,51,1,More than One Race,Not Hispanic or Latino,2001-01-16,01/16/99
+1017,72,1,Unknown or Not Reported,Unknown/Not Reported Ethnicity,2001-01-17,01/17/99
+1018,51,1,More than One Race,Not Hispanic or Latino,2001-01-18,01/18/99
+1019,55,2,More than One Race,Not Hispanic or Latino,2001-01-19,01/19/99
+1020,72,1,American Indian/Alaska Native,Not Hispanic or Latino,2001-01-20,01/20/99

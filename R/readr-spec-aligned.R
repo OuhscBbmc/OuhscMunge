@@ -1,6 +1,6 @@
 #' @name readr_spec_aligned
 #'
-#' @title Align & qualify the `col_types` specification passed to [readr::spec_csv()].
+#' @title Align & qualify the `col_types` specification passed to [readr::read_csv()].
 #'
 #' @description These functions are used during the execution of a program.  Rather they produce snippets
 #' that can be pasted into code, and help the developer avoid some typing.
@@ -34,12 +34,13 @@ readr_spec_aligned <- function( ... ) {
       value   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", .data$value),
 
       # Isolate the left-& right-hand sides
-      left    = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\1", .data$value),
-      right   = sub("\\s+(.+)\\s+=\\s+(.+)$", "\\2", .data$value),
+      left    = sub("^\\s+(.+?)\\s+=\\s+(readr.+)$", "\\1", .data$value),
+      right   = sub("^\\s+(.+?)\\s+=\\s+(readr.+)$", "\\2", .data$value),
 
       # Pad an odd number of spaces -just beyond the longest variable name.
-      padding = nchar(sub("^(.+) = .+", "\\1", .data$value)),
-      padding = max(.data$padding) %/%2 * 2 + 1,
+      # padding = nchar(sub("^(`.+?`) = readr.+", "\\1", .data$value)),
+      padding = nchar(.data$left),
+      padding = max(.data$padding) %/%2 * 2 + 3,
 
       # Pad the left side before appending the right side.
       aligned = sprintf("  %-*s = %s", .data$padding, .data$left, .data$right)
