@@ -17,8 +17,13 @@ These functions are used during the execution of a program.  Rather they produce
 that can be pasted into code, and help the developer avoid some typing.
 }
 \examples{
+# The aligned values produced by this funciton.
 readr_spec_aligned(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
 readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
+
+# For reference, the unaligned output of `readr::spec_csv()`.
+readr::spec_csv(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
+readr::spec_csv(system.file("package-dependency-list.csv", package = "OuhscMunge"))
 }
 \author{
 Will Beasley

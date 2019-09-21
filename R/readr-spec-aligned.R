@@ -16,8 +16,13 @@
 #' @importFrom magrittr %>%
 #'
 #' @examples
+#' # The aligned values produced by this funciton.
 #' readr_spec_aligned(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
 #' readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
+#'
+#' # For reference, the unaligned output of `readr::spec_csv()`.
+#' readr::spec_csv(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
+#' readr::spec_csv(system.file("package-dependency-list.csv", package = "OuhscMunge"))
 
 #' @export
 readr_spec_aligned <- function( ... ) {
@@ -25,13 +30,13 @@ readr_spec_aligned <- function( ... ) {
   # pattern <- "^[ ]+(`?)(.+?)\\1 = (col_.+)$"
   . <- NULL   # This is solely for the sake of avoiding the R CMD check error.
 
-  x <-
+  out <-
     readr::spec_csv(...) %>%
     utils::capture.output() %>%
     tibble::enframe(name=NULL) %>%
     dplyr::slice(-1, -dplyr::n()) %>%
     dplyr::mutate(
-      # Isolate the left-& right-hand sides
+      # Isolate the left-hand & right-hand sides. Enclose all variable names in back ticks.
       left    = sub(pattern, "`\\1`", .data$value),
       right   = sub(pattern, "\\2"  , .data$value),
 
@@ -58,6 +63,6 @@ readr_spec_aligned <- function( ... ) {
       "\n)\n"
     )
 
-  cat(x)          # Print to the console.
-  invisible(x)    # Also, return to the variable, if captured.
+  cat(out)          # Print to the console.
+  invisible(out)    # Also, return to the variable, if captured.
 }
