@@ -1,4 +1,4 @@
-subject id,county_id,gender_id,race,ethnicity,dob,dod,date=3
+subject id,county_id,gender*id,race,ethnicity,dob,dod,date=3
 1001,51,255,More than One Race,Hispanic or Latino,2001-01-01,01/01/99,"Jan 01,1987"
 1002,72,2,Native Hawaiian or Other Pacific Islander,Hispanic or Latino,2001-01-02,01/02/99,"Jan 01,1987"
 1003,51,1,American Indian/Alaska Native,Hispanic or Latino,2001-01-03,01/03/99,"Jan 01,1987"

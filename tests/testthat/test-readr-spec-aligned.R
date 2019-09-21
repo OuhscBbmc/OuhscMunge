@@ -6,7 +6,7 @@ test_that("readr_spec_aligned -subject-1", {
 'col_types <- readr::cols_only\\(
   `subject id`    = readr::col_double\\(\\),
   `county_id`     = readr::col_double\\(\\),
-  `gender_id`     = readr::col_double\\(\\),
+  `gender\\*id`     = readr::col_double\\(\\),
   `race`          = readr::col_character\\(\\),
   `ethnicity`     = readr::col_character\\(\\),
   `dob`           = readr::col_date\\(format = ""\\),

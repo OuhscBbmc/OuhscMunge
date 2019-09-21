@@ -23,6 +23,7 @@
 readr_spec_aligned <- function( ... ) {
   pattern <- "^[ ]+`?(.+?)`? = (col_.+)$"
   # pattern <- "^[ ]+(`?)(.+?)\\1 = (col_.+)$"
+  . <- NULL   # This is solely for the sake of avoiding the R CMD check error.
 
   readr::spec_csv(...) %>%
     utils::capture.output() %>%
@@ -33,7 +34,7 @@ readr_spec_aligned <- function( ... ) {
       left    = sub(pattern, "`\\1`", .data$value),
       right   = sub(pattern, "\\2"  , .data$value),
 
-      # Pad an odd number of spaces -just beyond the longest variable name.
+      # Calculate the odd number of spaces -just beyond the longest variable name.
       padding = nchar(.data$left),
       padding = max(.data$padding) %/%2 * 2 + 3,
 
@@ -41,21 +42,19 @@ readr_spec_aligned <- function( ... ) {
       aligned = sprintf("  %-*s = readr::%s", .data$padding, .data$left, .data$right)
     ) %>%
     dplyr::select(.data$aligned) %>%
-    tibble::add_row(
-      # value   = NA_character_,
-      aligned = "col_types <- readr::cols_only(",
-      .before = 1
-    ) %>%
-    tibble::add_row(
-      # value   = NA_character_,
-      aligned = ")"
-    ) %>%
+    # tibble::add_row(
+    #   aligned = "col_types <- readr::cols_only(",
+    #   .before = 1
+    # ) %>%
+    # tibble::add_row(
+    #   aligned = ")"
+    # ) %>%
     dplyr::pull(.data$aligned) %>%
     paste(collapse="\n") %>%
-    # paste0( # I'd prefer this approach, but the `.` is causing problems with R CMD check.
-    #   "col_types <- readr::cols_only(\n",
-    #   .,
-    #   "\n)\n"
-    # ) %>%
+    paste0( # I'd prefer this approach, but the `.` is causing problems with R CMD check.
+      "col_types <- readr::cols_only(\n",
+      .,
+      "\n)\n"
+    ) %>%
     cat()
 }
