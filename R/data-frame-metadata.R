@@ -42,10 +42,8 @@ column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=TRUE ) {
     padded_format <- paste0("%-", max_column_name + extra_character_length + extra_padding, "s")
     left_side <- sprintf(padded_format, left_names)
 
-    # cat("dplyr::select(    # `dplyr::select()` drops columns not included\\.\n")
     cat("dplyr::select(    # `dplyr::select()` drops columns not included.\n")
-    cat(paste0("  ", left_side, " = ", colnames(d), ",\n"), sep="") # Gives a headstart to dplyr::rename_() & plyr::rename()
-    # cat("  ", left_side, " = ", colnames(d), ",\n\n", sep="") # Gives a headstart to dplyr::rename_() & plyr::rename()
+    cat(paste0("  ", left_side, " = ", colnames(d), ",\n"), sep="") # Gives a headstart to dplyr::rename_() & dplyr::rename()
     cat(")\n")
   } else {
     left_side <- paste0("\"", left_names, "\"")
@@ -55,7 +53,7 @@ column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=TRUE ) {
     right_side <- paste0("\"", colnames(d), "\",\n")
 
     cat("dplyr::select(!!c(    # `dplyr::select()` drops columns not mentioned.\n")
-    cat(paste0("  ", left_side, " = ", right_side), sep="") # Gives a headstart to dplyr::rename_() & plyr::rename()
+    cat(paste0("  ", left_side, " = ", right_side), sep="") # Gives a headstart to dplyr::rename_() & dplyr::rename()
     cat("))\n")
   }
 }

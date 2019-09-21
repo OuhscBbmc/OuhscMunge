@@ -37,7 +37,7 @@ test_that("match_statistics -two columns", {
 })
 
 test_that("match_statistics -one column w/ 1 different name", {
-  d_c <- dplyr::rename_(ds_child, "ParentID"="parent_id")
+  d_c <- dplyr::rename(ds_child, ParentID=parent_id)
 
   expected <- "\n\nMatch stats for `ds_parent` vs `d_c` on column(s): c(parent_id = \"ParentID\").\n| parent in child     |        7 |\n| parent not in child |        3 |\n| parent na any       |        0 |\n| child in parent     |       22 |\n| child not in parent |       18 |\n| child na any        |        0 |\n| deadbeat proportion | 30.0000% |\n| orphan proportion   | 45.0000% |\n"
   observed <- match_statistics_display(ds_parent, d_c, join_columns=c("parent_id"="ParentID")) #dput(observed)
@@ -45,7 +45,7 @@ test_that("match_statistics -one column w/ 1 different name", {
 })
 
 test_that("match_statistics -two columns w/ 1 different name", {
-  d_c <- dplyr::rename_(ds_child, "Letter"="letter")
+  d_c <- dplyr::rename(ds_child, Letter=letter)
 
   expected <- "\n\nMatch stats for `ds_parent` vs `d_c` on column(s): c(letter = \"Letter\", \"index\").\n| parent in child     |        6 |\n| parent not in child |        4 |\n| parent na any       |        0 |\n| child in parent     |       12 |\n| child not in parent |       28 |\n| child na any        |        0 |\n| deadbeat proportion | 40.0000% |\n| orphan proportion   | 70.0000% |\n"
   observed <- match_statistics_display(ds_parent, d_c, join_columns=c("letter"="Letter", "index")) #dput(observed)
@@ -53,7 +53,7 @@ test_that("match_statistics -two columns w/ 1 different name", {
 })
 
 test_that("match_statistics -two columns w/ 2 different names", {
-  d_c <- dplyr::rename_(ds_child, "Letter"="letter", "Index"="index")
+  d_c <- dplyr::rename(ds_child, Letter=letter, Index=index)
 
   expected <- "\n\nMatch stats for `ds_parent` vs `d_c` on column(s): c(letter = \"Letter\", index = \"Index\").\n| parent in child     |        6 |\n| parent not in child |        4 |\n| parent na any       |        0 |\n| child in parent     |       12 |\n| child not in parent |       28 |\n| child na any        |        0 |\n| deadbeat proportion | 40.0000% |\n| orphan proportion   | 70.0000% |\n"
   observed <- match_statistics_display(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="Index")) #dput(observed)
@@ -68,7 +68,7 @@ test_that("match_statistics -bad parent name", {
 })
 
 test_that("match_statistics -bad child name", {
-  d_c <- dplyr::rename_(ds_child, "Letter"="letter", "Index"="index")
+  d_c <- dplyr::rename(ds_child, Letter=letter, Index=index)
   expect_error(
     match_statistics_display(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="BAD"))
     , 'The variable `BAD` is not found in the child table passed to `OuhscMunge::match_statistics\\(\\)`'
