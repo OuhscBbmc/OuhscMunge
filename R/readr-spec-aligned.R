@@ -21,7 +21,8 @@
 
 #' @export
 readr_spec_aligned <- function( ... ) {
-  pattern <- "^\\s+`?(.+?)`?\\s+=\\s+(col_.+)$"
+  pattern <- "^[ ]+`?(.+?)`? = (col_.+)$"
+  # pattern <- "^[ ]+(`?)(.+?)\\1 = (col_.+)$"
 
   readr::spec_csv(...) %>%
     utils::capture.output() %>%
