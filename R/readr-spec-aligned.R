@@ -25,7 +25,8 @@ readr_spec_aligned <- function( ... ) {
   # pattern <- "^[ ]+(`?)(.+?)\\1 = (col_.+)$"
   . <- NULL   # This is solely for the sake of avoiding the R CMD check error.
 
-  readr::spec_csv(...) %>%
+  x <-
+    readr::spec_csv(...) %>%
     utils::capture.output() %>%
     tibble::enframe(name=NULL) %>%
     dplyr::slice(-1, -dplyr::n()) %>%
@@ -55,6 +56,8 @@ readr_spec_aligned <- function( ... ) {
       "col_types <- readr::cols_only(\n",
       .,
       "\n)\n"
-    ) %>%
-    cat()
+    )
+
+  cat(x)          # Print to the console.
+  invisible(x)    # Also, return to the variable, if captured.
 }
