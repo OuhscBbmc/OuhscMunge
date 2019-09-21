@@ -21,29 +21,23 @@
 
 #' @export
 readr_spec_aligned <- function( ... ) {
+  pattern <- "^\\s+`?(.+?)`?\\s+=\\s+(col_.+)$"
+
   readr::spec_csv(...) %>%
     utils::capture.output() %>%
     tibble::enframe(name=NULL) %>%
     dplyr::slice(-1, -dplyr::n()) %>%
     dplyr::mutate(
-
-      # Qualify each col_qqq call with 'readr::'
-      value   = sub(" = ", " = readr::", .data$value),
-
-      # Enclose variable name in back ticks (if it's not already).
-      value   = sub("(\\s+)([^`]+?) = ", "\\1`\\2` = ", .data$value),
-
       # Isolate the left-& right-hand sides
-      left    = sub("^\\s+(.+?)\\s+=\\s+(readr.+)$", "\\1", .data$value),
-      right   = sub("^\\s+(.+?)\\s+=\\s+(readr.+)$", "\\2", .data$value),
+      left    = sub(pattern, "`\\1`", .data$value),
+      right   = sub(pattern, "\\2"  , .data$value),
 
       # Pad an odd number of spaces -just beyond the longest variable name.
-      # padding = nchar(sub("^(`.+?`) = readr.+", "\\1", .data$value)),
       padding = nchar(.data$left),
       padding = max(.data$padding) %/%2 * 2 + 3,
 
       # Pad the left side before appending the right side.
-      aligned = sprintf("  %-*s = %s", .data$padding, .data$left, .data$right)
+      aligned = sprintf("  %-*s = readr::%s", .data$padding, .data$left, .data$right)
     ) %>%
     dplyr::select(.data$aligned) %>%
     tibble::add_row(
