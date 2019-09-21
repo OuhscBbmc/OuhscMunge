@@ -10,7 +10,8 @@ test_that("readr_spec_aligned -subject-1", {
   `race`          = readr::col_character\\(\\),
   `ethnicity`     = readr::col_character\\(\\),
   `dob`           = readr::col_date\\(format = ""\\),
-  `dod`           = readr::col_character\\(\\)
+  `dod`           = readr::col_character\\(\\),
+  `date=3`        = readr::col_character\\(\\)
 \\)'
 
   testthat::expect_output(
