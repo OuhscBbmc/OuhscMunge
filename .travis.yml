@@ -5,8 +5,8 @@ cache: packages
 warnings_are_errors: true
 apt_packages:
  - iodbc
- - libiodbc2
- - libiodbc2-dev
+ - unixodbc
+ - unixodbc-dev
  - r-cran-rodbc
 r_github_packages:
   - jimhester/covr

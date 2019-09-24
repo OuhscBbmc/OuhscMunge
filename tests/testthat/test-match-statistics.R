@@ -37,7 +37,7 @@ test_that("match_statistics -two columns", {
 })
 
 test_that("match_statistics -one column w/ 1 different name", {
-  d_c <- dplyr::rename_(ds_child, "ParentID"="parent_id")
+  d_c <- dplyr::rename(ds_child, ParentID=parent_id)
 
   expected <- structure(c(7, 3, 0, 0.3, 22, 18, 0, 0.45), .Names = names_returned)
   observed <- match_statistics(ds_parent, d_c, join_columns=c("parent_id"="ParentID")) #dput(observed)
@@ -45,7 +45,7 @@ test_that("match_statistics -one column w/ 1 different name", {
 })
 
 test_that("match_statistics -two columns w/ 1 different name", {
-  d_c <- dplyr::rename_(ds_child, "Letter"="letter")
+  d_c <- dplyr::rename(ds_child, Letter=letter)
 
   expected <- structure(c(6, 4, 0, 0.4, 12, 28, 0, 0.7), .Names = names_returned)
   observed <- match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index")) #dput(observed)
@@ -53,7 +53,7 @@ test_that("match_statistics -two columns w/ 1 different name", {
 })
 
 test_that("match_statistics -two columns w/ 2 different names", {
-  d_c <- dplyr::rename_(ds_child, "Letter"="letter", "Index"="index")
+  d_c <- dplyr::rename(ds_child, Letter=letter, Index=index)
 
   expected <- structure(c(6, 4, 0, 0.4, 12, 28, 0, 0.7), .Names = names_returned)
   observed <- match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="Index")) #dput(observed)
@@ -68,7 +68,7 @@ test_that("match_statistics -bad parent name", {
 })
 
 test_that("match_statistics -bad child name", {
-  d_c <- dplyr::rename_(ds_child, "Letter"="letter", "Index"="index")
+  d_c <- dplyr::rename(ds_child, Letter=letter, Index=index)
   expect_error(
     match_statistics(ds_parent, d_c, join_columns=c("letter"="Letter", "index"="BAD"))
     , 'The variable `BAD` is not found in the child table passed to `OuhscMunge::match_statistics\\(\\)`'
