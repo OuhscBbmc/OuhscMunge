@@ -97,10 +97,10 @@ test_that("column value -OrchardSprays", {
 test_that("column rename nse -OrchardSprays", {
   expected <-
 'dplyr::select\\(    # `dplyr::select\\(\\)` drops columns not included\\.
-  decrease                 = decrease,
-  rowpos                   = rowpos,
-  colpos                   = colpos,
-  treatment                = treatment,
+  decrease                 = `decrease`,
+  rowpos                   = `rowpos`,
+  colpos                   = `colpos`,
+  treatment                = `treatment`,
 \\)'
 
   testthat::expect_output(
@@ -112,11 +112,11 @@ test_that("column rename nse -OrchardSprays", {
 test_that("column rename -Iris", {
   expected <-
 'dplyr::select\\(    # `dplyr::select\\(\\)` drops columns not included\\.
-  sepal_length                = Sepal.Length,
-  sepal_width                 = Sepal.Width,
-  petal_length                = Petal.Length,
-  petal_width                 = Petal.Width,
-  species                     = Species,
+  sepal_length                = `Sepal.Length`,
+  sepal_width                 = `Sepal.Width`,
+  petal_length                = `Petal.Length`,
+  petal_width                 = `Petal.Width`,
+  species                     = `Species`,
 \\)'
 
   testthat::expect_output(
@@ -130,11 +130,11 @@ test_that("column rename -Iris", {
 test_that("column rename w/o snake-Iris", {
   expected <-
 'dplyr::select\\(    # `dplyr::select\\(\\)` drops columns not included\\.
-  Sepal.Length                = Sepal.Length,
-  Sepal.Width                 = Sepal.Width,
-  Petal.Length                = Petal.Length,
-  Petal.Width                 = Petal.Width,
-  Species                     = Species,
+  Sepal.Length                = `Sepal.Length`,
+  Sepal.Width                 = `Sepal.Width`,
+  Petal.Length                = `Petal.Length`,
+  Petal.Width                 = `Petal.Width`,
+  Species                     = `Species`,
 \\)'
 
   testthat::expect_output(
