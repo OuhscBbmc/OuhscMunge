@@ -43,7 +43,7 @@ column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=TRUE ) {
     left_side <- sprintf(padded_format, left_names)
 
     cat("dplyr::select(    # `dplyr::select()` drops columns not included.\n")
-    cat(paste0("  ", left_side, " = ", colnames(d), ",\n"), sep="") # Gives a headstart to dplyr::rename_() & dplyr::rename()
+    cat(paste0("  ", left_side, " = `", colnames(d), "`,\n"), sep="") # Gives a headstart to dplyr::rename_() & dplyr::rename()
     cat(")\n")
   } else {
     left_side <- paste0("\"", left_names, "\"")
