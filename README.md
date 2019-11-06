@@ -16,10 +16,10 @@ install.packages("OuhscMunge")
 ```
 -->
 
-The *development* version of `OuhscMunge` can be installed from [GitHub](https://github.com/OuhscBbmc/OuhscMunge) after installing the `devtools` package.  (The *release* version will be available on [CRAN](https://cran.r-project.org/) later.)
+The *development* version of `OuhscMunge` can be installed from [GitHub](https://github.com/OuhscBbmc/OuhscMunge) after installing the `remotes` package.  (The *release* version will be available on [CRAN](https://cran.r-project.org/) later.)
 ```r
-install.packages("remotes")                            # If it's not already installed.
-remotes::install_github(repo="OuhscBbmc/OuhscMunge")
+install.packages("remotes")                     # If it's not already installed.
+remotes::install_github("OuhscBbmc/OuhscMunge")
 ```
 
 ### Collaborative Development
