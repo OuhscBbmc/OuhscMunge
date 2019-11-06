@@ -6,6 +6,17 @@
 #' @description Uses [digest::digest()] to hash as (salted) value, using 'SHA-256'.
 #' If the `x` isn't already a `character` vector, it's converted to one (even if `x` inherits from character).
 #'
+#' This approach protects the actual value of `x`, while still allowing a downstream user
+#' to determine which cells were derived from the same `x`.
+#'
+#' For example, suppose a patient's
+#' [mrn](https://ushik.ahrq.gov/ViewItemDetails?system=ps&itemKey=88720000)
+#' of '111' is hashed, and the output is 'abc'.
+#' (To view it's real value, execute `OuhscMunge::hash_and_salt_sha_256(111)`.)
+#' When given the value 'abc', is it computational infeasible to determine the input
+#' had been '111' (especially when *salted*).  However, when you see that two visits
+#' have an mrn of 'abc', you can determine the same patient generated both visits.
+#'
 #' @param x A vector of values to convert.  it should be a `character` vector, or something that can be cast to a `character` vector.
 #' @param salt A single-element character vector.
 #' @param min_characters The minimum count of characters that `x` is allowed to be.  Must be an `integer` or `numeric` data type.
@@ -15,6 +26,10 @@
 #' @return A character vector.
 #'
 #' @author Will Beasley
+#'
+#' @references
+#' [cryptographic hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function)
+#' and [salts](https://en.wikipedia.org/wiki/Salt_(cryptography)).
 #'
 #' @examples
 #' x    <- letters[1:5]

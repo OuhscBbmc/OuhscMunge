@@ -24,6 +24,17 @@ A character vector.
 \description{
 Uses \code{\link[digest:digest]{digest::digest()}} to hash as (salted) value, using 'SHA-256'.
 If the \code{x} isn't already a \code{character} vector, it's converted to one (even if \code{x} inherits from character).
+
+This approach protects the actual value of \code{x}, while still allowing a downstream user
+to determine which cells were derived from the same \code{x}.
+
+For example, suppose a patient's
+\href{https://ushik.ahrq.gov/ViewItemDetails?system=ps&itemKey=88720000}{mrn}
+of '111' is hashed, and the output is 'abc'.
+(To view it's real value, execute \code{OuhscMunge::hash_and_salt_sha_256(111)}.)
+When given the value 'abc', is it computational infeasible to determine the input
+had been '111' (especially when \emph{salted}).  However, when you see that two visits
+have an mrn of 'abc', you can determine the same patient generated both visits.
 }
 \examples{
 x    <- letters[1:5]
@@ -36,6 +47,10 @@ hash_and_salt_sha_256(x)
 
 # By default, a zero-length character produces hash of NA.
 hash_and_salt_sha_256(c("a", "", "c"))
+}
+\references{
+\href{https://en.wikipedia.org/wiki/Cryptographic_hash_function}{cryptographic hash function}
+and \href{https://en.wikipedia.org/wiki/Salt_(cryptography)}{salts}.
 }
 \author{
 Will Beasley
