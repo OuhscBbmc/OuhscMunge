@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Object inherits from <a href='base::data.frame()'>data.frame</a>. — verify_data_frame • OuhscMunge</title>
+<title>Object inherits from <a href='base::data.frame()'>data.frame</a>. (Soft-deprecated.) — verify_data_frame • OuhscMunge</title>
 
 
 <!-- jquery -->
@@ -35,11 +35,11 @@
 
 
 
-<meta property="og:title" content="Object inherits from <a href='base::data.frame()'>data.frame</a>. — verify_data_frame" />
+<meta property="og:title" content="Object inherits from <a href='base::data.frame()'>data.frame</a>. (Soft-deprecated.) — verify_data_frame" />
 <meta property="og:description" content="Check that the object inherits from data.frame.
 If not, throw an error.
-This function will be deprecated in the future.  If you're developing new code,
-consider the superior checkmate functions, checkmate::assert_data_frame() and checkmate::assert_tibble()
+This function has been soft-deprecated (i.e., it works, but with a warning).
+Please use the superior checkmate functions, checkmate::assert_data_frame() and checkmate::assert_tibble()
 This helps check database-reading functions (e.g., RODBC::sqlQuery()) that return a data.frame
 if successful, and a character vector is unsucessful.
 A minimum row count can be used to check that a trivially small number of rows was not returned.
@@ -113,7 +113,7 @@ but with with a more specific error message." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Object inherits from <a href='base::data.frame()'>data.frame</a>.</h1>
+    <h1>Object inherits from <a href='base::data.frame()'>data.frame</a>. (Soft-deprecated.)</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/verify-data-frame.R'><code>R/verify-data-frame.R</code></a></small>
     <div class="hidden name"><code>verify_data_frame.Rd</code></div>
     </div>
@@ -121,8 +121,8 @@ but with with a more specific error message." />
     <div class="ref-description">
     <p>Check that the object inherits from <a href='base::data.frame()'>data.frame</a>.
 If not, throw an error.</p>
-<p>This function will be deprecated in the future.  If you're developing new code,
-consider the superior <a href='checkmate'>checkmate</a> functions, <code><a href='https://rdrr.io/pkg/checkmate/man/checkDataFrame.html'>checkmate::assert_data_frame()</a></code> and <code><a href='https://rdrr.io/pkg/checkmate/man/checkTibble.html'>checkmate::assert_tibble()</a></code></p>
+<p>This function has been soft-deprecated (<em>i.e.</em>, it works, but with a warning).
+Please use the superior <a href='checkmate'>checkmate</a> functions, <code><a href='https://rdrr.io/pkg/checkmate/man/checkDataFrame.html'>checkmate::assert_data_frame()</a></code> and <code><a href='https://rdrr.io/pkg/checkmate/man/checkTibble.html'>checkmate::assert_tibble()</a></code></p>
 <p>This helps check database-reading functions (<em>e.g.</em>, <code><a href='https://rdrr.io/pkg/RODBC/man/sqlQuery.html'>RODBC::sqlQuery()</a></code>) that return a <code>data.frame</code>
 if successful, and a <code>character</code> vector is unsucessful.</p>
 <p>A minimum row count can be used to check that a trivially small number of rows was not returned.
@@ -151,8 +151,11 @@ The datatype does not have to be an <code>integer</code>, but should be safely c
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/checkmate/man/checkClass.html'>checkmate::assert_class()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/OrchardSprays.html'>OrchardSprays</a></span>, <span class='fl'>20</span>)
-<span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/iris.html'>iris</a></span>, <span class='fl'>4</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/OrchardSprays.html'>OrchardSprays</a></span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: OuhscMunge::verify_data_frame() is deprecated.</span>
+#&gt; <span class='warning'>Instead, please use checkmate::assert_data_frame()</span>
+#&gt; <span class='warning'>with an appropriate value for the `min.rows` parameter.</span></div><div class='input'><span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/iris.html'>iris</a></span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: OuhscMunge::verify_data_frame() is deprecated.</span>
+#&gt; <span class='warning'>Instead, please use checkmate::assert_data_frame()</span>
+#&gt; <span class='warning'>with an appropriate value for the `min.rows` parameter.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

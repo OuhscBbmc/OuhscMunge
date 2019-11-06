@@ -1,13 +1,13 @@
 #' @name verify_data_frame
 #' @export
 #'
-#' @title Object inherits from [`data.frame`](base::data.frame()).
+#' @title Object inherits from [`data.frame`](base::data.frame()). (Soft-deprecated.)
 #'
 #' @description Check that the object inherits from [`data.frame`](base::data.frame()).
 #' If not, throw an error.
 #'
-#' This function will be deprecated in the future.  If you're developing new code,
-#' consider the superior [checkmate]() functions, [`checkmate::assert_data_frame()`] and [`checkmate::assert_tibble()`]
+#' This function has been soft-deprecated (*i.e.*, it works, but with a warning).
+#' Please use the superior [checkmate]() functions, [`checkmate::assert_data_frame()`] and [`checkmate::assert_tibble()`]
 #'
 #' This helps check database-reading functions (*e.g.*, [`RODBC::sqlQuery()`]) that return a `data.frame`
 #' if successful, and a `character` vector is unsucessful.
@@ -29,6 +29,11 @@
 #' verify_data_frame(datasets::iris, 4)
 
 verify_data_frame <- function( d, minimum_row_count=10L ) {
+  warning(
+    "OuhscMunge::verify_data_frame() is deprecated.\n",
+    "Instead, please use checkmate::assert_data_frame()\n",
+    "with an appropriate value for the `min.rows` parameter."
+  )
 
   # Verify that a legit data.frame was returned (and not an error message)
   if( !inherits(d, "data.frame") ) {
