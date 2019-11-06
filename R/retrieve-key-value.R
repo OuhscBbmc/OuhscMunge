@@ -13,28 +13,24 @@
 #' @details
 #' The database table and stored procedure must defined as:
 #'
-#' ```
-#' CREATE TABLE [security_private].[tbl_key_value_static](
-#'   [id] [smallint] IDENTITY(1,1) NOT NULL,
-#'   [project] [varchar](50) NOT NULL,
-#'   [attribute] [varchar](90) NOT NULL,
-#'   [value] [varchar](200) NOT NULL,
-#'   [file_last_updated_date] [date] NOT NULL,
-#'   [retired] [bit] NOT NULL,
-#'   CONSTRAINT [PK_tbl_key_value_static] PRIMARY KEY CLUSTERED
-#'   (
-#'     [id] ASC
-#'   )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-#' ) ON [PRIMARY]
+#' ```sql
+#' CREATE TABLE security_private.tbl_key_value_static(
+#'   id                     smallint     IDENTITY(1,1) PRIMARY KEY,
+#'   project                varchar(50)  NOT NULL,
+#'   attribute              varchar(90)  NOT NULL,
+#'   value                  varchar(200) NOT NULL,
+#'   file_last_updated_date date         NOT NULL,
+#'   retired                bit          NOT NULL
+#' )
 #'
-#' CREATE PROCEDURE [security].[prc_key_value_static]
+#' CREATE PROCEDURE security.prc_key_value_static
 #'   @project varchar(50),
 #'   @attribute varchar(90)
 #' AS
 #' BEGIN
-#' 	SET NOCOUNT ON;
-#' 	SELECT value from security_private.tbl_key_value_static
-#' 	WHERE project=@project AND attribute=@attribute
+#' 	 SET NOCOUNT ON;
+#' 	 SELECT value from security_private.tbl_key_value_static
+#' 	 WHERE project=@project AND attribute=@attribute
 #' END
 #' ````
 #' @note
