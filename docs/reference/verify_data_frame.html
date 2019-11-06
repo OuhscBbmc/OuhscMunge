@@ -6,23 +6,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Object inherits from <a href='base::data.frame()'>data.frame</a>. — verify_data_frame • OuhscMunge</title>
+<title>Object inherits from <a href='base::data.frame()'>data.frame</a>. (Soft-deprecated.) — verify_data_frame • OuhscMunge</title>
+
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,18 +34,19 @@
 
 
 
-<meta property="og:title" content="Object inherits from <a href='base::data.frame()'>data.frame</a>. — verify_data_frame" />
 
+<meta property="og:title" content="Object inherits from <a href='base::data.frame()'>data.frame</a>. (Soft-deprecated.) — verify_data_frame" />
 <meta property="og:description" content="Check that the object inherits from data.frame.
 If not, throw an error.
-This function will be deprecated in the future.  If you're developing new code,
-consider the superior checkmate functions, checkmate::assert_data_frame() and checkmate::assert_tibble()
+This function has been soft-deprecated (i.e., it works, but with a warning).
+Please use the superior checkmate functions, checkmate::assert_data_frame() and checkmate::assert_tibble()
 This helps check database-reading functions (e.g., RODBC::sqlQuery()) that return a data.frame
 if successful, and a character vector is unsucessful.
 A minimum row count can be used to check that a trivially small number of rows was not returned.
 If minimum_row_count is set to 0, the function is similar to checkmate::assert_class(d, &quot;data.frame&quot;),
 but with with a more specific error message." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -53,6 +58,7 @@ but with with a more specific error message." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -79,7 +85,7 @@ but with with a more specific error message." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -87,11 +93,10 @@ but with with a more specific error message." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/OuhscBbmc/OuhscMunge">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -102,32 +107,31 @@ but with with a more specific error message." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Object inherits from <a href='base::data.frame()'>data.frame</a>.</h1>
+    <h1>Object inherits from <a href='base::data.frame()'>data.frame</a>. (Soft-deprecated.)</h1>
     <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/verify-data-frame.R'><code>R/verify-data-frame.R</code></a></small>
     <div class="hidden name"><code>verify_data_frame.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Check that the object inherits from <a href='base::data.frame()'>data.frame</a>.
 If not, throw an error.</p>
-<p>This function will be deprecated in the future.  If you're developing new code,
-consider the superior <a href='checkmate'>checkmate</a> functions, <code><a href='https://www.rdocumentation.org/packages/checkmate/topics/checkDataFrame'>checkmate::assert_data_frame()</a></code> and <code><a href='https://www.rdocumentation.org/packages/checkmate/topics/checkTibble'>checkmate::assert_tibble()</a></code></p>
-<p>This helps check database-reading functions (<em>e.g.</em>, <code><a href='https://www.rdocumentation.org/packages/RODBC/topics/sqlQuery'>RODBC::sqlQuery()</a></code>) that return a <code>data.frame</code>
+<p>This function has been soft-deprecated (<em>i.e.</em>, it works, but with a warning).
+Please use the superior <a href='checkmate'>checkmate</a> functions, <code><a href='https://rdrr.io/pkg/checkmate/man/checkDataFrame.html'>checkmate::assert_data_frame()</a></code> and <code><a href='https://rdrr.io/pkg/checkmate/man/checkTibble.html'>checkmate::assert_tibble()</a></code></p>
+<p>This helps check database-reading functions (<em>e.g.</em>, <code><a href='https://rdrr.io/pkg/RODBC/man/sqlQuery.html'>RODBC::sqlQuery()</a></code>) that return a <code>data.frame</code>
 if successful, and a <code>character</code> vector is unsucessful.</p>
 <p>A minimum row count can be used to check that a trivially small number of rows was not returned.
-If <code>minimum_row_count</code> is set to 0, the function is similar to <code><a href='https://www.rdocumentation.org/packages/checkmate/topics/checkClass'>checkmate::assert_class(d, "data.frame")</a></code>,
+If <code>minimum_row_count</code> is set to 0, the function is similar to <code><a href='https://rdrr.io/pkg/checkmate/man/checkClass.html'>checkmate::assert_class(d, "data.frame")</a></code>,
 but with with a more specific error message.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>verify_data_frame</span>(<span class='no'>d</span>, <span class='kw'>minimum_row_count</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -141,23 +145,23 @@ but with with a more specific error message.</p>
 The datatype does not have to be an <code>integer</code>, but should be safely convertible to an integer.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/checkmate/topics/checkClass'>checkmate::assert_class()</a></code></p></div>
-    
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/checkmate/man/checkClass.html'>checkmate::assert_class()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/datasets/topics/OrchardSprays'>OrchardSprays</a></span>, <span class='fl'>20</span>)
-<span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/datasets/topics/iris'>iris</a></span>, <span class='fl'>4</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/OrchardSprays.html'>OrchardSprays</a></span>, <span class='fl'>20</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: OuhscMunge::verify_data_frame() is deprecated.</span>
+#&gt; <span class='warning'>Instead, please use checkmate::assert_data_frame()</span>
+#&gt; <span class='warning'>with an appropriate value for the `min.rows` parameter.</span></div><div class='input'><span class='fu'>verify_data_frame</span>(<span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/iris.html'>iris</a></span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: OuhscMunge::verify_data_frame() is deprecated.</span>
+#&gt; <span class='warning'>Instead, please use checkmate::assert_data_frame()</span>
+#&gt; <span class='warning'>with an appropriate value for the `min.rows` parameter.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -166,19 +170,23 @@ The datatype does not have to be an <code>integer</code>, but should be safely c
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Will Beasley.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

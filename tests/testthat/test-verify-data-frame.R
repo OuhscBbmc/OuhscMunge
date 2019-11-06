@@ -4,7 +4,7 @@ library(testthat)
 context("Verify Data Frame")
 
 test_that("OrchardSprays -regular row count", {
-  testthat::expect_silent(
+  testthat::expect_warning(
     verify_data_frame(datasets::OrchardSprays)
   )
 })
@@ -12,7 +12,7 @@ test_that("OrchardSprays -regular row count", {
 test_that("OrchardSprays -passes small row count threshold", {
   d <- datasets::OrchardSprays[1:5, ]
 
-  testthat::expect_silent(
+  testthat::expect_warning(
     verify_data_frame(datasets::OrchardSprays, 4L)
   )
 })
