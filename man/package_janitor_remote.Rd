@@ -4,12 +4,16 @@
 \alias{package_janitor_remote}
 \title{checks the user's installed packages against the packages listed in a CSV.}
 \usage{
-package_janitor_remote(url_package_dependencies,
-  cran_repo = "https://cran.rstudio.com", update_packages = TRUE,
-  dependencies = TRUE, check_xml_linux = (R.Version()$os ==
-  "linux-gnu"), check_libcurl_linux = (R.Version()$os == "linux-gnu"),
+package_janitor_remote(
+  url_package_dependencies,
+  cran_repo = "https://cran.rstudio.com",
+  update_packages = TRUE,
+  dependencies = TRUE,
+  check_xml_linux = (R.Version()$os == "linux-gnu"),
+  check_libcurl_linux = (R.Version()$os == "linux-gnu"),
   check_openssl_linux = (R.Version()$os == "linux-gnu"),
-  verbose = TRUE)
+  verbose = TRUE
+)
 }
 \arguments{
 \item{url_package_dependencies}{path to a csv containing the packages.  See the description.  Required.}

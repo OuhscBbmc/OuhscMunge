@@ -39,7 +39,7 @@ library(OuhscMunge)
 deterge_to_double(c(NA, 1:10), 4, 8)
 deterge_to_integer(c(NA, 1:10), 4L, 8L)
 
-x <- c("Ekstr\\xf8m", "J\\xf6reskog", "bi\\xdfchen Z\\xfcrcher")
+x <- c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher")
 deterge_to_ascii(x)
 }
 \seealso{

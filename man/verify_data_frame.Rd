@@ -2,7 +2,7 @@
 % Please edit documentation in R/verify-data-frame.R
 \name{verify_data_frame}
 \alias{verify_data_frame}
-\title{Object inherits from \href{base::data.frame()}{data.frame}. (Soft-deprecated.)}
+\title{Object inherits from \href{base::data.frame()}{\code{data.frame}}. (Soft-deprecated.)}
 \usage{
 verify_data_frame(d, minimum_row_count = 10L)
 }
@@ -13,7 +13,7 @@ verify_data_frame(d, minimum_row_count = 10L)
 The datatype does not have to be an \code{integer}, but should be safely convertible to an integer.}
 }
 \description{
-Check that the object inherits from \href{base::data.frame()}{data.frame}.
+Check that the object inherits from \href{base::data.frame()}{\code{data.frame}}.
 If not, throw an error.
 
 This function has been soft-deprecated (\emph{i.e.}, it works, but with a warning).
