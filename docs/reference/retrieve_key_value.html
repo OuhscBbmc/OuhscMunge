@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9011</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@
     <p>A <code>character</code> vector with one element.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The database table and stored procedure must defined as:</p><pre>CREATE TABLE security_private.tbl_key_value_static(
+    <p>The database table and stored procedure must defined as:<div class="sql"></p><pre>CREATE TABLE security_private.tbl_key_value_static(
   id                     smallint     IDENTITY(1,1) PRIMARY KEY,
   project                varchar(50)  NOT NULL,
   attribute              varchar(90)  NOT NULL,
@@ -160,8 +160,7 @@ BEGIN
 	 SELECT value from security_private.tbl_key_value_static
 	 WHERE project=@project AND attribute=@attribute
 END
-</pre>
-
+</pre><p></div></p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>Currently only the 'static' key-value pairs are retrieved through this function.

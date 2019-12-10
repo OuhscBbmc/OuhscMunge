@@ -5,9 +5,11 @@
 \alias{open_dsn_channel_sqls_odbc}
 \title{Open an ODBC channel to a SQL Server database}
 \usage{
-open_dsn_channel_sqls(dsn_name,
+open_dsn_channel_sqls(
+  dsn_name,
   driver_version_minimum = numeric_version("13.0"),
-  driver_version_maximum = numeric_version("99.0"))
+  driver_version_maximum = numeric_version("99.0")
+)
 }
 \arguments{
 \item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}

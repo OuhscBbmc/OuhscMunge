@@ -12,7 +12,8 @@
 #' @return A vector of converted names.
 #'
 #' @note This series of regexes has an advantages over the current
-#' implementations of [lettercase::str_snake_case()] and [`snakecase::to_snake_case()`].
+#' implementations of [`lettercase::str_snake_case()`](https://github.com/decisionpatterns/lettercase)
+#' and [`snakecase::to_snake_case()`].
 #' The former converts "PatientDOB" to "patientdob" and the latter converts
 #' "patient.dob" to "patient_._dob".  I'll keep an eye on these packages
 #' (*i.e.*, [lettercase #1](https://github.com/decisionpatterns/lettercase/issues/1) for 'camelCase'

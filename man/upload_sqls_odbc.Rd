@@ -4,10 +4,19 @@
 \alias{upload_sqls_odbc}
 \title{Upload to a SQL Server database using odbc}
 \usage{
-upload_sqls_odbc(d, schema_name, table_name, dsn_name,
-  clear_table = FALSE, create_table = FALSE,
-  convert_logical_to_integer = FALSE, transaction = FALSE,
-  verbose = TRUE)
+upload_sqls_odbc(
+  d,
+  schema_name,
+  table_name,
+  dsn_name,
+  clear_table = FALSE,
+  create_table = FALSE,
+  convert_logical_to_integer = FALSE,
+  timezone = "UTC",
+  timezone_out = "UTC",
+  transaction = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{d}{Dataset to be uploaded to the dataset.  The object must inherit from \code{data.frame}.}
@@ -23,6 +32,10 @@ upload_sqls_odbc(d, schema_name, table_name, dsn_name,
 \item{create_table}{If the table structure has not yet been defined in the database, it will be created if \code{create_table} is \code{TRUE}.}
 
 \item{convert_logical_to_integer}{Convert all \code{logical} columns to \code{integer}.  This helps the database store the values as bits.}
+
+\item{timezone}{The server time zone.  Passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
+
+\item{timezone_out}{The time zone returned to R. Passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.  See https://www.tidyverse.org/blog/2019/12/odbc-1-2-0/.}
 
 \item{transaction}{Should the clear and upload steps be wrapped in a rollback transaction?}
 
@@ -50,7 +63,9 @@ OuhscMunge::upload_sqls_odbc(
   clear_table                = TRUE,
   transaction                = TRUE,
   verbose                    = TRUE,
-  convert_logical_to_integer = TRUE
+  convert_logical_to_integer = TRUE,
+  timezone                   = "America/Chicago",
+  timezone_out               = "America/Chicago"
 )
 }
 }

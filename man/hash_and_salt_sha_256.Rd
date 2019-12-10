@@ -4,8 +4,13 @@
 \alias{hash_and_salt_sha_256}
 \title{Salt and hash a value}
 \usage{
-hash_and_salt_sha_256(x, salt = "", min_characters = 1L,
-  max_characters = 2048L, na_if = c(""))
+hash_and_salt_sha_256(
+  x,
+  salt = "",
+  min_characters = 1L,
+  max_characters = 2048L,
+  na_if = c("")
+)
 }
 \arguments{
 \item{x}{A vector of values to convert.  it should be a \code{character} vector, or something that can be cast to a \code{character} vector.}

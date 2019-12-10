@@ -39,7 +39,7 @@ These two function return and print \code{NA}, which behaves like SQL
 (and probably matches the expectations of most users).
 
 See Stack Overflow Questions \href{https://stackoverflow.com/questions/48470746/using-dplyrgroup-by-to-find-min-dates-with-nas}{Using dplyr::group_by() to find min dates with NAs}
-and \href{https://stackoverflow.com/questions/27554410/r-inf-when-it-has-class-date-is-printing-na}{R Inf when it has class Date is printing NA}.
+and \href{https://stackoverflow.com/questions/27554410/r-inf-when-it-has-class-date-is-printing-na}{R \code{Inf} when it has class \code{Date} is printing \code{NA}}.
 
 The foundation of these functions was proposed in a \href{https://stackoverflow.com/a/48471923/1082435}{response}
 by Edward Visel (SO username \href{https://stackoverflow.com/users/4497050/alistaire}{alistaire}).

@@ -4,7 +4,14 @@
 \alias{execute_sql_file}
 \title{Execute a SQL file}
 \usage{
-execute_sql_file(path_sql, dsn, execute = TRUE, minimum_row_count = 0L)
+execute_sql_file(
+  path_sql,
+  dsn,
+  execute = TRUE,
+  minimum_row_count = 0L,
+  timezone = "UTC",
+  timezone_out = "UTC"
+)
 }
 \arguments{
 \item{path_sql}{A vector to of names to convert.  Required character.}
@@ -16,6 +23,10 @@ execute_sql_file(path_sql, dsn, execute = TRUE, minimum_row_count = 0L)
 (which will return a \code{tibble::tibble}).  Required \code{logical}.}
 
 \item{minimum_row_count}{If \code{execute} is false, the returned dataset should have at least this many rows, or an error will be thrown.  Default of 0.  Required integer.}
+
+\item{timezone}{The server time zone.  Passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
+
+\item{timezone_out}{The time zone returned to R. Passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.  See https://www.tidyverse.org/blog/2019/12/odbc-1-2-0/.}
 }
 \value{
 A vector of converted names.

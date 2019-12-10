@@ -3,7 +3,6 @@
 \docType{package}
 \name{OuhscMunge}
 \alias{OuhscMunge}
-\alias{OuhscMunge-package}
 \title{Data manipulation operations frequently used in OUHSC BBMC projects. \url{http://www.ouhsc.edu/bbmc/}}
 \description{
 Thanks to Funders, including \href{https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012}{HRSA/ACF D89MC23154}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/verify-values-headstart.R
 \name{verify_value_headstart}
 \alias{verify_value_headstart}
-\title{Generates code to verify a \href{base::data.frame()}{data.frame}.}
+\title{Generates code to verify a \href{base::data.frame()}{\code{data.frame}}.}
 \usage{
 verify_value_headstart(d)
 }
@@ -10,7 +10,7 @@ verify_value_headstart(d)
 \item{d}{The \code{data.frame} to verify.  Required.}
 }
 \description{
-Inspects properties of a \href{base::data.frame()}{data.frame} and
+Inspects properties of a \href{base::data.frame()}{\code{data.frame}} and
 prints code to the console that a developer can use to start to
 check the properties of a dataset, such as the names and types of each column.
 }

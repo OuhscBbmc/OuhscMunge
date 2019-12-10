@@ -26,7 +26,7 @@ trim_date(
 An atomic vector with the same number of elements as \code{x}.
 }
 \description{
-Trim extreme values from an atomic vector, and replace with a specific value (typically \code{NA_*}).
+Trim extreme values from an atomic vector, and replace with a specific value (typically \verb{NA_*}).
 }
 \note{
 The data type of \code{x}, \code{bounds}, and \code{replacement} must match the atomic data type of the function.

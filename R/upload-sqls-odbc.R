@@ -12,6 +12,8 @@
 #' @param create_table If the table structure has not yet been defined in the database, it will be created if `create_table` is `TRUE`.
 #' @param convert_logical_to_integer Convert all `logical` columns to `integer`.  This helps the database store the values as bits.
 #' @param transaction Should the clear and upload steps be wrapped in a rollback transaction?
+#' @param timezone The server time zone.  Passed to [DBI::dbConnect()].
+#' @param timezone_out The time zone returned to R. Passed to [DBI::dbConnect()].  See https://www.tidyverse.org/blog/2019/12/odbc-1-2-0/.
 #' @param verbose Write a message about the status of a successful upload.
 #'
 #' @details
@@ -33,7 +35,9 @@
 #'   clear_table                = TRUE,
 #'   transaction                = TRUE,
 #'   verbose                    = TRUE,
-#'   convert_logical_to_integer = TRUE
+#'   convert_logical_to_integer = TRUE,
+#'   timezone                   = "America/Chicago",
+#'   timezone_out               = "America/Chicago"
 #' )
 #' }
 
@@ -46,7 +50,10 @@ upload_sqls_odbc <- function(
   clear_table                   = FALSE,
   create_table                  = FALSE,
   convert_logical_to_integer    = FALSE,
+  timezone                      = "UTC",
+  timezone_out                  = "UTC",
   transaction                   = FALSE,
+
   verbose                       = TRUE
 ) {
 
@@ -59,6 +66,8 @@ upload_sqls_odbc <- function(
   checkmate::assert_logical(  create_table                                  , len=1L, any.missing=F)
   checkmate::assert_logical(  convert_logical_to_integer                    , len=1L, any.missing=F)
   checkmate::assert_logical(  transaction                                   , len=1L, any.missing=F)
+  checkmate::assert_character(timezone                                      , len=1L, any.missing=F)
+  checkmate::assert_character(timezone_out                                  , len=1L, any.missing=F)
   checkmate::assert_logical(  verbose                                       , len=1L, any.missing=F)
 
   start_time <- base::Sys.time()
@@ -95,8 +104,10 @@ upload_sqls_odbc <- function(
 
 
   channel <- DBI::dbConnect(
-    drv   = odbc::odbc(),
-    dsn   = dsn_name
+    drv           = odbc::odbc(),
+    dsn           = dsn_name,
+    timezone      = timezone,
+    timezone_out  = timezone_out
   )
 
   if( create_table) {
