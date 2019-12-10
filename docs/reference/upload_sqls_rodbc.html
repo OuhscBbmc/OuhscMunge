@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9011</span>
       </span>
     </div>
 
@@ -114,10 +114,17 @@
     <p>The function performs some extra configuration to improve robustness.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>upload_sqls_rodbc</span>(<span class='no'>d</span>, <span class='no'>table_name</span>, <span class='no'>dsn_name</span>, <span class='kw'>schema_name</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
-  <span class='kw'>clear_table</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>create_table</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>convert_logical_to_integer</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>transaction</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>upload_sqls_rodbc</span>(
+  <span class='no'>d</span>,
+  <span class='no'>table_name</span>,
+  <span class='no'>dsn_name</span>,
+  <span class='kw'>schema_name</span> <span class='kw'>=</span> <span class='fl'>NA_character_</span>,
+  <span class='kw'>clear_table</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>create_table</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>convert_logical_to_integer</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>transaction</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -74,7 +74,7 @@ https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/uti
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9011</span>
       </span>
     </div>
 
@@ -124,12 +124,16 @@ The undecorated version of this csv (which is better for computers, but harder f
 https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>package_janitor_remote</span>(<span class='no'>url_package_dependencies</span>,
-  <span class='kw'>cran_repo</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com"</span>, <span class='kw'>update_packages</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>check_xml_linux</span> <span class='kw'>=</span> (<span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>os</span> <span class='kw'>==</span>
-  <span class='st'>"linux-gnu"</span>), <span class='kw'>check_libcurl_linux</span> <span class='kw'>=</span> (<span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>os</span> <span class='kw'>==</span> <span class='st'>"linux-gnu"</span>),
+    <pre class="usage"><span class='fu'>package_janitor_remote</span>(
+  <span class='no'>url_package_dependencies</span>,
+  <span class='kw'>cran_repo</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com"</span>,
+  <span class='kw'>update_packages</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>check_xml_linux</span> <span class='kw'>=</span> (<span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>os</span> <span class='kw'>==</span> <span class='st'>"linux-gnu"</span>),
+  <span class='kw'>check_libcurl_linux</span> <span class='kw'>=</span> (<span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>os</span> <span class='kw'>==</span> <span class='st'>"linux-gnu"</span>),
   <span class='kw'>check_openssl_linux</span> <span class='kw'>=</span> (<span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>os</span> <span class='kw'>==</span> <span class='st'>"linux-gnu"</span>),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

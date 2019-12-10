@@ -79,7 +79,7 @@ have an mrn of 'abc', you can determine the same patient generated both visits."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9011</span>
       </span>
     </div>
 
@@ -134,8 +134,13 @@ had been '111' (especially when <em>salted</em>).  However, when you see that tw
 have an mrn of 'abc', you can determine the same patient generated both visits.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hash_and_salt_sha_256</span>(<span class='no'>x</span>, <span class='kw'>salt</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>min_characters</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>max_characters</span> <span class='kw'>=</span> <span class='fl'>2048L</span>, <span class='kw'>na_if</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>))</pre>
+    <pre class="usage"><span class='fu'>hash_and_salt_sha_256</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>salt</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>min_characters</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
+  <span class='kw'>max_characters</span> <span class='kw'>=</span> <span class='fl'>2048L</span>,
+  <span class='kw'>na_if</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>""</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

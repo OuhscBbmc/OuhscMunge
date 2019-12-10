@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9010</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9011</span>
       </span>
     </div>
 
@@ -114,7 +114,14 @@
     <p>Read a SQL file, and execute its text using the <code>odbc</code> and <code>DBI</code> packages.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>execute_sql_file</span>(<span class='no'>path_sql</span>, <span class='no'>dsn</span>, <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>minimum_row_count</span> <span class='kw'>=</span> <span class='fl'>0L</span>)</pre>
+    <pre class="usage"><span class='fu'>execute_sql_file</span>(
+  <span class='no'>path_sql</span>,
+  <span class='no'>dsn</span>,
+  <span class='kw'>execute</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>minimum_row_count</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>timezone</span> <span class='kw'>=</span> <span class='st'>"UTC"</span>,
+  <span class='kw'>timezone_out</span> <span class='kw'>=</span> <span class='st'>"UTC"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,6 +143,14 @@
     <tr>
       <th>minimum_row_count</th>
       <td><p>If <code>execute</code> is false, the returned dataset should have at least this many rows, or an error will be thrown.  Default of 0.  Required integer.</p></td>
+    </tr>
+    <tr>
+      <th>timezone</th>
+      <td><p>The server time zone.  Passed to <code><a href='https://rdrr.io/pkg/DBI/man/dbConnect.html'>DBI::dbConnect()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>timezone_out</th>
+      <td><p>The time zone returned to R. Passed to <code><a href='https://rdrr.io/pkg/DBI/man/dbConnect.html'>DBI::dbConnect()</a></code>.  See https://www.tidyverse.org/blog/2019/12/odbc-1-2-0/.</p></td>
     </tr>
     </table>
 
