@@ -40,6 +40,8 @@
 #' @param check_openssl_linux display a message about the openssl Linux package.
 #' @param verbose print messages to the console (or wherever messages are being directed).
 #'
+#' @importFrom utils installed.packages
+#'
 #' @author Will Beasley
 #'
 #' @examples
@@ -210,5 +212,15 @@ package_janitor_remote <- function(
   }
 
   base::rm(ds_install_from_github, i)
+  # ---- notify-tinytex ---------------------------------------------------------
+  if (any(installed.packages()=="tinytex")) {
+    # This comparison is copied from tinytex:::is_tinytex().
+    if (!(gsub("^[.]", "", tolower(basename(tinytex::tinytex_root()))) == "tinytex"))
+      tinytex::install_tinytex()
+      # message("If you haven't already, install the TeX part of tinytex with `tinytex::install_tinytex()`.")
+  }
+
+  # ---- return ---------------------------------------------------------
+
   if( verbose ) message("package_janitor is complete.")
 }
