@@ -35,23 +35,23 @@
 #' b[missing_indices] <- NA_character_
 #' b <- OuhscMunge::replace_nas_with_explicit(b, add_unknown_level=TRUE)
 
-replace_nas_with_explicit <- function( scores, new_na_label="Unknown", create_factor=FALSE, add_unknown_level=FALSE ) {
+replace_nas_with_explicit <- function(scores, new_na_label = "Unknown", create_factor = FALSE, add_unknown_level = FALSE ) {
 
-  if( create_factor & !is.factor(scores) ) {
+  if (create_factor & !is.factor(scores)) {
     scores <- factor(scores)
   }
 
-  if( add_unknown_level ) {
-    if( !is.factor(scores) )
-      stop("The `replace_nas_with_explicit()` function cannot add a level to `scores` when it is not a factor.  Consider setting `create_factor=TRUE`.")
+  if (add_unknown_level) {
+    if (!is.factor(scores))
+      stop("The `replace_nas_with_explicit()` function cannot add a level to `scores` when it is not a factor.  Consider setting `create_factor = TRUE`.")
 
     levels(scores) <- c(levels(scores), new_na_label)  #Add a new level called 'Unknown'
   }
 
   scores[is.na(scores)] <- new_na_label #"Unknown"
 
-  if( any(is.na(scores)) )
+  if (any(is.na(scores)))
     stop("The reassigned factor variable should not have any NA values.")
 
-  return( scores )
+  scores
 }

@@ -50,17 +50,17 @@ execute_sql_file <- function(
       timezone_out  = timezone_out
     )
 
-    if( execute ) {
+    if (execute) {
       returned_value <- DBI::dbExecute(channel, sql)
     } else {
       returned_value <- DBI::dbGetQuery(channel, sql) %>%
         tibble::as_tibble()
 
-      checkmate::assert_tibble(returned_value, min.rows=minimum_row_count)
+      checkmate::assert_tibble(returned_value, min.rows = minimum_row_count)
     }
-  }, finally={
+  }, finally = {
     odbc::dbDisconnect(channel)
   })
 
-  return( returned_value )
+  returned_value
 }

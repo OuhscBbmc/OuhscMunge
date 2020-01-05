@@ -29,7 +29,7 @@ first_nonmissing <- function(
   na_codes = NULL
 ) {
   # x[which(!is.na(x))[1]]
-  if( rlang::is_null(na_codes) ) {
+  if (rlang::is_null(na_codes)) {
     indices_na <- which(!is.na(x))
   } else {
     indices_na <- which(!is.na(x) & !(x %in% na_codes))
@@ -37,7 +37,7 @@ first_nonmissing <- function(
 
   y <- x[indices_na[1]]
 
-  if( rlang::is_null(value_if_all_na) ) {
+  if (rlang::is_null(value_if_all_na)) {
     return( y )
   } else {
     return( dplyr::coalesce(y, value_if_all_na) )

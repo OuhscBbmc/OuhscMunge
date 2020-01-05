@@ -61,35 +61,35 @@
 #' match_statistics_display(ds_parent, ds_child, join_columns="parent_id")
 #' match_statistics_display(ds_parent, ds_child, join_columns=c("letter", "index"))
 
-match_statistics <- function( d_parent, d_child, join_columns ) {
+match_statistics <- function(d_parent, d_child, join_columns) {
   checkmate::assert_data_frame(d_parent, null.ok = FALSE)
   checkmate::assert_data_frame(d_child , null.ok = FALSE)
   checkmate::assert_character(join_columns, min.len=1, any.missing=F)
 
-  if( is.null(names(join_columns)) ) {
+  if (is.null(names(join_columns))) {
     flipped_join_columns <- join_columns
   } else {
     flipped_join_columns <- names(join_columns)
     names(flipped_join_columns) <- join_columns
-    flipped_join_columns <- ifelse(nchar(flipped_join_columns)==0L, names(flipped_join_columns), flipped_join_columns)
+    flipped_join_columns <- ifelse(nchar(flipped_join_columns) == 0L, names(flipped_join_columns), flipped_join_columns)
   }
 
-  for( i in seq_along(join_columns) ) {
-    if( !(flipped_join_columns[i] %in% colnames(d_parent)) )
+  for (i in seq_along(join_columns)) {
+    if (!(flipped_join_columns[i] %in% colnames(d_parent)))
       base::stop("The variable `", flipped_join_columns[i], "` is not found in the parent table passed to `OuhscMunge::match_statistics()`.")
-    if( !(join_columns[i] %in% colnames(d_child)) )
+    if (!(join_columns[i] %in% colnames(d_child)))
       base::stop("The variable `", join_columns[i], "` is not found in the child table passed to `OuhscMunge::match_statistics()`.")
   }
 
-  parent_in_child            <- nrow(dplyr::semi_join(d_parent, d_child, by=join_columns))
-  parent_not_in_child        <- nrow(dplyr::anti_join(d_parent, d_child, by=join_columns))
+  parent_in_child            <- nrow(dplyr::semi_join(d_parent, d_child, by = join_columns))
+  parent_not_in_child        <- nrow(dplyr::anti_join(d_parent, d_child, by = join_columns))
   deadbeat_proportion        <- parent_not_in_child / nrow(d_parent)
-  parent_na_any              <- sum(apply(dplyr::select(d_parent, !! flipped_join_columns), MARGIN=1, FUN=function(x) any(is.na(x))))
+  parent_na_any              <- sum(apply(dplyr::select(d_parent, !! flipped_join_columns), MARGIN = 1, FUN = function(x) any(is.na(x))))
 
-  child_in_parent            <- nrow(dplyr::semi_join(d_child, d_parent, by=flipped_join_columns))
-  child_not_in_parent        <- nrow(dplyr::anti_join(d_child, d_parent, by=flipped_join_columns))
+  child_in_parent            <- nrow(dplyr::semi_join(d_child, d_parent, by = flipped_join_columns))
+  child_not_in_parent        <- nrow(dplyr::anti_join(d_child, d_parent, by = flipped_join_columns))
   orphan_proportion          <- child_not_in_parent / nrow(d_child)
-  child_na_any               <- sum(apply(dplyr::select(d_child, !! join_columns), MARGIN=1, FUN=function(x) any(is.na(x))))
+  child_na_any               <- sum(apply(dplyr::select(d_child, !! join_columns), MARGIN = 1, FUN = function(x) any(is.na(x))))
 
   # browser()
   # apply(dplyr::select(d_parent, !! flipped_join_columns), MARGIN=1, FUN=function(x) length(x))
@@ -97,13 +97,13 @@ match_statistics <- function( d_parent, d_child, join_columns ) {
   parent <- c(parent_in_child = parent_in_child, parent_not_in_child = parent_not_in_child, parent_na_any = parent_na_any, deadbeat_proportion  = deadbeat_proportion )
   child  <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, child_na_any  = child_na_any , orphan_proportion    = orphan_proportion   )
 
-  return( c(parent, child) )
+  c(parent, child)
 }
 
-match_statistics_display <- function( d_parent, d_child, join_columns ) {
+match_statistics_display <- function(d_parent, d_child, join_columns) {
   # No need to check parameters, because `match_statistics()` does it.
 
-  m <- match_statistics( d_parent, d_child, join_columns )
+  m <- match_statistics(d_parent, d_child, join_columns)
   l <- list()
 
   l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
@@ -120,19 +120,18 @@ match_statistics_display <- function( d_parent, d_child, join_columns ) {
   d <- tibble::tibble(
       key   = gsub("_", " ", names(l)),
       value = as.character(l)
-    )  %>%
+    ) %>%
     dplyr::mutate(
       key_width_max   = max(nchar(.data$key)),
       value_width_max = max(nchar(.data$value))
     )
 
-  s <- paste0(
+  paste0(
     "\n\nMatch stats for `", deparse(substitute(d_parent)), "` vs `", deparse(substitute(d_child)), "` on column(s): ", as.character(deparse(substitute(join_columns))), ".\n",
     paste(
       sprintf("| %-*s | %*s |", d$key_width_max, d$key, d$value_width_max, d$value),
-      collapse="\n"
+      collapse = "\n"
     ),
     "\n"
   )
-  return( s )
 }

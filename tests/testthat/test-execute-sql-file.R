@@ -3,7 +3,8 @@ library(testthat)
 # ---- execute_sql_file --------------------------------------------------------
 context("execute_sql_file")
 
-path  <- base::file.path(devtools::inst(name="OuhscMunge"), "hdid-select.sql")
+path  <- base::file.path(devtools::inst(name = "OuhscMunge"), "hdid-select.sql")
+# system.file("hdid-select.sql", package = "OuhscMunge")
 dsn   <- "cdw_cache_staging"
 
 test_that("sql file -bad path", {

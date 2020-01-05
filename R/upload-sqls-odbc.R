@@ -73,14 +73,14 @@ upload_sqls_odbc <- function(
   start_time <- base::Sys.time()
   print(start_time)
 
-  if( convert_logical_to_integer ) {
+  if (convert_logical_to_integer) {
     d <- dplyr::mutate_if(d, is.logical, as.integer)
   }
 
   requireNamespace("DBI")
   requireNamespace("odbc")
 
-  if( schema_name == "dbo" ) {
+  if (schema_name == "dbo") {
     table_id <- DBI::Id(
       table   = table_name
     )
@@ -96,10 +96,10 @@ upload_sqls_odbc <- function(
   pattern <- "^\\w+$"
 
   # The real way would be to use a conditional, but it's not supported: ^(\[)?\w+(?(1)\])$
-  if( !grepl(pattern, schema_name) )
+  if (!grepl(pattern, schema_name))
     stop("The table's database schema's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
-  if( !grepl(pattern, table_id@name[["table"]]) )
+  if (!grepl(pattern, table_id@name[["table"]]))
     stop("The table's name must containly only letters, digits, and underscores.  Current versions may be more flexible.")
 
 
@@ -110,7 +110,7 @@ upload_sqls_odbc <- function(
     timezone_out  = timezone_out
   )
 
-  if( create_table) {
+  if (create_table) {
     overwrite <- TRUE
     append    <- FALSE
   } else {
@@ -118,19 +118,17 @@ upload_sqls_odbc <- function(
     append    <- TRUE
   }
 
-  tryCatch( {
-    if( transaction ) {
+  tryCatch({
+    if (transaction) {
       DBI::dbBegin(channel)
     }
 
-    if( verbose ) {
+    if (verbose) {
       DBI::dbGetInfo(channel)
     }
 
-
-
     # Check the *qualified* table exists.
-    if( !create_table & !DBI::dbExistsTable(channel, table_id) )
+    if (!create_table & !DBI::dbExistsTable(channel, table_id))
       stop(glue::glue("The following table does not exist, or is not accessible on this DSN: {schema}.{tbl}", schema=schema_name, tbl=table_name))
 
     # if( !create_table ) {
@@ -140,8 +138,12 @@ upload_sqls_odbc <- function(
     # }
 
     # Truncate the table's rows/records
-    if( !create_table & clear_table ) {
-      sql_truncate      <- glue::glue("TRUNCATE TABLE {schema}.{tbl}", schema=schema_name, tbl=table_id@name[["table"]])
+    if (!create_table & clear_table) {
+      sql_truncate      <- glue::glue(
+        "TRUNCATE TABLE {schema}.{tbl}",
+        schema  = schema_name,
+        tbl     = table_id@name[["table"]]
+      )
       result_truncate   <- DBI::dbSendQuery(channel, sql_truncate)
       DBI::dbClearResult(result_truncate)
     }
@@ -155,37 +157,37 @@ upload_sqls_odbc <- function(
       append      = append
     )
 
-    if( transaction ) {
+    if (transaction) {
       DBI::dbCommit(channel)
     }
 
-    if( verbose ) {
+    if (verbose) {
       message(
         sprintf(
           "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes.",
           schema_name,
           table_name,
-          format(nrow(d), big.mark=",", scientific = F),
+          format(nrow(d), big.mark = ",", scientific = FALSE),
           dsn_name,
-          difftime(Sys.time(), start_time, units="mins")
+          difftime(Sys.time(), start_time, units = "mins")
         )
       )
     }
 
-  }, error = function( e ) {
+  }, error = function(e) {
 
-    if( transaction ) {
+    if (transaction) {
       DBI::dbRollback(channel)
     }
     stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, "`.\n", e)
 
   }, finally = {
-    if( exists("channel") )
+    if (exists("channel"))
       DBI::dbDisconnect(channel)
 
     # suppressWarnings(DBI::dbClearResult(result_count))    # A warning message is produced if it was already cleared above.
 
-    if( exists("result_truncate") )
+    if (exists("result_truncate"))
       suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
   })
 }

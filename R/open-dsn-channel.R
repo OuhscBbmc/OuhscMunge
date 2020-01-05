@@ -34,8 +34,8 @@
 #' @export
 open_dsn_channel_sqls <- function(
   dsn_name,
-  driver_version_minimum=numeric_version("13.0"),
-  driver_version_maximum=numeric_version("99.0")
+  driver_version_minimum = numeric_version("13.0"),
+  driver_version_maximum = numeric_version("99.0")
 ) {
 
   requireNamespace("RODBC")
@@ -51,14 +51,14 @@ open_dsn_channel_sqls <- function(
   driver_link <- "https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server"
 
   dsn_exists <- (dsn_name %in% names(RODBC::odbcDataSources()))
-  if( !dsn_exists ) {
+  if (!dsn_exists) {
     m <- "The DSN `%s` does not exist on your local machine.  Please see the installation instructions at %s."
     stop(sprintf(m, dsn_name, create_link))
   }
 
   # Uses Trusted/integrated authentication
   channel <- RODBC::odbcConnect(dsn = dsn_name)
-  if( channel == -1L ) {
+  if (channel == -1L) {
     RODBC::odbcClose(channel)
     m <- "The ODBC channel should open successfully.  Please see the installation instructions at %s."
     stop(sprintf(m, dsn_name, create_link))
@@ -68,7 +68,7 @@ open_dsn_channel_sqls <- function(
 
   # print(numeric_version(info["Driver_Ver"]))
 
-  if( !(driver_version_minimum <= numeric_version(info["Driver_Ver"])) ) {
+  if (!(driver_version_minimum <= numeric_version(info["Driver_Ver"]))) {
     RODBC::odbcClose(channel)
     m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %s.  Please see the installation instructions at %s.  The DSN name is `%s`."
     stop(sprintf(m, as.character(driver_version_minimum), driver_link, create_link, dsn_name))
@@ -78,14 +78,14 @@ open_dsn_channel_sqls <- function(
     stop(sprintf(m, as.character(driver_version_maximum), driver_link, create_link, dsn_name))
   }
 
-  return( channel )
+  channel
 }
 
 #' @export
 open_dsn_channel_sqls_odbc <- function(
   dsn_name,
-  driver_version_minimum=numeric_version("13.0"),
-  driver_version_maximum=numeric_version("99.0")
+  driver_version_minimum = numeric_version("13.0"),
+  driver_version_maximum = numeric_version("99.0")
 ) {
 
   requireNamespace("odbc")
@@ -100,9 +100,9 @@ open_dsn_channel_sqls_odbc <- function(
   create_link <- "https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/odbc-dsn.md"
   driver_link <- "https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server"
 
-  if( requireNamespace("RODBC", quietly = TRUE) ) {
+  if (requireNamespace("RODBC", quietly = TRUE)) {
     dsn_exists <- (dsn_name %in% names(RODBC::odbcDataSources()))
-    if( !dsn_exists ) {
+    if (!dsn_exists) {
       m <- "The DSN `%s` does not exist on your local machine.  Please see the installation instructions at %s."
       stop(sprintf(m, dsn_name, create_link))
     }
@@ -119,7 +119,7 @@ open_dsn_channel_sqls_odbc <- function(
 
   info <- DBI::dbGetInfo(channel)
 
-  if( !(driver_version_minimum <= numeric_version(info$driver.version)) ) {
+  if (!(driver_version_minimum <= numeric_version(info$driver.version))) {
     DBI::dbDisconnect(channel)
     m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %s.  Please see the installation instructions at %s.  The DSN name is `%s`."
     stop(sprintf(m, as.character(driver_version_minimum), driver_link, create_link, dsn_name))
@@ -129,5 +129,5 @@ open_dsn_channel_sqls_odbc <- function(
     stop(sprintf(m, as.character(driver_version_maximum), driver_link, create_link, dsn_name))
   }
 
-  return( channel )
+  channel
 }

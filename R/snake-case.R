@@ -27,7 +27,7 @@
 #' snake_case(colnames(datasets::iris))
 #' snake_case(c("PatientID", "PatientDOB", "DOB", "name.last", "name.first"))
 
-snake_case <- function( x ) {
+snake_case <- function(x) {
   #Second & third lines use http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
   s <- gsub("\\.", "_", x)                                    # Replace dots with underscores.
   s <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2", s)                 # Separate w/ dashes based on capitalization
@@ -35,5 +35,5 @@ snake_case <- function( x ) {
   s <- gsub(" ", "_", s)                                      # Replace spaces with underscores.
   s <- gsub("__", "_", s)                                     # Replace double-underscores with single.
 
-  return( s )
+  s
 }

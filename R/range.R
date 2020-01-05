@@ -47,16 +47,16 @@
 
 # ---- date --------------------------------------------------------------------
 #' @export
-date_min_with_nas <- function( x ) {
-  if( all(is.na(x)) )
+date_min_with_nas <- function(x) {
+  if (all(is.na(x)))
     as.Date(NA_character_)
   else
     min(x, na.rm = TRUE)
 }
 
 #' @export
-date_max_with_nas <- function( x ) {
-  if( all(is.na(x)) )
+date_max_with_nas <- function(x) {
+  if(all(is.na(x)))
     as.Date(NA_character_)
   else
     max(x, na.rm = TRUE)
@@ -73,24 +73,24 @@ date_range_with_nas <- function( x ) {
 
 # ---- numeric -----------------------------------------------------------------
 #' @export
-min_with_nas_numeric <- function( x ) {
-  if( all(is.na(x)) )
+min_with_nas_numeric <- function(x) {
+  if(all(is.na(x)))
     NA_real_
   else
     min(x, na.rm = TRUE)
 }
 
 #' @export
-max_with_nas_numeric <- function( x ) {
-  if( all(is.na(x)) )
+max_with_nas_numeric <- function(x) {
+  if (all(is.na(x)))
     NA_real_
   else
     max(x, na.rm = TRUE)
 }
 
 #' @export
-range_with_nas_numeric <- function( x ) {
-  if( all(is.na(x)) )
+range_with_nas_numeric <- function(x) {
+  if (all(is.na(x)))
     c(NA_real_, NA_real_)
   else
     range(x, na.rm = TRUE)
@@ -98,24 +98,24 @@ range_with_nas_numeric <- function( x ) {
 
 # ---- integer -----------------------------------------------------------------
 #' @export
-min_with_nas_integer <- function( x ) {
-  if( all(is.na(x)) )
+min_with_nas_integer <- function(x) {
+  if (all(is.na(x)))
     NA_integer_
   else
     min(x, na.rm = TRUE)
 }
 
 #' @export
-max_with_nas_integer <- function( x ) {
-  if( all(is.na(x)) )
+max_with_nas_integer <- function(x) {
+  if (all(is.na(x)))
     NA_integer_
   else
     max(x, na.rm = TRUE)
 }
 
 #' @export
-range_with_nas_integer <- function( x ) {
-  if( all(is.na(x)) )
+range_with_nas_integer <- function(x) {
+  if (all(is.na(x)))
     c(NA_integer_, NA_integer_)
   else
     range(x, na.rm = TRUE)

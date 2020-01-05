@@ -26,8 +26,7 @@
 #'   )
 #' verify_value_headstart(storms_2)
 
-
-verify_value_headstart <- function( d ) {
+verify_value_headstart <- function(d) {
   checkmate::assert_class(d, "data.frame")
 
   d_structure <- tibble::tibble(
@@ -58,11 +57,11 @@ verify_value_headstart <- function( d ) {
       )
     )
   # paste(d_structure$code, collapse="\n")
-  cat(d_structure$code, sep="\n")
+  cat(d_structure$code, sep = "\n")
 }
 
 # Private/non-exposed functions
-boundaries <- function( x ) {
+boundaries <- function(x) {
   data_types <- class(x) # Remember this will have more than one value for columns that inherit multiple datatypes, eg 'factor' and 'ordered'
 
   if(      "numeric"   %in% data_types) boundaries_number(x)
@@ -73,10 +72,10 @@ boundaries <- function( x ) {
 } # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
 boundaries_number <- function( x ) {
-  min_number <- suppressWarnings(min(x, na.rm=T))
-  max_number <- suppressWarnings(max(x, na.rm=T))
+  min_number <- suppressWarnings(min(x, na.rm = TRUE))
+  max_number <- suppressWarnings(max(x, na.rm = TRUE))
 
-  if( is.infinite(min_number) | is.infinite(max_number))
+  if (is.infinite(min_number) | is.infinite(max_number))
    cat('stop("The number vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   sprintf(
@@ -84,30 +83,26 @@ boundaries_number <- function( x ) {
     floor(  min_number),
     ceiling(max_number)
   )
-} # boundaries_number(rnorm(10))
-# boundaries_number(NA_integer_)
-# checkmate::assert_integer(NA_integer_ , lower=Inf, upper=-Inf)
+}
 
-boundaries_character <- function( x ) {
-  # browser()
-  min_char_count <- suppressWarnings(as.numeric(min(nchar(x), na.rm=T)))
-  max_char_count <- suppressWarnings(as.numeric(max(nchar(x), na.rm=T)))
+boundaries_character <- function(x) {
+  min_char_count <- suppressWarnings(as.numeric(min(nchar(x), na.rm = TRUE)))
+  max_char_count <- suppressWarnings(as.numeric(max(nchar(x), na.rm = TRUE)))
 
-  if( is.infinite(min_char_count) | is.infinite(max_char_count))
+  if (is.infinite(min_char_count) | is.infinite(max_char_count))
     cat('stop("The character vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   min_char_count <- dplyr::if_else(is.infinite(min_char_count), "NA", as.character(min_char_count))
   max_char_count <- dplyr::if_else(is.infinite(max_char_count), "NA", as.character(max_char_count))
 
   sprintf(', pattern="^.{%s,%s}$"', min_char_count, max_char_count)
-} # boundaries_character(dplyr::band_members$band)
-# boundaries_character(NA_character_)
+}
 
-boundaries_date <- function( x ) {
-  min_date <- suppressWarnings(min(x, na.rm=T))
-  max_date <- suppressWarnings(max(x, na.rm=T))
+boundaries_date <- function(x) {
+  min_date <- suppressWarnings(min(x, na.rm = TRUE))
+  max_date <- suppressWarnings(max(x, na.rm = TRUE))
 
-  if( is.infinite(min_date) | is.infinite(max_date))
+  if (is.infinite(min_date) | is.infinite(max_date))
     cat('stop("The date vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   min_date <- dplyr::if_else(is.infinite(min_date), "NA", as.character(min_date))
@@ -115,4 +110,3 @@ boundaries_date <- function( x ) {
 
   sprintf(', lower=as.Date("%s"), upper=as.Date("%s")', min_date, max_date)
 }
-# boundaries_date(as.Date(NA_character_))
