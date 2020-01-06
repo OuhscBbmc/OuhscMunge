@@ -35,8 +35,7 @@
 #' b[missing_indices] <- NA_character_
 #' b <- OuhscMunge::replace_nas_with_explicit(b, add_unknown_level=TRUE)
 
-replace_nas_with_explicit <- function(scores, new_na_label = "Unknown", create_factor = FALSE, add_unknown_level = FALSE ) {
-
+replace_nas_with_explicit <- function(scores, new_na_label = "Unknown", create_factor = FALSE, add_unknown_level = FALSE) {
   if (create_factor & !is.factor(scores)) {
     scores <- factor(scores)
   }

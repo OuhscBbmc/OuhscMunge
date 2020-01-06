@@ -43,7 +43,7 @@
 
 
 #' @export
-trim_numeric <- function(x, bounds = c(-Inf, Inf), replacement = NA_real_ ) {
+trim_numeric <- function(x, bounds = c(-Inf, Inf), replacement = NA_real_) {
   checkmate::assert_numeric(x, any.missing=T)
   checkmate::assert_numeric(bounds, min.len=2, max.len=2, any.missing=F)
   checkmate::assert_numeric(replacement, min.len=1, max.len=1)

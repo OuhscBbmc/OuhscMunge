@@ -80,7 +80,7 @@ retrieve_key_value <- function(
 
   base::tryCatch(
     expr = {
-      ds_value <- RODBCext::sqlExecute(channel, sql, d_input, fetch = TRUE, stringsAsFactors=FALSE)
+      ds_value <- RODBCext::sqlExecute(channel, sql, d_input, fetch = TRUE, stringsAsFactors = FALSE)
     }, finally = {
       if (close_channel_on_exit) RODBC::odbcClose(channel)
     }

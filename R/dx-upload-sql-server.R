@@ -33,7 +33,7 @@ validate_non_nulls <- function(dsn_name, table_name, d) {
   )
 }
 
-inspect_variable_types <- function( dsn_name, table_name, d ) {
+inspect_variable_types <- function(dsn_name, table_name, d) {
   #See if types are consistent.
   d_column_info <- retrieve_column_info(dsn_name, table_name)
 

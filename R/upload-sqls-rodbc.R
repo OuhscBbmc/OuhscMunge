@@ -114,7 +114,7 @@ upload_sqls_rodbc <- function(
       )
     }
 
-  }, error = function( e ) {
+  }, error = function(e) {
 
     if (transaction) {
       RODBC::odbcEndTran(channel, commit = FALSE)

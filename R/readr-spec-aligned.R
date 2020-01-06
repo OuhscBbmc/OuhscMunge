@@ -56,7 +56,7 @@ readr_spec_aligned <- function(...) {
     #   aligned = ")"
     # ) %>%
     dplyr::pull(.data$aligned) %>%
-    paste(collapse="\n") %>%
+    paste(collapse = "\n") %>%
     # I'd prefer this approach, but the `.` is causing problems with R CMD check.
     paste0(
       "col_types <- readr::cols_only(\n",

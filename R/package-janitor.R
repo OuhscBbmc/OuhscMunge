@@ -103,9 +103,9 @@ package_janitor_remote <- function(
 
 
   # ---- cran-packages -----------------------------------------------------------
-  if( verbose ) message("package_janitor is updating the existing packages from CRAN.")
-  if( update_packages )
-    utils::update.packages(ask=FALSE, checkBuilt=TRUE, repos=cran_repo)
+  if (verbose) message("package_janitor is updating the existing packages from CRAN.")
+  if (update_packages)
+    utils::update.packages(ask = FALSE, checkBuilt = TRUE, repos = cran_repo)
 
 
   # ---- install-devtools --------------------------------------------------------
@@ -122,27 +122,27 @@ package_janitor_remote <- function(
   if (verbose) message("package_janitor is installing the CRAN packages:")
 
   for (package_name in ds_install_from_cran$package_name) {
-    if (package_name =="devtools") {
+    if (package_name == "devtools") {
       if (verbose) message("\nThe `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")
 
     } else if (package_name == "httr") {
-      if( verbose ) message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      if (verbose) message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
 
     } else {
-      available <- base::requireNamespace(package_name, quietly=TRUE) # Checks if it's available
+      available <- base::requireNamespace(package_name, quietly = TRUE) # Checks if it's available
       if (!available) {
-        if( verbose ) message("\nInstalling `", package_name, "` from CRAN, including its dependencies.")
-        utils::install.packages(package_name, dependencies=dependencies, repos=cran_repo)
+        if (verbose) message("\nInstalling `", package_name, "` from CRAN, including its dependencies.")
+        utils::install.packages(package_name, dependencies = dependencies, repos = cran_repo)
 
       } else if (update_packages) {
         if (verbose) message("\n`", package_name, "` exists, and verifying it's dependencies are installed too.")
 
         # Make sure all their dependencies are installed & up-to-date
-        need_to_install <- remotes::package_deps(package_name, dependencies=dependencies)$package
+        need_to_install <- remotes::package_deps(package_name, dependencies = dependencies)$package
         if (verbose)
-          message("Package `", package_name, "` has ", length(need_to_install), " dependencies: ", paste(need_to_install, collapse =", "), ".")
+          message("Package `", package_name, "` has ", length(need_to_install), " dependencies: ", paste(need_to_install, collapse = ", "), ".")
 
-        remotes::update_packages(need_to_install, repos=cran_repo)
+        remotes::update_packages(need_to_install, repos = cran_repo)
       }
       base::rm(available)
     }
@@ -156,7 +156,7 @@ package_janitor_remote <- function(
 
   if (check_xml_linux) {
     xml_results <- base::system("locate r-cran-xml")
-    xml_missing <- (xml_results==0)
+    xml_missing <- (xml_results == 0)
 
     if (xml_missing)
       base::warning(
@@ -187,7 +187,7 @@ package_janitor_remote <- function(
 
   # ---- check-linux-openssl -----------------------------------------------------
   if (check_openssl_linux) {
-    openssl_results <- as.integer(base::system("locate libssl-dev | wc -l", intern=TRUE))
+    openssl_results <- as.integer(base::system("locate libssl-dev | wc -l", intern = TRUE))
     openssl_missing <- (openssl_results == 0L)
 
     if (openssl_missing)
@@ -210,7 +210,7 @@ package_janitor_remote <- function(
 
     username        <- ds_install_from_github$github_username[i]
     repository_name <- paste0(username, "/", package_name)
-    devtools::install_github(repo=repository_name)
+    devtools::install_github(repo = repository_name)
     base::rm(package_name, username, repository_name)
   }
 
@@ -225,5 +225,5 @@ package_janitor_remote <- function(
 
   # ---- return ---------------------------------------------------------
 
-  if( verbose ) message("package_janitor is complete.")
+  if (verbose) message("package_janitor is complete.")
 }

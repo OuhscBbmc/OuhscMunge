@@ -38,8 +38,8 @@ first_nonmissing <- function(
   y <- x[indices_na[1]]
 
   if (rlang::is_null(value_if_all_na)) {
-    return( y )
+    return(y)
   } else {
-    return( dplyr::coalesce(y, value_if_all_na) )
+    return(dplyr::coalesce(y, value_if_all_na))
   }
 }

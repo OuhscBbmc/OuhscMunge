@@ -44,7 +44,7 @@ verify_data_frame <- function(d, minimum_row_count = 10L) {
   }
 
   # Check that the parameter is single, nonmissing positive integer.
-  checkmate::assert_integerish(minimum_row_count, len=1L, lower=0, any.missing=F)
+  checkmate::assert_integerish(minimum_row_count, len = 1L, lower = 0, any.missing = F)
 
   checkmate::assert_data_frame(
     d,

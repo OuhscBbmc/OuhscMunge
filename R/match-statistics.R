@@ -91,9 +91,6 @@ match_statistics <- function(d_parent, d_child, join_columns) {
   orphan_proportion          <- child_not_in_parent / nrow(d_child)
   child_na_any               <- sum(apply(dplyr::select(d_child, !! join_columns), MARGIN = 1, FUN = function(x) any(is.na(x))))
 
-  # browser()
-  # apply(dplyr::select(d_parent, !! flipped_join_columns), MARGIN=1, FUN=function(x) length(x))
-
   parent <- c(parent_in_child = parent_in_child, parent_not_in_child = parent_not_in_child, parent_na_any = parent_na_any, deadbeat_proportion  = deadbeat_proportion )
   child  <- c(child_in_parent = child_in_parent, child_not_in_parent = child_not_in_parent, child_na_any  = child_na_any , orphan_proportion    = orphan_proportion   )
 
@@ -106,13 +103,13 @@ match_statistics_display <- function(d_parent, d_child, join_columns) {
   m <- match_statistics(d_parent, d_child, join_columns)
   l <- list()
 
-  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
-  l$parent_not_in_child         <- format(m["parent_not_in_child"]   , big.mark=",")
-  l$parent_na_any               <- format(m["parent_na_any"]         , big.mark=",")
-  l$child_in_parent             <- format(m["child_in_parent"]       , big.mark=",")
-  l$child_not_in_parent         <- format(m["child_not_in_parent"]   , big.mark=",")
-  l$child_na_any                <- format(m["child_na_any"]          , big.mark=",")
-  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark=",")
+  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark = ",")
+  l$parent_not_in_child         <- format(m["parent_not_in_child"]   , big.mark = ",")
+  l$parent_na_any               <- format(m["parent_na_any"]         , big.mark = ",")
+  l$child_in_parent             <- format(m["child_in_parent"]       , big.mark = ",")
+  l$child_not_in_parent         <- format(m["child_not_in_parent"]   , big.mark = ",")
+  l$child_na_any                <- format(m["child_na_any"]          , big.mark = ",")
+  l$parent_in_child             <- format(m["parent_in_child"]       , big.mark = ",")
 
   l$deadbeat_proportion         <- sprintf("%0.4f%%", m["deadbeat_proportion"]* 100)
   l$orphan_proportion           <- sprintf("%0.4f%%", m["orphan_proportion"]  * 100)

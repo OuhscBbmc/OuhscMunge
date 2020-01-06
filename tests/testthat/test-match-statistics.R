@@ -63,7 +63,7 @@ test_that("match_statistics -two columns w/ 2 different names", {
 test_that("match_statistics -bad parent name", {
   expect_error(
     match_statistics(ds_parent, ds_child, join_columns = c("BAD" = "Letter", "index" = "Index"))
-    , 'The variable `BAD` is not found in the parent table passed to `OuhscMunge::match_statistics\\(\\)`'
+    , "The variable `BAD` is not found in the parent table passed to `OuhscMunge::match_statistics\\(\\)`"
   )
 })
 
@@ -71,7 +71,7 @@ test_that("match_statistics -bad child name", {
   d_c <- dplyr::rename(ds_child, Letter = letter, Index = index)
   expect_error(
     match_statistics(ds_parent, d_c, join_columns = c("letter" = "Letter", "index" = "BAD"))
-    , 'The variable `BAD` is not found in the child table passed to `OuhscMunge::match_statistics\\(\\)`'
+    , "The variable `BAD` is not found in the child table passed to `OuhscMunge::match_statistics\\(\\)`"
   )
 })
 
@@ -89,14 +89,14 @@ test_that("NAs in single join columns", {
 
 test_that("NAs in double join columns", {
   d_p <- ds_parent
-  d_p[c(2,5,7  ), ]$letter <- NA_integer_
-  d_p[c(  5,7,8), ]$index <- NA_integer_
+  d_p[c(2, 5, 7   ), ]$letter <- NA_integer_
+  d_p[c(   5, 7, 8), ]$index  <- NA_integer_
 
   d_c <- ds_child
-  d_c[c(20:29), ]$letter <- NA_integer_
-  d_c[c(25:34), ]$letter <- NA_integer_
+  d_c[20:29, ]$letter <- NA_integer_
+  d_c[25:34, ]$letter <- NA_integer_
 
   expected <- structure(c(4, 6, 4, 0.6, 13, 27, 15, 0.675), .Names = names_returned)
-  observed <- match_statistics(d_p, d_c, join_columns = c("letter", "index")) #dput(observed)
+  observed <- match_statistics(d_p, d_c, join_columns = c("letter", "index")) # dput(observed)
   expect_equal(observed, expected)
 })

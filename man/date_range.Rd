@@ -30,7 +30,7 @@ range_with_nas_integer(x)
 A date value, that's possibly \code{NA}.
 }
 \description{
-Return \code{NA} for the min and max of a date vector if no nonmissing values are presence
+Return \code{NA} for the min and max of a date vector if no nonmissing values are present.
 }
 \note{
 This function is a workaround for a weakness in \code{base::min.date()} and \code{base::max.date()}.

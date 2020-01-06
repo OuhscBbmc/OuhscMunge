@@ -11,7 +11,7 @@ test_that("clump_month_date -typical", {
   ), class = "Date")
   observed <- clump_month_date(detailed)#; dput(observed)
 
-  expect_equal(observed, expected, label="The dates should be clumped corrected.")
+  expect_equal(observed, expected, label = "The dates should be clumped corrected.")
   expect_equal(class(observed), "Date", "The returned array should remain a date data type.")
 })
 
@@ -26,7 +26,7 @@ test_that("clump_month_date -not a date", {
 test_that("clump_month_date -bad day character", {
   detailed <- seq.Date(from = as.Date("2011-04-21"), to = as.Date("2011-05-14"), by = "day")
   expect_error(
-    clump_month_date(detailed, day_of_month="a")
+    clump_month_date(detailed, day_of_month = "a")
     , regexp = "The `day_of_month` parameter must be an integer or numeric data type\\."
   )
 })
@@ -69,7 +69,7 @@ test_that("clump_week_date -typical", {
   ), class = "Date")
   observed <- clump_week_date(detailed)#; dput(observed)
 
-  expect_equal(observed, expected, label="The dates should be clumped corrected.")
+  expect_equal(observed, expected, label = "The dates should be clumped corrected.")
   expect_equal(class(observed), "Date", "The returned array should remain a date data type.")
 })
 

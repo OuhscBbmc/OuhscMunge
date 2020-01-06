@@ -129,7 +129,7 @@ upload_sqls_odbc <- function(
 
     # Check the *qualified* table exists.
     if (!create_table & !DBI::dbExistsTable(channel, table_id))
-      stop(glue::glue("The following table does not exist, or is not accessible on this DSN: {schema}.{tbl}", schema=schema_name, tbl=table_name))
+      stop(glue::glue("The following table does not exist, or is not accessible on this DSN: {schema}.{tbl}", schema = schema_name, tbl=table_name))
 
     # if( !create_table ) {
     #   sql_count         <- glue::glue("SELECT COUNT(*) FROM {schema}.{tbl}", schema=schema_name, tbl=table_id@name[["table"]])

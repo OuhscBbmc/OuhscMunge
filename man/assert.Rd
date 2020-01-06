@@ -12,9 +12,12 @@ assert_non_na_and_unique(x, class_vector)
 \arguments{
 \item{x}{Vector to inspect.  Required.}
 
-\item{class_vector}{The required \code{\link[base:class]{base::class()}} of the vector.  If the parameter is missing, the object's class is not checked.}
+\item{class_vector}{The required \code{\link[base:class]{base::class()}} of the vector.  If the
+parameter is missing, the object's class is not checked.}
 
-\item{proportion_minimum}{The (inclusive) minimum proportion of the vector's elements that should meet the requirement. If missing, all elements must pass.}
+\item{proportion_minimum}{The (inclusive) minimum proportion of the
+vector's elements that should meet the requirement. If missing, all
+elements must pass.}
 }
 \description{
 Assert a vector meets important data-quality requirements.

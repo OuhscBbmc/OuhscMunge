@@ -21,6 +21,6 @@ test_that("sql file -bad dsn", {
 
 test_that("sql file -empty", {
   expect_error(
-    execute_sql_file(base::file.path(devtools::inst(name="OuhscMunge"), "test-data/empty.sql"), dsn)
+    execute_sql_file(base::file.path(devtools::inst(name = "OuhscMunge"), "test-data/empty.sql"), dsn)
   )
 })

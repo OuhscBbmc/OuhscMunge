@@ -71,7 +71,7 @@ boundaries <- function(x) {
   else ""
 } # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
-boundaries_number <- function( x ) {
+boundaries_number <- function(x) {
   min_number <- suppressWarnings(min(x, na.rm = TRUE))
   max_number <- suppressWarnings(max(x, na.rm = TRUE))
 
