@@ -51,9 +51,9 @@ retrieve_key_value <- function(
   channel       = NULL
 ) {
   pattern <- "^[-a-zA-Z0-9_]+$"
-  checkmate::assert_character(key         , min.chars=1, pattern=pattern, any.missing=F, len=1)
-  checkmate::assert_character(project_name, min.chars=1, pattern=pattern, any.missing=F, len=1)
-  checkmate::assert_character(dsn_name    , min.chars=1, pattern=pattern, any.missing=F, len=1)
+  checkmate::assert_character(key         , min.chars=1, pattern=pattern, any.missing=FALSE, len=1)
+  checkmate::assert_character(project_name, min.chars=1, pattern=pattern, any.missing=FALSE, len=1)
+  checkmate::assert_character(dsn_name    , min.chars=1, pattern=pattern, any.missing=FALSE, len=1)
 
   if (!requireNamespace("RODBC", quietly = TRUE))
     stop("The function `retrieve_key_value()` cannot run if the `RODBC` package is not installed.  Please install it and try again.")

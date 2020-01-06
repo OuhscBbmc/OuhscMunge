@@ -18,8 +18,8 @@ gp <-
   goodpractice::all_checks() %>%
   purrr::discard(~(. %in% checks_to_exclude)) %>%
   goodpractice::gp(checks = .)
-
 goodpractice::results(gp)
+gp
 
 
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too

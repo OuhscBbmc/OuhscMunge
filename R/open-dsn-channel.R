@@ -40,11 +40,11 @@ open_dsn_channel_sqls <- function(
 
   requireNamespace("RODBC")
 
-  checkmate::assert_character(dsn_name, min.chars=1, min.len=1, max.len=1, any.missing=F)
+  checkmate::assert_character(dsn_name, min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
   checkmate::assert_class(driver_version_minimum, "numeric_version")
   checkmate::assert_class(driver_version_maximum, "numeric_version")
-  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, min.len=1, max.len=1, any.missing=F)
-  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, min.len=1, max.len=1, any.missing=F)
+  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
+  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
   # Check if the DSN even exists on the local machine.
 
   create_link <- "https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/odbc-dsn.md"
@@ -90,11 +90,11 @@ open_dsn_channel_sqls_odbc <- function(
 
   requireNamespace("odbc")
 
-  checkmate::assert_character(dsn_name, min.chars=1, min.len=1, max.len=1, any.missing=F)
+  checkmate::assert_character(dsn_name, min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
   checkmate::assert_class(driver_version_minimum, "numeric_version")
   checkmate::assert_class(driver_version_maximum, "numeric_version")
-  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, min.len=1, max.len=1, any.missing=F)
-  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, min.len=1, max.len=1, any.missing=F)
+  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
+  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
   # Check if the DSN even exists on the local machine.
 
   create_link <- "https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/odbc-dsn.md"
