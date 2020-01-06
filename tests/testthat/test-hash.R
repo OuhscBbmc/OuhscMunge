@@ -1,7 +1,5 @@
 library(testthat)
 
-context("hash_and_salt_sha_256")
-
 test_that("hash -all nonmissing", {
   input     <- letters[1:10]
   salt      <- "abc123"

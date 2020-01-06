@@ -1,9 +1,5 @@
 library(testthat)
 
-
-# ---- assert_non_na -----------------------------------------------------------
-context("assert_non_na")
-
 test_that("assert_non_na -all - passes", {
   expect_silent(assert_non_na(1:100                                                              ))
   expect_silent(assert_non_na(runif(100)                                                         ))

@@ -1,9 +1,5 @@
 library(testthat)
 
-
-# ---- assert_non_na_and_unique ------------------------------------------------
-context("assert_non_na_and_unique")
-
 test_that("assert_non_na_and_unique -all - passes", {
   expect_silent(assert_non_na_and_unique(1:100                                                              , "integer"   ))
   expect_silent(assert_non_na_and_unique(runif(100)                                                         , "numeric"   ))

@@ -1,5 +1,4 @@
 library(testthat)
-context("range-date")
 
 test_that("only NAs", {
   observed_min_1 <- date_min_with_nas(c(NA))

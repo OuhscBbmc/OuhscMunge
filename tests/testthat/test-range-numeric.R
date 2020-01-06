@@ -1,5 +1,4 @@
 library(testthat)
-context("range-numeric")
 
 test_that("only NAs", {
   observed_min_1 <- min_with_nas_numeric(c(NA))

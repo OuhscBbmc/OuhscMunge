@@ -1,5 +1,4 @@
 library(testthat)
-context("dates-month")
 
 test_that("clump_month_date -typical", {
   detailed <- seq.Date(from = as.Date("2011-04-21"), to = as.Date("2011-05-14"), by = "day")

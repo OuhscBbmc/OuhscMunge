@@ -1,9 +1,5 @@
 library(testthat)
 
-
-# ---- upload_sqls_rodbc ---------------------------------------------------
-context("upload_sqls_rodbc")
-
 d             <- mtcars
 table_name    <- "pretend_schema.pretend_table"
 dsn_name      <- "pretend-dsn"

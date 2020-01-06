@@ -1,8 +1,5 @@
 library(testthat)
 
-# ---- trim_integer() -------------------------------------------------------
-context("Trim Integer")
-
 test_that("trim_integer -good", {
   x           <- c(NA, -4:10)
   bounds      <- c(-1L, 8L)

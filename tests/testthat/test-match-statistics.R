@@ -1,8 +1,5 @@
 library(testthat)
 
-# ---- match_statistics --------------------------------------------------------
-context("match_statistics")
-
 ds_parent <- data.frame(
   parent_id         = 11L:20L,
   letter            = rep(letters[1:5], each = 2),
