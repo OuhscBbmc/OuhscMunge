@@ -67,7 +67,7 @@ column_class_headstart <- function(d) {
   padded_format <- paste0("%-", max_column_name + extra_character_length, "s")
   left_side <- sprintf(padded_format, left_side)
 
-  right_side <- paste0("\"", sapply(d, class), "\"\n")
+  right_side <- paste0("\"", vapply(d, class, character(1)), "\"\n")
 
   cat(paste0(left_side, " = ", right_side), sep = "")
 }

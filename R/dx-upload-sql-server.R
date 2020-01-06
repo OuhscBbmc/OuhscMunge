@@ -28,8 +28,8 @@ validate_non_nulls <- function(dsn_name, table_name, d) {
   data.frame(
     column_name     = colnames(d),
     db_allows_nulls = as.logical(d_column_info$NULLABLE),
-    df_has_nulls    = sapply(d, function(x) any(is.na(x))),
-    violation       = (!as.logical(d_column_info$NULLABLE) & sapply(d, function(x) any(is.na(x))))
+    df_has_nulls    = vapply(d, function(x) any(is.na(x)), logical(1)),
+    violation       = (!as.logical(d_column_info$NULLABLE) & vapply(d, function(x) any(is.na(x)), logical(1)))
   )
 }
 
@@ -39,7 +39,7 @@ inspect_variable_types <- function(dsn_name, table_name, d) {
 
   data.frame(
     db_type = d_column_info$TYPE_NAME,
-    df_type = sapply(d, class)
+    df_type = vapply(d, class, character(1))
   )
 }
 
@@ -51,8 +51,8 @@ validate_character_length <- function(dsn_name, table_name, d) {
     column_name = colnames(d),
     db_type = d_column_info$TYPE_NAME,
     db_max_size = d_column_info$COLUMN_SIZE,
-    df_max_size = sapply(d, function(x) max(nchar(x))),
-    violation_possible = (!as.logical(d_column_info$COLUMN_SIZE) & sapply(d, function(x) max(nchar(x))))
+    df_max_size = vapply(d, function(x) max(nchar(x)), numeric(1)),
+    violation_possible = (!as.logical(d_column_info$COLUMN_SIZE) & vapply(d, function(x) max(nchar(x)), numeric(1)))
   )
 }
 
