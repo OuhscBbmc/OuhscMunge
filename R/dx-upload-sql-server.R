@@ -1,5 +1,5 @@
-retrieve_column_info <- function( dsn_name, table_name ){
-  tryCatch( expr={
+retrieve_column_info <- function(dsn_name, table_name) {
+  tryCatch(expr = {
       channel <- RODBC::odbcConnect(dsn_name)
       RODBC::getSqlTypeInfo("Microsoft SQL Server")
       RODBC::odbcGetInfo(channel)
@@ -7,13 +7,11 @@ retrieve_column_info <- function( dsn_name, table_name ){
     },
     finally = RODBC::odbcClose(channel)
   )
-  return( d_column_info )
+  d_column_info
 }
 
-# ds <- retrieve_column_info("DhsWaiver", "tblAocs")
-
-validate_column_names <- function( dsn_name, table_name, d ) {
-  #See if the names match exactly.
+validate_column_names <- function(dsn_name, table_name, d) {
+  # See if the names match exactly.
   d_column_info <- retrieve_column_info(dsn_name, table_name)
 
   data.frame(
@@ -23,29 +21,29 @@ validate_column_names <- function( dsn_name, table_name, d ) {
   )
 }
 
-validate_non_nulls <- function( dsn_name, table_name, d ) {
+validate_non_nulls <- function(dsn_name, table_name, d) {
   #See if the there's a violation of nulls
   d_column_info <- retrieve_column_info(dsn_name, table_name)
 
   data.frame(
     column_name     = colnames(d),
     db_allows_nulls = as.logical(d_column_info$NULLABLE),
-    df_has_nulls    = sapply(d, function(x) { any(is.na(x)) }),
-    violation       = (!as.logical(d_column_info$NULLABLE) & sapply(d, function(x) { any(is.na(x)) }))
+    df_has_nulls    = vapply(d, function(x) any(is.na(x)), logical(1)),
+    violation       = (!as.logical(d_column_info$NULLABLE) & vapply(d, function(x) any(is.na(x)), logical(1)))
   )
 }
 
-inspect_variable_types <- function( dsn_name, table_name, d ) {
+inspect_variable_types <- function(dsn_name, table_name, d) {
   #See if types are consistent.
   d_column_info <- retrieve_column_info(dsn_name, table_name)
 
   data.frame(
     db_type = d_column_info$TYPE_NAME,
-    df_type = sapply(d, class)
+    df_type = vapply(d, class, character(1))
   )
 }
 
-validate_character_length <- function( dsn_name, table_name, d ) {
+validate_character_length <- function(dsn_name, table_name, d) {
   #See if the there's a violation of characters being too long. This only works for strings, not dates or numbers
   d_column_info <- retrieve_column_info(dsn_name, table_name)
 
@@ -53,8 +51,8 @@ validate_character_length <- function( dsn_name, table_name, d ) {
     column_name = colnames(d),
     db_type = d_column_info$TYPE_NAME,
     db_max_size = d_column_info$COLUMN_SIZE,
-    df_max_size = sapply(d, function(x) { max(nchar(x)) }),
-    violation_possible = (!as.logical(d_column_info$COLUMN_SIZE) & sapply(d, function(x) { max(nchar(x)) }))
+    df_max_size = vapply(d, function(x) max(nchar(x)), numeric(1)),
+    violation_possible = (!as.logical(d_column_info$COLUMN_SIZE) & vapply(d, function(x) max(nchar(x)), numeric(1)))
   )
 }
 

@@ -49,74 +49,74 @@ upload_sqls_rodbc <- function(
   verbose                       = TRUE
 ) {
 
-  checkmate::assert_data_frame(d                            , null.ok=F             , any.missing=T)
-  checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=T)
-  checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=F)
-  checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=F)
+  checkmate::assert_data_frame(d                            , null.ok=FALSE             , any.missing=TRUE)
+  checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=TRUE)
+  checkmate::assert_character(table_name                    , min.chars=1L  , len=1L, any.missing=FALSE)
+  checkmate::assert_character(dsn_name                      , min.chars=1L  , len=1L, any.missing=FALSE)
 
-  checkmate::assert_logical(  clear_table                                   , len=1L, any.missing=F)
-  checkmate::assert_logical(  create_table                                  , len=1L, any.missing=F)
-  checkmate::assert_logical(  convert_logical_to_integer                    , len=1L, any.missing=F)
-  checkmate::assert_logical(  transaction                                   , len=1L, any.missing=F)
-  checkmate::assert_logical(  verbose                                       , len=1L, any.missing=F)
+  checkmate::assert_logical(  clear_table                                   , len=1L, any.missing=FALSE)
+  checkmate::assert_logical(  create_table                                  , len=1L, any.missing=FALSE)
+  checkmate::assert_logical(  convert_logical_to_integer                    , len=1L, any.missing=FALSE)
+  checkmate::assert_logical(  transaction                                   , len=1L, any.missing=FALSE)
+  checkmate::assert_logical(  verbose                                       , len=1L, any.missing=FALSE)
 
   start_time <- base::Sys.time()
   print(start_time)
 
-  if( convert_logical_to_integer ) {
+  if (convert_logical_to_integer) {
     d <- dplyr::mutate_if(d, is.logical, as.integer)
   }
 
-  if( !is.na(schema_name) )
+  if (!is.na(schema_name))
     table_name <- paste0(schema_name, ".", table_name)
 
   requireNamespace("RODBC")
   channel <- RODBC::odbcConnect(dsn = dsn_name)
 
-  tryCatch( {
-    if( transaction ) {
+  tryCatch({
+    if (transaction) {
       RODBC::odbcSetAutoCommit(channel, autoCommit = FALSE)
     }
 
-    if( verbose ) {
+    if (verbose) {
       # RODBC::getSqlTypeInfo("Microsoft SQL Server")
       RODBC::odbcGetInfo(channel)
     }
 
-    if( !create_table & clear_table ) {
+    if (!create_table & clear_table) {
       RODBC::sqlClear(channel, table_name)
     }
 
-    if( create_table ) {
-      RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=FALSE)
+    if (create_table) {
+      RODBC::sqlSave(channel, d, table_name, append = TRUE, rownames = FALSE, fast = FALSE)
     } else {
       column_info           <- RODBC::sqlColumns(channel, table_name)
       var_types             <- as.character(column_info$TYPE_NAME)
       names(var_types)      <- as.character(column_info$COLUMN_NAME)  #varTypes
 
-      RODBC::sqlSave(channel, d, table_name, append=TRUE, rownames=FALSE, fast=TRUE, varTypes=var_types)
+      RODBC::sqlSave(channel, d, table_name, append = TRUE, rownames = FALSE, fast = TRUE, varTypes = var_types)
     }
 
-    if( transaction ) {
+    if (transaction) {
       RODBC::odbcEndTran(channel, commit = TRUE)
     }
 
-    if( verbose ) {
+    if (verbose) {
       message(
         sprintf(
           "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes.",
           schema_name,
           table_name,
-          format(nrow(d), big.mark=",", scientific = F),
+          format(nrow(d), big.mark = ",", scientific = FALSE),
           dsn_name,
-          difftime(Sys.time(), start_time, units="mins")
+          difftime(Sys.time(), start_time, units = "mins")
         )
       )
     }
 
-  }, error = function( e ) {
+  }, error = function(e) {
 
-    if( transaction ) {
+    if (transaction) {
       RODBC::odbcEndTran(channel, commit = FALSE)
     }
     stop("Writing to the database was not successful.  Attempted to write table `", table_name, "` over dsn `", dsn_name, "`.\n", e)

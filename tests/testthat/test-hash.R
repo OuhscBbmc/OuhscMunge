@@ -1,7 +1,5 @@
 library(testthat)
 
-context("hash_and_salt_sha_256")
-
 test_that("hash -all nonmissing", {
   input     <- letters[1:10]
   salt      <- "abc123"
@@ -39,7 +37,7 @@ test_that("hash -unsalted", {
   )
 
   actual_salt_missing   <- hash_and_salt_sha_256(input)
-  actual_salt_blank     <- hash_and_salt_sha_256(input, salt="")
+  actual_salt_blank     <- hash_and_salt_sha_256(input, salt = "")
 
   testthat::expect_equal(actual_salt_missing, expected)
   testthat::expect_equal(actual_salt_blank  , expected)

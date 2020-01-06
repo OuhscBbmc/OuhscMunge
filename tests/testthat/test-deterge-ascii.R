@@ -1,8 +1,6 @@
 library(testthat)
 
 # ---- deterge_to_ascii --------------------------------------------------------
-context("deterge_to_ascii")
-
 test_that("SEM founders --vanilla", {
   x         <- c("Ekstrom", "Joreskog", "bisschen Zurcher")
   expected  <- c("Ekstrom", "Joreskog", "bisschen Zurcher")
@@ -36,17 +34,7 @@ test_that("Russian --normal", {
     "D?D 3/4 D'N?N?D3D? D?D 3/4  D 3/4 D+-N?DuD?D,N?D,N?"
   )
 
-  observed <- deterge_to_ascii(x) # dput(observed)
+  observed <- deterge_to_ascii(x) # refresh: dput(observed)
 
   expect_equal(observed, expected)
 })
-
-
-
-# })
-# test_that("deterge double --bad upper bound length", {
-#   expect_error(
-#     OuhscMunge::deterge_to_double(5:40, bound_upper = 12:23)
-#     , regexp = "The parameter `bound_upper` must be a numeric or integer vector with exactly one element."
-#   )
-# })

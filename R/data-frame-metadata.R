@@ -27,23 +27,23 @@
 #' column_value_headstart(datasets::OrchardSprays$treatment)
 
 #' @export
-column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=TRUE ) {
+column_rename_headstart <- function(d, try_snake_case = TRUE, use_nse = TRUE) {
   max_column_name <- max(nchar(colnames(d)))
   extra_character_length <- 5L # A comma, two quotes, and two backslashes.
   extra_padding <- 10L         # Extra space for convenience.
 
-  if( try_snake_case ) {
+  if (try_snake_case) {
     left_names <- snake_case(colnames(d))
   } else {
     left_names <- colnames(d)
   }
 
-  if( use_nse ) {
+  if (use_nse) {
     padded_format <- paste0("%-", max_column_name + extra_character_length + extra_padding, "s")
     left_side <- sprintf(padded_format, left_names)
 
     cat("dplyr::select(    # `dplyr::select()` drops columns not included.\n")
-    cat(paste0("  ", left_side, " = `", colnames(d), "`,\n"), sep="") # Gives a headstart to dplyr::rename_() & dplyr::rename()
+    cat(paste0("  ", left_side, " = `", colnames(d), "`,\n"), sep = "") # Gives a headstart to dplyr::rename_() & dplyr::rename()
     cat(")\n")
   } else {
     left_side <- paste0("\"", left_names, "\"")
@@ -53,14 +53,13 @@ column_rename_headstart <- function( d, try_snake_case=TRUE, use_nse=TRUE ) {
     right_side <- paste0("\"", colnames(d), "\",\n")
 
     cat("dplyr::select(!!c(    # `dplyr::select()` drops columns not mentioned.\n")
-    cat(paste0("  ", left_side, " = ", right_side), sep="") # Gives a headstart to dplyr::rename_() & dplyr::rename()
+    cat(paste0("  ", left_side, " = ", right_side), sep = "") # Gives a headstart to dplyr::rename_() & dplyr::rename()
     cat("))\n")
   }
 }
-# column_rename_headstart(datasets::OrchardSprays, use_nse=T)
 
 #' @export
-column_class_headstart <- function( d ) {
+column_class_headstart <- function(d) {
   max_column_name <- max(nchar(colnames(d)))
   extra_character_length <- 5L #a comma, two quotes, and two backslashes.
 
@@ -68,15 +67,14 @@ column_class_headstart <- function( d ) {
   padded_format <- paste0("%-", max_column_name + extra_character_length, "s")
   left_side <- sprintf(padded_format, left_side)
 
-  right_side <- paste0("\"", sapply(d, class), "\"\n")
+  right_side <- paste0("\"", vapply(d, class, character(1)), "\"\n")
 
-  cat(paste0(left_side, " = ", right_side), sep="")
+  cat(paste0(left_side, " = ", right_side), sep = "")
 }
-# column_class_headstart(ds)
 
 #' @export
-column_value_headstart <- function( x ) {
-  if( is.factor(x) )
+column_value_headstart <- function(x) {
+  if (is.factor(x))
     x <- as.character(x)
 
   values <- sort(unique(x))
@@ -87,6 +85,5 @@ column_value_headstart <- function( x ) {
   padded_format <- paste0("%-", max_value_length + extra_character_length, "s")
   left_side <- sprintf(padded_format, left_side)
 
-  cat(paste0(left_side, " = \"", values, "\"\n"), sep="")
+  cat(paste0(left_side, " = \"", values, "\"\n"), sep = "")
 }
-# column_value_headstart(ds$Activity)

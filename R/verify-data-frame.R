@@ -28,7 +28,7 @@
 #' verify_data_frame(datasets::OrchardSprays, 20)
 #' verify_data_frame(datasets::iris, 4)
 
-verify_data_frame <- function( d, minimum_row_count=10L ) {
+verify_data_frame <- function(d, minimum_row_count = 10L) {
   warning(
     "OuhscMunge::verify_data_frame() is deprecated.\n",
     "Instead, please use checkmate::assert_data_frame()\n",
@@ -36,7 +36,7 @@ verify_data_frame <- function( d, minimum_row_count=10L ) {
   )
 
   # Verify that a legit data.frame was returned (and not an error message)
-  if( !inherits(d, "data.frame") ) {
+  if (!inherits(d, "data.frame")) {
     stop(
       "The object is not a valid data frame.  If the dataset originated from a database table,",
       "check that the SQL code is correct, and a database error was not thrown."
@@ -44,7 +44,7 @@ verify_data_frame <- function( d, minimum_row_count=10L ) {
   }
 
   # Check that the parameter is single, nonmissing positive integer.
-  checkmate::assert_integerish(minimum_row_count, len=1L, lower=0, any.missing=F)
+  checkmate::assert_integerish(minimum_row_count, len = 1L, lower = 0, any.missing = FALSE)
 
   checkmate::assert_data_frame(
     d,

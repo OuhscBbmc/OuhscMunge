@@ -24,7 +24,6 @@ Imports:
     readr,
     remotes,
     rlang,
-    testit,
     tibble,
 Suggests:
     odbc (>= 1.2.0),

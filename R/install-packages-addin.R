@@ -7,7 +7,7 @@
 install_packages_addin <- function() {
   package_janitor_remote <- NULL   # This will be overwritten by the gist.
 
-  if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
-  devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
+  if (!base::requireNamespace("devtools")) utils::install.packages("devtools")
+  devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename = "package-janitor-bbmc.R")
   package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv")
 }

@@ -33,14 +33,14 @@ execute_sql_file <- function(
   timezone_out                  = "UTC"
 ) {
   checkmate::expect_file_exists(path_sql)
-  checkmate::assert_character(path_sql, min.chars=2, min.len=1, max.len=1, any.missing=F)
-  checkmate::assert_character(dsn     , min.chars=2, min.len=1, max.len=1, any.missing=F)
-  checkmate::assert_logical(  execute              , len=1, any.missing=F)
-  checkmate::assert_character(timezone                                      , len=1L, any.missing=F)
-  checkmate::assert_character(timezone_out                                  , len=1L, any.missing=F)
+  checkmate::assert_character(path_sql, min.chars=2, min.len=1, max.len=1, any.missing=FALSE)
+  checkmate::assert_character(dsn     , min.chars=2, min.len=1, max.len=1, any.missing=FALSE)
+  checkmate::assert_logical(  execute              , len=1, any.missing=FALSE)
+  checkmate::assert_character(timezone                                      , len=1L, any.missing=FALSE)
+  checkmate::assert_character(timezone_out                                  , len=1L, any.missing=FALSE)
 
   sql   <- readr::read_file(path_sql)
-  checkmate::assert_character(sql     , min.chars=2, min.len=1, max.len=1, any.missing=F)
+  checkmate::assert_character(sql     , min.chars=2, min.len=1, max.len=1, any.missing=FALSE)
 
   tryCatch({
     channel <- odbc::dbConnect(
@@ -50,17 +50,17 @@ execute_sql_file <- function(
       timezone_out  = timezone_out
     )
 
-    if( execute ) {
+    if (execute) {
       returned_value <- DBI::dbExecute(channel, sql)
     } else {
       returned_value <- DBI::dbGetQuery(channel, sql) %>%
         tibble::as_tibble()
 
-      checkmate::assert_tibble(returned_value, min.rows=minimum_row_count)
+      checkmate::assert_tibble(returned_value, min.rows = minimum_row_count)
     }
-  }, finally={
+  }, finally = {
     odbc::dbDisconnect(channel)
   })
 
-  return( returned_value )
+  returned_value
 }

@@ -25,7 +25,7 @@
 #' readr::spec_csv(system.file("package-dependency-list.csv", package = "OuhscMunge"))
 
 #' @export
-readr_spec_aligned <- function( ... ) {
+readr_spec_aligned <- function(...) {
   pattern <- "^[ ]+`?(.+?)`? = (col_.+)$"
   # pattern <- "^[ ]+(`?)(.+?)\\1 = (col_.+)$"
   . <- NULL   # This is solely for the sake of avoiding the R CMD check error.
@@ -33,7 +33,7 @@ readr_spec_aligned <- function( ... ) {
   out <-
     readr::spec_csv(...) %>%
     utils::capture.output() %>%
-    tibble::enframe(name=NULL) %>%
+    tibble::enframe(name = NULL) %>%
     dplyr::slice(-1, -dplyr::n()) %>%
     dplyr::mutate(
       # Isolate the left-hand & right-hand sides. Enclose all variable names in back ticks.
@@ -42,7 +42,7 @@ readr_spec_aligned <- function( ... ) {
 
       # Calculate the odd number of spaces -just beyond the longest variable name.
       padding = nchar(.data$left),
-      padding = max(.data$padding) %/%2 * 2 + 3,
+      padding = max(.data$padding) %/% 2 * 2 + 3,
 
       # Pad the left side before appending the right side.
       aligned = sprintf("  %-*s = readr::%s", .data$padding, .data$left, .data$right)
@@ -56,8 +56,9 @@ readr_spec_aligned <- function( ... ) {
     #   aligned = ")"
     # ) %>%
     dplyr::pull(.data$aligned) %>%
-    paste(collapse="\n") %>%
-    paste0( # I'd prefer this approach, but the `.` is causing problems with R CMD check.
+    paste(collapse = "\n") %>%
+    # I'd prefer this approach, but the `.` is causing problems with R CMD check.
+    paste0(
       "col_types <- readr::cols_only(\n",
       .,
       "\n)\n"

@@ -43,12 +43,12 @@
 
 
 #' @export
-trim_numeric <- function(x, bounds=c(-Inf, Inf), replacement=NA_real_ ) {
-  checkmate::assert_numeric(x, any.missing=T)
-  checkmate::assert_numeric(bounds, min.len=2, max.len=2, any.missing=F)
+trim_numeric <- function(x, bounds = c(-Inf, Inf), replacement = NA_real_) {
+  checkmate::assert_numeric(x, any.missing=TRUE)
+  checkmate::assert_numeric(bounds, min.len=2, max.len=2, any.missing=FALSE)
   checkmate::assert_numeric(replacement, min.len=1, max.len=1)
 
-  if( !(bounds[1] <= bounds[2]) )
+  if (!(bounds[1] <= bounds[2]))
     stop("The lower element of `bounds` must be equal or less than the upper element of `bounds`.")
 
   # Set values that are outside the thresholds to replacement.
@@ -61,12 +61,12 @@ trim_numeric <- function(x, bounds=c(-Inf, Inf), replacement=NA_real_ ) {
 }
 
 #' @export
-trim_integer <- function(x, bounds=c(-2147483647L, 2147483647L), replacement=NA_integer_) {
-  checkmate::assert_integer(x, any.missing=T)
-  checkmate::assert_integer(bounds, min.len=2, max.len=2, any.missing=F)
+trim_integer <- function(x, bounds = c(-2147483647L, 2147483647L), replacement = NA_integer_) {
+  checkmate::assert_integer(x, any.missing=TRUE)
+  checkmate::assert_integer(bounds, min.len=2, max.len=2, any.missing=FALSE)
   checkmate::assert_integer(replacement, min.len=1, max.len=1)
 
-  if( !(bounds[1] <= bounds[2]) )
+  if (!(bounds[1] <= bounds[2]))
     stop("The lower element of `bounds` must be equal or less than the upper element of `bounds`.")
 
   # Set values that are outside the thresholds to replacement.
@@ -78,12 +78,12 @@ trim_integer <- function(x, bounds=c(-2147483647L, 2147483647L), replacement=NA_
 }
 
 #' @export
-trim_date <- function(x, bounds=as.Date(c("1940-01-01", "2030-01-01")), replacement=as.Date(NA_character_) ) {
-  checkmate::assert_date(x, any.missing=T)
-  checkmate::assert_date(bounds, min.len=2, max.len=2, any.missing=F)
+trim_date <- function(x, bounds = as.Date(c("1940-01-01", "2030-01-01")), replacement = as.Date(NA_character_)) {
+  checkmate::assert_date(x, any.missing=TRUE)
+  checkmate::assert_date(bounds, min.len=2, max.len=2, any.missing=FALSE)
   checkmate::assert_date(replacement, min.len=1, max.len=1)
 
-  if( !(bounds[1] <= bounds[2]) )
+  if (!(bounds[1] <= bounds[2]))
     stop("The lower element of `bounds` must be equal or less than the upper element of `bounds`.")
 
   # Set values that are outside the thresholds to replacement.

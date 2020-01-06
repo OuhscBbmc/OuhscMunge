@@ -53,35 +53,35 @@
 #' #          7          7          7          7          7          5
 
 #' @export
-clump_month_date <- function( date_detailed, day_of_month=15L ) {
-  if( !(class(date_detailed) %in% c("Date", "POSIXct", "POSIXlt")) )
+clump_month_date <- function(date_detailed, day_of_month = 15L) {
+  if (!(class(date_detailed) %in% c("Date", "POSIXct", "POSIXlt")))
     stop("The `date_detailed` parameter must be a Date, POSIXct, or POSIXlt data type.")
-  if( !(class(day_of_month) %in% c("integer", "numeric")) )
+  if (!(class(day_of_month) %in% c("integer", "numeric")))
     stop("The `day_of_month` parameter must be an integer or numeric data type.")
-  if( length(day_of_month) != 1L )
+  if (length(day_of_month) != 1L)
     stop("The `day_of_month` contains more than one element; it should contain only one.")
-  if( !(1<=day_of_month & day_of_month<=31) )
+  if (!(1L <= day_of_month & day_of_month <= 31L))
     stop("The `day_of_month` parameter must be bound by [1, 31].")
 
   assigned <- date_detailed
   lubridate::day(assigned) <- day_of_month
 
-  return( assigned )
+  assigned
 }
 
 #' @export
-clump_week_date <- function( date_detailed, day_of_week=2L ) {
-  if( !(class(date_detailed) %in% c("Date", "POSIXct", "POSIXlt")) )
+clump_week_date <- function(date_detailed, day_of_week = 2L) {
+  if (!(class(date_detailed) %in% c("Date", "POSIXct", "POSIXlt")))
     stop("The `date_detailed` parameter must be a Date, POSIXct, or POSIXlt data type.")
-  if( !(class(day_of_week) %in% c("integer", "numeric")) )
+  if (!(class(day_of_week) %in% c("integer", "numeric")))
     stop("The `day_of_week` parameter must be an integer or numeric data type.")
-  if( length(day_of_week) != 1L )
+  if (length(day_of_week) != 1L)
     stop("The `day_of_week` contains more than one element; it should contain only one.")
-  if( !(1<=day_of_week & day_of_week<=7) )
+  if (!(1L <= day_of_week & day_of_week <= 7L))
     stop("The `day_of_week` parameter must be bound by [1, 7].")
 
   assigned <- date_detailed
   lubridate::wday(assigned) <- day_of_week
 
-  return( assigned )
+  assigned
 }

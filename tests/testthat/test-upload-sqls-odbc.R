@@ -1,9 +1,6 @@
 library(testthat)
 
-
 # ---- upload_sqls_odbc ---------------------------------------------------
-context("upload_sqls_odbc")
-
 d             <- mtcars
 schema_name   <- "pretend_schema"
 table_name    <- "pretend_table"

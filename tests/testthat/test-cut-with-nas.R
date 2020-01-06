@@ -1,8 +1,5 @@
 library(testthat)
 
-# ---- cut_with_nas --------------------------------------------------------------
-context("cut_with_nas")
-
 w       <- c(0L, NA_integer_, 22:25, NA_integer_, 40)
 breaks  <- c(0, 25, 50)
 labels  <- c("lower", "upper")

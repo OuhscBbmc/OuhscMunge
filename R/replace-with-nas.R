@@ -41,31 +41,31 @@
 #' replace_with_nas(c("T", "", "", "F", "FALSE", "", "TRUE"), return_type="logical")
 #' replace_with_nas(c("1", "", "", "0", "0"    , "", "1")   , return_type="logical")
 
-replace_with_nas <- function( x, return_type=NULL ) {
+replace_with_nas <- function(x, return_type = NULL) {
   x <- as.character(x)
 
-  if( is.null(return_type) ) {
+  if (is.null(return_type)) {
     #This function accepts character values with blanks (ie, "").
     #   It converts the blanks to NAs.
     dplyr::na_if(x, "")
 
-  } else if( return_type == "Date" ) {
+  } else if (return_type == "Date") {
     #This function accepts character values with blanks (ie, "").
     #   It first converts the blanks to NAs.
     #   It then converts them to dates.
     as.Date(dplyr::na_if(x, ""))
 
-  } else if( return_type == "character" ) {
+  } else if (return_type == "character") {
     as.character(dplyr::na_if(x, ""))
 
-  } else if( return_type == "integer" ) {
+  } else if (return_type == "integer") {
     as.integer(dplyr::na_if(x, ""))
 
-  } else if( return_type == "numeric" ) {
+  } else if (return_type == "numeric") {
     as.numeric(dplyr::na_if(x, ""))
 
-  } else if( return_type == "logical" ) {
-    if( all(x %in% c("", "0", "1")) ) {
+  } else if (return_type == "logical") {
+    if (all(x %in% c("", "0", "1"))) {
       as.logical(as.integer(dplyr::na_if(x, "")))
     } else {
       as.logical(dplyr::na_if(x, ""))
@@ -73,7 +73,5 @@ replace_with_nas <- function( x, return_type=NULL ) {
 
   } else {
     stop(paste0("The `return_type` of ", return_type, " is not currently supported."))
-
   }
 }
-

@@ -1,8 +1,5 @@
 library(testthat)
 
-# ---- Verify Data Frame -------------------------------------------------------
-context("Verify Data Frame")
-
 test_that("OrchardSprays -regular row count", {
   testthat::expect_warning(
     verify_data_frame(datasets::OrchardSprays)

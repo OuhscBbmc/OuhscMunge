@@ -21,13 +21,13 @@ test_that("readr_spec_aligned -subject-1", {
 })
 test_that("readr_spec_aligned -package-dependency-list.csv", {
   expected <-
-'col_types <- readr::cols_only\\(
+"col_types <- readr::cols_only\\(
   `package_name`      = readr::col_character\\(\\),
   `on_cran`           = readr::col_logical\\(\\),
   `install`           = readr::col_logical\\(\\),
   `github_username`   = readr::col_character\\(\\),
   `description`       = readr::col_character\\(\\)
-\\)'
+\\)"
 
   testthat::expect_output(
     readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
