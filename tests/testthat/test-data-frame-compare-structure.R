@@ -31,4 +31,3 @@ test_that("zero new rows --shuffled order", {
 
   expect_true(data_frame_compare_structure(ds_original, ds_current, c("x1", "x2")))
 })
-
