@@ -7,3 +7,11 @@ test_that("data_frame_test_uniqueness", {
   expect_false(data_frame_test_uniqueness(mtcars, c("cyl", "hp"), display_count=0))
   expect_true( data_frame_test_uniqueness(mtcars, c("mpg", "wt"))                 )
 })
+
+test_that("data_frame_assert_uniqueness", {
+  expect_error(data_frame_assert_uniqueness(mtcars, c("cyl"))                       )
+  expect_error(data_frame_assert_uniqueness(mtcars, c("cyl", "vs"))                 )
+  expect_error(data_frame_assert_uniqueness(mtcars, c("cyl", "hp"))                 )
+  expect_error(data_frame_assert_uniqueness(mtcars, c("cyl", "hp"), display_count=0))
+  data_frame_assert_uniqueness(mtcars, c("mpg", "wt"))
+})

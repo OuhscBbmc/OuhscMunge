@@ -23,7 +23,14 @@
 #' data_frame_test_uniqueness(mtcars, c("cyl", "hp"), display_count=0)
 #' data_frame_test_uniqueness(mtcars, c("mpg", "wt"))
 #'
+#' \dontrun{
+#' data_frame_assert_uniqueness(mtcars, c("cyl"))
+#' data_frame_assert_uniqueness(mtcars, c("cyl", "vs"))
+#' data_frame_assert_uniqueness(mtcars, c("mpg", "wt"))
+#' }
+#'
 #' @export
+#' @rdname data_frame_uniqueness
 data_frame_test_uniqueness <- function(d, keys, display_count = 10L) {
   checkmate::assert_data_frame(d             , null.ok = FALSE)
   checkmate::assert_character( keys          , null.ok = FALSE, any.missing = FALSE, min.len = 1, min.chars = 1L)
@@ -45,3 +52,16 @@ data_frame_test_uniqueness <- function(d, keys, display_count = 10L) {
 
   !has_duplicates
 }
+
+#' @export
+#' @rdname data_frame_uniqueness
+data_frame_assert_uniqueness <- function(d, keys, display_count = 10L) {
+  if (!data_frame_test_uniqueness(d, keys, display_count)) {
+    stop(
+      "The data.frame did not have unique values for column(s)\n{`",
+      paste(keys, collapse="`, `"),
+      "`}."
+    )
+  }
+}
+

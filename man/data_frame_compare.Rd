@@ -16,7 +16,7 @@ that potentialy needs to be updated.  Required.}
 \item{columns}{A vector to describe.}
 }
 \value{
-`data.frame``
+\code{data.frame}
 }
 \description{
 These functions help to compare two metadata frames as assess if new rows

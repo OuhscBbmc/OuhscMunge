@@ -1,7 +1,5 @@
 library(testthat)
 
-
-# ---- metadata-se ----------------------------------------------------------------
 test_that("four new rows", {
   ds_original <- tibble::tibble(
     x1  = c(1, 3, 4),

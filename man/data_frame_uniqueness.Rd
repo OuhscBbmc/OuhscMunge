@@ -2,9 +2,12 @@
 % Please edit documentation in R/data-frame-test-uniqueness.R
 \name{data_frame_test_uniqueness}
 \alias{data_frame_test_uniqueness}
+\alias{data_frame_assert_uniqueness}
 \title{Check uniqueness of column combinations}
 \usage{
 data_frame_test_uniqueness(d, keys, display_count = 10L)
+
+data_frame_assert_uniqueness(d, keys, display_count = 10L)
 }
 \arguments{
 \item{d}{A \code{data.frame} to examine.  Required.}
@@ -26,6 +29,12 @@ data_frame_test_uniqueness(mtcars, c("cyl", "vs"))
 data_frame_test_uniqueness(mtcars, c("cyl", "hp"))
 data_frame_test_uniqueness(mtcars, c("cyl", "hp"), display_count=0)
 data_frame_test_uniqueness(mtcars, c("mpg", "wt"))
+
+\dontrun{
+data_frame_assert_uniqueness(mtcars, c("cyl"))
+data_frame_assert_uniqueness(mtcars, c("cyl", "vs"))
+data_frame_assert_uniqueness(mtcars, c("mpg", "wt"))
+}
 
 }
 \author{
