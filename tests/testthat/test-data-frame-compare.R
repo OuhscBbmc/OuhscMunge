@@ -8,15 +8,15 @@ test_that("four new rows", {
   )
 
   ds_current <- tibble::tibble(
-    x1  = c(1:5, 1, 5, 5),
-    x2  = c(letters[1:5], "a", "e", "e"),
-    x3  = c(11, 12, 13, 14, 15, 11, 15, 17)
+    x1  = c(1:5, 1, 5),
+    x2  = c(letters[1:5], "x", "y"),
+    x3  = c(11, 12, 13, 14, 15, 11, 15)
   )
 
   ds_expected <- tibble::tibble(
-    x1  = c(2, 5, 5, 5),
-    x2  = c("b", "e", "e", "e"),
-    x3  = c(12, 15, 15, 17)
+    x1  = c(2, 5, 1, 5),
+    x2  = c("b", "e", "x", "y"),
+    x3  = c(12, 15, 11, 15)
   )
 
   ds_actual <- data_frame_compare(ds_original, ds_current, c("x1", "x2"))
