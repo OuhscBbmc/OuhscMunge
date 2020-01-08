@@ -13,7 +13,7 @@
 #' `d_original`. Required.
 #' @param columns A vector to describe.
 #'
-#' @return `data.frame``
+#' @return `data.frame`
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
@@ -46,7 +46,7 @@
 data_frame_compare <- function(d_original, d_current, columns) {
   checkmate::assert_data_frame(d_original , null.ok = FALSE)
   checkmate::assert_data_frame(d_current  , null.ok = FALSE)
-  checkmate::assert_character( columns    , null.ok = FALSE, min.chars=1, any.missing=F, min.len=1)
+  checkmate::assert_character( columns    , null.ok = FALSE, any.missing=F, min.len=1, min.chars=1)
 
   d_current %>%
     dplyr::anti_join(d_original, by = columns)
