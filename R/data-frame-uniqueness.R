@@ -1,4 +1,4 @@
-#' @name data_frame_test_uniqueness
+#' @name data_frame_uniqueness_test
 #'
 #' @title Check uniqueness of column combinations
 #'
@@ -17,21 +17,21 @@
 #' @author Will Beasley
 #'
 #' @examples
-#' data_frame_test_uniqueness(mtcars, c("cyl"))
-#' data_frame_test_uniqueness(mtcars, c("cyl", "vs"))
-#' data_frame_test_uniqueness(mtcars, c("cyl", "hp"))
-#' data_frame_test_uniqueness(mtcars, c("cyl", "hp"), display_count=0)
-#' data_frame_test_uniqueness(mtcars, c("mpg", "wt"))
+#' data_frame_uniqueness_test(mtcars, c("cyl"))
+#' data_frame_uniqueness_test(mtcars, c("cyl", "vs"))
+#' data_frame_uniqueness_test(mtcars, c("cyl", "hp"))
+#' data_frame_uniqueness_test(mtcars, c("cyl", "hp"), display_count=0)
+#' data_frame_uniqueness_test(mtcars, c("mpg", "wt"))
 #'
 #' \dontrun{
-#' data_frame_assert_uniqueness(mtcars, c("cyl"))
-#' data_frame_assert_uniqueness(mtcars, c("cyl", "vs"))
-#' data_frame_assert_uniqueness(mtcars, c("mpg", "wt"))
+#' data_frame_uniqueness_assert(mtcars, c("cyl"))
+#' data_frame_uniqueness_assert(mtcars, c("cyl", "vs"))
+#' data_frame_uniqueness_assert(mtcars, c("mpg", "wt"))
 #' }
 #'
 #' @export
 #' @rdname data_frame_uniqueness
-data_frame_test_uniqueness <- function(d, keys, display_count = 10L) {
+data_frame_uniqueness_test <- function(d, keys, display_count = 10L) {
   checkmate::assert_data_frame(d             , null.ok = FALSE)
   checkmate::assert_character( keys          , null.ok = FALSE, any.missing = FALSE, min.len = 1, min.chars = 1L)
   checkmate::assert_integerish(display_count , null.ok = FALSE, any.missing = FALSE, len     = 1, lower     = 0L)
@@ -55,8 +55,8 @@ data_frame_test_uniqueness <- function(d, keys, display_count = 10L) {
 
 #' @export
 #' @rdname data_frame_uniqueness
-data_frame_assert_uniqueness <- function(d, keys, display_count = 10L) {
-  if (!data_frame_test_uniqueness(d, keys, display_count)) {
+data_frame_uniqueness_assert <- function(d, keys, display_count = 10L) {
+  if (!data_frame_uniqueness_test(d, keys, display_count)) {
     stop(
       "The data.frame did not have unique values for column(s)\n{`",
       paste(keys, collapse="`, `"),
