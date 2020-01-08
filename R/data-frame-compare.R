@@ -67,7 +67,7 @@ data_frame_compare <- function(d_original, d_current, columns) {
 }
 
 # import::from("magrittr", "%>%")
-
+#
 # ds_original <- tibble::tibble(
 #   x1  = c(1, 3, 4),
 #   x2  = letters[c(1, 3, 4)],
@@ -75,9 +75,9 @@ data_frame_compare <- function(d_original, d_current, columns) {
 # )
 #
 # ds_current <- tibble::tibble(
-#   x1  = c(1:5, 1, 5, 5),
-#   x2  = c(letters[1:5], "a", "e", "e"),
-#   x3  = c(11, 12, 13, 14, 15, 11, 15, 17)
+#   x1  = c(1:5, 1, 5),
+#   x2  = c(letters[1:5], "x", "y"),
+#   x3  = c(11, 12, 13, 14, 15, 11, 15)
 # )
 #
 # ds_new_1 <-
@@ -85,5 +85,7 @@ data_frame_compare <- function(d_original, d_current, columns) {
 #   dplyr::anti_join(ds_original, by = c("x1", "x2"))
 # ds_new_1
 #
-# ds_new_2 <- metadata_compare(ds_original, ds_current, c("x1", "x2"))
-# ds_new_2
+# ds_new_2 <- data_frame_compare(ds_original, ds_current, c("x1", "x2"))
+#
+# ds_original %>%
+#   dplyr::union_all(ds_new_2)

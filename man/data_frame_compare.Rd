@@ -31,17 +31,15 @@ ds_original <- tibble::tibble(
 )
 
 ds_current <- tibble::tibble(
-  x1  = c(1:5, 1, 5, 5),
-  x2  = c(letters[1:5], "a", "e", "e"),
-  x3  = c(11, 12, 13, 14, 15, 11, 15, 17)
+  x1  = c(1:5, 1, 5),
+  x2  = c(letters[1:5], "x", "y"),
+  x3  = c(11, 12, 13, 14, 15, 11, 15)
 )
 
-ds_new_1 <-
-  ds_current \%>\%
+data_frame_compare(ds_original, ds_current, c("x1", "x2"))
+
+ds_current \%>\%
   dplyr::anti_join(ds_original, by = c("x1", "x2"))
-ds_new_1
-ds_new_2 <- data_frame_compare(ds_original, ds_current, c("x1", "x2"))
-ds_new_2
 
 }
 \author{
