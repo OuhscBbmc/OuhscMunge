@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read a value stored in a database. — retrieve_key_value • OuhscMunge</title>
+<title>Verify equivalent structure of two dataset — data_frame_compare_structure • OuhscMunge</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Read a value stored in a database. — retrieve_key_value" />
-<meta property="og:description" content="Facilitates retrieval of key-value pairs that are stored in a SQL Server database." />
+<meta property="og:title" content="Verify equivalent structure of two dataset — data_frame_compare_structure" />
+<meta property="og:description" content="Compare two datasets and throw an error if they have different
+(a) column counts, (b) column names, and (c) column class" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,79 +106,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read a value stored in a database.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/retrieve-key-value.R'><code>R/retrieve-key-value.R</code></a></small>
-    <div class="hidden name"><code>retrieve_key_value.Rd</code></div>
+    <h1>Verify equivalent structure of two dataset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/data-frame-compare-structure.R'><code>R/data-frame-compare-structure.R</code></a></small>
+    <div class="hidden name"><code>data_frame_compare_structure.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Facilitates retrieval of key-value pairs that are stored in a SQL Server database.</p>
+    <p>Compare two datasets and throw an error if they have different
+(a) column counts, (b) column names, and (c) column class</p>
     </div>
 
-    <pre class="usage"><span class='fu'>retrieve_key_value</span>(<span class='no'>key</span>, <span class='no'>project_name</span>, <span class='no'>dsn_name</span>, <span class='kw'>channel</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>data_frame_compare_structure</span>(<span class='no'>d_original</span>, <span class='no'>d_current</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>key</th>
-      <td><p>The key associated with the desired value.  Required character vecotr with one element</p></td>
+      <th>d_original</th>
+      <td><p>A <code>data.frame</code> that serves as the existing metadata file
+that potentialy needs to be updated.  Required.</p></td>
     </tr>
     <tr>
-      <th>project_name</th>
-      <td><p>The project name associated with the desired value.  Required character vecotr with one element</p></td>
-    </tr>
-    <tr>
-      <th>dsn_name</th>
-      <td><p>Name of the locally-defined DSN passed to <a href='RODBC::odbcConnect()'>RODBC::odbcConnect()</a>.</p></td>
-    </tr>
-    <tr>
-      <th>channel</th>
-      <td><p>An <em>optional</em> connection handle as returned by <code><a href='https://rdrr.io/pkg/RODBC/man/odbcConnect.html'>RODBC::odbcConnect()</a></code>.  See Details below. Optional.</p></td>
+      <th>d_current</th>
+      <td><p>A <code>data.frame</code> that contains records potentialy missing from
+<code>d_original</code>. Required.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>character</code> vector with one element.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The database table and stored procedure must defined as:<div class="sql"></p><pre>CREATE TABLE security_private.tbl_key_value_static(
-  id                     smallint     IDENTITY(1,1) PRIMARY KEY,
-  project                varchar(50)  NOT NULL,
-  attribute              varchar(90)  NOT NULL,
-  value                  varchar(200) NOT NULL,
-  file_last_updated_date date         NOT NULL,
-  retired                bit          NOT NULL
-)
-
-CREATE PROCEDURE security.prc_key_value_static
-  @project varchar(50),
-  @attribute varchar(90)
-AS
-BEGIN
-	 SET NOCOUNT ON;
-	 SELECT value from security_private.tbl_key_value_static
-	 WHERE project=@project AND attribute=@attribute
-END
-</pre><p></div></p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Currently only the 'static' key-value pairs are retrieved through this function.
-Talk to Will if you need to retrieve the 'rolling' or the 'personal' key-value pairs.</p>
+    <p>If all check pass, and invisible <code>TRUE</code> is returned.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>value</span> <span class='kw'>&lt;-</span> <span class='fu'>retrieve_key_value</span>(<span class='st'>"file-server"</span>, <span class='st'>"bbmc"</span>, <span class='st'>"BbmcSecurity"</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"magrittr"</span>)
+<span class='no'>ds_original</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>),
+  <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)],
+  <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>13</span>, <span class='fl'>14</span>)
+)
+
+<span class='no'>ds_current</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>1</span>, <span class='fl'>5</span>),
+  <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='st'>"x"</span>, <span class='st'>"y"</span>),
+  <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>11</span>, <span class='fl'>15</span>)
+)
+
+<span class='fu'>data_frame_compare_structure</span>(<span class='no'>ds_original</span>, <span class='no'>ds_current</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
