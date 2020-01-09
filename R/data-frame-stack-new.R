@@ -11,6 +11,8 @@
 #' from `d_original`. Required.
 #' @param keys Column names that represent unique combination.
 #' `character` vector. Optional.
+#' @param path Location of the mdatadata file to potentially updated.
+#' Required `character` vector.
 #'
 #' @return A [`tibble::tibble`] that combines `d_original` with the new records
 #' from `d_current`.
@@ -43,6 +45,29 @@
 #'
 #' ds_current %>%
 #'   dplyr::anti_join(ds_original, by = c("x1", "x2"))
+#'
+#' # Update a file
+#'
+#' {
+#'   path_temp <- tempfile(fileext = ".csv")
+#'   on.exit(unlink(path_temp))
+#'   file.copy(
+#'     system.file("test-data/metadata-original.csv", package = "OuhscMunge"),
+#'     path_temp
+#'   )
+#' }
+#'
+#' # Displays 3 rows.
+#' readr::read_csv(path_temp)
+#'
+#' metadata_update_file(
+#'   path_temp,
+#'   dplyr::mutate(ds_current, x1 = as.character(x1), x3 = as.character(x3)),
+#'   c("x1", "x2")
+#' )
+#'
+#' # Displays 7 rows.
+#' readr::read_csv(path_temp)
 #'
 #' @export
 data_frame_stack_new <- function(d_original, d_current, keys) {
@@ -81,4 +106,22 @@ data_frame_stack_new <- function(d_original, d_current, keys) {
   d_original %>%
     dplyr::union_all(d_new) %>%
     tibble::as_tibble()
+}
+
+#' @rdname data_frame_stack_new
+#' @export
+metadata_update_file <- function(path, d_current, keys) {
+  checkmate::assert_file_exists(path)
+
+  d_original <- readr::read_csv(
+    file      = path,
+    col_types = readr::cols(.default = readr::col_character())
+  )
+
+  d_new <- data_frame_stack_new(d_original, d_current, keys)
+
+  readr::write_csv(
+    x     = d_new,
+    path  = path
+  )
 }
