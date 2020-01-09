@@ -33,7 +33,9 @@
 #'
 #' @author Will Beasley
 #'
-#' @seealso These functions are gloves around [lubridate::day()] and [lubridate::wday()].
+#' @seealso These functions are gloves around [lubridate::day()] and
+#' \code{\link[lubridate:day]{lubridate::wday()}}
+#'
 #' Essentially the add just error-checking and default values.
 #'
 #' @examples

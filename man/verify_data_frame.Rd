@@ -17,7 +17,10 @@ Check that the object inherits from \href{base::data.frame()}{\code{data.frame}}
 If not, throw an error.
 
 This function has been soft-deprecated (\emph{i.e.}, it works, but with a warning).
-Please use the superior \url{checkmate} functions, \code{\link[checkmate:assert_data_frame]{checkmate::assert_data_frame()}} and \code{\link[checkmate:assert_tibble]{checkmate::assert_tibble()}}
+Please use the superior \url{checkmate} functions,
+\code{\link[checkmate:checkDataFrame]{checkmate::assert_data_frame()}}
+and
+\code{\link[checkmate:checkTibble]{checkmate::assert_tibble()}}.
 
 This helps check database-reading functions (\emph{e.g.}, \code{\link[RODBC:sqlQuery]{RODBC::sqlQuery()}}) that return a \code{data.frame}
 if successful, and a \code{character} vector is unsucessful.
@@ -31,7 +34,7 @@ verify_data_frame(datasets::OrchardSprays, 20)
 verify_data_frame(datasets::iris, 4)
 }
 \seealso{
-\code{\link[checkmate:assert_class]{checkmate::assert_class()}}
+\code{\link[checkmate:checkClass]{checkmate::assert_class()}}
 }
 \author{
 Will Beasley

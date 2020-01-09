@@ -1,11 +1,11 @@
 #' @name readr_spec_aligned
 #'
-#' @title Align & qualify the `col_types` specification passed to [readr::read_csv()].
+#' @title Align & qualify the `col_types` specification passed to \code{\link[readr:read_delim]{readr::spec_csv()}}.
 #'
 #' @description These functions are used during the execution of a program.  Rather they produce snippets
 #' that can be pasted into code, and help the developer avoid some typing.
 #'
-#' @param ... values passed to [readr::spec_csv()].
+#' @param ... values passed to \code{\link[readr:spec_delim]{readr::spec_csv()}}.
 #'
 #' @return Prints formatted code to the console.
 #'
