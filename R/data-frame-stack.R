@@ -10,9 +10,12 @@
 #' that potentialy needs to be updated.  Required.
 #' @param d_current A `data.frame` that contains records potentialy missing from
 #' `d_original`. Required.
-#' @param keys Column names that represent a vector to describe. `character` vector.  Required.
+#' @param keys Column names that represent unique combination. `character` vector. Optional.
 #'
 #' @return A [`tibble::tibble`] that combines `d_original` with the new records from `d_current`.
+#'
+#' @note each dataset is verified to not have more then one
+#' row with the same values in the combination of `keys`
 #'
 #' @seealso [data_frame_compare_structure()]
 #' @importFrom magrittr %>%
@@ -43,8 +46,32 @@
 
 data_frame_stack <- function(d_original, d_current, keys) {
 
+  # Check arguments
+  # d_original & d_current will be checked in `data_frame_compare_structure()`.
+  checkmate::assert_character( keys       , null.ok = FALSE, any.missing = TRUE, min.len=1, min.chars=1)
+
   # Check the structure of the two datasets are equivalent
-  data_frame_compare_structure(d_original, d_current, keys)
+  data_frame_compare_structure(d_original, d_current)
+
+  # Check uniqueness in original
+  if (!data_frame_uniqueness_test(d_original, keys)) {
+    stop(
+      "The `d_original` data.frame has multiple rows with the same ",
+      "values for column(s)\n{`",
+      paste(keys, collapse = "`, `"),
+      "`}."
+    )
+  }
+
+  # Check uniqueness in current
+  if (!data_frame_uniqueness_test(d_current, keys)) {
+    stop(
+      "The `d_current` data.frame has multiple rows with the same ",
+      "values for column(s)\n{`",
+      paste(keys, collapse = "`, `"),
+      "`}."
+    )
+  }
 
   # Isolate the new rows (using the keys/columns)
   d_new <- d_current %>%

@@ -13,7 +13,7 @@ that potentialy needs to be updated.  Required.}
 \item{d_current}{A \code{data.frame} that contains records potentialy missing from
 \code{d_original}. Required.}
 
-\item{keys}{Column names that represent a vector to describe. \code{character} vector.  Required.}
+\item{keys}{Column names that represent unique combination. \code{character} vector. Optional.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble}} that combines \code{d_original} with the new records from \code{d_current}.
@@ -21,6 +21,10 @@ A \code{\link[tibble:tibble]{tibble::tibble}} that combines \code{d_original} wi
 \description{
 These functions help to compare two metadata frames as assess if new rows
 should be added.
+}
+\note{
+each dataset is verified to not have more then one
+row with the same values in the combination of \code{keys}
 }
 \examples{
 library("magrittr")

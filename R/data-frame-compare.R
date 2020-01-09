@@ -5,14 +5,10 @@
 #' @description Compare two datasets and throw an error if they have different
 #' (a) column counts, (b) column names, and (c) column class
 #'
-#' If `keys` is not `NA`, each dataset is verified to not have more then one
-#' row with the same values in the combination of `keys`.
-#'
 #' @param d_original A `data.frame` that serves as the existing metadata file
 #' that potentialy needs to be updated.  Required.
 #' @param d_current A `data.frame` that contains records potentialy missing from
 #' `d_original`. Required.
-#' @param keys Column names that represent a vector to describe. `character` vector. Optional.
 #'
 #' @return If all check pass, and invisible `TRUE` is returned.
 #'
@@ -35,17 +31,13 @@
 #'   x3  = c(11, 12, 13, 14, 15, 11, 15)
 #' )
 #'
-#' data_frame_compare_structure(ds_original, ds_current, c("x1", "x2"))
-#'
-#' ds_current %>%
-#'   dplyr::anti_join(ds_original, by = c("x1", "x2"))
+#' data_frame_compare_structure(ds_original, ds_current)
 #'
 #' @export
-data_frame_compare_structure <- function(d_original, d_current, keys=NA) {
+data_frame_compare_structure <- function(d_original, d_current) {
   # Check arguments
   checkmate::assert_data_frame(d_original , null.ok = FALSE)
   checkmate::assert_data_frame(d_current  , null.ok = FALSE)
-  checkmate::assert_character( keys       , null.ok = FALSE, any.missing = TRUE, min.len=1, min.chars=1)
 
   # Check column count
   if (ncol(d_original) != ncol(d_current)) {
@@ -74,26 +66,6 @@ data_frame_compare_structure <- function(d_original, d_current, keys=NA) {
       "The two data.frames have different column classes.\n",
       "  d_original: {", paste(names(class_original), class_original, collapse = ", "), "}\n",
       "  d_current : {", paste(names(class_current ), class_current , collapse = ", "), "}"
-    )
-  }
-
-  # Check uniqueness in original
-  if (!data_frame_uniqueness_test(d_original, keys)) {
-    stop(
-      "The `d_original` data.frame has multiple rows with the same ",
-      "values for column(s)\n{`",
-      paste(keys, collapse = "`, `"),
-      "`}."
-    )
-  }
-
-  # Check uniqueness in current
-  if (!data_frame_uniqueness_test(d_current, keys)) {
-    stop(
-      "The `d_current` data.frame has multiple rows with the same ",
-      "values for column(s)\n{`",
-      paste(keys, collapse = "`, `"),
-      "`}."
     )
   }
 

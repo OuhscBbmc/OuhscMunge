@@ -4,7 +4,7 @@
 \alias{data_frame_compare_structure}
 \title{Verify equivalent structure of two dataset}
 \usage{
-data_frame_compare_structure(d_original, d_current, keys = NA)
+data_frame_compare_structure(d_original, d_current)
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
@@ -12,8 +12,6 @@ that potentialy needs to be updated.  Required.}
 
 \item{d_current}{A \code{data.frame} that contains records potentialy missing from
 \code{d_original}. Required.}
-
-\item{keys}{Column names that represent a vector to describe. \code{character} vector. Optional.}
 }
 \value{
 If all check pass, and invisible \code{TRUE} is returned.
@@ -21,9 +19,6 @@ If all check pass, and invisible \code{TRUE} is returned.
 \description{
 Compare two datasets and throw an error if they have different
 (a) column counts, (b) column names, and (c) column class
-
-If \code{keys} is not \code{NA}, each dataset is verified to not have more then one
-row with the same values in the combination of \code{keys}.
 }
 \examples{
 library("magrittr")
@@ -39,10 +34,7 @@ ds_current <- tibble::tibble(
   x3  = c(11, 12, 13, 14, 15, 11, 15)
 )
 
-data_frame_compare_structure(ds_original, ds_current, c("x1", "x2"))
-
-ds_current \%>\%
-  dplyr::anti_join(ds_original, by = c("x1", "x2"))
+data_frame_compare_structure(ds_original, ds_current)
 
 }
 \author{
