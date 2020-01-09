@@ -55,7 +55,9 @@ table(clumped_week)
 #          7          7          7          7          7          5
 }
 \seealso{
-These functions are gloves around \code{\link[lubridate:day]{lubridate::day()}} and \code{\link[lubridate:wday]{lubridate::wday()}}.
+These functions are gloves around \code{\link[lubridate:day]{lubridate::day()}} and
+\code{\link[lubridate:day]{lubridate::wday()}}
+
 Essentially the add just error-checking and default values.
 }
 \author{

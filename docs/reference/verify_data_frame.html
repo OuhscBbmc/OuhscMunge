@@ -39,7 +39,10 @@
 <meta property="og:description" content="Check that the object inherits from data.frame.
 If not, throw an error.
 This function has been soft-deprecated (i.e., it works, but with a warning).
-Please use the superior checkmate functions, checkmate::assert_data_frame() and checkmate::assert_tibble()
+Please use the superior checkmate functions,
+checkmate::assert_data_frame()
+and
+checkmate::assert_tibble().
 This helps check database-reading functions (e.g., RODBC::sqlQuery()) that return a data.frame
 if successful, and a character vector is unsucessful.
 A minimum row count can be used to check that a trivially small number of rows was not returned.
@@ -77,7 +80,7 @@ but with with a more specific error message." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9011</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9012</span>
       </span>
     </div>
 
@@ -122,7 +125,10 @@ but with with a more specific error message." />
     <p>Check that the object inherits from <a href='base::data.frame()'><code>data.frame</code></a>.
 If not, throw an error.</p>
 <p>This function has been soft-deprecated (<em>i.e.</em>, it works, but with a warning).
-Please use the superior <a href='checkmate'>checkmate</a> functions, <code><a href='https://rdrr.io/pkg/checkmate/man/checkDataFrame.html'>checkmate::assert_data_frame()</a></code> and <code><a href='https://rdrr.io/pkg/checkmate/man/checkTibble.html'>checkmate::assert_tibble()</a></code></p>
+Please use the superior <a href='checkmate'>checkmate</a> functions,
+<code><a href='https://rdrr.io/pkg/checkmate/man/checkDataFrame.html'>checkmate::assert_data_frame()</a></code>
+and
+<code><a href='https://rdrr.io/pkg/checkmate/man/checkTibble.html'>checkmate::assert_tibble()</a></code>.</p>
 <p>This helps check database-reading functions (<em>e.g.</em>, <code><a href='https://rdrr.io/pkg/RODBC/man/sqlQuery.html'>RODBC::sqlQuery()</a></code>) that return a <code>data.frame</code>
 if successful, and a <code>character</code> vector is unsucessful.</p>
 <p>A minimum row count can be used to check that a trivially small number of rows was not returned.

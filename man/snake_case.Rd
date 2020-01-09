@@ -20,7 +20,7 @@ in \href{http://stackoverflow.com/a/1176023/1082435}{"Elegant Python function to
 \note{
 This series of regexes has an advantages over the current
 implementations of \href{https://github.com/decisionpatterns/lettercase}{\code{lettercase::str_snake_case()}}
-and \code{\link[snakecase:to_snake_case]{snakecase::to_snake_case()}}.
+and \code{\link[snakecase:caseconverter]{snakecase::to_snake_case()}}.
 The former converts "PatientDOB" to "patientdob" and the latter converts
 "patient.dob" to "patient_._dob".  I'll keep an eye on these packages
 (\emph{i.e.}, \href{https://github.com/decisionpatterns/lettercase/issues/1}{lettercase #1} for 'camelCase'
