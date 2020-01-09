@@ -71,7 +71,7 @@ data_frame_compare_structure <- function(d_original, d_current, keys=NA) {
   class_mismatch <- (class_original != class_current)
   if (any(class_mismatch)) {
     stop(
-      "The two data.frames have different column classes\n",
+      "The two data.frames have different column classes.\n",
       "  d_original: {", paste(names(class_original), class_original, collapse = ", "), "}\n",
       "  d_current : {", paste(names(class_current ), class_current , collapse = ", "), "}"
     )
