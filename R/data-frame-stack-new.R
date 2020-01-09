@@ -1,4 +1,4 @@
-#' @name data_frame_stack
+#' @name data_frame_stack_new
 #'
 #' @title Verify equivalent structure of two dataset
 #'
@@ -39,13 +39,13 @@
 #'   x3  = c(11, 12, 13, 14, 15, 11, 15)
 #' )
 #'
-#' data_frame_stack(ds_original, ds_current, c("x1", "x2"))
+#' data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
 #'
 #' ds_current %>%
 #'   dplyr::anti_join(ds_original, by = c("x1", "x2"))
 #'
 #' @export
-data_frame_stack <- function(d_original, d_current, keys) {
+data_frame_stack_new <- function(d_original, d_current, keys) {
 
   # Check arguments: d_original & d_current will be checked in `data_frame_compare_structure()`.
   checkmate::assert_character(keys, null.ok = FALSE, any.missing = TRUE, min.len=1, min.chars=1)

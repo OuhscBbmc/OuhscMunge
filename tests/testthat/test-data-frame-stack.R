@@ -24,7 +24,7 @@ test_that("four new rows", {
       5, "y",  15
   )
 
-  ds_actual <- data_frame_stack(ds_original, ds_current, c("x1", "x2"))
+  ds_actual <- data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
   expect_equal(ds_actual, ds_expected)
 })
 
@@ -43,7 +43,7 @@ test_that("zero new rows --shuffled order", {
 
   ds_expected <- ds_original
 
-  ds_actual <- data_frame_stack(ds_original, ds_current, c("x1", "x2"))
+  ds_actual <- data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
   expect_equal(ds_actual, ds_expected)
 })
 
@@ -63,7 +63,7 @@ test_that("nonunique original", {
   )
 
   expect_error(
-    data_frame_stack(ds_original, ds_current, c("x1", "x2"))
+    data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
     , "The `d_original` data\\.frame has multiple rows with the same values for column\\(s\\)\\\n\\{`x1`, `x2`\\}\\."
   )
 })
@@ -81,7 +81,7 @@ test_that("nonunique current", {
   )
 
   expect_error(
-    data_frame_stack(ds_original, ds_current, c("x1", "x2"))
+    data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
     , "The `d_current` data\\.frame has multiple rows with the same values for column\\(s\\)\\\n\\{`x1`, `x2`\\}\\."
   )
 })
