@@ -47,9 +47,8 @@
 #' @export
 data_frame_stack <- function(d_original, d_current, keys) {
 
-  # Check arguments
-  # d_original & d_current will be checked in `data_frame_compare_structure()`.
-  checkmate::assert_character( keys       , null.ok = FALSE, any.missing = TRUE, min.len=1, min.chars=1)
+  # Check arguments: d_original & d_current will be checked in `data_frame_compare_structure()`.
+  checkmate::assert_character(keys, null.ok = FALSE, any.missing = TRUE, min.len=1, min.chars=1)
 
   # Check the structure of the two datasets are equivalent
   data_frame_compare_structure(d_original, d_current)
@@ -80,5 +79,6 @@ data_frame_stack <- function(d_original, d_current, keys) {
 
   # Stack the two datasets on top of each other
   d_original %>%
-    dplyr::union_all(d_new)
+    dplyr::union_all(d_new) %>%
+    tibble::as_tibble()
 }
