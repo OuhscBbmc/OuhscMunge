@@ -10,17 +10,19 @@ data_frame_stack(d_original, d_current, keys)
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
 that potentialy needs to be updated.  Required.}
 
-\item{d_current}{A \code{data.frame} that contains records potentialy missing from
-\code{d_original}. Required.}
+\item{d_current}{A \code{data.frame} that contains records potentialy missing
+from \code{d_original}. Required.}
 
-\item{keys}{Column names that represent unique combination. \code{character} vector. Optional.}
+\item{keys}{Column names that represent unique combination.
+\code{character} vector. Optional.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble}} that combines \code{d_original} with the new records from \code{d_current}.
+A \code{\link[tibble:tibble]{tibble::tibble}} that combines \code{d_original} with the new records
+from \code{d_current}.
 }
 \description{
-These functions help to compare two metadata frames as assess if new rows
-should be added.
+These functions help to compare two metadata frames and assess
+if new rows should be added.
 }
 \note{
 each dataset is verified to not have more then one
