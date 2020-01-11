@@ -9,8 +9,8 @@
 #' that potentialy needs to be updated.  Required.
 #' @param d_current A `data.frame` that contains records potentialy missing from
 #' `d_original`. Required.
-#' @param ignore_datestamp A `logical` value indicating whether to ignore a
-#' column called `datestamp`.
+#' @param datestamp_ignore A `logical` value indicating whether to ignore a
+#' column called `datestamp`. Defaults to `FALSE`.
 #'
 #' @return If all check pass, and invisible `TRUE` is returned.
 #'
@@ -44,20 +44,20 @@
 #'   x3  = c(11, 13, 14),
 #'   datestamp = Sys.Date()
 #' )
-#' data_frame_compare_structure(ds_original_2, ds_current, ignore_datestamp = TRUE)
+#' data_frame_compare_structure(ds_original_2, ds_current, datestamp_ignore = TRUE)
 #'
 #' @export
 data_frame_compare_structure <- function(
   d_original,
   d_current,
-  ignore_datestamp = FALSE
+  datestamp_ignore = FALSE
 ) {
   # Check arguments
   checkmate::assert_data_frame(d_original , null.ok = FALSE)
   checkmate::assert_data_frame(d_current  , null.ok = FALSE)
-  checkmate::assert_logical(   ignore_datestamp, any.missing = FALSE, len = 1L)
+  checkmate::assert_logical(   datestamp_ignore, any.missing = FALSE, len = 1L)
 
-  if (ignore_datestamp) {
+  if (datestamp_ignore) {
     # This doesn't affect the caller's copy of the datasets.
     d_original[["datestamp"]] <- NULL
     d_current[[ "datestamp"]] <- NULL

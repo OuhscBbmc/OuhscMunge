@@ -4,7 +4,7 @@
 \alias{data_frame_compare_structure}
 \title{Verify equivalent structure of two dataset}
 \usage{
-data_frame_compare_structure(d_original, d_current)
+data_frame_compare_structure(d_original, d_current, datestamp_ignore = FALSE)
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
@@ -12,6 +12,9 @@ that potentialy needs to be updated.  Required.}
 
 \item{d_current}{A \code{data.frame} that contains records potentialy missing from
 \code{d_original}. Required.}
+
+\item{datestamp_ignore}{A \code{logical} value indicating whether to ignore a
+column called \code{datestamp}. Defaults to \code{FALSE}.}
 }
 \value{
 If all check pass, and invisible \code{TRUE} is returned.
@@ -20,21 +23,33 @@ If all check pass, and invisible \code{TRUE} is returned.
 Compare two datasets and throw an error if they have different
 (a) column counts, (b) column names, and (c) column class
 }
+\note{
+The \code{datestamp} column is used in metadata operations like
+\code{\link[=metadata_update_file]{metadata_update_file()}} and \code{\link[=data_frame_stack_new]{data_frame_stack_new()}}.  In these functions,
+the \code{datestamp} column does not have to be present.
+}
 \examples{
-library("magrittr")
-ds_original <- tibble::tibble(
+# A conventional comparison.
+ds_original_1 <- tibble::tibble(
   x1  = c(1, 3, 4),
   x2  = letters[c(1, 3, 4)],
   x3  = c(11, 13, 14)
 )
-
 ds_current <- tibble::tibble(
   x1  = c(1:5, 1, 5),
   x2  = c(letters[1:5], "x", "y"),
   x3  = c(11, 12, 13, 14, 15, 11, 15)
 )
+data_frame_compare_structure(ds_original_1, ds_current)
 
-data_frame_compare_structure(ds_original, ds_current)
+# When comparing metadata w/ datestamp.
+ds_original_2 <- tibble::tibble(
+  x1  = c(1, 3, 4),
+  x2  = letters[c(1, 3, 4)],
+  x3  = c(11, 13, 14),
+  datestamp = Sys.Date()
+)
+data_frame_compare_structure(ds_original_2, ds_current, datestamp_ignore = TRUE)
 
 }
 \author{

@@ -31,7 +31,7 @@ test_that("drop timestamp", {
     x3  = c(11, 12, 13, 14, 15, 11, 15)
   )
 
-  expect_true(data_frame_compare_structure(ds_original, ds_current, ignore_datestamp = TRUE))
+  expect_true(data_frame_compare_structure(ds_original, ds_current, datestamp_ignore = TRUE))
 })
 
 test_that("zero new rows --shuffled order", {
