@@ -143,7 +143,13 @@ data_frame_stack_new <- function(
 
 #' @rdname data_frame_stack_new
 #' @export
-metadata_update_file <- function(path, d_current, keys) {
+metadata_update_file <- function(
+  path,
+  d_current,
+  keys,
+  datestamp_update = FALSE,
+  datestamp_value  = Sys.Date()
+) {
   checkmate::assert_file_exists(path)
 
   d_original <- readr::read_csv(
@@ -151,7 +157,13 @@ metadata_update_file <- function(path, d_current, keys) {
     col_types = readr::cols(.default = readr::col_character())
   )
 
-  d_new <- data_frame_stack_new(d_original, d_current, keys)
+  d_new <- data_frame_stack_new(
+    d_original,
+    d_current,
+    keys,
+    datestamp_update  = datestamp_update,
+    datestamp_value   = datestamp_value
+  )
 
   readr::write_csv(
     x     = d_new,

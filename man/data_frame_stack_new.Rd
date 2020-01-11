@@ -13,7 +13,13 @@ data_frame_stack_new(
   datestamp_value = Sys.Date()
 )
 
-metadata_update_file(path, d_current, keys)
+metadata_update_file(
+  path,
+  d_current,
+  keys,
+  datestamp_update = FALSE,
+  datestamp_value = Sys.Date()
+)
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
