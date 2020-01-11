@@ -161,4 +161,3 @@ test_that("missing datestamp in original", {
     , "If `datestamp_update` is true, then the data.frame `d_original` must have a `datestamp` colum\\. The column is allowed to contain missing values\\."
   )
 })
-

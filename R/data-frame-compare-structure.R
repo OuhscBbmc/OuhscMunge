@@ -53,8 +53,8 @@ data_frame_compare_structure <- function(
   datestamp_ignore = FALSE
 ) {
   # Check arguments
-  checkmate::assert_data_frame(d_original , null.ok = FALSE)
-  checkmate::assert_data_frame(d_current  , null.ok = FALSE)
+  checkmate::assert_data_frame(d_original)
+  checkmate::assert_data_frame(d_current )
   checkmate::assert_logical(   datestamp_ignore, any.missing = FALSE, len = 1L)
 
   if (datestamp_ignore) {

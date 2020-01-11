@@ -86,7 +86,7 @@ data_frame_stack_new <- function(
 ) {
 
   # Check arguments: d_original & d_current will be checked in `data_frame_compare_structure()`.
-  checkmate::assert_character(keys             , any.missing = TRUE , min.len=1, min.chars=1)
+  checkmate::assert_character(keys             , any.missing = TRUE , min.len = 1, min.chars = 1)
   checkmate::assert_logical(  datestamp_update , any.missing = FALSE, len = 1L)
   checkmate::assert_date(     datestamp_value  , any.missing = FALSE, len = 1L)
 
