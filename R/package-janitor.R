@@ -155,12 +155,12 @@ package_janitor_remote <- function(
   #http://stackoverflow.com/questions/7765429/unable-to-install-r-package-in-ubuntu-11-04
 
   if (check_xml_linux) {
-    xml_results <- base::system("locate r-cran-xml")
-    xml_missing <- (xml_results == 0)
+    xml_results <- length(base::system2("locate", "r-cran-xml", stdout = TRUE))
+    xml_missing <- (xml_results == 0L)
 
     if (xml_missing)
       base::warning(
-        "This Linux machine is possibly missing the 'libxml2-dev' library.  ",
+        "This Linux machine is possibly missing the 'r-cran-xml' library.  ",
         "Consider running `sudo apt-get install r-cran-xml` ",
         "or the equivalent for your distribution."
       )
@@ -171,8 +171,8 @@ package_janitor_remote <- function(
 
   # ---- check-linux-libcurl -----------------------------------------------------
   if (check_libcurl_linux) {
-    libcurl_results <- base::system("locate libcurl4*")
-    libcurl_missing <- (libcurl_results == 0)
+    libcurl_results <- length(base::system2("locate", "libcurl4", stdout = TRUE))
+    libcurl_missing <- (libcurl_results == 0L)
 
     if (libcurl_missing)
       base::warning(
@@ -187,7 +187,7 @@ package_janitor_remote <- function(
 
   # ---- check-linux-openssl -----------------------------------------------------
   if (check_openssl_linux) {
-    openssl_results <- as.integer(base::system("locate libssl-dev | wc -l", intern = TRUE))
+    openssl_results <- length(base::system2("locate", "libssl-dev", stdout = TRUE))
     openssl_missing <- (openssl_results == 0L)
 
     if (openssl_missing)
