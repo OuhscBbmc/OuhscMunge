@@ -4,7 +4,7 @@ test_that("metadata_update_file", {
   path_temp       <- tempfile(fileext = ".csv")
   on.exit(unlink(path_temp))
   file.copy(
-    system.file("test-data/metadata-original.csv", package = "OuhscMunge"),
+    system.file("test-data/metadata-original.csv", package = "OuhscMunge"), # See ?pkgload::system.file
     path_temp
   )
 
@@ -31,7 +31,7 @@ test_that("metadata_update_file-with-datestamp", {
   path_temp       <- tempfile(fileext = ".csv")
   on.exit(unlink(path_temp))
   file.copy(
-    system.file("test-data/metadata-original-with-datestamp.csv", package = "OuhscMunge"),
+    system.file("test-data/metadata-original-with-datestamp.csv", package = "OuhscMunge"), # See ?pkgload::system.file
     path_temp
   )
 
