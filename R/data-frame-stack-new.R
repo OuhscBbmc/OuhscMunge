@@ -157,6 +157,10 @@ metadata_update_file <- function(
     col_types = readr::cols(.default = readr::col_character())
   )
 
+  if (datestamp_update) {
+    d_original[["datestamp"]] <- as.Date(d_original[["datestamp"]])
+  }
+
   d_new <- data_frame_stack_new(
     d_original,
     d_current,

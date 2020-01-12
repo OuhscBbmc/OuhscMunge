@@ -27,6 +27,34 @@ test_that("metadata_update_file", {
   ds_new <- readr::read_csv(path_temp)
   expect_equal(7, nrow(ds_new))
 })
+test_that("metadata_update_file-with-datestamp", {
+  path_temp       <- tempfile(fileext = ".csv")
+  on.exit(unlink(path_temp))
+  file.copy(
+    system.file("test-data/metadata-original-with-datestamp.csv", package = "OuhscMunge"),
+    path_temp
+  )
+
+  ds_original <- readr::read_csv(path_temp)
+  expect_equal(3, nrow(ds_original))
+
+  ds_current <- tibble::tibble(
+    x1  = c(1:5, 1, 5),
+    x2  = c(letters[1:5], "x", "y"),
+    x3  = c(11, 12, 13, 14, 15, 11, 15)
+  )
+
+  metadata_update_file(
+    path_temp,
+    dplyr::mutate(ds_current, x1 = as.character(x1), x3 = as.character(x3)),
+    c("x1", "x2"),
+    datestamp_update = TRUE
+  )
+
+  # Displays 7 rows.
+  ds_new <- readr::read_csv(path_temp)
+  expect_equal(7, nrow(ds_new))
+})
 
 
 # ---- data_frame_stack_new ----------------------------------------------------
@@ -85,7 +113,6 @@ test_that("with datestamp", {
   ds_actual <- data_frame_stack_new(ds_original, ds_current, c("x1", "x2"), datestamp_update = TRUE)
   expect_equal(ds_actual, ds_expected)
 })
-
 test_that("zero new rows --shuffled order", {
   ds_original <- tibble::tibble(
     x1  = c(1, 3, 4),
@@ -105,8 +132,9 @@ test_that("zero new rows --shuffled order", {
   expect_equal(ds_actual, ds_expected)
 })
 
+# ---- throw-errors-metadata_update_file ---------------------------------------
 
-# ---- throw-errors ------------------------------------------------------------
+# ---- throw-errors-data_frame_stack_new ---------------------------------------
 test_that("nonunique original", {
   ds_original <- tibble::tibble(
     x1  = c(1, 3, 3),
