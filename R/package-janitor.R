@@ -82,7 +82,9 @@ package_janitor_remote <- function(
   required_columns <- c("package_name", "on_cran", "install", "github_username", "description")
 
   # ---- load-data ---------------------------------------------------------------
-  if (verbose) message("package_janitor is loading the list of package dependencies.")
+  if (verbose)
+    message("package_janitor is loading the list of package dependencies.")
+
   ds_packages <- utils::read.csv(
     file = url_package_dependencies,
     stringsAsFactors = FALSE
@@ -103,30 +105,35 @@ package_janitor_remote <- function(
 
 
   # ---- cran-packages -----------------------------------------------------------
-  if (verbose) message("package_janitor is updating the existing packages from CRAN.")
+  if (verbose)
+    message("package_janitor is updating the existing packages from CRAN.")
   if (update_packages)
-    utils::update.packages(ask = FALSE, checkBuilt = TRUE, repos = cran_repo)
+    utils::update.packages(ask = FALSE, checkBuilt = TRUE, repos = cran_repo) # nocov
 
 
   # ---- install-devtools --------------------------------------------------------
-  if (verbose) message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
+  if (verbose)
+    message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
 
   if (!base::requireNamespace("httr"))
-    utils::install.packages("httr", repos = cran_repo)
+    utils::install.packages("httr", repos = cran_repo) # nocov
 
   if (!base::requireNamespace("devtools"))
-    utils::install.packages("devtools", repos = cran_repo)
+    utils::install.packages("devtools", repos = cran_repo) # nocov
 
 
   # ---- install-cran-packages ---------------------------------------------------
-  if (verbose) message("package_janitor is installing the CRAN packages:")
+  if (verbose)
+    message("package_janitor is installing the CRAN packages:")
 
   for (package_name in ds_install_from_cran$package_name) {
     if (package_name == "devtools") {
-      if (verbose) message("\nThe `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      if (verbose) # nocov
+        message("\nThe `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")  # nocov
 
     } else if (package_name == "httr") {
-      if (verbose) message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.")
+      if (verbose) # nocov
+        message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.") # nocov
 
     } else {
       available <- base::requireNamespace(package_name, quietly = TRUE) # Checks if it's available
@@ -149,7 +156,8 @@ package_janitor_remote <- function(
   }
 
   rm(ds_install_from_cran, package_name)
-  if (verbose) message("\n")
+  if (verbose)
+    message("\n")
 
   # ----check-linux-xml ---------------------------------------------------------
   #http://stackoverflow.com/questions/7765429/unable-to-install-r-package-in-ubuntu-11-04
@@ -202,7 +210,8 @@ package_janitor_remote <- function(
 
 
   #---- install-github-packages -------------------------------------------------
-  if (verbose) message("\npackage_janitor is installing the GitHub packages:")
+  if (verbose)
+    message("\npackage_janitor is installing the GitHub packages:")
 
   for (i in base::seq_len(base::nrow(ds_install_from_github))) {
     package_name <- ds_install_from_github$package_name[i]
@@ -215,15 +224,17 @@ package_janitor_remote <- function(
   }
 
   base::rm(ds_install_from_github, i)
+
   # ---- notify-tinytex ---------------------------------------------------------
   if (any(installed.packages() == "tinytex")) {
     # This comparison is copied from tinytex:::is_tinytex().
     if (!(gsub("^[.]", "", tolower(basename(tinytex::tinytex_root()))) == "tinytex"))
-      tinytex::install_tinytex()
+      tinytex::install_tinytex() # nocov
       # message("If you haven't already, install the TeX part of tinytex with `tinytex::install_tinytex()`.")
   }
 
   # ---- return ---------------------------------------------------------
 
-  if (verbose) message("package_janitor is complete.")
+  if (verbose)
+    message("package_janitor is complete.")
 }
