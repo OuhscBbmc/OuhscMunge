@@ -116,7 +116,7 @@
 (a) column counts, (b) column names, and (c) column class</p>
     </div>
 
-    <pre class="usage"><span class='fu'>data_frame_compare_structure</span>(<span class='no'>d_original</span>, <span class='no'>d_current</span>)</pre>
+    <pre class="usage"><span class='fu'>data_frame_compare_structure</span>(<span class='no'>d_original</span>, <span class='no'>d_current</span>, <span class='kw'>datestamp_ignore</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,33 +131,51 @@ that potentialy needs to be updated.  Required.</p></td>
       <td><p>A <code>data.frame</code> that contains records potentialy missing from
 <code>d_original</code>. Required.</p></td>
     </tr>
+    <tr>
+      <th>datestamp_ignore</th>
+      <td><p>A <code>logical</code> value indicating whether to ignore a
+column called <code>datestamp</code>. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>If all check pass, and invisible <code>TRUE</code> is returned.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The <code>datestamp</code> column is used in metadata operations like
+<code><a href='data_frame_stack_new.html'>metadata_update_file()</a></code> and <code><a href='data_frame_stack_new.html'>data_frame_stack_new()</a></code>.  In these functions,
+the <code>datestamp</code> column does not have to be present.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"magrittr"</span>)
-<span class='no'>ds_original</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    <pre class="examples"><div class='input'><span class='co'># A conventional comparison.</span>
+<span class='no'>ds_original_1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
   <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>),
   <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)],
   <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>13</span>, <span class='fl'>14</span>)
 )
-
 <span class='no'>ds_current</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
   <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>1</span>, <span class='fl'>5</span>),
   <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='st'>"x"</span>, <span class='st'>"y"</span>),
   <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>11</span>, <span class='fl'>15</span>)
 )
+<span class='fu'>data_frame_compare_structure</span>(<span class='no'>ds_original_1</span>, <span class='no'>ds_current</span>)
 
-<span class='fu'>data_frame_compare_structure</span>(<span class='no'>ds_original</span>, <span class='no'>ds_current</span>)</div></pre>
+<span class='co'># When comparing metadata w/ datestamp.</span>
+<span class='no'>ds_original_2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>),
+  <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)],
+  <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>13</span>, <span class='fl'>14</span>),
+  <span class='kw'>datestamp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()
+)
+<span class='fu'>data_frame_compare_structure</span>(<span class='no'>ds_original_2</span>, <span class='no'>ds_current</span>, <span class='kw'>datestamp_ignore</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#note">Note</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

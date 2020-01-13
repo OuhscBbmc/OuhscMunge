@@ -54,7 +54,7 @@
 #'   dplyr::anti_join(ds_original, by = c("x1", "x2"))
 #'
 #' # Update a file
-#'
+#' \dontrun{
 #' {
 #'   path_temp <- tempfile(fileext = ".csv")
 #'   on.exit(unlink(path_temp))
@@ -75,6 +75,7 @@
 #'
 #' # Displays 7 rows.
 #' readr::read_csv(path_temp)
+#' }
 #'
 #' @export
 data_frame_stack_new <- function(
