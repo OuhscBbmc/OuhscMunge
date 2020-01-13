@@ -25,6 +25,7 @@ Imports:
     remotes,
     rlang,
     tibble,
+    tidyselect,
 Suggests:
     odbc (>= 1.2.0),
     RODBC,
