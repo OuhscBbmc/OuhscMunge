@@ -17,7 +17,7 @@ These functions are used during the execution of a program.  Rather they produce
 that can be pasted into code, and help the developer avoid some typing.
 }
 \examples{
-# The aligned values produced by this funciton.
+# The aligned values produced by this function.
 readr_spec_aligned(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
 readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
 

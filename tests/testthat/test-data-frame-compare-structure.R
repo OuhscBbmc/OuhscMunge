@@ -17,6 +17,22 @@ test_that("four new rows", {
 
   expect_true(data_frame_compare_structure(ds_original, ds_current))
 })
+test_that("drop timestamp", {
+  ds_original <- tibble::tibble(
+    x1  = c(1, 3, 4),
+    x2  = letters[c(1, 3, 4)],
+    x3  = c(11, 13, 14),
+    datestamp = Sys.Date()
+  )
+
+  ds_current <- tibble::tibble(
+    x1  = c(1:5, 1, 5),
+    x2  = c(letters[1:5], "x", "y"),
+    x3  = c(11, 12, 13, 14, 15, 11, 15)
+  )
+
+  expect_true(data_frame_compare_structure(ds_original, ds_current, datestamp_ignore = TRUE))
+})
 
 test_that("zero new rows --shuffled order", {
   ds_original <- tibble::tibble(

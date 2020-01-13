@@ -15,8 +15,10 @@ test_that("readr_spec_aligned -subject-1", {
 \\)'
 
   testthat::expect_output(
-    readr_spec_aligned(system.file("test-data/subject-1.csv", package = "OuhscMunge"))
-    , expected
+    readr_spec_aligned(
+      system.file("test-data/subject-1.csv", package = "OuhscMunge") # See ?pkgload::system.file
+    ),
+    expected
   )
 })
 test_that("readr_spec_aligned -package-dependency-list.csv", {
@@ -30,7 +32,9 @@ test_that("readr_spec_aligned -package-dependency-list.csv", {
 \\)"
 
   testthat::expect_output(
-    readr_spec_aligned(system.file("package-dependency-list.csv", package = "OuhscMunge"))
-    , expected
+    readr_spec_aligned(
+      system.file("package-dependency-list.csv", package = "OuhscMunge") # See ?pkgload::system.file
+    ),
+    expected
   )
 })

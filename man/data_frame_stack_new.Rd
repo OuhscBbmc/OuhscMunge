@@ -5,9 +5,21 @@
 \alias{metadata_update_file}
 \title{Verify equivalent structure of two dataset}
 \usage{
-data_frame_stack_new(d_original, d_current, keys)
+data_frame_stack_new(
+  d_original,
+  d_current,
+  keys,
+  datestamp_update = FALSE,
+  datestamp_value = Sys.Date()
+)
 
-metadata_update_file(path, d_current, keys)
+metadata_update_file(
+  path,
+  d_current,
+  keys,
+  datestamp_update = FALSE,
+  datestamp_value = Sys.Date()
+)
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
@@ -18,6 +30,14 @@ from \code{d_original}. Required.}
 
 \item{keys}{Column names that represent unique combination.
 \code{character} vector. Optional.}
+
+\item{datestamp_update}{A \code{logical} value indicating whether to ignore a
+column called \code{datestamp}. Defaults to \code{FALSE}.}
+
+\item{datestamp_value}{A \code{Date} value assigned to the \code{datestamp} column
+for the records in \code{d_current} not present in \code{d_original} when
+\code{datestamp_update} is \code{TRUE}.
+Defaults to today.}
 
 \item{path}{Location of the mdatadata file to potentially updated.
 Required \code{character} vector.}
@@ -39,7 +59,8 @@ library("magrittr")
 ds_original <- tibble::tibble(
   x1  = c(1, 3, 4),
   x2  = letters[c(1, 3, 4)],
-  x3  = c(11, 13, 14)
+  x3  = c(11, 13, 14),
+  datestamp = as.Date("2020-01-07")
 )
 
 ds_current <- tibble::tibble(
@@ -54,7 +75,7 @@ ds_current \%>\%
   dplyr::anti_join(ds_original, by = c("x1", "x2"))
 
 # Update a file
-
+\dontrun{
 {
   path_temp <- tempfile(fileext = ".csv")
   on.exit(unlink(path_temp))
@@ -75,6 +96,7 @@ metadata_update_file(
 
 # Displays 7 rows.
 readr::read_csv(path_temp)
+}
 
 }
 \seealso{

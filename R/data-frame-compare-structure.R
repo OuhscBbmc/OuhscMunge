@@ -9,8 +9,14 @@
 #' that potentialy needs to be updated.  Required.
 #' @param d_current A `data.frame` that contains records potentialy missing from
 #' `d_original`. Required.
+#' @param datestamp_ignore A `logical` value indicating whether to ignore a
+#' column called `datestamp`. Defaults to `FALSE`.
 #'
 #' @return If all check pass, and invisible `TRUE` is returned.
+#'
+#' @note The `datestamp` column is used in metadata operations like
+#' [metadata_update_file()] and [data_frame_stack_new()].  In these functions,
+#' the `datestamp` column does not have to be present.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
@@ -18,26 +24,44 @@
 #' @author Will Beasley
 #'
 #' @examples
-#' library("magrittr")
-#' ds_original <- tibble::tibble(
+#' # A conventional comparison.
+#' ds_original_1 <- tibble::tibble(
 #'   x1  = c(1, 3, 4),
 #'   x2  = letters[c(1, 3, 4)],
 #'   x3  = c(11, 13, 14)
 #' )
-#'
 #' ds_current <- tibble::tibble(
 #'   x1  = c(1:5, 1, 5),
 #'   x2  = c(letters[1:5], "x", "y"),
 #'   x3  = c(11, 12, 13, 14, 15, 11, 15)
 #' )
+#' data_frame_compare_structure(ds_original_1, ds_current)
 #'
-#' data_frame_compare_structure(ds_original, ds_current)
+#' # When comparing metadata w/ datestamp.
+#' ds_original_2 <- tibble::tibble(
+#'   x1  = c(1, 3, 4),
+#'   x2  = letters[c(1, 3, 4)],
+#'   x3  = c(11, 13, 14),
+#'   datestamp = Sys.Date()
+#' )
+#' data_frame_compare_structure(ds_original_2, ds_current, datestamp_ignore = TRUE)
 #'
 #' @export
-data_frame_compare_structure <- function(d_original, d_current) {
+data_frame_compare_structure <- function(
+  d_original,
+  d_current,
+  datestamp_ignore = FALSE
+) {
   # Check arguments
-  checkmate::assert_data_frame(d_original , null.ok = FALSE)
-  checkmate::assert_data_frame(d_current  , null.ok = FALSE)
+  checkmate::assert_data_frame(d_original)
+  checkmate::assert_data_frame(d_current )
+  checkmate::assert_logical(   datestamp_ignore, any.missing = FALSE, len = 1L)
+
+  if (datestamp_ignore) {
+    # This doesn't affect the caller's copy of the datasets.
+    d_original[["datestamp"]] <- NULL
+    d_current[[ "datestamp"]] <- NULL
+  }
 
   # Check column count
   if (ncol(d_original) != ncol(d_current)) {
@@ -49,7 +73,7 @@ data_frame_compare_structure <- function(d_original, d_current) {
   }
 
   # Check names
-  if (any(colnames(d_original) != colnames(d_current ))) {
+  if (any(colnames(d_original) != colnames(d_current))) {
     stop(
       "The two data.frames have different column names.\n",
       "  d_original: {", paste(colnames(d_original), collapse = ", "), "}\n",
