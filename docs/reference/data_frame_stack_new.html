@@ -121,7 +121,8 @@ if new rows should be added.</p>
   <span class='no'>d_current</span>,
   <span class='no'>keys</span>,
   <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>datestamp_value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()
+  <span class='kw'>datestamp_value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>(),
+  <span class='kw'>stat_columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>)
 )
 
 <span class='fu'>metadata_update_file</span>(
@@ -129,7 +130,8 @@ if new rows should be added.</p>
   <span class='no'>d_current</span>,
   <span class='no'>keys</span>,
   <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>datestamp_value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()
+  <span class='kw'>datestamp_value</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>(),
+  <span class='kw'>stat_columns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -138,11 +140,11 @@ if new rows should be added.</p>
     <tr>
       <th>d_original</th>
       <td><p>A <code>data.frame</code> that serves as the existing metadata file
-that potentialy needs to be updated.  Required.</p></td>
+that potentially needs to be updated.  Required.</p></td>
     </tr>
     <tr>
       <th>d_current</th>
-      <td><p>A <code>data.frame</code> that contains records potentialy missing
+      <td><p>A <code>data.frame</code> that contains records potentially missing
 from <code>d_original</code>. Required.</p></td>
     </tr>
     <tr>
@@ -163,8 +165,13 @@ for the records in <code>d_current</code> not present in <code>d_original</code>
 Defaults to today.</p></td>
     </tr>
     <tr>
+      <th>stat_columns</th>
+      <td><p>The name(s) of columns containing values to update.
+These values in <code>d_current</code> with <em>overwrite</em> the values in <code>d_original</code>.</p></td>
+    </tr>
+    <tr>
       <th>path</th>
-      <td><p>Location of the mdatadata file to potentially updated.
+      <td><p>Location of the metadata file to potentially updated.
 Required <code>character</code> vector.</p></td>
     </tr>
     </table>
@@ -175,8 +182,12 @@ Required <code>character</code> vector.</p></td>
 from <code>d_current</code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>each dataset is verified to not have more then one
+    <p>Each dataset is verified to not have more then one
 row with the same values in the combination of <code>keys</code></p>
+<p>The <code>stat_columns</code> typically contain metrics like 'count' or 'mean'
+which may become obsolete in <code>d_original</code>.  These values are dropped
+from <code>d_original</code> and replaced by the columns in <code>d_current</code>, after
+joining on the <code>keys</code> column(s).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='data_frame_compare_structure.html'>data_frame_compare_structure()</a></code></p></div>
@@ -184,36 +195,95 @@ row with the same values in the combination of <code>keys</code></p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"magrittr"</span>)
 <span class='no'>ds_original</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-  <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>),
-  <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)],
-  <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>13</span>, <span class='fl'>14</span>),
-  <span class='kw'>datestamp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2020-01-07"</span>)
+  <span class='kw'>x1</span>         <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>),
+  <span class='kw'>x2</span>         <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)],
+  <span class='kw'>x3</span>         <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>13</span>, <span class='fl'>14</span>),
+  <span class='kw'>x4</span>         <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>111</span>, <span class='fl'>113</span>, <span class='fl'>114</span>),
+  <span class='kw'>x5</span>         <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>11</span>, -<span class='fl'>13</span>, -<span class='fl'>14</span>),
+  <span class='kw'>datestamp</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span>(<span class='st'>"2020-01-07"</span>)
 )
 
 <span class='no'>ds_current</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-  <span class='kw'>x1</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>1</span>, <span class='fl'>5</span>),
-  <span class='kw'>x2</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='st'>"x"</span>, <span class='st'>"y"</span>),
-  <span class='kw'>x3</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>11</span>, <span class='fl'>15</span>)
+  <span class='kw'>x1</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>5</span>, <span class='fl'>1</span>, <span class='fl'>5</span>),
+  <span class='kw'>x2</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>5</span>], <span class='st'>"x"</span>, <span class='st'>"y"</span>),
+  <span class='kw'>x3</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>11</span>, <span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>11</span>, <span class='fl'>15</span>),
+  <span class='kw'>x4</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>211</span>, <span class='fl'>212</span>, <span class='fl'>213</span>, <span class='fl'>214</span>, <span class='fl'>215</span>, <span class='fl'>211</span>, <span class='fl'>215</span>),
+  <span class='kw'>x5</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>311</span>, <span class='fl'>312</span>, <span class='fl'>313</span>, <span class='fl'>314</span>, <span class='fl'>315</span>, <span class='fl'>311</span>, <span class='fl'>315</span>)
 )
 
-<span class='fu'>data_frame_stack_new</span>(<span class='no'>ds_original</span>, <span class='no'>ds_current</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 4</span><span>
-#&gt;      x1 x2       x3 datestamp 
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>    
-#&gt; </span><span style='color: #555555;'>1</span><span>     1 a        11 2020-01-07
-#&gt; </span><span style='color: #555555;'>2</span><span>     3 c        13 2020-01-07
-#&gt; </span><span style='color: #555555;'>3</span><span>     4 d        14 2020-01-07
-#&gt; </span><span style='color: #555555;'>4</span><span>     2 b        12 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>5</span><span>     5 e        15 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>6</span><span>     1 x        11 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>7</span><span>     5 y        15 </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
+<span class='co'># Basic: append the new records.</span>
+<span class='fu'>data_frame_stack_new</span>(
+  <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
+  <span class='kw'>d_current</span>        <span class='kw'>=</span> <span class='no'>ds_current</span>,
+  <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>)
+)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 7 x 6</span><span>
+#&gt;      x1 x2       x3    x4    x5 datestamp 
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11   111   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13   113   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14   114   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12   212   312 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15   215   315 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11   211   311 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15   215   315 </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
+<span class='co'># Wrinkle 1: datestamp the new records.</span>
+<span class='fu'>data_frame_stack_new</span>(
+  <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
+  <span class='kw'>d_current</span>        <span class='kw'>=</span> <span class='no'>ds_current</span>,
+  <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>),
+  <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 6</span><span>
+#&gt;      x1 x2       x3    x4    x5 datestamp 
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11   111   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13   113   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14   114   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12   212   312 2020-01-14
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15   215   315 2020-01-14
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11   211   311 2020-01-14
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15   215   315 2020-01-14</div><div class='input'>
+<span class='co'># Wrinkle 2a: datestamp the new records; update x4.</span>
+<span class='fu'>data_frame_stack_new</span>(
+  <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
+  <span class='kw'>d_current</span>        <span class='kw'>=</span> <span class='no'>ds_current</span>,
+  <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>),
+  <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>stat_columns</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x4"</span>)
+)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 6</span><span>
+#&gt;      x1 x2       x3    x5 datestamp     x4
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07   211
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07   213
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07   214
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12   312 2020-01-14   212
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15   315 2020-01-14   215
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11   311 2020-01-14   211
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15   315 2020-01-14   215</div><div class='input'>
+<span class='co'># Wrinkle 2b: datestamp the new records; update x4 &amp; x5.</span>
+<span class='fu'>data_frame_stack_new</span>(
+  <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
+  <span class='kw'>d_current</span>        <span class='kw'>=</span> <span class='no'>ds_current</span>,
+  <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>),
+  <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>stat_columns</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x4"</span>, <span class='st'>"x5"</span>)
+)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 6</span><span>
+#&gt;      x1 x2       x3 datestamp     x4    x5
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11 2020-01-07   211   311
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13 2020-01-07   213   313
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14 2020-01-07   214   314
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12 2020-01-14   212   312
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15 2020-01-14   215   315
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11 2020-01-14   211   311
+#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15 2020-01-14   215   315</div><div class='input'>
 <span class='no'>ds_current</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>anti_join</a></span>(<span class='no'>ds_original</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 3</span><span>
-#&gt;      x1 x2       x3
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     2 b        12
-#&gt; </span><span style='color: #555555;'>2</span><span>     5 e        15
-#&gt; </span><span style='color: #555555;'>3</span><span>     1 x        11
-#&gt; </span><span style='color: #555555;'>4</span><span>     5 y        15</div><div class='input'>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>anti_join</a></span>(<span class='no'>ds_original</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 5</span><span>
+#&gt;      x1 x2       x3    x4    x5
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2 b        12   212   312
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5 e        15   215   315
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1 x        11   211   311
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     5 y        15   215   315</div><div class='input'>
 <span class='co'># Update a file</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 {

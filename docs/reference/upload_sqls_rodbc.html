@@ -169,7 +169,7 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If <code>transaction</code> is <code>TRUE</code> and the upload fails, the table is rolled back to the state before function was callled.
+    <p>If <code>transaction</code> is <code>TRUE</code> and the upload fails, the table is rolled back to the state before function was called.
 This includes rolling back the (optional) clearing of records, and uploading the new records.
 Decide if it's more robust to rollback to the previous state, or if it's better to leave the table in the incomplete state.
 The latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database</p>

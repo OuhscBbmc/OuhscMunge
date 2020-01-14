@@ -37,7 +37,7 @@
 
 <meta property="og:title" content="Convert blank, zero-length values to <code>NA</code>s for a variety of data types. — replace_with_nas" />
 <meta property="og:description" content="Elements of zero-length are converted to NAs.  Can force
-cohersion to an optionally-specified data type.
+coercion to an optionally-specified data type.
 The function has two parts.
 First, it uses consider using dplyr::na_if(x, &quot;&quot;).
 Second, it (optionally) coerces to the desired data type." />
@@ -116,7 +116,7 @@ Second, it (optionally) coerces to the desired data type." />
 
     <div class="ref-description">
     <p>Elements of zero-length are converted to <code>NA</code>s.  Can force
-cohersion to an optionally-specified data type.</p>
+coercion to an optionally-specified data type.</p>
 <p>The function has two parts.
 First, it uses consider using <a href='dplyr::na_if()'>dplyr::na_if(x, "")</a>.
 Second, it (optionally) coerces to the desired data type.</p>
@@ -143,7 +143,7 @@ Second, it (optionally) coerces to the desired data type.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>return_type</code> is missing, returned data type will match input.
-Supports cohersion to <code>integer</code>, <code>numeric</code>, <code>character</code>, <code>logical</code>,
+Supports coercion to <code>integer</code>, <code>numeric</code>, <code>character</code>, <code>logical</code>,
 and <code>Date</code> vectors.</p>
 <p>If <code>return_type=logical</code>, a <code>logical</code> vector will be returned
 if <code>x</code> contains only blanks and the characters <code>"0"</code> and <code>"1"</code>.</p>
