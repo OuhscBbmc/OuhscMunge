@@ -1,8 +1,8 @@
 | [GitHub](https://github.com/OuhscBbmc/OuhscMunge) | [Travis-CI](https://travis-ci.org/OuhscBbmc/OuhscMunge/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/ouhscmunge/history) |  [Coveralls](https://coveralls.io/r/OuhscBbmc/OuhscMunge) |
-| :----- | :---------------------------: | :-----------------------------: | :-------: | 
-| [Master](https://github.com/OuhscBbmc/OuhscMunge/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/OuhscMunge.svg?branch=master)](https://travis-ci.org/OuhscBbmc/OuhscMunge) | [![Build status](https://ci.appveyor.com/api/projects/status/j74ml0yqlmve7oaw/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/ouhscmunge/branch/master) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/OuhscMunge/badge.svg?branch=master)](https://coveralls.io/r/OuhscBbmc/OuhscMunge?branch=master) |
-| [Dev](https://github.com/OuhscBbmc/OuhscMunge/tree/dev) | [![Build Status](https://travis-ci.org/OuhscBbmc/OuhscMunge.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/OuhscMunge) | [![Build status](https://ci.appveyor.com/api/projects/status/j74ml0yqlmve7oaw/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/ouhscmunge/branch/dev) | [![Coverage Status](https://coveralls.io/repos/OuhscBbmc/OuhscMunge/badge.svg?branch=dev)](https://coveralls.io/r/OuhscBbmc/OuhscMunge?branch=dev) |  
-| | *Ubuntu LTS* | *Windows Server* | *Travis Tests* | 
+| :----- | :---------------------------: | :-----------------------------: | :-------: |
+| [Master](https://github.com/OuhscBbmc/OuhscMunge/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/OuhscMunge.svg?branch=master)](https://travis-ci.org/OuhscBbmc/OuhscMunge) | [![Build status](https://ci.appveyor.com/api/projects/status/j74ml0yqlmve7oaw/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/ouhscmunge/branch/master) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=master)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=master) |
+| [Dev](https://github.com/OuhscBbmc/OuhscMunge/tree/dev) | [![Build Status](https://travis-ci.org/OuhscBbmc/OuhscMunge.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/OuhscMunge) | [![Build status](https://ci.appveyor.com/api/projects/status/j74ml0yqlmve7oaw/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/ouhscmunge/branch/dev) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=dev) | 
+| | *Ubuntu LTS* | *Windows Server* | *Travis Tests* |
 
 OuhscMunge
 ==========
@@ -10,7 +10,7 @@ Data manipulation operations commonly used by the [Biomedical and Behavioral Met
 
 ### Download and Installation Instructions
 <!--
-The *release* version of IalsaSynthesis can be installed from [CRAN](http://cran.r-project.org/web/packages/OuhscMunge/).
+The *release* version of OuhscMunge can be installed from [CRAN](http://cran.r-project.org/web/packages/OuhscMunge/).
 ```r
 install.packages("OuhscMunge")
 ```
