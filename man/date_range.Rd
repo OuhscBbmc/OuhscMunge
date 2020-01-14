@@ -11,7 +11,7 @@
 \alias{min_with_nas_integer}
 \alias{max_with_nas_integer}
 \alias{range_with_nas_integer}
-\title{Find date ranges in the  prescence of missing subsets}
+\title{Find date ranges in the presence of missing subsets}
 \usage{
 date_min_with_nas(x)
 date_max_with_nas(x)

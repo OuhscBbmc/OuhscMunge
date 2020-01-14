@@ -4,7 +4,7 @@
 #' min_with_nas_numeric max_with_nas_numeric range_with_nas_numeric
 #' min_with_nas_integer max_with_nas_integer range_with_nas_integer
 #'
-#' @title Find date ranges in the  prescence of missing subsets
+#' @title Find date ranges in the presence of missing subsets
 #'
 #' @description Return `NA` for the min and max of a date vector if no nonmissing values are present.
 #'

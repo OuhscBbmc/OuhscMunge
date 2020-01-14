@@ -25,12 +25,15 @@ Imports:
     remotes,
     rlang,
     tibble,
+    tidyselect,
 Suggests:
     odbc (>= 1.2.0),
     RODBC,
     RODBCext,
+    spelling,
     testthat,
     tinytex
 Encoding: UTF-8
+Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2

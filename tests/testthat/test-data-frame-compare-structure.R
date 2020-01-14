@@ -1,6 +1,5 @@
 library(testthat)
 
-
 # ---- good-values -------------------------------------------------------------
 test_that("four new rows", {
   ds_original <- tibble::tibble(

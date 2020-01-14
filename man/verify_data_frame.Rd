@@ -23,7 +23,7 @@ and
 \code{\link[checkmate:checkTibble]{checkmate::assert_tibble()}}.
 
 This helps check database-reading functions (\emph{e.g.}, \code{\link[RODBC:sqlQuery]{RODBC::sqlQuery()}}) that return a \code{data.frame}
-if successful, and a \code{character} vector is unsucessful.
+if successful, and a \code{character} vector is unsuccessful.
 
 A minimum row count can be used to check that a trivially small number of rows was not returned.
 If \code{minimum_row_count} is set to 0, the function is similar to \code{checkmate::assert_class(d, "data.frame")},

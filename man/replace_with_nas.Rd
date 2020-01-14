@@ -16,7 +16,7 @@ An array of values with \code{NA}s.
 }
 \description{
 Elements of zero-length are converted to \code{NA}s.  Can force
-cohersion to an optionally-specified data type.
+coercion to an optionally-specified data type.
 
 The function has two parts.
 First, it uses consider using \href{dplyr::na_if()}{dplyr::na_if(x, "")}.
@@ -24,7 +24,7 @@ Second, it (optionally) coerces to the desired data type.
 }
 \details{
 If \code{return_type} is missing, returned data type will match input.
-Supports cohersion to \code{integer}, \code{numeric}, \code{character}, \code{logical},
+Supports coercion to \code{integer}, \code{numeric}, \code{character}, \code{logical},
 and \code{Date} vectors.
 
 If \code{return_type=logical}, a \code{logical} vector will be returned

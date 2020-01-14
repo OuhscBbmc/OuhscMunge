@@ -4,8 +4,8 @@
 #'
 #' @description Facilitates retrieval of key-value pairs that are stored in a SQL Server database.
 #'
-#' @param key The key associated with the desired value.  Required character vecotr with one element
-#' @param project_name The project name associated with the desired value.  Required character vecotr with one element
+#' @param key The key associated with the desired value.  Required character vector with one element
+#' @param project_name The project name associated with the desired value.  Required character vector with one element
 #' @param dsn_name Name of the locally-defined DSN passed to [RODBC::odbcConnect()](RODBC::odbcConnect()).
 #' @param channel An *optional* connection handle as returned by [RODBC::odbcConnect()].  See Details below. Optional.
 #' @return A `character` vector with one element.

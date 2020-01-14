@@ -3,7 +3,7 @@
 #' @export match_statistics match_statistics_display
 #' @title Create explicit factor level for missing values.
 #'
-#' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
+#' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 #' It also allows the presence of a missing to become a predictor in models.
 #'
 #' @param d_parent A `data.frame` of the parent table.

@@ -6,7 +6,7 @@
 #'
 #' @param d A `data.frame` to examine.  Required.
 #' @param keys A `character` vector specifying the (combination of) columns that should be unique.
-#' @param display_count Maximum number of uniquness violations to display.
+#' @param display_count Maximum number of uniqueness violations to display.
 #'
 #' @return A `logical` value indicating if uniqueness is satisfied.
 #' If `FALSE`, the top rows are printed to the console.

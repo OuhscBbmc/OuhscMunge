@@ -8,9 +8,9 @@ data_frame_compare_structure(d_original, d_current, datestamp_ignore = FALSE)
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
-that potentialy needs to be updated.  Required.}
+that potentially needs to be updated.  Required.}
 
-\item{d_current}{A \code{data.frame} that contains records potentialy missing from
+\item{d_current}{A \code{data.frame} that contains records potentially missing from
 \code{d_original}. Required.}
 
 \item{datestamp_ignore}{A \code{logical} value indicating whether to ignore a

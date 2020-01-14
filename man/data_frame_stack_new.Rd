@@ -10,7 +10,8 @@ data_frame_stack_new(
   d_current,
   keys,
   datestamp_update = FALSE,
-  datestamp_value = Sys.Date()
+  datestamp_value = Sys.Date(),
+  stat_columns = character(0)
 )
 
 metadata_update_file(
@@ -18,14 +19,15 @@ metadata_update_file(
   d_current,
   keys,
   datestamp_update = FALSE,
-  datestamp_value = Sys.Date()
+  datestamp_value = Sys.Date(),
+  stat_columns = character(0)
 )
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
-that potentialy needs to be updated.  Required.}
+that potentially needs to be updated.  Required.}
 
-\item{d_current}{A \code{data.frame} that contains records potentialy missing
+\item{d_current}{A \code{data.frame} that contains records potentially missing
 from \code{d_original}. Required.}
 
 \item{keys}{Column names that represent unique combination.
@@ -39,7 +41,10 @@ for the records in \code{d_current} not present in \code{d_original} when
 \code{datestamp_update} is \code{TRUE}.
 Defaults to today.}
 
-\item{path}{Location of the mdatadata file to potentially updated.
+\item{stat_columns}{The name(s) of columns containing values to update.
+These values in \code{d_current} with \emph{overwrite} the values in \code{d_original}.}
+
+\item{path}{Location of the metadata file to potentially updated.
 Required \code{character} vector.}
 }
 \value{
@@ -51,25 +56,65 @@ These functions help to compare two metadata frames and assess
 if new rows should be added.
 }
 \note{
-each dataset is verified to not have more then one
+Each dataset is verified to not have more then one
 row with the same values in the combination of \code{keys}
+
+The \code{stat_columns} typically contain metrics like 'count' or 'mean'
+which may become obsolete in \code{d_original}.  These values are dropped
+from \code{d_original} and replaced by the columns in \code{d_current}, after
+joining on the \code{keys} column(s).
 }
 \examples{
 library("magrittr")
 ds_original <- tibble::tibble(
-  x1  = c(1, 3, 4),
-  x2  = letters[c(1, 3, 4)],
-  x3  = c(11, 13, 14),
-  datestamp = as.Date("2020-01-07")
+  x1         = c(1, 3, 4),
+  x2         = letters[c(1, 3, 4)],
+  x3         = c(11, 13, 14),
+  x4         = c(111, 113, 114),
+  x5         = c(-11, -13, -14),
+  datestamp  = as.Date("2020-01-07")
 )
 
 ds_current <- tibble::tibble(
-  x1  = c(1:5, 1, 5),
-  x2  = c(letters[1:5], "x", "y"),
-  x3  = c(11, 12, 13, 14, 15, 11, 15)
+  x1   = c(1:5, 1, 5),
+  x2   = c(letters[1:5], "x", "y"),
+  x3   = c(11, 12, 13, 14, 15, 11, 15),
+  x4   = c(211, 212, 213, 214, 215, 211, 215),
+  x5   = c(311, 312, 313, 314, 315, 311, 315)
 )
 
-data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
+# Basic: append the new records.
+data_frame_stack_new(
+  d_original       = ds_original,
+  d_current        = ds_current,
+  keys             = c("x1", "x2")
+)
+
+# Wrinkle 1: datestamp the new records.
+data_frame_stack_new(
+  d_original       = ds_original,
+  d_current        = ds_current,
+  keys             = c("x1", "x2"),
+  datestamp_update = TRUE
+)
+
+# Wrinkle 2a: datestamp the new records; update x4.
+data_frame_stack_new(
+  d_original       = ds_original,
+  d_current        = ds_current,
+  keys             = c("x1", "x2"),
+  datestamp_update = TRUE,
+  stat_columns     = c("x4")
+)
+
+# Wrinkle 2b: datestamp the new records; update x4 & x5.
+data_frame_stack_new(
+  d_original       = ds_original,
+  d_current        = ds_current,
+  keys             = c("x1", "x2"),
+  datestamp_update = TRUE,
+  stat_columns     = c("x4", "x5")
+)
 
 ds_current \%>\%
   dplyr::anti_join(ds_original, by = c("x1", "x2"))

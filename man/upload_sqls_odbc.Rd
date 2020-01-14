@@ -45,7 +45,7 @@ upload_sqls_odbc(
 The function performs some extra configuration to improve robustness.
 }
 \details{
-If \code{transaction} is \code{TRUE} and the upload fails, the table is rolled back to the state before function was callled.
+If \code{transaction} is \code{TRUE} and the upload fails, the table is rolled back to the state before function was called.
 This includes rolling back the (optional) clearing of records, and uploading the new records.
 Decide if it's more robust to rollback to the previous state, or if it's better to leave the table in the incomplete state.
 The latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database
