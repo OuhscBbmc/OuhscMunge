@@ -24,7 +24,7 @@ replace_nas_with_explicit(
 An array of values, where the \code{NA} values are now a factor level, with the label specified by the \code{new_na_label} value.
 }
 \description{
-Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
+Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 It also allows the presence of a missing to become a predictor in models.
 
 The function is retained so existing code doesn't break.  For new code, consider using \url{dplyr::coalesce()}.

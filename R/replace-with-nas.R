@@ -4,7 +4,7 @@
 #' @title Convert blank, zero-length values to `NA`s for a variety of data types.
 #'
 #' @description Elements of zero-length are converted to `NA`s.  Can force
-#' cohersion to an optionally-specified data type.
+#' coercion to an optionally-specified data type.
 #'
 #' The function has two parts.
 #' First, it uses consider using [dplyr::na_if(x, "")](dplyr::na_if()).
@@ -16,7 +16,7 @@
 #' @return An array of values with `NA`s.
 #'
 #' @details If `return_type` is missing, returned data type will match input.
-#' Supports cohersion to `integer`, `numeric`, `character`, `logical`,
+#' Supports coercion to `integer`, `numeric`, `character`, `logical`,
 #' and `Date` vectors.
 #'
 #' If `return_type=logical`, a `logical` vector will be returned
@@ -45,7 +45,7 @@ replace_with_nas <- function(x, return_type = NULL) {
   x <- as.character(x)
 
   if (is.null(return_type)) {
-    #This function accepts character values with blanks (ie, "").
+    # This function accepts character values with blanks (ie, "").
     #   It converts the blanks to NAs.
     dplyr::na_if(x, "")
 

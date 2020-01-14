@@ -6,8 +6,8 @@
 #' (a) column counts, (b) column names, and (c) column class
 #'
 #' @param d_original A `data.frame` that serves as the existing metadata file
-#' that potentialy needs to be updated.  Required.
-#' @param d_current A `data.frame` that contains records potentialy missing from
+#' that potentially needs to be updated.  Required.
+#' @param d_current A `data.frame` that contains records potentially missing from
 #' `d_original`. Required.
 #' @param datestamp_ignore A `logical` value indicating whether to ignore a
 #' column called `datestamp`. Defaults to `FALSE`.

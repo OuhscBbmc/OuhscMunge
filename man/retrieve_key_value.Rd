@@ -7,9 +7,9 @@
 retrieve_key_value(key, project_name, dsn_name, channel = NULL)
 }
 \arguments{
-\item{key}{The key associated with the desired value.  Required character vecotr with one element}
+\item{key}{The key associated with the desired value.  Required character vector with one element}
 
-\item{project_name}{The project name associated with the desired value.  Required character vecotr with one element}
+\item{project_name}{The project name associated with the desired value.  Required character vector with one element}
 
 \item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}
 

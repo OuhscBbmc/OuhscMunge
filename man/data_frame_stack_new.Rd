@@ -25,9 +25,9 @@ metadata_update_file(
 }
 \arguments{
 \item{d_original}{A \code{data.frame} that serves as the existing metadata file
-that potentialy needs to be updated.  Required.}
+that potentially needs to be updated.  Required.}
 
-\item{d_current}{A \code{data.frame} that contains records potentialy missing
+\item{d_current}{A \code{data.frame} that contains records potentially missing
 from \code{d_original}. Required.}
 
 \item{keys}{Column names that represent unique combination.
@@ -44,7 +44,7 @@ Defaults to today.}
 \item{stat_columns}{The name(s) of columns containing values to update.
 These values in \code{d_current} with \emph{overwrite} the values in \code{d_original}.}
 
-\item{path}{Location of the mdatadata file to potentially updated.
+\item{path}{Location of the metadata file to potentially updated.
 Required \code{character} vector.}
 }
 \value{

@@ -6,12 +6,12 @@
 #' if new rows should be added.
 #'
 #' @param d_original A `data.frame` that serves as the existing metadata file
-#' that potentialy needs to be updated.  Required.
-#' @param d_current A `data.frame` that contains records potentialy missing
+#' that potentially needs to be updated.  Required.
+#' @param d_current A `data.frame` that contains records potentially missing
 #' from `d_original`. Required.
 #' @param keys Column names that represent unique combination.
 #' `character` vector. Optional.
-#' @param path Location of the mdatadata file to potentially updated.
+#' @param path Location of the metadata file to potentially updated.
 #' Required `character` vector.
 #' @param datestamp_update A `logical` value indicating whether to ignore a
 #' column called `datestamp`. Defaults to `FALSE`.

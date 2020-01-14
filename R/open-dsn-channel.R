@@ -19,7 +19,7 @@
 #' @note
 #' Assuring a minimum version is important, because driver versions can interpret values differently.
 #' For example, earlier version (before 11.0)  returned dates as characters, which would
-#' propogate undetected through our code until it broke something with an unhelpful error message.
+#' propagate undetected through our code until it broke something with an unhelpful error message.
 #'
 #' @examples
 #' \dontrun{

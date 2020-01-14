@@ -28,7 +28,7 @@ A \code{numeric} array of the following elements:
 }
 }
 \description{
-Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertantly ignored.
+Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 It also allows the presence of a missing to become a predictor in models.
 }
 \details{

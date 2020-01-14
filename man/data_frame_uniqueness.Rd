@@ -14,7 +14,7 @@ data_frame_uniqueness_assert(d, keys, display_count = 10L)
 
 \item{keys}{A \code{character} vector specifying the (combination of) columns that should be unique.}
 
-\item{display_count}{Maximum number of uniquness violations to display.}
+\item{display_count}{Maximum number of uniqueness violations to display.}
 }
 \value{
 A \code{logical} value indicating if uniqueness is satisfied.
