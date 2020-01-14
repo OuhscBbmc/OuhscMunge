@@ -67,20 +67,20 @@ joining on the \code{keys} column(s).
 \examples{
 library("magrittr")
 ds_original <- tibble::tibble(
-  x1  = c(1, 3, 4),
-  x2  = letters[c(1, 3, 4)],
-  x3  = c(11, 13, 14),
-  x4  = c(111, 113, 114),
-  x5  = c(-11, -13, -14),
-  datestamp = as.Date("2020-01-07")
+  x1         = c(1, 3, 4),
+  x2         = letters[c(1, 3, 4)],
+  x3         = c(11, 13, 14),
+  x4         = c(111, 113, 114),
+  x5         = c(-11, -13, -14),
+  datestamp  = as.Date("2020-01-07")
 )
 
 ds_current <- tibble::tibble(
-  x1  = c(1:5, 1, 5),
-  x2  = c(letters[1:5], "x", "y"),
-  x3  = c(11, 12, 13, 14, 15, 11, 15),
-  x4  = c(211, 212, 213, 214, 215, 211, 215),
-  x5  = c(311, 312, 313, 314, 315, 311, 315)
+  x1   = c(1:5, 1, 5),
+  x2   = c(letters[1:5], "x", "y"),
+  x3   = c(11, 12, 13, 14, 15, 11, 15),
+  x4   = c(211, 212, 213, 214, 215, 211, 215),
+  x5   = c(311, 312, 313, 314, 315, 311, 315)
 )
 
 # Basic: append the new records.
