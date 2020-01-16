@@ -85,6 +85,10 @@ package_janitor_remote <- function(
   if (verbose)
     message("package_janitor is loading the list of package dependencies.")
 
+
+  if (!base::requireNamespace("checkmate"))
+    utils::install.packages("checkmate", repos = cran_repo) # nocov
+
   checkmate::assert_character(url_package_dependencies, min.chars = 1, len=1)
 
   ds_packages <- utils::read.csv(
