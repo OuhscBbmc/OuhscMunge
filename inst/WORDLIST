@@ -9,9 +9,11 @@ CCAN
 codecov
 cryptographic
 csv
+dbConnect
 Dev
 devtools
 dplyr
+dsn
 DSN
 ec
 ee
@@ -49,6 +51,7 @@ RStudio's
 SHA
 snakecase
 sql
+sqls
 stackoverflow
 th
 tidyverse
