@@ -1,4 +1,5 @@
 retrieve_column_info <- function(dsn_name, table_name) {
+  warning("`OuhscMunge::retrieve_column_info()` is deprecated and will be removed in the future.  Please create a GitHub issue if this is a problem, or post to https://github.com/OuhscBbmc/OuhscMunge/issues/117.")
   tryCatch(expr = {
       channel <- RODBC::odbcConnect(dsn_name)
       RODBC::getSqlTypeInfo("Microsoft SQL Server")

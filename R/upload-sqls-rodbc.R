@@ -20,6 +20,8 @@
 #' Decide if it's more robust to rollback to the previous state, or if it's better to leave the table in the incomplete state.
 #' The latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database
 #'
+#'`OuhscMunge::upload_sqls_rodbc()` is deprecated and will be removed in the future.  Please use `OuhscMunge::upload_sqls_odbc().
+#'
 #' @examples
 #' \dontrun{
 #' requireNamespace("OuhscMunge")
@@ -48,6 +50,7 @@ upload_sqls_rodbc <- function(
   transaction                   = FALSE,
   verbose                       = TRUE
 ) {
+  warning("`OuhscMunge::upload_sqls_rodbc()` is deprecated and will be removed in the future.  Please use `OuhscMunge::upload_sqls_odbc().")
 
   checkmate::assert_data_frame(d                            , null.ok=FALSE             , any.missing=TRUE)
   checkmate::assert_character(schema_name                   , min.chars=1L  , len=1L, any.missing=TRUE)

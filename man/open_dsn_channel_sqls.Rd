@@ -12,7 +12,7 @@ open_dsn_channel_sqls(
 )
 }
 \arguments{
-\item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}
+\item{dsn_name}{Name of the locally-defined DSN passed to \url{DBI::dbConnect()}.}
 
 \item{driver_version_minimum}{The driver must be at least this version number.  Represented as a \code{\link[base:numeric_version]{base::numeric_version()}}}
 
@@ -24,9 +24,11 @@ Creates & opens a channel and checks its important characteristics.
 \details{
 A DSN channel requires more code than usual to diagnose problems, because the DSN
 is defined on the local computer, and is not under the control of the repository.
-This function wraps the basic \url{RODBC::odbcConnect()} function with some
+This function wraps the basic \href{DBI::dbConnect()}{DBI::dbConnect(odbc::odbc(), dsn = dsn_name)()} function with some
 checks.  If unsuccessful, it returns some hints how to correct the problem, such as downloading
 the newest version from the \href{https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server}{Microsoft website}.
+
+\code{OuhscMunge::open_dsn_channel_sqls()} is deprecated and will be removed in the future.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().
 }
 \note{
 Assuring a minimum version is important, because driver versions can interpret values differently.

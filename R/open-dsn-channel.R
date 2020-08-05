@@ -4,7 +4,7 @@
 #'
 #' @description Creates & opens a channel and checks its important characteristics.
 #'
-#' @param dsn_name Name of the locally-defined DSN passed to [RODBC::odbcConnect()](RODBC::odbcConnect()).
+#' @param dsn_name Name of the locally-defined DSN passed to [DBI::dbConnect()](DBI::dbConnect()).
 #' @param driver_version_minimum The driver must be at least this version number.  Represented as a [base::numeric_version()]
 #' @param driver_version_maximum The driver must not exceed this version number.  Represented as a [base::numeric_version()]
 #'
@@ -12,9 +12,11 @@
 #' A DSN channel requires more code than usual to diagnose problems, because the DSN
 #' is defined on the local computer, and is not under the control of the repository.
 
-#' This function wraps the basic [RODBC::odbcConnect()](RODBC::odbcConnect()) function with some
+#' This function wraps the basic [DBI::dbConnect(odbc::odbc(), dsn = dsn_name)()](DBI::dbConnect()) function with some
 #' checks.  If unsuccessful, it returns some hints how to correct the problem, such as downloading
 #' the newest version from the [Microsoft website](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server).
+#'
+#' `OuhscMunge::open_dsn_channel_sqls()` is deprecated and will be removed in the future.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().
 #'
 #' @note
 #' Assuring a minimum version is important, because driver versions can interpret values differently.
@@ -37,6 +39,8 @@ open_dsn_channel_sqls <- function(
   driver_version_minimum = numeric_version("13.0"),
   driver_version_maximum = numeric_version("99.0")
 ) {
+
+  warning("`OuhscMunge::open_dsn_channel_sqls()` is deprecated and will be removed in the future.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().")
 
   requireNamespace("RODBC")
 
