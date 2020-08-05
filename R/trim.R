@@ -1,5 +1,5 @@
 #' @name trim
-#' @aliases trim_numeric trim_integer trim_date
+#' @aliases trim_numeric trim_integer trim_date trim_datetime
 #' @title Trim extreme values
 #'
 #' @description Trim extreme values from an atomic vector, and replace with a specific value (typically `NA_*`).
@@ -9,12 +9,12 @@
 #' trim_integer(x, bounds=c(-2147483647L, 2147483647L), replacement=NA_integer_)
 #' trim_date(
 #'   x,
-#'   bounds      = as.Date(c("1940-01-01", "2030-01-01")),
+#'   bounds      = as.Date(c("1940-01-01", "2029-12-31")),
 #'   replacement = as.Date(NA_character_)
 #' )
 # trim_datetime(
 #   x,
-#   bounds      = as.POSIXct(c("1940-01-01", "2030-01-01")),
+#   bounds      = as.POSIXct(c("1940-01-01 00:00", "2029-12-31 23:59")),
 #   replacement = as.POSIXct(NA_character_)
 # )
 #'
@@ -102,6 +102,7 @@ trim_date <- function(x, bounds = as.Date(c("1940-01-01", "2029-12-31")), replac
     false     = replacement
   )
 }
+
 #' @export
 trim_datetime <- function(x, bounds = as.POSIXct(c("1940-01-01 00:00", "2029-12-31 23:59")), replacement = as.POSIXct(NA_character_)) {
   checkmate::assert_posixct(x, any.missing=TRUE)

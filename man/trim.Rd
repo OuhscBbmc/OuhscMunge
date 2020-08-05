@@ -5,13 +5,14 @@
 \alias{trim_numeric}
 \alias{trim_integer}
 \alias{trim_date}
+\alias{trim_datetime}
 \title{Trim extreme values}
 \usage{
 trim_numeric(x, bounds=c(-Inf, Inf), replacement=NA_real_)
 trim_integer(x, bounds=c(-2147483647L, 2147483647L), replacement=NA_integer_)
 trim_date(
   x,
-  bounds      = as.Date(c("1940-01-01", "2030-01-01")),
+  bounds      = as.Date(c("1940-01-01", "2029-12-31")),
   replacement = as.Date(NA_character_)
 )
 }
@@ -48,8 +49,8 @@ trim_date(
   bounds = as.Date(c("1990-01-01", "2030-01-01"))
 )
 trim_datetime(
-  x      = as.Date(c("1902-02-02", "1999-09-09", "2020-02-22", "1930-01-01", "1930-01-02")),
-  bounds = as.Date(c("1990-01-01", "2030-01-01"))
+  x      = as.POSIXct(c("1902-02-02", "1999-09-09", "2020-02-22", "1930-01-01", "1930-01-02")),
+  bounds = as.POSIXct(c("1990-01-01", "2030-01-01"))
 )
 }
 \author{
