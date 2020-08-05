@@ -43,6 +43,8 @@ If \code{transaction} is \code{TRUE} and the upload fails, the table is rolled b
 This includes rolling back the (optional) clearing of records, and uploading the new records.
 Decide if it's more robust to rollback to the previous state, or if it's better to leave the table in the incomplete state.
 The latter is helpful diagnosing which record caused the write to fail; look at the last successful record contained in the database
+
+\code{OuhscMunge::upload_sqls_rodbc()} is deprecated and will be removed in the future.  Please use `OuhscMunge::upload_sqls_odbc().
 }
 \examples{
 \dontrun{

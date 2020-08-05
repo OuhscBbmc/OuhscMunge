@@ -118,7 +118,8 @@ test_that("four new rows", {
     5   , "y", 15
   )
 
-  ds_actual <- data_frame_stack_new(ds_original, ds_current, c("x1", "x2"))
+  ds_actual <- data_frame_stack_new(ds_original, ds_current, c("x1", "x2")) %>%
+    dplyr::arrange(x2)
   expect_equal(ds_actual, ds_expected)
 })
 test_that("with datestamp", {
@@ -146,7 +147,9 @@ test_that("with datestamp", {
     5  , "y",  15, Sys.Date()
   )
 
-  ds_actual <- data_frame_stack_new(ds_original, ds_current, c("x1", "x2"), datestamp_update = TRUE)
+  ds_actual <-
+    data_frame_stack_new(ds_original, ds_current, c("x1", "x2"), datestamp_update = TRUE) %>%
+    dplyr::arrange(x2)
   expect_equal(ds_actual, ds_expected)
 })
 test_that("with datestamp & 1 stat", {
@@ -168,14 +171,14 @@ test_that("with datestamp & 1 stat", {
   )
 
   ds_expected <- tibble::tribble(
-    ~x1 , ~x2, ~x3, ~datestamp             , ~x4, ~x5,
-    1   , "a",  11, as.Date("2020-01-07")  , 211, -11,
-    2   , "b",  12, Sys.Date()             , 212, 312,
-    3   , "c",  13, as.Date("2020-01-07")  , 213, -13,
-    4   , "d",  14, as.Date("2020-01-07")  , 214, -14,
-    5   , "e",  15, Sys.Date()             , 215, 315,
-    1   , "x",  11, Sys.Date()             , 211, 311,
-    5   , "y",  15, Sys.Date()             , 215, 315
+    ~x1 , ~x2, ~x3, ~x5, ~datestamp             , ~x4,
+    1   , "a",  11, -11, as.Date("2020-01-07")  , 211,
+    2   , "b",  12, 312, Sys.Date()             , 212,
+    3   , "c",  13, -13, as.Date("2020-01-07")  , 213,
+    4   , "d",  14, -14, as.Date("2020-01-07")  , 214,
+    5   , "e",  15, 315, Sys.Date()             , 215,
+    1   , "x",  11, 311, Sys.Date()             , 211,
+    5   , "y",  15, 315, Sys.Date()             , 215
   )
 
   ds_actual <-
@@ -185,7 +188,8 @@ test_that("with datestamp & 1 stat", {
       keys             = c("x1", "x2"),
       datestamp_update = TRUE,
       stat_columns     = c("x4")
-    )
+    ) %>%
+    dplyr::arrange(x2)
   expect_equal(ds_actual, ds_expected)
 })
 test_that("with datestamp & 2 stats", {
@@ -224,7 +228,8 @@ test_that("with datestamp & 2 stats", {
       keys             = c("x1", "x2"),
       datestamp_update = TRUE,
       stat_columns     = c("x4", "x5")
-    )
+    ) %>%
+    dplyr::arrange(x2)
   expect_equal(ds_actual, ds_expected)
 })
 test_that("zero new rows --shuffled order", {
