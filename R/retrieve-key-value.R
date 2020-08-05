@@ -55,36 +55,51 @@ retrieve_key_value <- function(
   checkmate::assert_character(project_name, min.chars=1, pattern=pattern, any.missing=FALSE, len=1)
   checkmate::assert_character(dsn_name    , min.chars=1, pattern=pattern, any.missing=FALSE, len=1)
 
-  if (!requireNamespace("RODBC", quietly = TRUE))
-    stop("The function `retrieve_key_value()` cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-  if (!requireNamespace("RODBCext", quietly = TRUE))
-    stop("The function `retrieve_key_value()` cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
+  if (!requireNamespace("odbc", quietly = TRUE))
+    stop("The function `retrieve_key_value()` cannot run if the `odbc` package is not installed.  Please install it and try again.")
+  # if (!requireNamespace("RODBC", quietly = TRUE))
+  #   stop("The function `retrieve_key_value()` cannot run if the `RODBC` package is not installed.  Please install it and try again.")
+  # if (!requireNamespace("RODBCext", quietly = TRUE))
+  #   stop("The function `retrieve_key_value()` cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 
   sql <- "EXEC security.prc_key_value_static @project=?, @attribute = ?"
 
-  d_input <- data.frame(
-    project_name       = project_name,
-    key                = key,
-    stringsAsFactors   = FALSE
-  )
+  # d_input <- data.frame(
+  #   project_name       = project_name,
+  #   key                = key,
+  #   stringsAsFactors   = FALSE
+  # )
 
   if (base::missing(channel) | base::is.null(channel)) {
     if (base::missing(dsn_name) | base::is.null(dsn_name))
       stop("The 'dsn_name' parameter can be missing only if a 'channel' has been passed to `retrieve_key_value()`.")
 
-    channel <- open_dsn_channel_sqls(dsn_name)
+    channel <- open_dsn_channel_sqls_odbc(dsn_name)
     close_channel_on_exit <- TRUE
   } else {
     close_channel_on_exit <- FALSE
   }
 
+  # browser()
   base::tryCatch(
     expr = {
-      ds_value <- RODBCext::sqlExecute(channel, sql, d_input, fetch = TRUE, stringsAsFactors = FALSE)
+      query     <- DBI::dbSendQuery(channel, sql)
+      bind      <- DBI::dbBind(query, list(project_name, key))
+      ds_value  <- DBI::dbFetch(query)
+
     }, finally = {
-      if (close_channel_on_exit) RODBC::odbcClose(channel)
+      if (exists("query"))       DBI::dbClearResult(query)
+      # if (exists("bind"))        DBI::dbClearResult(bind)
+      if (close_channel_on_exit) DBI::dbDisconnect(channel)
     }
   )
+  # base::tryCatch(
+  #   expr = {
+  #     ds_value <- RODBCext::sqlExecute(channel, sql, d_input, fetch = TRUE, stringsAsFactors = FALSE)
+  #   }, finally = {
+  #     if (close_channel_on_exit) RODBC::odbcClose(channel)
+  #   }
+  # )
 
   if (nrow(ds_value) == 0L) {
     stop("No row was found with the desired [key]-by-[project_name] combination.")

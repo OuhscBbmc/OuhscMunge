@@ -29,7 +29,6 @@ Imports:
 Suggests:
     odbc (>= 1.2.0),
     RODBC,
-    RODBCext,
     spelling,
     testthat,
     tinytex
