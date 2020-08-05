@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -38,7 +42,6 @@
 <meta property="og:title" content="Verify equivalent structure of two dataset — data_frame_stack_new" />
 <meta property="og:description" content="These functions help to compare two metadata frames and assess
 if new rows should be added." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -56,7 +59,7 @@ if new rows should be added." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -70,7 +73,7 @@ if new rows should be added." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9012</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9.9013</span>
       </span>
     </div>
 
@@ -88,7 +91,7 @@ if new rows should be added." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/OuhscBbmc/OuhscMunge">
+  <a href="https://github.com/OuhscBbmc/OuhscMunge/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -216,32 +219,32 @@ joining on the <code>keys</code> column(s).</p>
   <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
   <span class='kw'>d_current</span>        <span class='kw'>=</span> <span class='no'>ds_current</span>,
   <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>)
-)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 7 x 6</span><span>
+)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 7 x 6</span><span>
 #&gt;      x1 x2       x3    x4    x5 datestamp 
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11   111   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13   113   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14   114   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12   212   312 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15   215   315 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11   211   311 </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15   215   315 </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a        11   111   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07
+#&gt; </span><span style='color: #555555;'>2</span><span>     3 c        13   113   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07
+#&gt; </span><span style='color: #555555;'>3</span><span>     4 d        14   114   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07
+#&gt; </span><span style='color: #555555;'>4</span><span>     2 b        12   212   312 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>5</span><span>     5 e        15   215   315 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>6</span><span>     1 x        11   211   311 </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'>7</span><span>     5 y        15   215   315 </span><span style='color: #BB0000;'>NA</span><span>        </div><div class='input'>
 <span class='co'># Wrinkle 1: datestamp the new records.</span>
 <span class='fu'>data_frame_stack_new</span>(
   <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
   <span class='kw'>d_current</span>        <span class='kw'>=</span> <span class='no'>ds_current</span>,
   <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>),
   <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 6</span><span>
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 7 x 6</span><span>
 #&gt;      x1 x2       x3    x4    x5 datestamp 
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11   111   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13   113   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14   114   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12   212   312 2020-01-14
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15   215   315 2020-01-14
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11   211   311 2020-01-14
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15   215   315 2020-01-14</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a        11   111   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07
+#&gt; </span><span style='color: #555555;'>2</span><span>     3 c        13   113   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07
+#&gt; </span><span style='color: #555555;'>3</span><span>     4 d        14   114   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07
+#&gt; </span><span style='color: #555555;'>4</span><span>     2 b        12   212   312 2020-08-05
+#&gt; </span><span style='color: #555555;'>5</span><span>     5 e        15   215   315 2020-08-05
+#&gt; </span><span style='color: #555555;'>6</span><span>     1 x        11   211   311 2020-08-05
+#&gt; </span><span style='color: #555555;'>7</span><span>     5 y        15   215   315 2020-08-05</div><div class='input'>
 <span class='co'># Wrinkle 2a: datestamp the new records; update x4.</span>
 <span class='fu'>data_frame_stack_new</span>(
   <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
@@ -249,16 +252,16 @@ joining on the <code>keys</code> column(s).</p>
   <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>),
   <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>stat_columns</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x4"</span>)
-)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 6</span><span>
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 7 x 6</span><span>
 #&gt;      x1 x2       x3    x5 datestamp     x4
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07   211
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07   213
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07   214
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12   312 2020-01-14   212
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15   315 2020-01-14   215
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11   311 2020-01-14   211
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15   315 2020-01-14   215</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a        11   -</span><span style='color: #BB0000;'>11</span><span> 2020-01-07   211
+#&gt; </span><span style='color: #555555;'>2</span><span>     3 c        13   -</span><span style='color: #BB0000;'>13</span><span> 2020-01-07   213
+#&gt; </span><span style='color: #555555;'>3</span><span>     4 d        14   -</span><span style='color: #BB0000;'>14</span><span> 2020-01-07   214
+#&gt; </span><span style='color: #555555;'>4</span><span>     2 b        12   312 2020-08-05   212
+#&gt; </span><span style='color: #555555;'>5</span><span>     5 e        15   315 2020-08-05   215
+#&gt; </span><span style='color: #555555;'>6</span><span>     1 x        11   311 2020-08-05   211
+#&gt; </span><span style='color: #555555;'>7</span><span>     5 y        15   315 2020-08-05   215</div><div class='input'>
 <span class='co'># Wrinkle 2b: datestamp the new records; update x4 &amp; x5.</span>
 <span class='fu'>data_frame_stack_new</span>(
   <span class='kw'>d_original</span>       <span class='kw'>=</span> <span class='no'>ds_original</span>,
@@ -266,24 +269,24 @@ joining on the <code>keys</code> column(s).</p>
   <span class='kw'>keys</span>             <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>),
   <span class='kw'>datestamp_update</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>stat_columns</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x4"</span>, <span class='st'>"x5"</span>)
-)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 7 x 6</span><span>
+)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 7 x 6</span><span>
 #&gt;      x1 x2       x3 datestamp     x4    x5
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1 a        11 2020-01-07   211   311
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     3 c        13 2020-01-07   213   313
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     4 d        14 2020-01-07   214   314
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     2 b        12 2020-01-14   212   312
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>     5 e        15 2020-01-14   215   315
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>     1 x        11 2020-01-14   211   311
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>     5 y        15 2020-01-14   215   315</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     1 a        11 2020-01-07   211   311
+#&gt; </span><span style='color: #555555;'>2</span><span>     3 c        13 2020-01-07   213   313
+#&gt; </span><span style='color: #555555;'>3</span><span>     4 d        14 2020-01-07   214   314
+#&gt; </span><span style='color: #555555;'>4</span><span>     2 b        12 2020-08-05   212   312
+#&gt; </span><span style='color: #555555;'>5</span><span>     5 e        15 2020-08-05   215   315
+#&gt; </span><span style='color: #555555;'>6</span><span>     1 x        11 2020-08-05   211   311
+#&gt; </span><span style='color: #555555;'>7</span><span>     5 y        15 2020-08-05   215   315</div><div class='input'>
 <span class='no'>ds_current</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/join.html'>anti_join</a></span>(<span class='no'>ds_original</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 4 x 5</span><span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter-joins.html'>anti_join</a></span>(<span class='no'>ds_original</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x1"</span>, <span class='st'>"x2"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 5</span><span>
 #&gt;      x1 x2       x3    x4    x5
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     2 b        12   212   312
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     5 e        15   215   315
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     1 x        11   211   311
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>     5 y        15   215   315</div><div class='input'>
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>     2 b        12   212   312
+#&gt; </span><span style='color: #555555;'>2</span><span>     5 e        15   215   315
+#&gt; </span><span style='color: #555555;'>3</span><span>     1 x        11   211   311
+#&gt; </span><span style='color: #555555;'>4</span><span>     5 y        15   215   315</div><div class='input'>
 <span class='co'># Update a file</span>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 {
@@ -308,18 +311,10 @@ joining on the <code>keys</code> column(s).</p>
 <span class='kw pkg'>readr</span><span class='kw ns'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span>(<span class='no'>path_temp</span>)
 }</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#note">Note</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Will Beasley</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -330,7 +325,7 @@ joining on the <code>keys</code> column(s).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
