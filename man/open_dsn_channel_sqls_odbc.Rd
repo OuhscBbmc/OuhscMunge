@@ -6,7 +6,7 @@
 \usage{
 open_dsn_channel_sqls_odbc(
   dsn_name,
-  driver_version_minimum = numeric_version("13.0"),
+  driver_version_minimum = numeric_version("17.0"),
   driver_version_maximum = numeric_version("99.0")
 )
 }
