@@ -1,5 +1,4 @@
-#' @name open_dsn_channel_sqls
-#' @aliases open_dsn_channel_sqls open_dsn_channel_sqls_odbc
+#' @name open_dsn_channel_sqls_odbc
 #' @title Open an ODBC channel to a SQL Server database
 #'
 #' @description Creates & opens a channel and checks its important characteristics.
@@ -16,7 +15,7 @@
 #' checks.  If unsuccessful, it returns some hints how to correct the problem, such as downloading
 #' the newest version from the [Microsoft website](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server).
 #'
-#' `OuhscMunge::open_dsn_channel_sqls()` is deprecated and will be removed in the future.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().
+#' `OuhscMunge::open_dsn_channel_sqls()` was deprecated and was removed 2020-10-18.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().
 #'
 #' @note
 #' Assuring a minimum version is important, because driver versions can interpret values differently.
@@ -27,63 +26,10 @@
 #' \dontrun{
 #' requireNamespace("OuhscMunge")
 #'
-#' OuhscMunge::open_dsn_channel_sqls(
+#' OuhscMunge::open_dsn_channel_sqls_odbc(
 #'   dsn_name        = "miechv_eval"
 #' )
 #' }
-
-
-#' @export
-open_dsn_channel_sqls <- function(
-  dsn_name,
-  driver_version_minimum = numeric_version("13.0"),
-  driver_version_maximum = numeric_version("99.0")
-) {
-
-  warning("`OuhscMunge::open_dsn_channel_sqls()` is deprecated and will be removed in the future.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().")
-
-  requireNamespace("RODBC")
-
-  checkmate::assert_character(dsn_name, min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
-  checkmate::assert_class(driver_version_minimum, "numeric_version")
-  checkmate::assert_class(driver_version_maximum, "numeric_version")
-  checkmate::assert_character(as.character(driver_version_minimum), min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
-  checkmate::assert_character(as.character(driver_version_maximum), min.chars=1, min.len=1, max.len=1, any.missing=FALSE)
-  # Check if the DSN even exists on the local machine.
-
-  create_link <- "https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/odbc-dsn.md"
-  driver_link <- "https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server"
-
-  dsn_exists <- (dsn_name %in% names(RODBC::odbcDataSources()))
-  if (!dsn_exists) {
-    m <- "The DSN `%s` does not exist on your local machine.  Please see the installation instructions at %s."
-    stop(sprintf(m, dsn_name, create_link))
-  }
-
-  # Uses Trusted/integrated authentication
-  channel <- RODBC::odbcConnect(dsn = dsn_name)
-  if (channel == -1L) {
-    RODBC::odbcClose(channel)
-    m <- "The ODBC channel should open successfully.  Please see the installation instructions at %s."
-    stop(sprintf(m, dsn_name, create_link))
-  }
-
-  info <- RODBC::odbcGetInfo(channel)
-
-  # print(numeric_version(info["Driver_Ver"]))
-
-  if (!(driver_version_minimum <= numeric_version(info["Driver_Ver"]))) {
-    RODBC::odbcClose(channel)
-    m <- "The SQL Server ODBC driver version must be at least %s.  Please download the newest version at %s.  Please see the installation instructions at %s.  The DSN name is `%s`."
-    stop(sprintf(m, as.character(driver_version_minimum), driver_link, create_link, dsn_name))
-  } else if (!(numeric_version(info["Driver_Ver"]) <= driver_version_maximum)) {
-    RODBC::odbcClose(channel)
-    m <- "The SQL Server ODBC driver version must be not exceed %s.  Please download an earlier version at %s.  Please see the installation instructions at %s.  The DSN name is `%s`."
-    stop(sprintf(m, as.character(driver_version_maximum), driver_link, create_link, dsn_name))
-  }
-
-  channel
-}
 
 #' @export
 open_dsn_channel_sqls_odbc <- function(
