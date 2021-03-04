@@ -26,7 +26,8 @@
 
 #' @export
 readr_spec_aligned <- function(...) {
-  pattern <- "^[ ]+`?(.+?)`? = (col_.+)$"
+  # pattern <- "^[ ]+`?(.+?)`? = .+?(col_.+)\\\\.+$"
+  pattern <- "^[ ]+`?(.+?)`? = (col_.+).*$"
   # pattern <- "^[ ]+(`?)(.+?)\\1 = (col_.+)$"
   . <- NULL   # This is solely for the sake of avoiding the R CMD check error.
 
@@ -36,9 +37,12 @@ readr_spec_aligned <- function(...) {
     tibble::enframe(name = NULL) %>%
     dplyr::slice(-1, -dplyr::n()) %>%
     dplyr::mutate(
+      # Remove pillar coloring
+      value = gsub("(\\\033|\\[3\\dm)", "", .data$value),
+
       # Isolate the left-hand & right-hand sides. Enclose all variable names in back ticks.
-      left    = sub(pattern, "`\\1`", .data$value),
-      right   = sub(pattern, "\\2"  , .data$value),
+      left    = sub(pattern, "`\\1`", .data$value, perl = TRUE),
+      right   = sub(pattern, "\\2"  , .data$value, perl = TRUE),
 
       # Calculate the odd number of spaces -just beyond the longest variable name.
       padding = nchar(.data$left),
