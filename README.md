@@ -1,7 +1,8 @@
-| [GitHub](https://github.com/OuhscBbmc/OuhscMunge) | [Travis-CI](https://travis-ci.org/OuhscBbmc/OuhscMunge/builds) | [Coveralls](https://coveralls.io/r/OuhscBbmc/OuhscMunge) |
-| :----- | :---------------------------: | :-----------------------------: | :-------: |
-| [Main](https://github.com/OuhscBbmc/OuhscMunge/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml/badge.svg)](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=main)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=main) |
-| [Dev](https://github.com/OuhscBbmc/OuhscMunge/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml/badge.svg?branch=dev)](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=dev) | 
+| [GitHub](https://github.com/OuhscBbmc/OuhscMunge) | [Travis-CI](https://travis-ci.org/OuhscBbmc/OuhscMunge/builds) | [CodeCov](https://app.codecov.io/gh/OuhscBbmc/OuhscMunge/) |
+| :----- | :---------------------------: | :-------: |
+| [Main](https://github.com/OuhscBbmc/OuhscMunge/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml/badge.svg)](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml) | [![codecov](https://codecov.io/gh/OuhscBbmc/OuhscMunge/branch/main/graph/badge.svg?token=O1mkr31GRw)](https://codecov.io/gh/OuhscBbmc/OuhscMunge) |
+| [Dev](https://github.com/OuhscBbmc/OuhscMunge/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml/badge.svg?branch=dev)](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml) | [![codecov](https://codecov.io/gh/OuhscBbmc/OuhscMunge/branch/dev/graph/badge.svg?token=O1mkr31GRw)](https://app.codecov.io/gh/OuhscBbmc/OuhscMunge/branch/dev)
+ | 
 
 OuhscMunge
 ==========
