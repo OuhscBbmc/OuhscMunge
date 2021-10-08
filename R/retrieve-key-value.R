@@ -15,12 +15,12 @@
 #'
 #' ```sql
 #' CREATE TABLE security_private.tbl_key_value_static(
-#'   id                     smallint     IDENTITY(1,1) PRIMARY KEY,
-#'   project                varchar(50)  NOT NULL,
-#'   attribute              varchar(90)  NOT NULL,
-#'   value                  varchar(200) NOT NULL,
-#'   file_last_updated_date date         NOT NULL,
-#'   retired                bit          NOT NULL
+#'   id                     smallint     identity(1,1) primary key,
+#'   project                varchar(50)  not null,
+#'   attribute              varchar(90)  not null,
+#'   value                  varchar(200) not null,
+#'   file_last_updated_date date         not null,
+#'   retired                bit          not null
 #' )
 #'
 #' CREATE PROCEDURE security.prc_key_value_static
@@ -28,9 +28,9 @@
 #'   @attribute varchar(90)
 #' AS
 #' BEGIN
-#' 	 SET NOCOUNT ON;
-#' 	 SELECT value from security_private.tbl_key_value_static
-#' 	 WHERE project=@project AND attribute=@attribute
+#'   SET NOCOUNT ON;
+#'   SELECT value from security_private.tbl_key_value_static
+#'   WHERE project = @project and attribute = @attribute
 #' END
 #' ````
 #' @note
