@@ -11,9 +11,9 @@ retrieve_key_value(key, project_name, dsn_name, channel = NULL)
 
 \item{project_name}{The project name associated with the desired value.  Required character vector with one element}
 
-\item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}
+\item{dsn_name}{Name of the locally-defined DSN passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
-\item{channel}{An \emph{optional} connection handle as returned by \code{\link[RODBC:odbcConnect]{RODBC::odbcConnect()}}.  See Details below. Optional.}
+\item{channel}{An \emph{optional} connection handle as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.  See Details below. Optional.}
 }
 \value{
 A \code{character} vector with one element.
