@@ -11,9 +11,9 @@ retrieve_key_value(key, project_name, dsn_name, channel = NULL)
 
 \item{project_name}{The project name associated with the desired value.  Required character vector with one element}
 
-\item{dsn_name}{Name of the locally-defined DSN passed to \url{RODBC::odbcConnect()}.}
+\item{dsn_name}{Name of the locally-defined DSN passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
-\item{channel}{An \emph{optional} connection handle as returned by \code{\link[RODBC:odbcConnect]{RODBC::odbcConnect()}}.  See Details below. Optional.}
+\item{channel}{An \emph{optional} connection handle as returned by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.  See Details below. Optional.}
 }
 \value{
 A \code{character} vector with one element.
@@ -22,13 +22,13 @@ A \code{character} vector with one element.
 Facilitates retrieval of key-value pairs that are stored in a SQL Server database.
 }
 \details{
-The database table and stored procedure must defined as:\if{html}{\out{<div class="sql">}}\preformatted{CREATE TABLE security_private.tbl_key_value_static(
-  id                     smallint     IDENTITY(1,1) PRIMARY KEY,
-  project                varchar(50)  NOT NULL,
-  attribute              varchar(90)  NOT NULL,
-  value                  varchar(200) NOT NULL,
-  file_last_updated_date date         NOT NULL,
-  retired                bit          NOT NULL
+The database table and stored procedure must defined as:\if{html}{\out{<div class="sourceCode sql">}}\preformatted{CREATE TABLE security_private.tbl_key_value_static(
+  id                     smallint     identity(1,1) primary key,
+  project                varchar(50)  not null,
+  attribute              varchar(90)  not null,
+  value                  varchar(200) not null,
+  file_last_updated_date date         not null,
+  retired                bit          not null
 )
 
 CREATE PROCEDURE security.prc_key_value_static
@@ -36,9 +36,9 @@ CREATE PROCEDURE security.prc_key_value_static
   @attribute varchar(90)
 AS
 BEGIN
-	 SET NOCOUNT ON;
-	 SELECT value from security_private.tbl_key_value_static
-	 WHERE project=@project AND attribute=@attribute
+  SET NOCOUNT ON;
+  SELECT value from security_private.tbl_key_value_static
+  WHERE project = @project and attribute = @attribute
 END
 }\if{html}{\out{</div>}}
 }

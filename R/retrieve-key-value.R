@@ -6,8 +6,8 @@
 #'
 #' @param key The key associated with the desired value.  Required character vector with one element
 #' @param project_name The project name associated with the desired value.  Required character vector with one element
-#' @param dsn_name Name of the locally-defined DSN passed to [RODBC::odbcConnect()](RODBC::odbcConnect()).
-#' @param channel An *optional* connection handle as returned by [RODBC::odbcConnect()].  See Details below. Optional.
+#' @param dsn_name Name of the locally-defined DSN passed to [DBI::dbConnect()].
+#' @param channel An *optional* connection handle as returned by [DBI::dbConnect()].  See Details below. Optional.
 #' @return A `character` vector with one element.
 #'
 #' @details
@@ -15,12 +15,12 @@
 #'
 #' ```sql
 #' CREATE TABLE security_private.tbl_key_value_static(
-#'   id                     smallint     IDENTITY(1,1) PRIMARY KEY,
-#'   project                varchar(50)  NOT NULL,
-#'   attribute              varchar(90)  NOT NULL,
-#'   value                  varchar(200) NOT NULL,
-#'   file_last_updated_date date         NOT NULL,
-#'   retired                bit          NOT NULL
+#'   id                     smallint     identity(1,1) primary key,
+#'   project                varchar(50)  not null,
+#'   attribute              varchar(90)  not null,
+#'   value                  varchar(200) not null,
+#'   file_last_updated_date date         not null,
+#'   retired                bit          not null
 #' )
 #'
 #' CREATE PROCEDURE security.prc_key_value_static
@@ -28,9 +28,9 @@
 #'   @attribute varchar(90)
 #' AS
 #' BEGIN
-#' 	 SET NOCOUNT ON;
-#' 	 SELECT value from security_private.tbl_key_value_static
-#' 	 WHERE project=@project AND attribute=@attribute
+#'   SET NOCOUNT ON;
+#'   SELECT value from security_private.tbl_key_value_static
+#'   WHERE project = @project and attribute = @attribute
 #' END
 #' ````
 #' @note
@@ -57,10 +57,6 @@ retrieve_key_value <- function(
 
   if (!requireNamespace("odbc", quietly = TRUE))
     stop("The function `retrieve_key_value()` cannot run if the `odbc` package is not installed.  Please install it and try again.")
-  # if (!requireNamespace("RODBC", quietly = TRUE))
-  #   stop("The function `retrieve_key_value()` cannot run if the `RODBC` package is not installed.  Please install it and try again.")
-  # if (!requireNamespace("RODBCext", quietly = TRUE))
-  #   stop("The function `retrieve_key_value()` cannot run if the `RODBCext` package is not installed.  Please install it and try again.")
 
   sql <- "EXEC security.prc_key_value_static @project=?, @attribute = ?"
 
@@ -93,13 +89,6 @@ retrieve_key_value <- function(
       if (close_channel_on_exit) DBI::dbDisconnect(channel)
     }
   )
-  # base::tryCatch(
-  #   expr = {
-  #     ds_value <- RODBCext::sqlExecute(channel, sql, d_input, fetch = TRUE, stringsAsFactors = FALSE)
-  #   }, finally = {
-  #     if (close_channel_on_exit) RODBC::odbcClose(channel)
-  #   }
-  # )
 
   if (nrow(ds_value) == 0L) {
     stop("No row was found with the desired [key]-by-[project_name] combination.")
