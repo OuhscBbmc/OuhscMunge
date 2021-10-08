@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9014</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9015</span>
       </span>
     </div>
 
@@ -132,11 +132,11 @@
     </tr>
     <tr>
       <th>dsn_name</th>
-      <td><p>Name of the locally-defined DSN passed to <a href='RODBC::odbcConnect()'>RODBC::odbcConnect()</a>.</p></td>
+      <td><p>Name of the locally-defined DSN passed to <code><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>DBI::dbConnect()</a></code>.</p></td>
     </tr>
     <tr>
       <th>channel</th>
-      <td><p>An <em>optional</em> connection handle as returned by <code><a href='https://rdrr.io/pkg/RODBC/man/odbcConnect.html'>RODBC::odbcConnect()</a></code>.  See Details below. Optional.</p></td>
+      <td><p>An <em>optional</em> connection handle as returned by <code><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>DBI::dbConnect()</a></code>.  See Details below. Optional.</p></td>
     </tr>
     </table>
 
@@ -145,13 +145,13 @@
     <p>A <code>character</code> vector with one element.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The database table and stored procedure must defined as:<div class="sql"></p><pre>CREATE TABLE security_private.tbl_key_value_static(
-  id                     smallint     IDENTITY(1,1) PRIMARY KEY,
-  project                varchar(50)  NOT NULL,
-  attribute              varchar(90)  NOT NULL,
-  value                  varchar(200) NOT NULL,
-  file_last_updated_date date         NOT NULL,
-  retired                bit          NOT NULL
+    <p>The database table and stored procedure must defined as:<div class="sourceCode sql"></p><pre>CREATE TABLE security_private.tbl_key_value_static(
+  id                     smallint     identity(1,1) primary key,
+  project                varchar(50)  not null,
+  attribute              varchar(90)  not null,
+  value                  varchar(200) not null,
+  file_last_updated_date date         not null,
+  retired                bit          not null
 )
 
 CREATE PROCEDURE security.prc_key_value_static
@@ -159,9 +159,9 @@ CREATE PROCEDURE security.prc_key_value_static
   @attribute varchar(90)
 AS
 BEGIN
-	 SET NOCOUNT ON;
-	 SELECT value from security_private.tbl_key_value_static
-	 WHERE project=@project AND attribute=@attribute
+  SET NOCOUNT ON;
+  SELECT value from security_private.tbl_key_value_static
+  WHERE project = @project and attribute = @attribute
 END
 </pre><p></div></p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
