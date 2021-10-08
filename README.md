@@ -1,8 +1,7 @@
-| [GitHub](https://github.com/OuhscBbmc/OuhscMunge) | [Travis-CI](https://travis-ci.org/OuhscBbmc/OuhscMunge/builds) | [AppVeyor](https://ci.appveyor.com/project/wibeasley/ouhscmunge/history) |  [Coveralls](https://coveralls.io/r/OuhscBbmc/OuhscMunge) |
+| [GitHub](https://github.com/OuhscBbmc/OuhscMunge) | [Travis-CI](https://travis-ci.org/OuhscBbmc/OuhscMunge/builds) | [Coveralls](https://coveralls.io/r/OuhscBbmc/OuhscMunge) |
 | :----- | :---------------------------: | :-----------------------------: | :-------: |
-| [Master](https://github.com/OuhscBbmc/OuhscMunge/tree/master) | [![Build Status](https://travis-ci.org/OuhscBbmc/OuhscMunge.svg?branch=master)](https://travis-ci.org/OuhscBbmc/OuhscMunge) | [![Build status](https://ci.appveyor.com/api/projects/status/j74ml0yqlmve7oaw/branch/master?svg=true)](https://ci.appveyor.com/project/wibeasley/ouhscmunge/branch/master) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=master)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=master) |
-| [Dev](https://github.com/OuhscBbmc/OuhscMunge/tree/dev) | [![Build Status](https://travis-ci.org/OuhscBbmc/OuhscMunge.svg?branch=dev)](https://travis-ci.org/OuhscBbmc/OuhscMunge) | [![Build status](https://ci.appveyor.com/api/projects/status/j74ml0yqlmve7oaw/branch/dev?svg=true)](https://ci.appveyor.com/project/wibeasley/ouhscmunge/branch/dev) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=dev) | 
-| | *Ubuntu LTS* | *Windows Server* | *Travis Tests* |
+| [Main](https://github.com/OuhscBbmc/OuhscMunge/tree/main) | [![R-CMD-check](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml/badge.svg)](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=main)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=main) |
+| [Dev](https://github.com/OuhscBbmc/OuhscMunge/tree/dev) | [![R-CMD-check](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml/badge.svg?branch=dev)](https://github.com/OuhscBbmc/OuhscMunge/actions/workflows/check-release.yaml) | [![Coverage Status](https://coveralls.io/repos/github/OuhscBbmc/OuhscMunge/badge.svg?branch=dev)](https://coveralls.io/github/OuhscBbmc/OuhscMunge?branch=dev) | 
 
 OuhscMunge
 ==========
@@ -32,9 +31,9 @@ We encourage input and collaboration from the overall community.  If you're fami
 
 ### Code Coverage Over Time
 
-Master Branch:
+Main Branch:
 
-![codecov.io](http://codecov.io/github/OuhscBbmc/OuhscMunge/branch.svg?branch=master)
+![codecov.io](http://codecov.io/github/OuhscBbmc/OuhscMunge/branch.svg?branch=main)
 
 Dev Branch:
 
