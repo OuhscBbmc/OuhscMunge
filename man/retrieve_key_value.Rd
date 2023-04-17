@@ -22,7 +22,9 @@ A \code{character} vector with one element.
 Facilitates retrieval of key-value pairs that are stored in a SQL Server database.
 }
 \details{
-The database table and stored procedure must defined as:\if{html}{\out{<div class="sourceCode sql">}}\preformatted{CREATE TABLE security_private.tbl_key_value_static(
+The database table and stored procedure must defined as:
+
+\if{html}{\out{<div class="sourceCode sql">}}\preformatted{CREATE TABLE security_private.tbl_key_value_static(
   id                     smallint     identity(1,1) primary key,
   project                varchar(50)  not null,
   attribute              varchar(90)  not null,

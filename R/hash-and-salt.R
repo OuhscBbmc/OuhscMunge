@@ -55,7 +55,7 @@ hash_and_salt_sha_256 <- function(
   checkmate::assert_integerish(max_characters, any.missing=FALSE, len=1, lower=min_characters)
   checkmate::assert_character( na_if         , any.missing=TRUE, min.chars = 0)
 
-  if (class(x) != "character")
+  if (!inherits(x, "character"))
     x <- as.character(x)
 
   checkmate::assert_character(x, any.missing = TRUE) #, pattern=sprintf("^.{%s,%s}$", min_characters, max_characters))

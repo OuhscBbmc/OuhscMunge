@@ -28,12 +28,13 @@
 #' snake_case(c("PatientID", "PatientDOB", "DOB", "name.last", "name.first"))
 
 snake_case <- function(x) {
-  #Second & third lines use http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
-  s <- gsub("\\.", "_", x)                                    # Replace dots with underscores.
-  s <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2", s)                 # Separate w/ dashes based on capitalization
-  s <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", s))
-  s <- gsub(" ", "_", s)                                      # Replace spaces with underscores.
-  s <- gsub("__", "_", s)                                     # Replace double-underscores with single.
-
-  s
+  # Third & fourth lines use http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
+  s <- gsub("'"                         , ""        , x, perl = TRUE)     # Remove apostrophes to preserve contractions.
+  s <- gsub("\\W"                       , "_"       , s, perl = TRUE)     # Replace any nondigit/noncharacter/nonunderscore with an underscore.
+  s <- gsub("(.)([A-Z][a-z]+)"          , "\\1_\\2" , s, perl = TRUE)     # Separate w/ underscores based on capitalization
+  s <- tolower(gsub("([a-z0-9])([A-Z])" , "\\1_\\2" , s, perl = TRUE))
+  s <- gsub("_+"                        , "_"       , s, perl = TRUE)     # Replace consecutive underscores with single.
+  s <- gsub("^_|_$"                     , ""        , s, perl = TRUE)     # remove leading and trailing underscores
+  # s <- gsub("\\."                     , "_"       , s, perl = TRUE)     # Replace dots with underscores.
+  return(s)
 }
