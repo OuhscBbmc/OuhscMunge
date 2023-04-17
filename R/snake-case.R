@@ -29,12 +29,12 @@
 
 snake_case <- function(x) {
   # Third & fourth lines use http://stackoverflow.com/questions/1175208/elegant-python-function-to-convert-camelcase-to-snake-case
-  s <- gsub("'", "", x)                                       # Remove apostrophes to preserve contractions.
-  s <- gsub("[[:punct:]]|[[:space:]]", "_", s)                # Replace punctuation and spaces with underscores.
-  s <- gsub("\\.", "_", s)                                    # Replace dots with underscores.
-  s <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2", s)                 # Separate w/ underscores based on capitalization
-  s <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", s))
-  s <- gsub("_+", "_", s)                                     # Replace consecutive underscores with single.
-  s <- gsub("^_|_$", "", s)                                   # remove leading and trailing underscores
+  s <- gsub("'", ""                               , x, perl = TRUE)     # Remove apostrophes to preserve contractions.
+  s <- gsub("[[:punct:]]|[[:space:]]", "_"        , s, perl = FALSE)    # Replace punctuation and spaces with underscores.
+  s <- gsub("\\.", "_"                            , s, perl = TRUE)     # Replace dots with underscores.
+  s <- gsub("(.)([A-Z][a-z]+)", "\\1_\\2"         , s, perl = TRUE)     # Separate w/ underscores based on capitalization
+  s <- tolower(gsub("([a-z0-9])([A-Z])", "\\1_\\2", s, perl = TRUE))
+  s <- gsub("_+", "_"                             , s, perl = TRUE)     # Replace consecutive underscores with single.
+  s <- gsub("^_|_$", ""                           , s, perl = TRUE)     # remove leading and trailing underscores
   return(s)
 }
