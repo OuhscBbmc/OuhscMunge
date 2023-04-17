@@ -24,7 +24,7 @@ gp
 
 
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
-# devtools::run_examples(, "redcap_read.Rd")
+# devtools::run_examples(), "redcap_read.Rd")
 test_results_checked <- devtools::test()
 # test_results_checked <- devtools::test(filter = "read_b.*")
 # testthat::test_dir("./tests/")
