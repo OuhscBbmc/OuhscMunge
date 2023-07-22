@@ -246,6 +246,6 @@ metadata_update_file <- function(
 
   readr::write_csv(
     x     = d_new,
-    path  = path
+    file  = path
   )
 }

@@ -42,7 +42,7 @@ data_frame_uniqueness_test <- function(d, keys, display_count = 10L) {
     d %>%
     dplyr::count(!!!key_expr) %>%
     dplyr::filter(2L <= .data$n) %>%
-    dplyr::rename(row_count = .data$n)
+    dplyr::rename(row_count = n)
 
   has_duplicates <- (1L <= nrow(d_duplicates))
   if (has_duplicates && (1L < display_count)) {

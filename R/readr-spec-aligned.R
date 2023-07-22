@@ -51,7 +51,7 @@ readr_spec_aligned <- function(...) {
       # Pad the left side before appending the right side.
       aligned = sprintf("  %-*s = readr::%s", .data$padding, .data$left, .data$right)
     ) %>%
-    dplyr::select(.data$aligned) %>%
+    dplyr::select(aligned) %>%
     # tibble::add_row(
     #   aligned = "col_types <- readr::cols_only(",
     #   .before = 1
