@@ -32,7 +32,7 @@ gp <-
 goodpractice::results(gp)
 gp
 # If necessary: tinytex::tlmgr_install("makeindex")
-BiocCheck::BiocCheck()
+b <- BiocCheck::BiocCheck()
 # styler::style_pkg()
 # styler::style_file("R/redcap-read-oneshot.R")
 
