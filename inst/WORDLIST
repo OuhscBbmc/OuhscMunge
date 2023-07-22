@@ -46,6 +46,7 @@ nonmissing
 odbc
 openssl
 patientdob
+perl
 regexes
 repo
 requireNamespace

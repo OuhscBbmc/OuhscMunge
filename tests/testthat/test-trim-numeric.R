@@ -27,12 +27,10 @@ test_that("trim_numeric -degenerate", {
 
 test_that("trim_numeric -bad values", {
   x           <- c(NA, -4:10) / 10
-  bounds      <- c(-.15, .8)
-  replacement <- 99
 
   expect_error(
     OuhscMunge::trim_numeric(x, NA_real_),
-    "Assertion on 'bounds' failed: Must have length >= 2, but has length 1."
+    "Assertion on 'bounds' failed: Must have length >= 2, but has length 1\\."
   )
   expect_error(
     OuhscMunge::trim_numeric(x, c(6, 2)),
@@ -41,6 +39,6 @@ test_that("trim_numeric -bad values", {
 
   expect_error(
     OuhscMunge::trim_numeric(x, c(1, 2, 3)),
-    "Assertion on 'bounds' failed: Must have length <= 2, but has length 3."
+    "Assertion on 'bounds' failed: Must have length <= 2, but has length 3\\."
   )
 })
