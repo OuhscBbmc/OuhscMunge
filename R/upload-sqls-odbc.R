@@ -162,6 +162,8 @@ upload_sqls_odbc <- function(
     }
 
     if (verbose) {
+      message(result)
+
       message(
         sprintf(
           "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes.",

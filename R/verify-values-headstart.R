@@ -64,10 +64,10 @@ verify_value_headstart <- function(d) {
 boundaries <- function(x) {
   data_types <- class(x) # Remember this will have more than one value for columns that inherit multiple datatypes, eg 'factor' and 'ordered'
 
-  if(      "numeric"   %in% data_types) boundaries_number(x)
-  else if( "integer"   %in% data_types) boundaries_number(x)
-  else if( "character" %in% data_types) boundaries_character(x)
-  else if( "Date"      %in% data_types) boundaries_date(x)
+  if (      "numeric"   %in% data_types) boundaries_number(x)
+  else if ( "integer"   %in% data_types) boundaries_number(x)
+  else if ( "character" %in% data_types) boundaries_character(x)
+  else if ( "Date"      %in% data_types) boundaries_date(x)
   else ""
 } # purrr::map_chr(datasets::OrchardSprays, boundaries)
 
@@ -76,7 +76,7 @@ boundaries_number <- function(x) {
   max_number <- suppressWarnings(max(x, na.rm = TRUE))
 
   if (is.infinite(min_number) || is.infinite(max_number))
-   cat('stop("The number vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
+    cat('stop("The number vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   sprintf(
     ", lower=%s, upper=%s", # Allow for values like 'Inf'

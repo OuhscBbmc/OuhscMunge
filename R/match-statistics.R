@@ -114,7 +114,8 @@ match_statistics_display <- function(d_parent, d_child, join_columns) {
   l$deadbeat_proportion         <- sprintf("%0.4f%%", m["deadbeat_proportion"]* 100)
   l$orphan_proportion           <- sprintf("%0.4f%%", m["orphan_proportion"]  * 100)
 
-  d <- tibble::tibble(
+  d <-
+    tibble::tibble(
       key   = gsub("_", " ", names(l)),
       value = as.character(l)
     ) %>%
