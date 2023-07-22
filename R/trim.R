@@ -1,5 +1,5 @@
 #' @name trim
-#' @aliases trim_numeric trim_integer trim_date trim_datetime
+#' @aliases trim_numeric trim_integer trim_date trim_datetime trim_character
 #' @title Trim extreme values
 #'
 #' @description Trim extreme values from an atomic vector, and replace with a specific value (typically `NA_*`).
@@ -12,15 +12,24 @@
 #'   bounds      = as.Date(c("1940-01-01", "2029-12-31")),
 #'   replacement = as.Date(NA_character_)
 #' )
-# trim_datetime(
-#   x,
-#   bounds      = as.POSIXct(c("1940-01-01 00:00", "2029-12-31 23:59")),
-#   replacement = as.POSIXct(NA_character_)
-# )
+#' trim_datetime(
+#'   x,
+#'   bounds      = as.POSIXct(c("1940-01-01 00:00", "2029-12-31 23:59")),
+#'   replacement = as.POSIXct(NA_character_)
+#' )
+#' trim_character(
+#'   x,
+#'   pattern = "^.*$",
+#'   replacement = NA_character_
+#' )
 #'
 #' @param x The input vector to be trimmed.  Required
 #' @param bounds A two-element vector that establishes the lower and upper *inclusive* bounds of `x`.
-#' @param replacement A scalar that will replace all instances of `x` that fall outside of `bounds`.
+#' @param pattern A perl-style regular expression passed to [base::grepl()].
+#' Vector elements that match the pattern are returned.
+#' Vector elements that do not match the pattern are replaced with [NA_character_].
+#' @param replacement A scalar that will replace all instances of `x`
+#' that fall outside of `bounds` or `pattern`.
 #'
 #' @return An atomic vector with the same number of elements as `x`.
 #'
@@ -39,17 +48,24 @@
 #'
 #' @examples
 #' library(OuhscMunge)
+#'
 #' trim_numeric(runif(10, -1, 10), bounds=c(4, 8))
+#'
 #' trim_integer(c(NA, 1:10), bounds=c(4L, 8L))
+#'
 #' trim_date(
 #'   x      = as.Date(c("1902-02-02", "1999-09-09", "2020-02-22", "1930-01-01", "1930-01-02")),
 #'   bounds = as.Date(c("1990-01-01", "2030-01-01"))
 #' )
+#'
 #' trim_datetime(
 #'   x      = as.POSIXct(c("1902-02-02", "1999-09-09", "2020-02-22", "1930-01-01", "1930-01-02")),
 #'   bounds = as.POSIXct(c("1990-01-01", "2030-01-01"))
 #' )
-
+#'
+#' zip_codes <- c("12345", "a2345", "54321-6789", "54321-67890")
+#' trim_character(zip_codes, "^\\d{5}(-\\d{4})?$")
+#' trim_character(zip_codes)                                      # Everything passes.
 
 #' @export
 trim_numeric <- function(x, bounds = c(-Inf, Inf), replacement = NA_real_) {
@@ -115,6 +131,20 @@ trim_datetime <- function(x, bounds = as.POSIXct(c("1940-01-01 00:00", "2029-12-
   # Set values that are outside the thresholds to replacement.
   dplyr::if_else(
     condition = dplyr::between(x, bounds[1], bounds[2]),
+    true      = x,
+    false     = replacement
+  )
+}
+
+#' @export
+trim_character <- function(x, pattern = "^.*$", replacement = NA_character_) {
+  checkmate::assert_character(x, any.missing = TRUE)
+  checkmate::assert_character(pattern, len = 1, any.missing = FALSE)
+  checkmate::assert_character(replacement, len = 1)
+
+  # Set values that fail the pattern to replacement.
+  dplyr::if_else(
+    condition = grepl(pattern, x, perl = TRUE),
     true      = x,
     false     = replacement
   )
