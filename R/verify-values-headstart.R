@@ -75,7 +75,7 @@ boundaries_number <- function(x) {
   min_number <- suppressWarnings(min(x, na.rm = TRUE))
   max_number <- suppressWarnings(max(x, na.rm = TRUE))
 
-  if (is.infinite(min_number) | is.infinite(max_number))
+  if (is.infinite(min_number) || is.infinite(max_number))
    cat('stop("The number vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   sprintf(
@@ -89,7 +89,7 @@ boundaries_character <- function(x) {
   min_char_count <- suppressWarnings(as.numeric(min(nchar(x), na.rm = TRUE)))
   max_char_count <- suppressWarnings(as.numeric(max(nchar(x), na.rm = TRUE)))
 
-  if (is.infinite(min_char_count) | is.infinite(max_char_count))
+  if (is.infinite(min_char_count) || is.infinite(max_char_count))
     cat('stop("The character vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   min_char_count <- dplyr::if_else(is.infinite(min_char_count), "NA", as.character(min_char_count))
@@ -102,7 +102,7 @@ boundaries_date <- function(x) {
   min_date <- suppressWarnings(min(x, na.rm = TRUE))
   max_date <- suppressWarnings(max(x, na.rm = TRUE))
 
-  if (is.infinite(min_date) | is.infinite(max_date))
+  if (is.infinite(min_date) || is.infinite(max_date))
     cat('stop("The date vector contains only NAs. Set limits you think are appropriate for this variable.")', "\n")
 
   min_date <- dplyr::if_else(is.infinite(min_date), "NA", as.character(min_date))
