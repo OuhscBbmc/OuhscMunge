@@ -32,7 +32,7 @@ test_that("trim_integer -bad values", {
 
   expect_error(
     OuhscMunge::trim_integer(x, NA_integer_),
-    "Assertion on 'bounds' failed: Must have length >= 2, but has length 1."
+    "Assertion on 'bounds' failed: Must have length 2, but has length 1\\."
   )
   expect_error(
     OuhscMunge::trim_integer(x, c(6L, 2L)),
@@ -41,6 +41,6 @@ test_that("trim_integer -bad values", {
 
   expect_error(
     OuhscMunge::trim_integer(x, c(1L, 2L, 3L)),
-    "Assertion on 'bounds' failed: Must have length <= 2, but has length 3."
+    "Assertion on 'bounds' failed: Must have length 2, but has length 3\\."
   )
 })
