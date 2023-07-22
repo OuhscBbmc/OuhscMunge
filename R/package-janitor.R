@@ -236,7 +236,6 @@ package_janitor_remote <- function(
     # This comparison is copied from tinytex:::is_tinytex().
     if (!(gsub("^[.]", "", tolower(basename(tinytex::tinytex_root()))) == "tinytex"))
       tinytex::install_tinytex() # nocov
-      # message("If you haven't already, install the TeX part of tinytex with `tinytex::install_tinytex()`.")
   }
 
   # ---- return ---------------------------------------------------------

@@ -62,7 +62,7 @@ clump_month_date <- function(date_detailed, day_of_month = 15L) {
     stop("The `day_of_month` parameter must be an integer or numeric data type.")
   if (length(day_of_month) != 1L)
     stop("The `day_of_month` contains more than one element; it should contain only one.")
-  if (!(1L <= day_of_month & day_of_month <= 31L))
+  if (!(1L <= day_of_month && day_of_month <= 31L))
     stop("The `day_of_month` parameter must be bound by [1, 31].")
 
   assigned <- date_detailed
@@ -79,7 +79,7 @@ clump_week_date <- function(date_detailed, day_of_week = 2L) {
     stop("The `day_of_week` parameter must be an integer or numeric data type.")
   if (length(day_of_week) != 1L)
     stop("The `day_of_week` contains more than one element; it should contain only one.")
-  if (!(1L <= day_of_week & day_of_week <= 7L))
+  if (!(1L <= day_of_week && day_of_week <= 7L))
     stop("The `day_of_week` parameter must be bound by [1, 7].")
 
   assigned <- date_detailed

@@ -50,10 +50,10 @@ hash_and_salt_sha_256 <- function(
   max_characters = 2048L,
   na_if          = c("")
 ) {
-  checkmate::assert_character( salt          , any.missing=FALSE, min.chars = 0L)
-  checkmate::assert_integerish(min_characters, any.missing=FALSE, len=1, lower=0)
-  checkmate::assert_integerish(max_characters, any.missing=FALSE, len=1, lower=min_characters)
-  checkmate::assert_character( na_if         , any.missing=TRUE, min.chars = 0)
+  checkmate::assert_character( salt          , any.missing = FALSE, min.chars = 0L)
+  checkmate::assert_integerish(min_characters, any.missing = FALSE, len = 1, lower = 0)
+  checkmate::assert_integerish(max_characters, any.missing = FALSE, len = 1, lower = min_characters)
+  checkmate::assert_character( na_if         , any.missing = TRUE , min.chars = 0)
 
   if (!inherits(x, "character"))
     x <- as.character(x)

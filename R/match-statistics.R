@@ -64,7 +64,7 @@
 match_statistics <- function(d_parent, d_child, join_columns) {
   checkmate::assert_data_frame(d_parent, null.ok = FALSE)
   checkmate::assert_data_frame(d_child , null.ok = FALSE)
-  checkmate::assert_character(join_columns, min.len=1, any.missing=FALSE)
+  checkmate::assert_character(join_columns, min.len = 1, any.missing = FALSE)
 
   if (is.null(names(join_columns))) {
     flipped_join_columns <- join_columns

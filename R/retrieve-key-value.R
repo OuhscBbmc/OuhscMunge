@@ -60,14 +60,8 @@ retrieve_key_value <- function(
 
   sql <- "EXEC security.prc_key_value_static @project=?, @attribute = ?"
 
-  # d_input <- data.frame(
-  #   project_name       = project_name,
-  #   key                = key,
-  #   stringsAsFactors   = FALSE
-  # )
-
-  if (base::missing(channel) | base::is.null(channel)) {
-    if (base::missing(dsn_name) | base::is.null(dsn_name))
+  if (base::missing(channel) || base::is.null(channel)) {
+    if (base::missing(dsn_name) || base::is.null(dsn_name))
       stop("The 'dsn_name' parameter can be missing only if a 'channel' has been passed to `retrieve_key_value()`.")
 
     channel <- open_dsn_channel_sqls_odbc(dsn_name)

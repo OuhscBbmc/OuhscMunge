@@ -30,7 +30,7 @@
 
 cut_with_nas   <- function(
   x,
-  .missing="Unknown",
+  .missing = "Unknown",
   ...
 ) {
   checkmate::assert_numeric(x, any.missing = TRUE)

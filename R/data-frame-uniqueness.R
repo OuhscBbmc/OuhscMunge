@@ -45,7 +45,7 @@ data_frame_uniqueness_test <- function(d, keys, display_count = 10L) {
     dplyr::rename(row_count = .data$n)
 
   has_duplicates <- (1L <= nrow(d_duplicates))
-  if (has_duplicates & (1L < display_count)) {
+  if (has_duplicates && (1L < display_count)) {
     message("Displaying first ", display_count, " violations of uniqueness:")
     print(dplyr::slice(d_duplicates, seq_len(display_count)))
   }
@@ -59,9 +59,8 @@ data_frame_uniqueness_assert <- function(d, keys, display_count = 10L) {
   if (!data_frame_uniqueness_test(d, keys, display_count)) {
     stop(
       "The data.frame did not have unique values for column(s)\n{`",
-      paste(keys, collapse="`, `"),
+      paste(keys, collapse = "`, `"),
       "`}."
     )
   }
 }
-

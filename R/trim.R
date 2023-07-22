@@ -69,9 +69,9 @@
 
 #' @export
 trim_numeric <- function(x, bounds = c(-Inf, Inf), replacement = NA_real_) {
-  checkmate::assert_numeric(x, any.missing=TRUE)
-  checkmate::assert_numeric(bounds, min.len=2, max.len=2, any.missing=FALSE)
-  checkmate::assert_numeric(replacement, min.len=1, max.len=1)
+  checkmate::assert_numeric(x, any.missing = TRUE)
+  checkmate::assert_numeric(bounds, len = 2, any.missing = FALSE)
+  checkmate::assert_numeric(replacement, len = 1)
 
   if (!(bounds[1] <= bounds[2]))
     stop("The lower element of `bounds` must be equal or less than the upper element of `bounds`.")
@@ -87,9 +87,9 @@ trim_numeric <- function(x, bounds = c(-Inf, Inf), replacement = NA_real_) {
 
 #' @export
 trim_integer <- function(x, bounds = c(-2147483647L, 2147483647L), replacement = NA_integer_) {
-  checkmate::assert_integer(x, any.missing=TRUE)
-  checkmate::assert_integer(bounds, min.len=2, max.len=2, any.missing=FALSE)
-  checkmate::assert_integer(replacement, min.len=1, max.len=1)
+  checkmate::assert_integer(x, any.missing = TRUE)
+  checkmate::assert_integer(bounds, len = 2, any.missing = FALSE)
+  checkmate::assert_integer(replacement, len = 1)
 
   if (!(bounds[1] <= bounds[2]))
     stop("The lower element of `bounds` must be equal or less than the upper element of `bounds`.")

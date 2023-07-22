@@ -54,8 +54,8 @@ data_frame_compare_structure <- function(
 ) {
   # Check arguments
   checkmate::assert_data_frame(d_original)
-  checkmate::assert_data_frame(d_current )
-  checkmate::assert_logical(   datestamp_ignore, any.missing = FALSE, len = 1L)
+  checkmate::assert_data_frame(d_current)
+  checkmate::assert_logical(datestamp_ignore, any.missing = FALSE, len = 1L)
 
   if (datestamp_ignore) {
     # This doesn't affect the caller's copy of the datasets.
