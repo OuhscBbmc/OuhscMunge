@@ -37,6 +37,7 @@ data_frame_uniqueness_test <- function(d, keys, display_count = 10L) {
   checkmate::assert_integerish(display_count , null.ok = FALSE, any.missing = FALSE, len     = 1, lower     = 0L)
 
   key_expr <- rlang::parse_exprs(keys)
+  n        <- NULL
 
   d_duplicates <-
     d %>%

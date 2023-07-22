@@ -50,9 +50,9 @@ test_that("Replace with NAs -date", {
 })
 
 test_that("Replace with NAs -logical", {
-  input_1  <- c("T", "", "", "F", "FALSE", "", "TRUE")
-  input_2  <- c("1", "", "", "0", "0"    , "", "1")
-  expected <- c(T  , NA, NA, F  , F      , NA, T)
+  input_1  <- c("T" , "", "", "F"  , "FALSE"  , "", "TRUE")
+  input_2  <- c("1" , "", "", "0"   , "0"     , "", "1")
+  expected <- c(TRUE, NA, NA, FALSE , FALSE   , NA, TRUE)
 
   actual_1 <- replace_with_nas(input_1, return_type = "logical")
   actual_2 <- replace_with_nas(input_2, return_type = "logical")
