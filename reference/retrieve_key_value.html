@@ -80,24 +80,24 @@
     <div id="details">
     <h2>Details</h2>
     <p>The database table and stored procedure must defined as:</p>
-<p></p><div class="sourceCode sql"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> security_private.tbl_key_value_static(</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">id</span>                     <span class="dt">smallint</span>     identity(<span class="dv">1</span>,<span class="dv">1</span>) <span class="kw">primary</span> <span class="kw">key</span>,</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  project                <span class="dt">varchar</span>(<span class="dv">50</span>)  <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">attribute</span>              <span class="dt">varchar</span>(<span class="dv">90</span>)  <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">value</span>                  <span class="dt">varchar</span>(<span class="dv">200</span>) <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  file_last_updated_date <span class="dt">date</span>         <span class="kw">not</span> <span class="kw">null</span>,</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  retired                bit          <span class="kw">not</span> <span class="kw">null</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> security.prc_key_value_static</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  @project <span class="dt">varchar</span>(<span class="dv">50</span>),</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  @attribute <span class="dt">varchar</span>(<span class="dv">90</span>)</span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">AS</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="cf">BEGIN</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;</span>
-<span id="cb1-16"><a href="#cb1-16"></a>  <span class="kw">SELECT</span> <span class="fu">value</span> <span class="kw">from</span> security_private.tbl_key_value_static</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  <span class="kw">WHERE</span> project <span class="op">=</span> @project <span class="kw">and</span> <span class="kw">attribute</span> <span class="op">=</span> @attribute</span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="cf">END</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode sql"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> security_private.tbl_key_value_static(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">id</span>                     <span class="dt">smallint</span>     identity(<span class="dv">1</span>,<span class="dv">1</span>) <span class="kw">primary</span> <span class="kw">key</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  project                <span class="dt">varchar</span>(<span class="dv">50</span>)  <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">attribute</span>              <span class="dt">varchar</span>(<span class="dv">90</span>)  <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value</span>                  <span class="dt">varchar</span>(<span class="dv">200</span>) <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  file_last_updated_date <span class="dt">date</span>         <span class="kw">not</span> <span class="kw">null</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  retired                bit          <span class="kw">not</span> <span class="kw">null</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">PROCEDURE</span> security.prc_key_value_static</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  @project <span class="dt">varchar</span>(<span class="dv">50</span>),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  @attribute <span class="dt">varchar</span>(<span class="dv">90</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SET</span> NOCOUNT <span class="kw">ON</span>;</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> <span class="fu">value</span> <span class="kw">from</span> security_private.tbl_key_value_static</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> project <span class="op">=</span> @project <span class="kw">and</span> <span class="kw">attribute</span> <span class="op">=</span> @attribute</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="cf">END</span></span></code></pre><p></p></div>
     </div>
     <div id="note">
     <h2>Note</h2>

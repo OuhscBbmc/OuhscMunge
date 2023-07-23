@@ -60,7 +60,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dsn_name</dt>
-<dd><p>Name of the locally-defined DSN passed to <a href="DBI::dbConnect()">DBI::dbConnect()</a>.</p></dd>
+<dd><p>Name of the locally-defined DSN passed to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code>.</p></dd>
 
 
 <dt>driver_version_minimum</dt>
@@ -75,7 +75,7 @@
     <h2>Details</h2>
     <p>A DSN channel requires more code than usual to diagnose problems, because the DSN
 is defined on the local computer, and is not under the control of the repository.
-This function wraps the basic <a href="DBI::dbConnect()">DBI::dbConnect(odbc::odbc(), dsn = dsn_name)()</a> function with some
+This function wraps the basic <code>DBI::dbConnect(odbc::odbc(), dsn = dsn_name)</code> function with some
 checks.  If unsuccessful, it returns some hints how to correct the problem, such as downloading
 the newest version from the <a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server" class="external-link">Microsoft website</a>.</p>
 <p><code>OuhscMunge::open_dsn_channel_sqls()</code> was deprecated and was removed 2020-10-18.  Please use `OuhscMunge::open_dsn_channel_sqls_odbc().</p>
