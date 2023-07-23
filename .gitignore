@@ -4,6 +4,7 @@
 .RData
 .Rproj.user
 .Rproj.user/
+docs/
 
 # produced vignettes
 vignettes/*.html
