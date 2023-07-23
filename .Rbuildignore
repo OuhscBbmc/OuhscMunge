@@ -16,6 +16,7 @@
 ^\.gitignore$
 ^\.travis\.yml$
 ^\.lintr$
+^\.vscode$
 ^appveyor\.yml$
 ^CONDUCT.md$
 ^CODE_OF_CONDUCT.md$
