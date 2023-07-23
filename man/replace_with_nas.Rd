@@ -19,7 +19,7 @@ Elements of zero-length are converted to \code{NA}s.  Can force
 coercion to an optionally-specified data type.
 
 The function has two parts.
-First, it uses consider using \href{dplyr::na_if()}{dplyr::na_if(x, "")}.
+First, it uses \code{dplyr::na_if(x, "")}.
 Second, it (optionally) coerces to the desired data type.
 }
 \details{

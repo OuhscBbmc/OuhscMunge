@@ -12,7 +12,8 @@ match_statistics(d_parent, d_child, join_columns)
 
 \item{d_child}{A \code{data.frame} of the child table.}
 
-\item{join_columns}{The \code{character} vector of the column names used to join to parent and child tables.}
+\item{join_columns}{The \code{character} vector of the column names used
+to join to parent and child tables.}
 }
 \value{
 A \code{numeric} array of the following elements:
@@ -28,7 +29,9 @@ A \code{numeric} array of the following elements:
 }
 }
 \description{
-Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+Missing values are converted to a factor level.
+This explicit assignment can reduce the chances
+that missing values are inadvertently ignored.
 It also allows the presence of a missing to become a predictor in models.
 }
 \details{
@@ -39,7 +42,7 @@ More information about the 'parent' and 'child' terminology and concepts can be 
 Wikipedia entry, among many other sources.
 }
 \note{
-The \code{join_columns} parameter is passed directly to \url{dplyr::semi_join()} and \url{dplyr::anti_join()}.
+The \code{join_columns} parameter is passed directly to \code{\link[dplyr:filter-joins]{dplyr::semi_join()}} and \code{\link[dplyr:filter-joins]{dplyr::anti_join()}}.
 }
 \examples{
 ds_parent <- data.frame(

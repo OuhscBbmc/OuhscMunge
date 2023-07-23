@@ -7,7 +7,7 @@
 #' coercion to an optionally-specified data type.
 #'
 #' The function has two parts.
-#' First, it uses consider using [dplyr::na_if(x, "")](dplyr::na_if()).
+#' First, it uses `dplyr::na_if(x, "")`.
 #' Second, it (optionally) coerces to the desired data type.
 #'
 #' @param x An array of values. It is temporarily coerced to a string. Required

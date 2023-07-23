@@ -11,7 +11,7 @@ open_dsn_channel_sqls_odbc(
 )
 }
 \arguments{
-\item{dsn_name}{Name of the locally-defined DSN passed to \url{DBI::dbConnect()}.}
+\item{dsn_name}{Name of the locally-defined DSN passed to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{driver_version_minimum}{The driver must be at least this version number.  Represented as a \code{\link[base:numeric_version]{base::numeric_version()}}}
 
@@ -23,7 +23,7 @@ Creates & opens a channel and checks its important characteristics.
 \details{
 A DSN channel requires more code than usual to diagnose problems, because the DSN
 is defined on the local computer, and is not under the control of the repository.
-This function wraps the basic \href{DBI::dbConnect()}{DBI::dbConnect(odbc::odbc(), dsn = dsn_name)()} function with some
+This function wraps the basic \code{DBI::dbConnect(odbc::odbc(), dsn = dsn_name)} function with some
 checks.  If unsuccessful, it returns some hints how to correct the problem, such as downloading
 the newest version from the \href{https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server}{Microsoft website}.
 

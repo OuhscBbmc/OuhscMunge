@@ -5,7 +5,7 @@
 #' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
 #' It also allows the presence of a missing to become a predictor in models.
 #'
-#' The function is retained so existing code doesn't break.  For new code, consider using [dplyr::coalesce()](dplyr::coalesce()).
+#' The function is retained so existing code doesn't break.  For new code, consider using [dplyr::coalesce()].
 #' if you don't need to convert the missing code to a factor level.
 #'
 #' @param scores An array of values, ideally either factor or character. Required

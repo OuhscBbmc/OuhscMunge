@@ -3,12 +3,15 @@
 #' @export match_statistics match_statistics_display
 #' @title Create explicit factor level for missing values.
 #'
-#' @description Missing values are converted to a factor level.  This explicit assignment can reduce the chances that missing values are inadvertently ignored.
+#' @description Missing values are converted to a factor level.
+#' This explicit assignment can reduce the chances
+#' that missing values are inadvertently ignored.
 #' It also allows the presence of a missing to become a predictor in models.
 #'
 #' @param d_parent A `data.frame` of the parent table.
 #' @param d_child A `data.frame` of the child table.
-#' @param join_columns The `character` vector of the column names used to join to parent and child tables.
+#' @param join_columns The `character` vector of the column names used
+#' to join to parent and child tables.
 #'
 #' @return
 #'   A `numeric` array of the following elements:
@@ -27,7 +30,7 @@
 #' [Hierarchical Database Model](https://en.wikipedia.org/wiki/Hierarchical_database_model)
 #' Wikipedia entry, among many other sources.
 #'
-#' @note  The `join_columns` parameter is passed directly to [`dplyr::semi_join()`](dplyr::semi_join()) and [`dplyr::anti_join()`](dplyr::anti_join()).
+#' @note  The `join_columns` parameter is passed directly to [dplyr::semi_join()] and [dplyr::anti_join()].
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data

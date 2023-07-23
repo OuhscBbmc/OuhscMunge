@@ -1,9 +1,9 @@
 #' @name verify_value_headstart
 #' @export
 #'
-#' @title Generates code to verify a [`data.frame`](base::data.frame()).
+#' @title Generates code to verify a [base::data.frame()].
 #'
-#' @description Inspects properties of a [`data.frame`](base::data.frame()) and
+#' @description Inspects properties of a [base::data.frame()] and
 #' prints code to the console that a developer can use to start to
 #' check the properties of a dataset, such as the names and types of each column.
 #'
