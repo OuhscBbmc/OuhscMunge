@@ -28,28 +28,57 @@
 #' the new column will be an [integer].
 #' Otherwise the new column will be a [double].
 #'
-#' @note
 #' @author Will Beasley
 #' @importFrom rlang :=
 #' @examples
 #' library(OuhscMunge) #Load the package into the current R session.
-
+#' mtcars |>
+#'   row_sum(
+#'     columns_to_average = c("cyl", "disp", "vs", "carb"),
+#'     new_column_name    = "engine_sum"
+#'   )
 #'
+#' if (require(tidyr))
+#'   tidyr::billboard |>
+#'     row_sum(
+#'       pattern               = "^wk\\d{1,2}$",
+#'       new_column_name       = "week_sum",
+#'       threshold_proportion  = .1,
+#'       verbose               = TRUE
+#'     ) |>
+#'     dplyr::select(
+#'       artist,
+#'       date.entered,
+#'       week_sum,
+#'     )
+#'
+#'   tidyr::billboard |>
+#'     row_sum(
+#'       pattern               = "^wk\\d$",
+#'       new_column_name       = "week_sum",
+#'       verbose               = TRUE
+#'     ) |>
+#'     dplyr::select(
+#'       artist,
+#'       date.entered,
+#'       week_sum,
+#'     )
+
 #' @export
 row_sum <- function(
     d,
     columns_to_average        = character(0),
-    pattern,
+    pattern                   = "",
     new_column_name           = "row_sum",
     threshold_proportion      = .75,
     verbose                   = FALSE
 ) {
   checkmate::assert_data_frame(d)
   checkmate::assert_character(columns_to_average  , any.missing = FALSE)
-  checkmate::assert_character(pattern             , min.len = 0, max.len = 1)
+  checkmate::assert_character(pattern             , len = 1)
   checkmate::assert_character(new_column_name     , len = 1)
   checkmate::assert_double(   threshold_proportion, len = 1)
-  checkmate::assert_logical(   verbose             , len = 1)
+  checkmate::assert_logical(  verbose             , len = 1)
 
   if (length(columns_to_average) == 0L) {
     columns_to_average <-

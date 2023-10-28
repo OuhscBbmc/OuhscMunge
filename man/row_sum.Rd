@@ -7,7 +7,7 @@
 row_sum(
   d,
   columns_to_average = character(0),
-  pattern,
+  pattern = "",
   new_column_name = "row_sum",
   threshold_proportion = 0.75,
   verbose = FALSE
@@ -50,7 +50,37 @@ Otherwise the new column will be a \link{double}.
 }
 \examples{
 library(OuhscMunge) #Load the package into the current R session.
+mtcars |>
+  row_sum(
+    columns_to_average = c("cyl", "disp", "vs", "carb"),
+    new_column_name    = "engine_sum"
+  )
 
+if (require(tidyr))
+  tidyr::billboard |>
+    row_sum(
+      pattern               = "^wk\\\\d{1,2}$",
+      new_column_name       = "week_sum",
+      threshold_proportion  = .1,
+      verbose               = TRUE
+    ) |>
+    dplyr::select(
+      artist,
+      date.entered,
+      week_sum,
+    )
+
+  tidyr::billboard |>
+    row_sum(
+      pattern               = "^wk\\\\d$",
+      new_column_name       = "week_sum",
+      verbose               = TRUE
+    ) |>
+    dplyr::select(
+      artist,
+      date.entered,
+      week_sum,
+    )
 }
 \author{
 Will Beasley

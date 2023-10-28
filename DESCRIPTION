@@ -31,6 +31,7 @@ Suggests:
     RODBC,
     spelling,
     testthat,
+    tidyr,
     tinytex
 Encoding: UTF-8
 Language: en-US
