@@ -17,11 +17,18 @@
 #' @param threshold_proportion Designates the minimum proportion of columns
 #' that have a nonmissing values (within each row) in order to return a sum.
 #' Required; defaults to to 0.75.
+#' @param nonmissing_count_name If a non-NA value is passed,
+#' a second column will be added to `d` that contains the row's count
+#' of nonmissing items among the selected columns.
+#' Must be a valid column name.  Optional.
 #' @param verbose a logical value to designate if extra information is
 #' displayed in the console,
 #' such as which columns are matched by `pattern`.
 #'
-#' @return The data.frame `d`, with the additional column containing the row sum.
+#' @return The data.frame `d`,
+#' with the additional column containing the row sum.
+#' If a valid value is passed to `nonmissing_count_name`,
+#' a second column will be added as well.
 #'
 #' @details
 #' If the specified columns are all logicals or integers,
@@ -36,6 +43,13 @@
 #'   row_sum(
 #'     columns_to_average = c("cyl", "disp", "vs", "carb"),
 #'     new_column_name    = "engine_sum"
+#'   )
+#'
+#' mtcars |>
+#'   row_sum(
+#'     columns_to_average     = c("cyl", "disp", "vs", "carb"),
+#'     new_column_name        = "engine_sum",
+#'     nonmissing_count_name  = "engine_nonmissing_count"
 #'   )
 #'
 #' if (require(tidyr))
@@ -71,6 +85,7 @@ row_sum <- function(
     pattern                   = "",
     new_column_name           = "row_sum",
     threshold_proportion      = .75,
+    nonmissing_count_name     = NA_character_,
     verbose                   = FALSE
 ) {
   checkmate::assert_data_frame(d)
@@ -78,6 +93,7 @@ row_sum <- function(
   checkmate::assert_character(pattern             , len = 1)
   checkmate::assert_character(new_column_name     , len = 1)
   checkmate::assert_double(   threshold_proportion, len = 1)
+  checkmate::assert_character(nonmissing_count_name, len = 1, min.chars = 1, any.missing = TRUE)
   checkmate::assert_logical(  verbose             , len = 1)
 
   if (length(columns_to_average) == 0L) {
@@ -108,35 +124,46 @@ row_sum <- function(
       }
     )
 
-  rs <- nonmissing_count <- nonmissing_proportion <- NULL
+  .rs <- .nonmissing_count <- .nonmissing_proportion <- NULL
   d <-
     d |>
     dplyr::mutate(
-      rs = # Finding the sum (used by m4)
+      .rs =
         rowSums(
           dplyr::across(!!columns_to_average),
           na.rm = TRUE
         ),
-      nonmissing_count =
+      .nonmissing_count =
         rowSums(
           dplyr::across(
             !!columns_to_average,
             .fns = \(x) { !is.na(x) }
           )
         ),
-      nonmissing_proportion = nonmissing_count / length(columns_to_average),
+      .nonmissing_proportion = .nonmissing_count / length(columns_to_average),
       {{new_column_name}} :=
         dplyr::if_else(
-          threshold_proportion <= nonmissing_proportion,
-          rs,
-          # rs / nonmissing_count,
+          threshold_proportion <= .nonmissing_proportion,
+          .rs,
+          # .rs / .nonmissing_count,
           NA_real_
         )
-    ) |>
+    )
+
+  if (!is.na(nonmissing_count_name)) {
+    d <-
+      d |>
+      dplyr::mutate(
+        {{nonmissing_count_name}} := .nonmissing_count,
+      )
+  }
+
+  d <-
+    d |>
     dplyr::select(
-      -rs,
-      -nonmissing_count,
-      -nonmissing_proportion,
+      -.rs,
+      -.nonmissing_count,
+      -.nonmissing_proportion,
     )
   # Alternatively, return just the new columns
   # dplyr::pull({{new_column_name}})

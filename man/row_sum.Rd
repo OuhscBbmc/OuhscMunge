@@ -10,6 +10,7 @@ row_sum(
   pattern = "",
   new_column_name = "row_sum",
   threshold_proportion = 0.75,
+  nonmissing_count_name = NA_character_,
   verbose = FALSE
 )
 }
@@ -30,12 +31,20 @@ of the specified columns.  Required.}
 that have a nonmissing values (within each row) in order to return a sum.
 Required; defaults to to 0.75.}
 
+\item{nonmissing_count_name}{If a non-NA value is passed,
+a second column will be added to \code{d} that contains the row's count
+of nonmissing items among the selected columns.
+Must be a valid column name.  Optional.}
+
 \item{verbose}{a logical value to designate if extra information is
 displayed in the console,
 such as which columns are matched by \code{pattern}.}
 }
 \value{
-The data.frame \code{d}, with the additional column containing the row sum.
+The data.frame \code{d},
+with the additional column containing the row sum.
+If a valid value is passed to \code{nonmissing_count_name},
+a second column will be added as well.
 }
 \description{
 Sums across columns within a row,
@@ -54,6 +63,13 @@ mtcars |>
   row_sum(
     columns_to_average = c("cyl", "disp", "vs", "carb"),
     new_column_name    = "engine_sum"
+  )
+
+mtcars |>
+  row_sum(
+    columns_to_average     = c("cyl", "disp", "vs", "carb"),
+    new_column_name        = "engine_sum",
+    nonmissing_count_name  = "engine_nonmissing_count"
   )
 
 if (require(tidyr))
