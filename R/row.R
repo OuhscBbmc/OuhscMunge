@@ -17,7 +17,7 @@
 #' @param threshold_proportion Designates the minimum proportion of columns
 #' that have a nonmissing values (within each row) in order to return a sum.
 #' Required; defaults to to 0.75.
-#' @param vebose a logical value to designate if extra information is
+#' @param vv a logical value to designate if extra information is
 #' displayed in the console,
 #' such as which columns are matched by `pattern`.
 #'
@@ -30,6 +30,7 @@
 #'
 #' @note
 #' @author Will Beasley
+#' @importFrom rlang :=
 #' @examples
 #' library(OuhscMunge) #Load the package into the current R session.
 
@@ -41,8 +42,16 @@ row_sum <- function(
     pattern,
     new_column_name           = "row_sum",
     threshold_proportion      = .75,
-    verbose                   = FALSE
+    vv                   = FALSE
 ) {
+  checkmate::assert_data_frame(d)
+  checkmate::assert_character(columns_to_average  , any.missing = FALSE)
+  checkmate::assert_character(pattern             , min.len = 0, max.len = 1)
+  checkmate::assert_character(new_column_name     , len = 1)
+  checkmate::assert_double(   threshold_proportion, len = 1)
+  checkmate::assert_logical(   vv             , len = 1)
+
+
 
   if (length(columns_to_average) == 0L) {
     columns_to_average <-
@@ -55,7 +64,7 @@ row_sum <- function(
         perl      = TRUE
       )
 
-    if (verbose) {
+    if (vv) {
       message(
         "The following columns will be summed:\n- ",
         paste(columns_to_average, collapse = "\n- ")
@@ -72,7 +81,7 @@ row_sum <- function(
       }
     )
 
-  rs <- nonmissing_count <- NULL
+  rs <- nonmissing_count <- nonmissing_proportion <- NULL
   d <-
     d |>
     dplyr::mutate(

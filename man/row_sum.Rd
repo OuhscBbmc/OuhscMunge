@@ -10,7 +10,7 @@ row_sum(
   pattern,
   new_column_name = "row_sum",
   threshold_proportion = 0.75,
-  verbose = FALSE
+  vv = FALSE
 )
 }
 \arguments{
@@ -30,7 +30,7 @@ of the specified columns.  Required.}
 that have a nonmissing values (within each row) in order to return a sum.
 Required; defaults to to 0.75.}
 
-\item{vebose}{a logical value to designate if extra information is
+\item{vv}{a logical value to designate if extra information is
 displayed in the console,
 such as which columns are matched by \code{pattern}.}
 }

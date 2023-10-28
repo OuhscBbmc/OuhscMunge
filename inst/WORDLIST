@@ -43,6 +43,7 @@ lettercase
 libcurl
 mrn
 nonmissing
+nonmissingness
 odbc
 openssl
 patientdob
