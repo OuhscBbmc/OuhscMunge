@@ -8,6 +8,7 @@ Dev
 Funders
 HRSA
 MIECHV
+NIGMS
 NSE
 ODBC
 OUHSC
@@ -16,6 +17,7 @@ PatientDOB
 RStudio's
 RedcapExamplesAndPatterns
 SHA
+Translational
 Visel
 abc
 alistaire
@@ -24,7 +26,6 @@ camelCase
 codecov
 cryptographic
 csv
-dbConnect
 devtools
 dplyr
 dsn
@@ -41,8 +42,8 @@ io
 lettercase
 libcurl
 mrn
-na
 nonmissing
+nonmissingness
 odbc
 openssl
 patientdob
