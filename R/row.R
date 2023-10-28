@@ -17,6 +17,8 @@
 #' @param threshold_proportion Designates the minimum proportion of columns
 #' that have a nonmissing values (within each row) in order to return a sum.
 #' Required; defaults to to 0.75.
+#' In other words, by default, if less than 75% of the specified
+#' cells are missing within a row, the row sum will be `NA`.
 #' @param nonmissing_count_name If a non-NA value is passed,
 #' a second column will be added to `d` that contains the row's count
 #' of nonmissing items among the selected columns.
@@ -38,15 +40,14 @@
 #' @author Will Beasley
 #' @importFrom rlang :=
 #' @examples
-#' library(OuhscMunge) #Load the package into the current R session.
 #' mtcars |>
-#'   row_sum(
+#'   OuhscMunge::row_sum(
 #'     columns_to_average = c("cyl", "disp", "vs", "carb"),
 #'     new_column_name    = "engine_sum"
 #'   )
 #'
 #' mtcars |>
-#'   row_sum(
+#'   OuhscMunge::row_sum(
 #'     columns_to_average     = c("cyl", "disp", "vs", "carb"),
 #'     new_column_name        = "engine_sum",
 #'     nonmissing_count_name  = "engine_nonmissing_count"
@@ -54,7 +55,7 @@
 #'
 #' if (require(tidyr))
 #'   tidyr::billboard |>
-#'     row_sum(
+#'     OuhscMunge::row_sum(
 #'       pattern               = "^wk\\d{1,2}$",
 #'       new_column_name       = "week_sum",
 #'       threshold_proportion  = .1,
@@ -67,7 +68,7 @@
 #'     )
 #'
 #'   tidyr::billboard |>
-#'     row_sum(
+#'     OuhscMunge::row_sum(
 #'       pattern               = "^wk\\d$",
 #'       new_column_name       = "week_sum",
 #'       verbose               = TRUE
