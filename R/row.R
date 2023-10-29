@@ -81,13 +81,13 @@
 
 #' @export
 row_sum <- function(
-    d,
-    columns_to_average        = character(0),
-    pattern                   = "",
-    new_column_name           = "row_sum",
-    threshold_proportion      = .75,
-    nonmissing_count_name     = NA_character_,
-    verbose                   = FALSE
+  d,
+  columns_to_average        = character(0),
+  pattern                   = "",
+  new_column_name           = "row_sum",
+  threshold_proportion      = .75,
+  nonmissing_count_name     = NA_character_,
+  verbose                   = FALSE
 ) {
   checkmate::assert_data_frame(d)
   checkmate::assert_character(columns_to_average  , any.missing = FALSE)

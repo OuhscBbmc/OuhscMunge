@@ -101,7 +101,7 @@ package_janitor_remote <- function(
 
   # ---- tweak-data --------------------------------------------------------------
   missing_columns <- base::setdiff(required_columns, colnames(ds_packages))
-  if( length(missing_columns) > 0 )
+  if (1L <= length(missing_columns))
     stop(paste("The data.frame of the required packages is missing the following columns:", missing_columns))
 
   ds_install_from_cran    <- ds_packages[ds_packages$install &  ds_packages$on_cran, ]
