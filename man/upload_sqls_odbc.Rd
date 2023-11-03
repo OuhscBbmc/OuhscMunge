@@ -15,7 +15,8 @@ upload_sqls_odbc(
   timezone = "UTC",
   timezone_out = "UTC",
   transaction = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  verbose_detail = FALSE
 )
 }
 \arguments{
@@ -39,7 +40,12 @@ upload_sqls_odbc(
 
 \item{transaction}{Should the clear and upload steps be wrapped in a rollback transaction?}
 
-\item{verbose}{Write a message about the status of a successful upload.}
+\item{verbose}{Display messages about the status of an upload.}
+
+\item{verbose_detail}{Display a message about the connection's low-level details.}
+}
+\value{
+A boolean value that was returned by \code{\link[DBI:dbWriteTable]{DBI::dbWriteTable()}}.
 }
 \description{
 The function performs some extra configuration to improve robustness.
