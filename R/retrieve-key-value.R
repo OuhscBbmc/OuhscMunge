@@ -74,7 +74,7 @@ retrieve_key_value <- function(
   base::tryCatch(
     expr = {
       query     <- DBI::dbSendQuery(channel, sql)
-      # bind      <- DBI::dbBind(query, list(project_name, key))
+      bind      <- DBI::dbBind(query, list(project_name, key))
       ds_value  <- DBI::dbFetch(query)
 
     }, finally = {
