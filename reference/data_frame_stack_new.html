@@ -18,7 +18,7 @@ if new rows should be added."><!-- mathjax --><script src="https://cdnjs.cloudfl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9015</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9016</span>
       </span>
     </div>
 
@@ -186,10 +186,10 @@ joining on the <code>keys</code> column(s).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 a        11   111   -<span style="color: #BB0000;">11</span> 2020-01-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3 c        13   113   -<span style="color: #BB0000;">13</span> 2020-01-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     4 d        14   114   -<span style="color: #BB0000;">14</span> 2020-01-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2 b        12   212   312 2023-11-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 e        15   215   315 2023-11-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1 x        11   211   311 2023-11-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>     5 y        15   215   315 2023-11-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2 b        12   212   312 2023-12-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 e        15   215   315 2023-12-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1 x        11   211   311 2023-12-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>     5 y        15   215   315 2023-12-14</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Wrinkle 2a: datestamp the new records; update x4.</span></span></span>
 <span class="r-in"><span><span class="fu">data_frame_stack_new</span><span class="op">(</span></span></span>
@@ -205,10 +205,10 @@ joining on the <code>keys</code> column(s).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 a        11   -<span style="color: #BB0000;">11</span> 2020-01-07   211</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3 c        13   -<span style="color: #BB0000;">13</span> 2020-01-07   213</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     4 d        14   -<span style="color: #BB0000;">14</span> 2020-01-07   214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2 b        12   312 2023-11-03   212</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 e        15   315 2023-11-03   215</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1 x        11   311 2023-11-03   211</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>     5 y        15   315 2023-11-03   215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2 b        12   312 2023-12-14   212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 e        15   315 2023-12-14   215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1 x        11   311 2023-12-14   211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>     5 y        15   315 2023-12-14   215</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Wrinkle 2b: datestamp the new records; update x4 &amp; x5.</span></span></span>
 <span class="r-in"><span><span class="fu">data_frame_stack_new</span><span class="op">(</span></span></span>
@@ -224,10 +224,10 @@ joining on the <code>keys</code> column(s).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1 a        11 2020-01-07   211   311</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3 c        13 2020-01-07   213   313</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     4 d        14 2020-01-07   214   314</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2 b        12 2023-11-03   212   312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 e        15 2023-11-03   215   315</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1 x        11 2023-11-03   211   311</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>     5 y        15 2023-11-03   215   315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     2 b        12 2023-12-14   212   312</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     5 e        15 2023-12-14   215   315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     1 x        11 2023-12-14   211   311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>     5 y        15 2023-12-14   215   315</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ds_current</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html" class="external-link">anti_join</a></span><span class="op">(</span><span class="va">ds_original</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span><span class="op">)</span></span></span>

@@ -19,7 +19,7 @@ check the properties of a dataset, such as the names and types of each column.">
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">OuhscMunge</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9015</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9016</span>
       </span>
     </div>
 
@@ -98,19 +98,19 @@ check the properties of a dataset, such as the names and types of each column.</
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">verify_value_headstart</span><span class="op">(</span><span class="va">storms_2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(ds$name                         , any.missing=F , pattern="^.{3,9}$"                                       )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$year                         , any.missing=F , lower=1975, upper=2021                                   )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$year                         , any.missing=F , lower=1975, upper=2022                                   )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$month                        , any.missing=F , lower=1, upper=12                                        )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$day                          , any.missing=F , lower=1, upper=31                                        )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$hour                         , any.missing=F , lower=0, upper=23                                        )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$lat                          , any.missing=F , lower=7, upper=71                                        )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$long                         , any.missing=F , lower=-110, upper=14                                     )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$long                         , any.missing=F , lower=-137, upper=14                                     )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(   ds$status                       , any.missing=F                                                            )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$category                     , any.missing=T , lower=1, upper=5                                         )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$wind                         , any.missing=F , lower=10, upper=165                                      )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$pressure                     , any.missing=F , lower=882, upper=1024                                    )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$tropicalstorm_force_diameter , any.missing=T , lower=0, upper=1440                                      )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$hurricane_force_diameter     , any.missing=T , lower=0, upper=300                                       )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_date(     ds$storm_date                   , any.missing=F , lower=as.Date("1975-06-27"), upper=as.Date("2021-11-08") )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_date(     ds$storm_date                   , any.missing=F , lower=as.Date("1975-06-27"), upper=as.Date("2022-11-11") )</span>
 </code></pre></div>
     </div>
   </div>
