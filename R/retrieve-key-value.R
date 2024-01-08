@@ -73,12 +73,13 @@ retrieve_key_value <- function(
   # browser()
   base::tryCatch(
     expr = {
-      query     <- DBI::dbSendQuery(channel, sql)
-      bind      <- DBI::dbBind(query, list(project_name, key))
-      ds_value  <- DBI::dbFetch(query)
+      ds_value  <- DBI::dbGetQuery(channel, sql, params = list(project_name, key))
+      # query     <- DBI::dbSendQuery(channel, sql, immediate = FALSE)
+      # bind      <- DBI::dbBind(query, list(project_name, key))
+      # ds_value  <- DBI::dbFetch(query)
 
     }, finally = {
-      if (exists("query"))       DBI::dbClearResult(query)
+      # if (exists("query"))       DBI::dbClearResult(query)
       # if (exists("bind"))        DBI::dbClearResult(bind)
       if (close_channel_on_exit) DBI::dbDisconnect(channel)
     }
