@@ -1,5 +1,5 @@
 #' @name assert_version
-#' @aliases assert_version_r
+#' @aliases assert_version_r, assert_version_package
 #' @title I that the local machine is using an acceptable version.
 #'
 #' @description Assert that the local machine is using a version that satisfies
@@ -25,10 +25,20 @@
 #' @author Will Beasley
 #'
 #' @examples
+#' # Check R
 #' assert_version_r("3.1.0")
 #' assert_version_r()
 #' # Fails: assert_version_r("99.1.0")
-
+#'
+#' # Check packages
+#' assert_version_package("base", "3.1.0")
+#' assert_version_package("OuhscMunge", "0.1.0")
+#' # Fails: assert_version_package("base", "99.1.0")
+#' # Fails: assert_version_package("OuhscMunge", "9.1.0")
+#' # Fails:
+#' # Fails: assert_version_package("OuhscMungeee", "9.1.0")
+#'
+#'
 #' @export
 assert_version_r <- function(minimum = base::package_version("4.2.1")) {
   checkmate::assert_vector(minimum, len = 1, any.missing = FALSE)
@@ -58,6 +68,64 @@ assert_version_r <- function(minimum = base::package_version("4.2.1")) {
       ) |>
       stop()
   } else {
-    TRUE
+    invisible(TRUE)
+  }
+}
+
+#' @export
+assert_version_package <- function(
+    package_name,
+    minimum,
+    installation_code = ""
+) {
+  checkmate::assert_character(package_name, len = 1, min.chars = 1, any.missing = FALSE)
+  checkmate::assert_vector(minimum, len = 1, any.missing = FALSE)
+  checkmate::assert_character(installation_code, len = 1, min.chars = 0, any.missing = FALSE)
+
+  package_is_installed <- requireNamespace(package_name, quietly = TRUE)
+
+  installation_message <-
+    if (1L <= nchar(installation_code)) {
+      "  Install the package with `%s`." |>
+        sprintf(installation_code)
+    } else {
+      ""
+    }
+
+  if (!package_is_installed) {
+    "The package '%s' not installed.%s" |>
+      sprintf(package_name, installation_message) |>
+      stop()
+  }
+
+  minimum <-
+    if (inherits(minimum, "package_version")) {
+      as.character(minimum)
+    } else if (inherits(minimum, "character")) {
+      # Make sure it can be recognized as a version
+      as.character(base::package_version(minimum))
+    } else {
+      stop("The value passed to `minimum` must inherit either from 'character' or `package_version`.")
+    }
+
+  current <- as.character(utils::packageVersion(package_name))
+
+  comparison <-
+    utils::compareVersion(
+      current,
+      minimum
+    )
+
+  if (comparison < 0 ) {
+    "Your version of the `%s` package is too old.  It is %s, but needs to be at least %s.%s" |>
+      sprintf(
+        package_name,
+        current,
+        minimum,
+        installation_message
+      ) |>
+      stop()
+  } else {
+    invisible(TRUE)
   }
 }

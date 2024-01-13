@@ -3,6 +3,8 @@
 \name{assert_version}
 \alias{assert_version}
 \alias{assert_version_r}
+\alias{assert_version_r,}
+\alias{assert_version_package}
 \title{I that the local machine is using an acceptable version.}
 \usage{
 assert_version_r(minimum = base::package_version("4.2.1"))
@@ -32,9 +34,20 @@ for the native pipe.  Future versions of OuhscMunge will likely increase
 the default value to keep pace with important developments to R.
 }
 \examples{
+# Check R
 assert_version_r("3.1.0")
 assert_version_r()
 # Fails: assert_version_r("99.1.0")
+
+# Check packages
+assert_version_package("base", "3.1.0")
+assert_version_package("OuhscMunge", "0.1.0")
+# Fails: assert_version_package("base", "99.1.0")
+# Fails: assert_version_package("OuhscMunge", "9.1.0")
+# Fails:
+# Fails: assert_version_package("OuhscMungeee", "9.1.0")
+
+
 }
 \author{
 Will Beasley
