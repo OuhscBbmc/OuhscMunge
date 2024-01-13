@@ -32,7 +32,7 @@
 #' @export
 assert_version_r <- function(minimum = base::package_version("4.2.1")) {
   checkmate::assert_vector(minimum, len = 1, any.missing = FALSE)
-  v <-
+  minimum <-
     if (inherits(minimum, "package_version")) {
       as.character(minimum)
     } else if (inherits(minimum, "character")) {
@@ -47,11 +47,16 @@ assert_version_r <- function(minimum = base::package_version("4.2.1")) {
   comparison <-
     utils::compareVersion(
       current,
-      v
+      minimum
     )
 
   if (comparison < 0 ) {
-    stop("Your R version is too old.  Update it at <https://cloud.r-project.org>.")
+    "Your R version is too old.  It is %s, but needs to be at least %s.  Update it at <https://cloud.r-project.org>." |>
+      sprintf(
+        current,
+        minimum
+      ) |>
+      stop()
   } else {
     TRUE
   }
