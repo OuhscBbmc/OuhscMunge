@@ -14,7 +14,10 @@
 #' @param transaction Should the clear and upload steps be wrapped in a rollback transaction?
 #' @param timezone The server time zone.  Passed to [DBI::dbConnect()].
 #' @param timezone_out The time zone returned to R. Passed to [DBI::dbConnect()].  See https://www.tidyverse.org/blog/2019/12/odbc-1-2-0/.
-#' @param verbose Write a message about the status of a successful upload.
+#' @param verbose Display messages about the status of an upload.
+#' @param verbose_detail Display a message about the connection's low-level details.
+#'
+#' @returns A boolean value that was returned by [DBI::dbWriteTable()].
 #'
 #' @details
 #' If `transaction` is `TRUE` and the upload fails, the table is rolled back to the state before function was called.
@@ -54,7 +57,8 @@ upload_sqls_odbc <- function(
   timezone_out                  = "UTC",
   transaction                   = FALSE,
 
-  verbose                       = TRUE
+  verbose                       = TRUE,
+  verbose_detail                = FALSE
 ) {
 
   checkmate::assert_data_frame(d                            , null.ok=FALSE             , any.missing=TRUE)
@@ -69,9 +73,10 @@ upload_sqls_odbc <- function(
   checkmate::assert_character(timezone                                      , len=1L, any.missing=FALSE)
   checkmate::assert_character(timezone_out                                  , len=1L, any.missing=FALSE)
   checkmate::assert_logical(  verbose                                       , len=1L, any.missing=FALSE)
+  checkmate::assert_logical(  verbose_detail                                , len=1L, any.missing=FALSE)
 
   start_time <- base::Sys.time()
-  print(start_time)
+  if (verbose) message ("Writing starting at ", strftime(start_time, "%F %T."))
 
   if (convert_logical_to_integer) {
     d <- dplyr::mutate_if(d, is.logical, as.integer)
@@ -123,8 +128,9 @@ upload_sqls_odbc <- function(
       DBI::dbBegin(channel)
     }
 
-    if (verbose) {
-      DBI::dbGetInfo(channel)
+    if (verbose_detail) {
+      # browser()
+      print(DBI::dbGetInfo(channel))
     }
 
     # Check the *qualified* table exists.
@@ -162,20 +168,22 @@ upload_sqls_odbc <- function(
     }
 
     if (verbose) {
-      message(result)
+      # message("Writing result: ", result)
 
       message(
         sprintf(
-          "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes.",
+          "The table `%s.%s` had %s rows written over dsn `%s` in %0.3f minutes at %s.",
           schema_name,
           table_name,
           format(nrow(d), big.mark = ",", scientific = FALSE),
           dsn_name,
-          difftime(Sys.time(), start_time, units = "mins")
+          difftime(Sys.time(), start_time, units = "mins"),
+          strftime(Sys.time(), "%F %T")
         )
       )
     }
 
+    invisible(result)
   }, error = function(e) {
 
     if (transaction) {
@@ -191,5 +199,6 @@ upload_sqls_odbc <- function(
 
     if (exists("result_truncate"))
       suppressWarnings(DBI::dbClearResult(result_truncate)) # A warning message is produced if it was already cleared above.
+
   })
 }
