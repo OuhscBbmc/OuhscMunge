@@ -154,7 +154,7 @@ assert_version_package <- function(
 assert_version_driver_sqlserver <- function(
   connection,
   minimum
-) {
+) { # nocov start
   checkmate::assert_class(connection, "Microsoft SQL Server")
   checkmate::assert_vector(minimum, len = 1, any.missing = FALSE)
 
@@ -189,4 +189,4 @@ assert_version_driver_sqlserver <- function(
   } else {
     invisible(TRUE)
   }
-}
+} # nocov end
