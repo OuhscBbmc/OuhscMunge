@@ -1,7 +1,6 @@
-#' OuhscMunge.
-#'
+#' @keywords internal
+"_PACKAGE"
 #' @name OuhscMunge
-#' @docType package
 #'
 #' @title Data manipulation operations frequently used in OUHSC BBMC projects. <http://www.ouhsc.edu/bbmc/>
 #'
