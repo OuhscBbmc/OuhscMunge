@@ -74,9 +74,9 @@ assert_version_r <- function(minimum = base::package_version("4.2.1")) {
 
 #' @export
 assert_version_package <- function(
-    package_name,
-    minimum,
-    installation_code = ""
+  package_name,
+  minimum,
+  installation_code = ""
 ) {
   checkmate::assert_character(package_name, len = 1, min.chars = 1, any.missing = FALSE)
   checkmate::assert_vector(minimum, len = 1, any.missing = FALSE)
