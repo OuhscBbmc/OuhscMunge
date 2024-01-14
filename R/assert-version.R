@@ -86,10 +86,10 @@ assert_version_package <- function(
 
   installation_message <-
     if (1L <= nchar(installation_code)) {
-      "  Install the package with `%s`." |>
+      "  Install the package with `%s`.  Afterwards, please restart the R session." |>
         sprintf(installation_code)
     } else {
-      ""
+      "  Afterwards, please restart the R session."
     }
 
   if (!package_is_installed) {
