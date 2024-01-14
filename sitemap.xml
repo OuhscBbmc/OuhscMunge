@@ -19,10 +19,16 @@
     <loc>/license.html</loc>
   </url>
   <url>
+    <loc>/reference/OuhscMunge-package.html</loc>
+  </url>
+  <url>
     <loc>/reference/OuhscMunge.html</loc>
   </url>
   <url>
     <loc>/reference/assert.html</loc>
+  </url>
+  <url>
+    <loc>/reference/assert_version.html</loc>
   </url>
   <url>
     <loc>/reference/clump_date.html</loc>
