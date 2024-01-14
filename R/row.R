@@ -138,7 +138,9 @@ row_sum <- function(
         rowSums(
           dplyr::across(
             !!columns_to_average,
-            .fns = \(x) { !is.na(x) }
+            .fns = \(x) {
+              !is.na(x)
+            }
           )
         ),
       .nonmissing_proportion = .nonmissing_count / length(columns_to_average),
