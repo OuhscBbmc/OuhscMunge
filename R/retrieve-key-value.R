@@ -77,7 +77,6 @@ retrieve_key_value <- function(
       # query     <- DBI::dbSendQuery(channel, sql, immediate = FALSE)
       # bind      <- DBI::dbBind(query, list(project_name, key))
       # ds_value  <- DBI::dbFetch(query)
-
     }, finally = {
       # if (exists("query"))       DBI::dbClearResult(query)
       # if (exists("bind"))        DBI::dbClearResult(bind)
