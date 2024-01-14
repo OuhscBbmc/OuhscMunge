@@ -35,6 +35,7 @@
 #' assert_version_package("OuhscMunge", "0.1.0")
 #' # Fails: assert_version_package("base", "99.1.0")
 #' # Fails: assert_version_package("OuhscMunge", "9.1.0")
+#' # Fails: assert_version_package("OuhscMunge", "9.1.0", installation_code = 'remotes::install_github("OuhscBbmc/OuhscMunge")')
 #' # Fails:
 #' # Fails: assert_version_package("OuhscMungeee", "9.1.0")
 #'

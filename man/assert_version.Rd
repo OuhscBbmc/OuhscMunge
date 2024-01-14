@@ -4,7 +4,8 @@
 \alias{assert_version}
 \alias{assert_version_r}
 \alias{assert_version_r,}
-\alias{assert_version_package}
+\alias{assert_version_package,}
+\alias{assert_version_driver_sqlserver}
 \title{I that the local machine is using an acceptable version.}
 \usage{
 assert_version_r(minimum = base::package_version("4.2.1"))
@@ -44,10 +45,18 @@ assert_version_package("base", "3.1.0")
 assert_version_package("OuhscMunge", "0.1.0")
 # Fails: assert_version_package("base", "99.1.0")
 # Fails: assert_version_package("OuhscMunge", "9.1.0")
+# Fails: assert_version_package("OuhscMunge", "9.1.0", installation_code = 'remotes::install_github("OuhscBbmc/OuhscMunge")')
 # Fails:
 # Fails: assert_version_package("OuhscMungeee", "9.1.0")
 
 
+\dontrun{
+cnn <- DBI::dbConnect(odbc::odbc(), dsn = "dhs_waiver_eval_1")
+assert_version_driver_sqlserver(cnn, "3.1.0")
+assert_version_driver_sqlserver(cnn, "99.1.0")
+DBI::dbDisconnect(cnn)
+
+}
 }
 \author{
 Will Beasley

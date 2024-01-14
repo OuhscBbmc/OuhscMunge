@@ -2,6 +2,7 @@
 
 export(assert_non_na)
 export(assert_non_na_and_unique)
+export(assert_version_driver_sqlserver)
 export(assert_version_package)
 export(assert_version_r)
 export(clump_month_date)
