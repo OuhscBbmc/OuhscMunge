@@ -1,12 +1,11 @@
 #' @name match_statistics
 #' @aliases match_statistics match_statistics_display
 #' @export match_statistics match_statistics_display
-#' @title Create explicit factor level for missing values.
-#'
-#' @description Missing values are converted to a factor level.
-#' This explicit assignment can reduce the chances
-#' that missing values are inadvertently ignored.
-#' It also allows the presence of a missing to become a predictor in models.
+#' @title Assess the quality of a join between two dataframes.
+#' 
+#' @description This function compares contents of two joined dataframes.  
+#' It assesses the (1) overlap, (2) difference, and (3) missingness between the two [data.frame]s.
+#' It is similar to a Venn diagram, but in a tabular format.
 #'
 #' @param d_parent A `data.frame` of the parent table.
 #' @param d_child A `data.frame` of the child table.
