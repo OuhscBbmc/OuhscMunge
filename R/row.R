@@ -1,4 +1,4 @@
-#' @name row_sum
+#' @name row
 #' @title Find the sum of selected columns within a row
 #'
 #' @description Sums across columns within a row,
@@ -53,6 +53,13 @@
 #'     nonmissing_count_name  = "engine_nonmissing_count"
 #'   )
 #'
+#' mtcars |>
+#'   OuhscMunge::row_mean(
+#'     columns_to_process     = c("cyl", "disp", "vs", "carb"),
+#'     new_column_name        = "engine_mean",
+#'     nonmissing_count_name  = "engine_nonmissing_count"
+#'   )
+#'
 #' if (require(tidyr))
 #'   tidyr::billboard |>
 #'     OuhscMunge::row_sum(
@@ -79,6 +86,7 @@
 #'       week_sum,
 #'     )
 
+#' @rdname row
 #' @export
 row_sum <- function(
   d,
@@ -174,6 +182,93 @@ row_sum <- function(
   if (cast_to_integer) {
     d[[new_column_name]] <- as.integer(d[[new_column_name]])
   }
+
+  d
+}
+
+#' @rdname row
+#' @export
+row_mean <- function(
+  d,
+  columns_to_process        = character(0),
+  pattern                   = "",
+  new_column_name           = "row_mean",
+  threshold_proportion      = .75,
+  nonmissing_count_name     = NA_character_,
+  verbose                   = FALSE
+) {
+  checkmate::assert_data_frame(d)
+  checkmate::assert_character(columns_to_process  , any.missing = FALSE)
+  checkmate::assert_character(pattern             , len = 1)
+  checkmate::assert_character(new_column_name     , len = 1)
+  checkmate::assert_double(   threshold_proportion, len = 1)
+  checkmate::assert_character(nonmissing_count_name, len = 1, min.chars = 1, any.missing = TRUE)
+  checkmate::assert_logical(  verbose             , len = 1)
+
+  if (length(columns_to_process) == 0L) {
+    columns_to_process <-
+      d |>
+      colnames() |>
+      grep(
+        x         = _,
+        pattern   = pattern,
+        value     = TRUE,
+        perl      = TRUE
+      )
+
+    if (verbose) {
+      message(
+        "The following columns will be processed:\n- ",
+        paste(columns_to_process, collapse = "\n- ")
+      )
+    }
+  }
+
+  .rm <- .nonmissing_count <- .nonmissing_proportion <- NULL
+  d <-
+    d |>
+    dplyr::mutate(
+      .rm =
+        rowMeans(
+          dplyr::across(!!columns_to_process),
+          na.rm = TRUE
+        ),
+      .nonmissing_count =
+        rowSums(
+          dplyr::across(
+            !!columns_to_process,
+            .fns = \(x) {
+              !is.na(x)
+            }
+          )
+        ),
+      .nonmissing_proportion = .nonmissing_count / length(columns_to_process),
+      {{new_column_name}} :=
+        dplyr::if_else(
+          threshold_proportion <= .nonmissing_proportion,
+          .rm,
+          # .rs / .nonmissing_count,
+          NA_real_
+        )
+    )
+
+  if (!is.na(nonmissing_count_name)) {
+    d <-
+      d |>
+      dplyr::mutate(
+        {{nonmissing_count_name}} := .nonmissing_count,
+      )
+  }
+
+  d <-
+    d |>
+    dplyr::select(
+      -.rm,
+      -.nonmissing_count,
+      -.nonmissing_proportion,
+    )
+  # Alternatively, return just the new columns
+  # dplyr::pull({{new_column_name}})
 
   d
 }
