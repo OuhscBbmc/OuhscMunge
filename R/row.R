@@ -7,8 +7,8 @@
 #' by passing a regular expression to matches the column names.
 #'
 #' @param d The data.frame containing the values to sum. Required.
-#' @param columns_to_average A character vector containing the columns
-#' names to sum.
+#' @param columns_to_process A character vector containing the columns
+#' names to process (_e.g._, to average or to sum).
 #' If empty, `pattern` is used to select columns. Optional.
 #' @param pattern A regular expression pattern passed to [base::grep()]
 #' (with `perl = TRUE`).  Optional
@@ -42,13 +42,13 @@
 #' @examples
 #' mtcars |>
 #'   OuhscMunge::row_sum(
-#'     columns_to_average = c("cyl", "disp", "vs", "carb"),
+#'     columns_to_process = c("cyl", "disp", "vs", "carb"),
 #'     new_column_name    = "engine_sum"
 #'   )
 #'
 #' mtcars |>
 #'   OuhscMunge::row_sum(
-#'     columns_to_average     = c("cyl", "disp", "vs", "carb"),
+#'     columns_to_process     = c("cyl", "disp", "vs", "carb"),
 #'     new_column_name        = "engine_sum",
 #'     nonmissing_count_name  = "engine_nonmissing_count"
 #'   )
@@ -82,7 +82,7 @@
 #' @export
 row_sum <- function(
   d,
-  columns_to_average        = character(0),
+  columns_to_process        = character(0),
   pattern                   = "",
   new_column_name           = "row_sum",
   threshold_proportion      = .75,
@@ -90,15 +90,15 @@ row_sum <- function(
   verbose                   = FALSE
 ) {
   checkmate::assert_data_frame(d)
-  checkmate::assert_character(columns_to_average  , any.missing = FALSE)
+  checkmate::assert_character(columns_to_process  , any.missing = FALSE)
   checkmate::assert_character(pattern             , len = 1)
   checkmate::assert_character(new_column_name     , len = 1)
   checkmate::assert_double(   threshold_proportion, len = 1)
   checkmate::assert_character(nonmissing_count_name, len = 1, min.chars = 1, any.missing = TRUE)
   checkmate::assert_logical(  verbose             , len = 1)
 
-  if (length(columns_to_average) == 0L) {
-    columns_to_average <-
+  if (length(columns_to_process) == 0L) {
+    columns_to_process <-
       d |>
       colnames() |>
       grep(
@@ -110,15 +110,15 @@ row_sum <- function(
 
     if (verbose) {
       message(
-        "The following columns will be summed:\n- ",
-        paste(columns_to_average, collapse = "\n- ")
+        "The following columns will be processed:\n- ",
+        paste(columns_to_process, collapse = "\n- ")
       )
     }
   }
 
   cast_to_integer <-
     d |>
-    dplyr::select(!!columns_to_average) |>
+    dplyr::select(!!columns_to_process) |>
     purrr::every(
       \(x) {
         is.logical(x) | is.integer(x)
@@ -131,19 +131,19 @@ row_sum <- function(
     dplyr::mutate(
       .rs =
         rowSums(
-          dplyr::across(!!columns_to_average),
+          dplyr::across(!!columns_to_process),
           na.rm = TRUE
         ),
       .nonmissing_count =
         rowSums(
           dplyr::across(
-            !!columns_to_average,
+            !!columns_to_process,
             .fns = \(x) {
               !is.na(x)
             }
           )
         ),
-      .nonmissing_proportion = .nonmissing_count / length(columns_to_average),
+      .nonmissing_proportion = .nonmissing_count / length(columns_to_process),
       {{new_column_name}} :=
         dplyr::if_else(
           threshold_proportion <= .nonmissing_proportion,

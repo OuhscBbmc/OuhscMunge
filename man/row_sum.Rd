@@ -6,7 +6,7 @@
 \usage{
 row_sum(
   d,
-  columns_to_average = character(0),
+  columns_to_process = character(0),
   pattern = "",
   new_column_name = "row_sum",
   threshold_proportion = 0.75,
@@ -17,8 +17,8 @@ row_sum(
 \arguments{
 \item{d}{The data.frame containing the values to sum. Required.}
 
-\item{columns_to_average}{A character vector containing the columns
-names to sum.
+\item{columns_to_process}{A character vector containing the columns
+names to process (\emph{e.g.}, to average or to sum).
 If empty, \code{pattern} is used to select columns. Optional.}
 
 \item{pattern}{A regular expression pattern passed to \code{\link[base:grep]{base::grep()}}
@@ -62,13 +62,13 @@ Otherwise the new column will be a \link{double}.
 \examples{
 mtcars |>
   OuhscMunge::row_sum(
-    columns_to_average = c("cyl", "disp", "vs", "carb"),
+    columns_to_process = c("cyl", "disp", "vs", "carb"),
     new_column_name    = "engine_sum"
   )
 
 mtcars |>
   OuhscMunge::row_sum(
-    columns_to_average     = c("cyl", "disp", "vs", "carb"),
+    columns_to_process     = c("cyl", "disp", "vs", "carb"),
     new_column_name        = "engine_sum",
     nonmissing_count_name  = "engine_nonmissing_count"
   )
