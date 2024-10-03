@@ -47,7 +47,7 @@ test_that("mtcars -engine_sum", {
   actual <-
     mtcars |>
     row_sum(
-      columns_to_average = c("cyl", "disp", "vs", "carb"),
+      columns_to_process = c("cyl", "disp", "vs", "carb"),
       new_column_name    = "engine_sum"
     )
 
@@ -105,7 +105,7 @@ test_that("mtcars -engine_sum & nonmissing count", {
   actual <-
     mtcars |>
     row_sum(
-      columns_to_average      = c("cyl", "disp", "vs", "carb"),
+      columns_to_process      = c("cyl", "disp", "vs", "carb"),
       new_column_name         = "engine_sum",
       nonmissing_count_name   = "engine_nonmissing_count"
     )
@@ -229,7 +229,7 @@ test_that("billboard -subset", {
       NA, 764, NA, 240
     )
 
-  expected_message <- "The following columns will be summed:\n- wk1\n- wk2\n- wk3\n- wk4\n- wk5\n- wk6\n- wk7\n- wk8\n- wk9"
+  expected_message <- "The following columns will be processed:\n- wk1\n- wk2\n- wk3\n- wk4\n- wk5\n- wk6\n- wk7\n- wk8\n- wk9"
 
   expect_message(
     regexp = expected_message,{

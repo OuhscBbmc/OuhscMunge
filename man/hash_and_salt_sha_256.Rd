@@ -34,7 +34,7 @@ This approach protects the actual value of \code{x}, while still allowing a down
 to determine which cells were derived from the same \code{x}.
 
 For example, suppose a patient's
-\href{https://ushik.ahrq.gov/ViewItemDetails?system=ps&itemKey=88720000}{mrn}
+\href{https://www.ahrq.gov:443/data/ushik.html}{mrn}
 of '111' is hashed, and the output is 'abc'.
 (To view it's real value, execute \code{OuhscMunge::hash_and_salt_sha_256(111)}.)
 When given the value 'abc', is it computational infeasible to determine the input
