@@ -1,111 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/code-of-conduct.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/license.html</loc>
-  </url>
-  <url>
-    <loc>/reference/OuhscMunge-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/OuhscMunge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/assert.html</loc>
-  </url>
-  <url>
-    <loc>/reference/assert_version.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clump_date.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cut_with_nas.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_frame_compare_structure.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_frame_stack_new.html</loc>
-  </url>
-  <url>
-    <loc>/reference/data_frame_uniqueness.html</loc>
-  </url>
-  <url>
-    <loc>/reference/date_range.html</loc>
-  </url>
-  <url>
-    <loc>/reference/deterge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/execute_sql_file.html</loc>
-  </url>
-  <url>
-    <loc>/reference/first_nonmissing.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hash_and_salt_sha_256.html</loc>
-  </url>
-  <url>
-    <loc>/reference/headstart_utilities.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/install_packages_addin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/match_statistics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/open_dsn_channel_sqls_odbc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/package_janitor_remote.html</loc>
-  </url>
-  <url>
-    <loc>/reference/readr_spec_aligned.html</loc>
-  </url>
-  <url>
-    <loc>/reference/replace_nas_with_explicit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/replace_with_nas.html</loc>
-  </url>
-  <url>
-    <loc>/reference/retrieve_key_value.html</loc>
-  </url>
-  <url>
-    <loc>/reference/row_sum.html</loc>
-  </url>
-  <url>
-    <loc>/reference/snake_case.html</loc>
-  </url>
-  <url>
-    <loc>/reference/trim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/update_packages_addin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/upload_sqls_odbc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/verify_value_headstart.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/code-of-conduct.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/license.html</loc></url>
+<url><loc>/reference/OuhscMunge-package.html</loc></url>
+<url><loc>/reference/OuhscMunge.html</loc></url>
+<url><loc>/reference/assert.html</loc></url>
+<url><loc>/reference/assert_version.html</loc></url>
+<url><loc>/reference/clump_date.html</loc></url>
+<url><loc>/reference/cut_with_nas.html</loc></url>
+<url><loc>/reference/data_frame_compare_structure.html</loc></url>
+<url><loc>/reference/data_frame_stack_new.html</loc></url>
+<url><loc>/reference/data_frame_uniqueness.html</loc></url>
+<url><loc>/reference/date_range.html</loc></url>
+<url><loc>/reference/deterge.html</loc></url>
+<url><loc>/reference/execute_sql_file.html</loc></url>
+<url><loc>/reference/first_nonmissing.html</loc></url>
+<url><loc>/reference/hash_and_salt_sha_256.html</loc></url>
+<url><loc>/reference/headstart_utilities.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/install_packages_addin.html</loc></url>
+<url><loc>/reference/match_statistics.html</loc></url>
+<url><loc>/reference/open_dsn_channel_sqls_odbc.html</loc></url>
+<url><loc>/reference/package_janitor_remote.html</loc></url>
+<url><loc>/reference/readr_spec_aligned.html</loc></url>
+<url><loc>/reference/replace_nas_with_explicit.html</loc></url>
+<url><loc>/reference/replace_with_nas.html</loc></url>
+<url><loc>/reference/retrieve_key_value.html</loc></url>
+<url><loc>/reference/row.html</loc></url>
+<url><loc>/reference/snake_case.html</loc></url>
+<url><loc>/reference/trim.html</loc></url>
+<url><loc>/reference/update_packages_addin.html</loc></url>
+<url><loc>/reference/upload_sqls_odbc.html</loc></url>
+<url><loc>/reference/verify_value_headstart.html</loc></url>
 </urlset>
+
