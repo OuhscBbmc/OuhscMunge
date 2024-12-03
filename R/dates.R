@@ -29,7 +29,12 @@
 #' The [sql equivalent](https://docs.microsoft.com/en-us/sql/t-sql/functions/datepart-transact-sql) to `clump_month_date()`
 #' is `cast(convert(char(7), getdate(), 126) + '-15' as date)`.
 #' The [sql equivalent](https://blog.sqlauthority.com/2007/08/20/sql-server-find-monday-of-the-current-week/) to `clump_week_date()`
-#' is `SELECT dateadd(wk, datediff(wk, 0, getdate()), 0)`
+#' is `SELECT dateadd(week, datediff(week, 0, getdate()), 0)`.
+#' Starting with SQL Server 2022, the [`datetrunc()`](https://learn.microsoft.com/en-us/sql/t-sql/functions/datetrunc-transact-sql?view=sql-server-ver16)
+#' function is available.  
+#' Assume `DECLARE @d date = cast(getdate() as date);`, then it's
+#' `SELECT dateadd(day, 14, datetrunc(month, @d))`
+#' and `SELECT dateadd(day, 1, datetrunc(week, @d))`.
 #'
 #' @author Will Beasley
 #'
