@@ -36,6 +36,7 @@
 #' @param update_packages should package be updated first.
 #' @param dependencies Passed to the `dependencies` parameter of [`utils::install.packages()`]).  Set to `NA` to avoid 'Suggests'.
 #' @param check_xml_linux display a message about the xml Linux package.
+#' @param lib library location passed to [`utils::install.packages()`]). A value of `NULL` defaults to the first element of `.libPaths()`.
 #' @param check_libcurl_linux display a message about the libcurl Linux package.
 #' @param check_openssl_linux display a message about the openssl Linux package.
 #' @param verbose print messages to the console (or wherever messages are being directed).
@@ -65,6 +66,7 @@ package_janitor_remote <- function(
   cran_repo                    = "https://cran.rstudio.com",
   update_packages              = TRUE,
   dependencies                 = TRUE,
+  lib                          = NULL,
   check_xml_linux              = (R.Version()$os == "linux-gnu"),
   check_libcurl_linux          = (R.Version()$os == "linux-gnu"),
   check_openssl_linux          = (R.Version()$os == "linux-gnu"),
@@ -87,7 +89,7 @@ package_janitor_remote <- function(
 
 
   if (!base::requireNamespace("checkmate"))
-    utils::install.packages("checkmate", repos = cran_repo) # nocov
+    utils::install.packages("checkmate", repos = cran_repo, lib = lib) # nocov
 
   checkmate::assert_character(url_package_dependencies, min.chars = 1, len=1)
 
@@ -122,10 +124,10 @@ package_janitor_remote <- function(
     message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
 
   if (!base::requireNamespace("httr"))
-    utils::install.packages("httr", repos = cran_repo) # nocov
+    utils::install.packages("httr", repos = cran_repo, lib = lib) # nocov
 
   if (!base::requireNamespace("devtools"))
-    utils::install.packages("devtools", repos = cran_repo) # nocov
+    utils::install.packages("devtools", repos = cran_repo, lib = lib) # nocov
 
 
   # ---- install-cran-packages ---------------------------------------------------
@@ -145,7 +147,7 @@ package_janitor_remote <- function(
       available <- base::requireNamespace(package_name, quietly = TRUE) # Checks if it's available
       if (!available) {
         if (verbose) message("\nInstalling `", package_name, "` from CRAN, including its dependencies.")
-        utils::install.packages(package_name, dependencies = dependencies, repos = cran_repo)
+        utils::install.packages(package_name, dependencies = dependencies, repos = cran_repo, lib = lib)
 
       } else if (update_packages) {
         if (verbose) message("\n`", package_name, "` exists, and verifying it's dependencies are installed too.")
