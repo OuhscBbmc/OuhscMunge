@@ -52,7 +52,7 @@ jobs:
           while read -r cmd
           do
             eval sudo $cmd
-          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+          done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04"))')
         # See https://community.rstudio.com/t/how-do-i-add-linux-library-dependencies-to-github-actions/98143/2
         # run: |
         #   Rscript -e "remotes::install_github('r-hub/sysreqs')"
