@@ -1,8 +1,5 @@
 #' @name assert_version
-#' @aliases
-#' assert_version_r
-#' assert_version_package
-#' assert_version_driver_sqlserver
+#' @aliases assert_version_r assert_version_package assert_version_driver_sqlserver
 #' @title I that the local machine is using an acceptable version.
 #'
 #' @description Assert that the local machine is using a version that satisfies
