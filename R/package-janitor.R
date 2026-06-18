@@ -119,51 +119,26 @@ package_janitor_remote <- function(
     utils::update.packages(ask = FALSE, checkBuilt = TRUE, repos = cran_repo) # nocov
 
 
-  # ---- install-devtools --------------------------------------------------------
-  if (verbose)
-    message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
-
-  if (!base::requireNamespace("httr"))
-    utils::install.packages("httr", repos = cran_repo, lib = lib) # nocov
-
-  if (!base::requireNamespace("devtools"))
-    utils::install.packages("devtools", repos = cran_repo, lib = lib) # nocov
+  # ---- install-pak -------------------------------------------------------------
+  if (!base::requireNamespace("pak"))
+    utils::install.packages("pak", repos = cran_repo, lib = lib) # nocov
 
 
   # ---- install-cran-packages ---------------------------------------------------
   if (verbose)
     message("package_janitor is installing the CRAN packages:")
 
-  for (package_name in ds_install_from_cran$package_name) {
-    if (package_name == "devtools") {
-      if (verbose) # nocov
-        message("\nThe `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")  # nocov
-
-    } else if (package_name == "httr") {
-      if (verbose) # nocov
-        message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.") # nocov
-
-    } else {
-      available <- base::requireNamespace(package_name, quietly = TRUE) # Checks if it's available
-      if (!available) {
-        if (verbose) message("\nInstalling `", package_name, "` from CRAN, including its dependencies.")
-        utils::install.packages(package_name, dependencies = dependencies, repos = cran_repo, lib = lib)
-
-      } else if (update_packages) {
-        if (verbose) message("\n`", package_name, "` exists, and verifying it's dependencies are installed too.")
-
-        # Make sure all their dependencies are installed & up-to-date
-        need_to_install <- remotes::package_deps(package_name, dependencies = dependencies)$package
-        if (verbose)
-          message("Package `", package_name, "` has ", length(need_to_install), " dependencies: ", paste(need_to_install, collapse = ", "), ".")
-
-        remotes::update_packages(need_to_install, repos = cran_repo)
-      }
-      base::rm(available)
-    }
+  if (update_packages) {
+    pak::pak(ds_install_from_cran$package_name, lib = lib)
+  } else {
+    to_install <- ds_install_from_cran$package_name[
+      !vapply(ds_install_from_cran$package_name, base::requireNamespace, logical(1), quietly = TRUE)
+    ]
+    if (length(to_install) > 0L)
+      pak::pak(to_install, lib = lib)
   }
 
-  rm(ds_install_from_cran, package_name)
+  rm(ds_install_from_cran)
   if (verbose)
     message("\n")
 
@@ -221,17 +196,11 @@ package_janitor_remote <- function(
   if (verbose)
     message("\npackage_janitor is installing the GitHub packages:")
 
-  for (i in base::seq_len(base::nrow(ds_install_from_github))) {
-    package_name <- ds_install_from_github$package_name[i]
-    if (verbose) message("Installing `", package_name, "` from GitHub, (not including its dependencies).")
+  repository_names <- paste0(ds_install_from_github$github_username, "/", ds_install_from_github$package_name)
+  if (length(repository_names) > 0L)
+    pak::pak(repository_names, lib = lib)
 
-    username        <- ds_install_from_github$github_username[i]
-    repository_name <- paste0(username, "/", package_name)
-    devtools::install_github(repo = repository_name)
-    base::rm(package_name, username, repository_name)
-  }
-
-  base::rm(ds_install_from_github, i)
+  base::rm(ds_install_from_github, repository_names)
 
   # ---- notify-tinytex ---------------------------------------------------------
   if (any(installed.packages() == "tinytex")) {
