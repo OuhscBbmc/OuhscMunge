@@ -46,8 +46,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt-get update
-          sudo apt-get -y install libssh-dev #package ssh dependency
-          sudo apt install mlocate # Needed for the locate command
+          sudo apt-get install -y libssh-dev #package ssh dependency
+          sudo apt-get install -y plocate # Needed for the locate command
 
           while read -r cmd
           do
