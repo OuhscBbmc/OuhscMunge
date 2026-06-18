@@ -27,7 +27,7 @@ storms_2 <- dplyr::storms \%>\%
 verify_value_headstart(storms_2)
 }
 \seealso{
-\link{checkmate}
+\link[checkmate:checkmate]{checkmate}
 }
 \author{
 Will Beasley

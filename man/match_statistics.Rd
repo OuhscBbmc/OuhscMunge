@@ -42,7 +42,7 @@ More information about the 'parent' and 'child' terminology and concepts can be 
 Wikipedia entry, among many other sources.
 }
 \note{
-The \code{join_columns} parameter is passed directly to \code{\link[dplyr:filter-joins]{dplyr::semi_join()}} and \code{\link[dplyr:filter-joins]{dplyr::anti_join()}}.
+The \code{join_columns} parameter is passed directly to \code{\link[dplyr:semi_join]{dplyr::semi_join()}} and \code{\link[dplyr:anti_join]{dplyr::anti_join()}}.
 }
 \examples{
 ds_parent <- data.frame(

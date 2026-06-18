@@ -19,5 +19,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Will Beasley \email{wibeasley@hotmail.com} (\href{https://orcid.org/0000-0002-5613-5006}{ORCID})
 
+Authors:
+\itemize{
+  \item Will Beasley \email{wibeasley@hotmail.com} (\href{https://orcid.org/0000-0002-5613-5006}{ORCID})
+}
+
 }
 \keyword{internal}
