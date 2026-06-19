@@ -9,6 +9,7 @@ package_janitor_remote(
   cran_repo = "https://cran.rstudio.com",
   update_packages = TRUE,
   dependencies = TRUE,
+  lib = NULL,
   check_xml_linux = (R.Version()$os == "linux-gnu"),
   check_libcurl_linux = (R.Version()$os == "linux-gnu"),
   check_openssl_linux = (R.Version()$os == "linux-gnu"),
@@ -24,6 +25,8 @@ package_janitor_remote(
 
 \item{dependencies}{Passed to the \code{dependencies} parameter of \code{\link[utils:install.packages]{utils::install.packages()}}).  Set to \code{NA} to avoid 'Suggests'.}
 
+\item{lib}{library location passed to \code{\link[utils:install.packages]{utils::install.packages()}}). A value of \code{NULL} defaults to the first element of \code{.libPaths()}.}
+
 \item{check_xml_linux}{display a message about the xml Linux package.}
 
 \item{check_libcurl_linux}{display a message about the libcurl Linux package.}
@@ -37,29 +40,29 @@ CRAN packages are installed only if they're not already; then they're updated if
 GitHub packages are installed regardless if they're already installed.
 These packages are necessary for most of the analyses run by the OUHSC BBMC  (https://github.com/OuhscBbmc).
 
-We use https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv.
+We use https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv.
 The undecorated version of this csv (which is better for computers, but harder for humans) is
-https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv.
+https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv.
 }
 \details{
 This code checks the user's installed packages against the packages listed in
-https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv
+https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv
 These packages are necessary for most of the analyses run by the OUHSC BBMC  (https://github.com/OuhscBbmc).
 
 CRAN packages are installed only if they're not already; then they're updated if available.
 GitHub packages are installed regardless if they're already installed.
 
 If anyone encounters a package that should be on there, please add it to
-https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv
+https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv
 
 There are two identical versions of this file.  If in doubt, use the first option.
 1. Stand-alone GitHub Gist: https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3
-2. R package on GitHub repo: https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R
+2. R package on GitHub repo: https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R
 
 To run this function on your local machine with the following three lines of code:
 if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
 devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
-package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv")
+package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv")
 }
 \examples{
 \dontrun{
@@ -71,7 +74,7 @@ package_janitor_remote("./utility/package-dependency-list.csv")
 # Caution, this one takes at least 5 minutes.
 url <- paste0(
   "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/",
-  "master/utility/package-dependency-list.csv"
+  "main/utility/package-dependency-list.csv"
 )
 package_janitor_remote(url)
 }
