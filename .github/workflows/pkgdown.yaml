@@ -11,7 +11,6 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_USER_CACHE_DIR: ${{ runner.temp }}/R-user-cache
     steps:
       - uses: actions/checkout@v4
 
