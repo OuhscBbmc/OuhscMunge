@@ -8,7 +8,7 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_USER_CACHE_DIR: ${{ runner.temp }}/R-user-cache
