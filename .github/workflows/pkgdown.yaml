@@ -12,6 +12,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_USER_CACHE_DIR: ${{ runner.temp }}/R-user-cache
+      # R_USER_CACHE_DIR: /tmp/R_CACHE
     steps:
       - uses: actions/checkout@v4
 
