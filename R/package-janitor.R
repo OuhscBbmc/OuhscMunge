@@ -1,21 +1,21 @@
 #'  This code checks the user's installed packages against the packages listed in
-#'    https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv
+#'    https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv
 #'    These packages are necessary for most of the analyses run by the OUHSC BBMC  (https://github.com/OuhscBbmc).
 #'
 #'  CRAN packages are installed only if they're not already; then they're updated if available.
 #'     GitHub packages are installed regardless if they're already installed.
 #'
 #'  If anyone encounters a package that should be on there, please add it to
-#'   https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv
+#'   https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv
 #'
 #'  There are two identical versions of this file.  If in doubt, use the first option.
 #'     1. Stand-alone GitHub Gist: https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3
-#'     2. R package on GitHub repo: https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R
+#'     2. R package on GitHub repo: https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R
 #'
 #'  To run this function on your local machine with the following three lines of code:
 #'     if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
 #'     devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
-#'     package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv")
+#'     package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv")
 
 #' @name package_janitor_remote
 #' @export
@@ -26,9 +26,9 @@
 #' GitHub packages are installed regardless if they're already installed.
 #' These packages are necessary for most of the analyses run by the OUHSC BBMC  (https://github.com/OuhscBbmc).
 #'
-#' We use https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv.
+#' We use https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv.
 #' The undecorated version of this csv (which is better for computers, but harder for humans) is
-#' https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv.
+#' https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv.
 #'
 #' @param url_package_dependencies path to a csv containing the packages.  See the description.  Required.
 #' @param cran_repo path to a CRAN mirror.
@@ -36,6 +36,7 @@
 #' @param update_packages should package be updated first.
 #' @param dependencies Passed to the `dependencies` parameter of [`utils::install.packages()`]).  Set to `NA` to avoid 'Suggests'.
 #' @param check_xml_linux display a message about the xml Linux package.
+#' @param lib library location passed to [`utils::install.packages()`]). A value of `NULL` defaults to the first element of `.libPaths()`.
 #' @param check_libcurl_linux display a message about the libcurl Linux package.
 #' @param check_openssl_linux display a message about the openssl Linux package.
 #' @param verbose print messages to the console (or wherever messages are being directed).
@@ -54,7 +55,7 @@
 #' # Caution, this one takes at least 5 minutes.
 #' url <- paste0(
 #'   "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/",
-#'   "master/utility/package-dependency-list.csv"
+#'   "main/utility/package-dependency-list.csv"
 #' )
 #' package_janitor_remote(url)
 #' }
@@ -65,6 +66,7 @@ package_janitor_remote <- function(
   cran_repo                    = "https://cran.rstudio.com",
   update_packages              = TRUE,
   dependencies                 = TRUE,
+  lib                          = NULL,
   check_xml_linux              = (R.Version()$os == "linux-gnu"),
   check_libcurl_linux          = (R.Version()$os == "linux-gnu"),
   check_openssl_linux          = (R.Version()$os == "linux-gnu"),
@@ -87,7 +89,7 @@ package_janitor_remote <- function(
 
 
   if (!base::requireNamespace("checkmate"))
-    utils::install.packages("checkmate", repos = cran_repo) # nocov
+    utils::install.packages("checkmate", repos = cran_repo, lib = lib) # nocov
 
   checkmate::assert_character(url_package_dependencies, min.chars = 1, len=1)
 
@@ -117,51 +119,26 @@ package_janitor_remote <- function(
     utils::update.packages(ask = FALSE, checkBuilt = TRUE, repos = cran_repo) # nocov
 
 
-  # ---- install-devtools --------------------------------------------------------
-  if (verbose)
-    message("package_janitor is installing the the `devtools` and `httr` packages from CRAN if necessary.")
-
-  if (!base::requireNamespace("httr"))
-    utils::install.packages("httr", repos = cran_repo) # nocov
-
-  if (!base::requireNamespace("devtools"))
-    utils::install.packages("devtools", repos = cran_repo) # nocov
+  # ---- install-pak -------------------------------------------------------------
+  if (!base::requireNamespace("pak"))
+    utils::install.packages("pak", repos = cran_repo, lib = lib) # nocov
 
 
   # ---- install-cran-packages ---------------------------------------------------
   if (verbose)
     message("package_janitor is installing the CRAN packages:")
 
-  for (package_name in ds_install_from_cran$package_name) {
-    if (package_name == "devtools") {
-      if (verbose) # nocov
-        message("\nThe `devtools` package does not need to be in the list of package dependencies.  It's updated automatically.")  # nocov
-
-    } else if (package_name == "httr") {
-      if (verbose) # nocov
-        message("\nThe `httr` package does not need to be in the list of package dependencies.  It's updated automatically.") # nocov
-
-    } else {
-      available <- base::requireNamespace(package_name, quietly = TRUE) # Checks if it's available
-      if (!available) {
-        if (verbose) message("\nInstalling `", package_name, "` from CRAN, including its dependencies.")
-        utils::install.packages(package_name, dependencies = dependencies, repos = cran_repo)
-
-      } else if (update_packages) {
-        if (verbose) message("\n`", package_name, "` exists, and verifying it's dependencies are installed too.")
-
-        # Make sure all their dependencies are installed & up-to-date
-        need_to_install <- remotes::package_deps(package_name, dependencies = dependencies)$package
-        if (verbose)
-          message("Package `", package_name, "` has ", length(need_to_install), " dependencies: ", paste(need_to_install, collapse = ", "), ".")
-
-        remotes::update_packages(need_to_install, repos = cran_repo)
-      }
-      base::rm(available)
-    }
+  if (update_packages) {
+    pak::pak(ds_install_from_cran$package_name, lib = lib)
+  } else {
+    to_install <- ds_install_from_cran$package_name[
+      !vapply(ds_install_from_cran$package_name, base::requireNamespace, logical(1), quietly = TRUE)
+    ]
+    if (length(to_install) > 0L)
+      pak::pak(to_install, lib = lib)
   }
 
-  rm(ds_install_from_cran, package_name)
+  rm(ds_install_from_cran)
   if (verbose)
     message("\n")
 
@@ -219,17 +196,11 @@ package_janitor_remote <- function(
   if (verbose)
     message("\npackage_janitor is installing the GitHub packages:")
 
-  for (i in base::seq_len(base::nrow(ds_install_from_github))) {
-    package_name <- ds_install_from_github$package_name[i]
-    if (verbose) message("Installing `", package_name, "` from GitHub, (not including its dependencies).")
+  repository_names <- paste0(ds_install_from_github$github_username, "/", ds_install_from_github$package_name)
+  if (length(repository_names) > 0L)
+    pak::pak(repository_names, lib = lib)
 
-    username        <- ds_install_from_github$github_username[i]
-    repository_name <- paste0(username, "/", package_name)
-    devtools::install_github(repo = repository_name)
-    base::rm(package_name, username, repository_name)
-  }
-
-  base::rm(ds_install_from_github, i)
+  base::rm(ds_install_from_github, repository_names)
 
   # ---- notify-tinytex ---------------------------------------------------------
   if (any(installed.packages() == "tinytex")) {
