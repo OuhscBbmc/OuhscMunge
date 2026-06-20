@@ -14,7 +14,7 @@
 #'
 #'  To run this function on your local machine with the following three lines of code:
 #'     if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
-#'     devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
+#'     devtools::source_gist("https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3")
 #'     package_janitor_remote("https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv")
 
 #' @name package_janitor_remote
