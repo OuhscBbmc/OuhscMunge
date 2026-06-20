@@ -60,7 +60,6 @@
 #' package_janitor_remote(url)
 #' }
 
-
 package_janitor_remote <- function(
   url_package_dependencies,
   cran_repo                    = "https://cran.rstudio.com",
@@ -87,7 +86,6 @@ package_janitor_remote <- function(
   if (verbose)
     message("package_janitor is loading the list of package dependencies.")
 
-
   if (!base::requireNamespace("checkmate"))
     utils::install.packages("checkmate", repos = cran_repo, lib = lib) # nocov
 
@@ -100,7 +98,6 @@ package_janitor_remote <- function(
 
   rm(url_package_dependencies)
 
-
   # ---- tweak-data --------------------------------------------------------------
   missing_columns <- base::setdiff(required_columns, colnames(ds_packages))
   if (1L <= length(missing_columns))
@@ -111,18 +108,15 @@ package_janitor_remote <- function(
 
   rm(ds_packages)
 
-
   # ---- cran-packages -----------------------------------------------------------
   if (verbose)
     message("package_janitor is updating the existing packages from CRAN.")
   if (update_packages)
     utils::update.packages(ask = FALSE, checkBuilt = TRUE, repos = cran_repo) # nocov
 
-
   # ---- install-pak -------------------------------------------------------------
   if (!base::requireNamespace("pak"))
     utils::install.packages("pak", repos = cran_repo, lib = lib) # nocov
-
 
   # ---- install-cran-packages ---------------------------------------------------
   if (verbose)
@@ -134,7 +128,7 @@ package_janitor_remote <- function(
     to_install <- ds_install_from_cran$package_name[
       !vapply(ds_install_from_cran$package_name, base::requireNamespace, logical(1), quietly = TRUE)
     ]
-    if (length(to_install) > 0L)
+    if (1L <= length(to_install))
       pak::pak(to_install, lib = lib)
   }
 
@@ -159,7 +153,6 @@ package_janitor_remote <- function(
     base::rm(xml_results, xml_missing)
   }
 
-
   # ---- check-linux-libcurl -----------------------------------------------------
   if (check_libcurl_linux) {
     libcurl_results <- length(base::system2("locate", "libcurl4", stdout = TRUE))
@@ -174,7 +167,6 @@ package_janitor_remote <- function(
 
     base::rm(libcurl_results, libcurl_missing)
   }
-
 
   # ---- check-linux-openssl -----------------------------------------------------
   if (check_openssl_linux) {
@@ -191,13 +183,12 @@ package_janitor_remote <- function(
     base::rm(openssl_results, openssl_missing)
   }
 
-
   #---- install-github-packages -------------------------------------------------
   if (verbose)
     message("\npackage_janitor is installing the GitHub packages:")
 
   repository_names <- paste0(ds_install_from_github$github_username, "/", ds_install_from_github$package_name)
-  if (length(repository_names) > 0L)
+  if (1L <= length(repository_names))
     pak::pak(repository_names, lib = lib)
 
   base::rm(ds_install_from_github, repository_names)
