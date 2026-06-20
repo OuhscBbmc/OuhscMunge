@@ -1,8 +1,5 @@
 #' @name assert_version
-#' @aliases
-#' assert_version_r
-#' assert_version_package
-#' assert_version_driver_sqlserver
+#' @aliases assert_version_r assert_version_package assert_version_driver_sqlserver
 #' @title I that the local machine is using an acceptable version.
 #'
 #' @description Assert that the local machine is using a version that satisfies
@@ -46,7 +43,7 @@
 #' assert_version_package(
 #'   package_name      = "OuhscMunge",
 #'   minimum           = "9.1.0",
-#'   installation_code = 'remotes::install_github("OuhscBbmc/OuhscMunge")'
+#'   installation_code = 'pak::pak("OuhscBbmc/OuhscMunge")'
 #' )
 #' assert_version_package("OuhscMungeee", "9.1.0")
 #' }

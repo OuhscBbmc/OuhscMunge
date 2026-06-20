@@ -16,7 +16,7 @@
 #' running `install.packages('OuhscMunge')`.
 #' The most recent development version is available through [GitHub](https://github.com/OuhscBbmc/OuhscMunge) by
 #' running
-#' `devtools::install_github` `(repo = 'OuhscBbmc/OuhscMunge')`
+#' `pak::pak("OuhscBbmc/OuhscMunge")`
 #' (make sure [devtools](https://cran.r-project.org/package=devtools) is already installed).
 #' If you're having trouble with the package, please install the development version.  If this doesn't solve
 #' your problem, please create a [new issue](https://github.com/OuhscBbmc/OuhscMunge/issues), or email Will.
@@ -35,6 +35,6 @@
 #'
 #' # Install/update REDCapR with the development version from GitHub
 #' #install.packages('devtools') #Uncomment if `devtools` isn't installed already.
-#' devtools::install_github('OuhscBbmc/OuhscMunge')
+#' pak::pak("OuhscBbmc/OuhscMunge")
 #' }
 NULL

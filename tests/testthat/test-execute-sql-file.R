@@ -4,7 +4,7 @@ path  <- system.file("test-data/hdid-select.sql", package = "OuhscMunge") # See 
 dsn   <- "cdw_cache_staging"
 
 test_that("sql file -bad path", {
-  expect_failure(
+  expect_error(
     execute_sql_file("bad-file.txt", dsn)
   )
 })

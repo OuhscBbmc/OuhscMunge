@@ -3,7 +3,7 @@
 \name{match_statistics}
 \alias{match_statistics}
 \alias{match_statistics_display}
-\title{Create explicit factor level for missing values.}
+\title{Assess the quality of a join between two dataframes.}
 \usage{
 match_statistics(d_parent, d_child, join_columns)
 }
@@ -29,10 +29,9 @@ A \code{numeric} array of the following elements:
 }
 }
 \description{
-Missing values are converted to a factor level.
-This explicit assignment can reduce the chances
-that missing values are inadvertently ignored.
-It also allows the presence of a missing to become a predictor in models.
+This function compares contents of two joined dataframes.
+It assesses the (1) overlap, (2) difference, and (3) missingness between the two \link{data.frame}s.
+It is similar to a Venn diagram, but in a tabular format.
 }
 \details{
 If a nonexistent column is passed to \code{join_columns}, an error will be thrown naming the violating column name.
@@ -42,7 +41,7 @@ More information about the 'parent' and 'child' terminology and concepts can be 
 Wikipedia entry, among many other sources.
 }
 \note{
-The \code{join_columns} parameter is passed directly to \code{\link[dplyr:filter-joins]{dplyr::semi_join()}} and \code{\link[dplyr:filter-joins]{dplyr::anti_join()}}.
+The \code{join_columns} parameter is passed directly to \code{\link[dplyr:semi_join]{dplyr::semi_join()}} and \code{\link[dplyr:anti_join]{dplyr::anti_join()}}.
 }
 \examples{
 ds_parent <- data.frame(

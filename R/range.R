@@ -1,8 +1,5 @@
 #' @name date_range
-#' @aliases
-#' date_min_with_nas date_max_with_nas date_range_with_nas
-#' min_with_nas_numeric max_with_nas_numeric range_with_nas_numeric
-#' min_with_nas_integer max_with_nas_integer range_with_nas_integer
+#' @aliases date_min_with_nas date_max_with_nas date_range_with_nas min_with_nas_numeric max_with_nas_numeric range_with_nas_numeric min_with_nas_integer max_with_nas_integer range_with_nas_integer
 #'
 #' @title Find date ranges in the presence of missing subsets
 #'

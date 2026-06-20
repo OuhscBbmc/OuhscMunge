@@ -34,9 +34,14 @@ Be careful that if you set a November date the 31st day, the result will be Dece
 Consequently, we recommend not setting the day to a value after the 28.
 
 The \href{https://docs.microsoft.com/en-us/sql/t-sql/functions/datepart-transact-sql}{sql equivalent} to \code{clump_month_date()}
-is \verb{CAST(convert(char(7), GETDATE(), 126) + '-15' AS date)}.
+is \verb{cast(convert(char(7), getdate(), 126) + '-15' as date)}.
 The \href{https://blog.sqlauthority.com/2007/08/20/sql-server-find-monday-of-the-current-week/}{sql equivalent} to \code{clump_week_date()}
-is \verb{SELECT DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0)}
+is \verb{SELECT dateadd(week, datediff(week, 0, getdate()), 0)}.
+Starting with SQL Server 2022, the \href{https://learn.microsoft.com/en-us/sql/t-sql/functions/datetrunc-transact-sql?view=sql-server-ver16}{\code{datetrunc()}}
+function is available.
+Assume \verb{DECLARE @d date = cast(getdate() as date);}, then it's
+\verb{SELECT dateadd(day, 14, datetrunc(month, @d))}
+and \verb{SELECT dateadd(day, 1, datetrunc(week, @d))}.
 }
 \examples{
 library(OuhscMunge)

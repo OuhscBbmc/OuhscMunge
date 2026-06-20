@@ -7,7 +7,7 @@
 Thanks to Funders, including \href{https://perf-data.hrsa.gov/mchb/DGISReports/Abstract/AbstractDetails.aspx?Source=TVIS&GrantNo=D89MC23154&FY=2012}{HRSA/ACF D89MC23154}
 
 \emph{OUHSC CCAN Independent Evaluation of the State of Oklahoma Competitive Maternal, Infant, and Early Childhood Home Visiting
-(\href{https://mchb.hrsa.gov/programs-impact/programs/home-visiting/maternal-infant-early-childhood-home-visiting-miechv-program}{MIECHV}) Project.}, which
+(\href{http://mchb.hrsa.gov/programs/homevisiting/}{MIECHV}) Project.}, which
 evaluates MIECHV expansion and enhancement of Evidence-based Home Visitation programs in four Oklahoma counties.
 }
 \note{
@@ -15,7 +15,7 @@ The release version will eventually be available through CRAN by
 running \code{install.packages('OuhscMunge')}.
 The most recent development version is available through \href{https://github.com/OuhscBbmc/OuhscMunge}{GitHub} by
 running
-\code{devtools::install_github} \code{(repo = 'OuhscBbmc/OuhscMunge')}
+\code{pak::pak("OuhscBbmc/OuhscMunge")}
 (make sure \href{https://cran.r-project.org/package=devtools}{devtools} is already installed).
 If you're having trouble with the package, please install the development version.  If this doesn't solve
 your problem, please create a \href{https://github.com/OuhscBbmc/OuhscMunge/issues}{new issue}, or email Will.
@@ -27,7 +27,7 @@ install.packages('OuhscMunge') #But it's not on CRAN yet.
 
 # Install/update REDCapR with the development version from GitHub
 #install.packages('devtools') #Uncomment if `devtools` isn't installed already.
-devtools::install_github('OuhscBbmc/OuhscMunge')
+pak::pak("OuhscBbmc/OuhscMunge")
 }
 }
 \author{

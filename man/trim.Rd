@@ -35,7 +35,7 @@ trim_character(
 \item{replacement}{A scalar that will replace all instances of \code{x}
 that fall outside of \code{bounds} or \code{pattern}.}
 
-\item{pattern}{A perl-style regular expression passed to \code{\link[base:grep]{base::grepl()}}.
+\item{pattern}{A perl-style regular expression passed to \code{\link[base:grepl]{base::grepl()}}.
 Vector elements that match the pattern are returned.
 Vector elements that do not match the pattern are replaced with \link{NA_character_}.}
 }
