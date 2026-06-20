@@ -43,7 +43,7 @@
 #' assert_version_package(
 #'   package_name      = "OuhscMunge",
 #'   minimum           = "9.1.0",
-#'   installation_code = 'remotes::install_github("OuhscBbmc/OuhscMunge")'
+#'   installation_code = 'pak::pak("OuhscBbmc/OuhscMunge")'
 #' )
 #' assert_version_package("OuhscMungeee", "9.1.0")
 #' }

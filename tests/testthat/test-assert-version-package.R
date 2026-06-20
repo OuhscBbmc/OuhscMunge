@@ -39,12 +39,12 @@ test_that("minimum that throws an error -tibble", {
   )
 })
 test_that("minimum that throws an error with installation code", {
-  expected_error_message <- 'Your version of the `OuhscMunge` package is too old\\.  It is [\\.\\d]+, but needs to be at least 99\\.1.0.  Install the package with `remotes::install_github\\("OuhscBbmc/OuhscMunge"\\)`.  Afterwards, please restart the R session.'
+  expected_error_message <- 'Your version of the `OuhscMunge` package is too old\\.  It is [\\.\\d]+, but needs to be at least 99\\.1.0.  Install the package with `pak::pak\\("OuhscBbmc/OuhscMunge"\\)`.  Afterwards, please restart the R session.'
   expect_error(
     assert_version_package(
       package_name      = "OuhscMunge",
       minimum           = "99.1.0",
-      installation_code = 'remotes::install_github("OuhscBbmc/OuhscMunge")'
+      installation_code = 'pak::pak("OuhscBbmc/OuhscMunge")'
     ),
     regexp = expected_error_message,
     perl   = TRUE
@@ -54,7 +54,7 @@ test_that("minimum that throws an error with installation code", {
     assert_version_package(
       package_name      = "OuhscMunge",
       minimum           = package_version("99.1.0"),
-      installation_code = 'remotes::install_github("OuhscBbmc/OuhscMunge")'
+      installation_code = 'pak::pak("OuhscBbmc/OuhscMunge")'
     ),
     regexp = expected_error_message,
     perl   = TRUE

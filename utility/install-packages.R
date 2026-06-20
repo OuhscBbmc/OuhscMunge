@@ -17,6 +17,6 @@ if( !base::requireNamespace("devtools") ) {
   utils::install.packages("devtools", repos="http://cran.rstudio.com")
 }
 
-devtools::install_github("OuhscBbmc/OuhscMunge")
+pak::pak("OuhscBbmc/OuhscMunge")
 
 OuhscMunge:::package_janitor_remote(path_csv)

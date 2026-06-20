@@ -15,7 +15,7 @@ The release version will eventually be available through CRAN by
 running \code{install.packages('OuhscMunge')}.
 The most recent development version is available through \href{https://github.com/OuhscBbmc/OuhscMunge}{GitHub} by
 running
-\code{devtools::install_github} \code{(repo = 'OuhscBbmc/OuhscMunge')}
+\code{pak::pak("OuhscBbmc/OuhscMunge")}
 (make sure \href{https://cran.r-project.org/package=devtools}{devtools} is already installed).
 If you're having trouble with the package, please install the development version.  If this doesn't solve
 your problem, please create a \href{https://github.com/OuhscBbmc/OuhscMunge/issues}{new issue}, or email Will.
@@ -27,7 +27,7 @@ install.packages('OuhscMunge') #But it's not on CRAN yet.
 
 # Install/update REDCapR with the development version from GitHub
 #install.packages('devtools') #Uncomment if `devtools` isn't installed already.
-devtools::install_github('OuhscBbmc/OuhscMunge')
+pak::pak("OuhscBbmc/OuhscMunge")
 }
 }
 \author{

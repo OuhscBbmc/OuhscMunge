@@ -56,7 +56,7 @@ jobs:
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04"))')
         # See https://community.rstudio.com/t/how-do-i-add-linux-library-dependencies-to-github-actions/98143/2
         # run: |
-        #   Rscript -e "remotes::install_github('r-hub/sysreqs')"
+        #   Rscript -e "pak::pak('r-hub/sysreqs')"
         #   sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
         #   sudo -s eval "$sysreqs"
 
