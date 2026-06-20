@@ -1,6 +1,8 @@
 library(testthat)
 
 test_that("Smoke test w/o update", {
+  withr::local_envvar(R_USER_CACHE_DIR = tempdir())
+
   path <- system.file( # See ?pkgload::system.file
     "package-dependency-list.csv",
     package   = "OuhscMunge",
