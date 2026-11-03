@@ -29,9 +29,21 @@
 verify_value_headstart <- function(d) {
   checkmate::assert_class(d, "data.frame")
 
+  # Capture the name of the object the caller passed in
+  d_name <- deparse(substitute(d))
+
+  # Map class names to checkmate assert function suffixes
+  assert_class <- function(cls) {
+    dplyr::case_when(
+      cls == "integer64" ~ "numeric",
+      TRUE               ~ cls
+    )
+  }
+
   d_structure <- tibble::tibble(
     name_variable     = colnames(d),
     class             = tolower(purrr::map_chr(d, ~class(.)[1])),
+    assert_suffix     = assert_class(tolower(purrr::map_chr(d, ~class(.)[1]))),
     any_missing       = purrr::map_lgl(d, ~any(is.na(.))),
     any_duplicated    = purrr::map_lgl(d, ~any(duplicated(.))),
     boundaries_string = purrr::map_chr(d, boundaries)
@@ -39,15 +51,16 @@ verify_value_headstart <- function(d) {
 
   d_structure <- d_structure %>%
     dplyr::mutate(
-      class_start     = paste0(.data$class, "("),
+      class_start     = paste0(.data$assert_suffix, "("),
       missing_string  = dplyr::if_else(.data$any_missing, ", any.missing=T", ", any.missing=F"),
       unique_string   = dplyr::if_else(!.data$any_duplicated, ", unique=T", "")
     ) %>%
     dplyr::mutate(
       code  = sprintf(
-        "checkmate::assert_%-*sds$%-*s %s %-*s %s)",
+        "checkmate::assert_%-*s%s$%-*s %s %-*s %s)",
         max(nchar("character"), nchar(.data$class_start)),
         .data$class_start,
+        d_name,
         max(nchar(.data$name_variable)),
         .data$name_variable,
         .data$missing_string,
@@ -66,6 +79,7 @@ boundaries <- function(x) {
 
   if (      "numeric"   %in% data_types) boundaries_number(x)
   else if ( "integer"   %in% data_types) boundaries_number(x)
+  else if ( "integer64" %in% data_types) boundaries_number(as.numeric(x))
   else if ( "character" %in% data_types) boundaries_character(x)
   else if ( "Date"      %in% data_types) boundaries_date(x)
   else ""
