@@ -78,41 +78,41 @@ check the properties of a dataset, such as the names and types of each column.</
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">verify_value_headstart</span><span class="op">(</span><span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/OrchardSprays.html" class="external-link">OrchardSprays</a></span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$decrease  , any.missing=F , lower=2, upper=130 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$rowpos    , any.missing=F , lower=1, upper=8   )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$colpos    , any.missing=F , lower=1, upper=8   )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(  ds$treatment , any.missing=F                      )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::OrchardSprays$decrease  , any.missing=F , lower=2, upper=130 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::OrchardSprays$rowpos    , any.missing=F , lower=1, upper=8   )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::OrchardSprays$colpos    , any.missing=F , lower=1, upper=8   )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(  datasets::OrchardSprays$treatment , any.missing=F                      )</span>
 <span class="r-in"><span><span class="fu">verify_value_headstart</span><span class="op">(</span><span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/iris.html" class="external-link">iris</a></span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$Sepal.Length , any.missing=F , lower=4, upper=8 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$Sepal.Width  , any.missing=F , lower=2, upper=5 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$Petal.Length , any.missing=F , lower=1, upper=7 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$Petal.Width  , any.missing=F , lower=0, upper=3 )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(  ds$Species      , any.missing=F                    )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::iris$Sepal.Length , any.missing=F , lower=4, upper=8 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::iris$Sepal.Width  , any.missing=F , lower=2, upper=5 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::iris$Petal.Length , any.missing=F , lower=1, upper=7 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::iris$Petal.Width  , any.missing=F , lower=0, upper=3 )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(  datasets::iris$Species      , any.missing=F                    )</span>
 <span class="r-in"><span><span class="fu">verify_value_headstart</span><span class="op">(</span><span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/BOD.html" class="external-link">BOD</a></span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$Time   , any.missing=F , lower=1, upper=7  , unique=T)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( ds$demand , any.missing=F , lower=8, upper=20 , unique=T)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::BOD$Time   , any.missing=F , lower=1, upper=7  , unique=T)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric( datasets::BOD$demand , any.missing=F , lower=8, upper=20 , unique=T)</span>
 <span class="r-in"><span><span class="fu">verify_value_headstart</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/band_members.html" class="external-link">band_members</a></span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(ds$name , any.missing=F , pattern="^.{4,4}$" , unique=T)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(ds$band , any.missing=F , pattern="^.{6,7}$" )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(dplyr::band_members$name , any.missing=F , pattern="^.{4,4}$" , unique=T)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(dplyr::band_members$band , any.missing=F , pattern="^.{6,7}$" )</span>
 <span class="r-in"><span><span class="va">storms_2</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="va"><a href="https://dplyr.tidyverse.org/reference/storms.html" class="external-link">storms</a></span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    storm_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ISOdatetime.html" class="external-link">ISOdate</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">month</span>, <span class="va">day</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">verify_value_headstart</span><span class="op">(</span><span class="va">storms_2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(ds$name                         , any.missing=F , pattern="^.{3,10}$"                                      )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$year                         , any.missing=F , lower=1975, upper=2024                                   )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$month                        , any.missing=F , lower=1, upper=12                                        )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$day                          , any.missing=F , lower=1, upper=31                                        )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$hour                         , any.missing=F , lower=0, upper=23                                        )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$lat                          , any.missing=F , lower=7, upper=71                                        )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$long                         , any.missing=F , lower=-137, upper=14                                     )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(   ds$status                       , any.missing=F                                                            )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  ds$category                     , any.missing=T , lower=1, upper=5                                         )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$wind                         , any.missing=F , lower=10, upper=165                                      )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$pressure                     , any.missing=F , lower=882, upper=1024                                    )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$tropicalstorm_force_diameter , any.missing=T , lower=0, upper=1440                                      )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  ds$hurricane_force_diameter     , any.missing=T , lower=0, upper=300                                       )</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_date(     ds$storm_date                   , any.missing=F , lower=as.Date("1975-06-27"), upper=as.Date("2024-11-18") )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_character(storms_2$name                         , any.missing=F , pattern="^.{3,10}$"                                      )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  storms_2$year                         , any.missing=F , lower=1975, upper=2024                                   )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  storms_2$month                        , any.missing=F , lower=1, upper=12                                        )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  storms_2$day                          , any.missing=F , lower=1, upper=31                                        )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  storms_2$hour                         , any.missing=F , lower=0, upper=23                                        )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  storms_2$lat                          , any.missing=F , lower=7, upper=71                                        )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  storms_2$long                         , any.missing=F , lower=-137, upper=14                                     )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_factor(   storms_2$status                       , any.missing=F                                                            )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_numeric(  storms_2$category                     , any.missing=T , lower=1, upper=5                                         )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  storms_2$wind                         , any.missing=F , lower=10, upper=165                                      )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  storms_2$pressure                     , any.missing=F , lower=882, upper=1024                                    )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  storms_2$tropicalstorm_force_diameter , any.missing=T , lower=0, upper=1440                                      )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_integer(  storms_2$hurricane_force_diameter     , any.missing=T , lower=0, upper=300                                       )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> checkmate::assert_date(     storms_2$storm_date                   , any.missing=F , lower=as.Date("1975-06-27"), upper=as.Date("2024-11-18") )</span>
 </code></pre></div>
     </div>
   </div>
